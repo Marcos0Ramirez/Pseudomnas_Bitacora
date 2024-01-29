@@ -62,5 +62,12 @@ Regresamos al Word Bitacora en la computadora local...
 -----------------------------------------------------------------------------------------------------------------------------
 
 ### ***NO.2CODE <INICIO>***
+#!/bin/bash
+Access="Accessions.txt"
+Se extrae la primera columna
+edades=$(awk -F ',' '{print $1}' "$Access")
+
+# Imprimir las edades
+echo "Edades: $edades"
 
 #### ***NO.2CODE <FINAL>***
