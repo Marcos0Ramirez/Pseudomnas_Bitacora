@@ -59,3 +59,8 @@ Salmonella enterica subsp. enterica serovar Typhimurium str. LT2        GCA_0000
 Regresamos al Word Bitacora en la computadora local...
 #### ***NO.1CODE <FINAL>***
 
+-----------------------------------------------------------------------------------------------------------------------------
+
+### ***NO.2CODE <INICIO>***
+
+#### ***NO.2CODE <FINAL>***
