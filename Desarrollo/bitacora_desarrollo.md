@@ -1,5 +1,5 @@
 29 de enero del 2024
-### ***NO1.CODE <INICIO>***
+### ***NO.1CODE <INICIO>***
 > El trabajo fue hecho en computadora local
 - Desarrollo del script, se llevo a acabo al entender com filtrar los datos, preguntandole a ChatGPT.
 Para ello descargarmos un archivo con toda la informacion de los individuos
@@ -57,5 +57,5 @@ Salmonella enterica subsp. enterica serovar Typhimurium str. LT2        GCA_0000
 .
 ```
 Regresamos al Word Bitacora en la computadora local...
-#### ***NO1.CODE <FINAL>***
+#### ***NO.1CODE <FINAL>***
 
