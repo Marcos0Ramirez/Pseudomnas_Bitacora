@@ -60,14 +60,33 @@ Regresamos al Word Bitacora en la computadora local...
 #### ***NO.1CODE <FINAL>***
 
 -----------------------------------------------------------------------------------------------------------------------------
-
+ Con este codigo se pretende, imprimir las accesiones para ver si funcionan las varaiables
 ### ***NO.2CODE <INICIO>***
 #!/bin/bash
 Access="Accessions.txt"
 Se extrae la primera columna
-edades=$(awk -F ',' '{print $1}' "$Access")
+access=$(awk -F ',' '{print $1}' "$Access")
 
-# Imprimir las edades
-echo "Edades: $edades"
+# Imprimir las accesiones
+echo "Accesiones: $access"
 
 #### ***NO.2CODE <FINAL>***
+
+30 de enero del 2024
+### ***NO.3CODE <INICIO>
+#!/bin/bash
+Access="Accessions.txt"
+Se extrae la primera columna
+access=$(awk -F ',' '{print $1}' "$Access")
+
+# Imprimir las accesiones
+echo "Accesiones: $access"
+# Se busca con awk y se almacenan los resuldados, sobreescribiendolos, sin borrar los ya encontrados
+awk '/access/ { print $0 }' ../proka_nombre_accesion_ftp.txt >> resultados_accesiones_buscadas.txt
+
+
+
+
+
+#### ***NO.3CODE <INICIO>
+
