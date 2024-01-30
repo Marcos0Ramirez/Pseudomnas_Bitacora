@@ -86,9 +86,29 @@ echo "Accesiones: $access"
 # Se busca con awk y se almacenan los resuldados, sobreescribiendolos, sin borrar los ya encontrados
 awk '/access/ { print $0 }' ../proka_nombre_accesion_ftp.txt >> ../RESULTADOS/resultados_accesiones_buscadas.txt
 ```
+-----------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
+Al final no funciono el codigo anterior, por lo que se opto por usar un codigo mas simpe y optimo
+1. El cual, en Accessions.txt se tienen las accesiones en una columna
+2. Se comparan en el archivo nuevo, para el cual solo se tienen las columnas necesarias
+3. finalmente, guarda los resultados que tuvieron match en otra carpeta
+4. Se puede disponer del archivo
+```
+#!/bin/bash
 
+# Archivos
+accessions="../DATOS/Accessions.txt"
+busca="../DATOS/proka_nombre_accesion_ftp.txt"
+guarda="../RESULTADOS/resultados_accesiones_buscadas.txt"
 
+# Buscar y almacenar los resultados en el archivo
+grep -F -f "$accessions" "$busca" > "$guarda"
 
+# Mostrar archivo
+more "$guarda"
+```
+-----------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 
 #### ***NO.3CODE <INICIO>
 
