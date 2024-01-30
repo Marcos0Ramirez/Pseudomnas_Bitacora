@@ -82,7 +82,7 @@ access=$(awk -F ',' '{print $1}' "$Access")
 # Imprimir las accesiones
 echo "Accesiones: $access"
 # Se busca con awk y se almacenan los resuldados, sobreescribiendolos, sin borrar los ya encontrados
-awk '/access/ { print $0 }' ../proka_nombre_accesion_ftp.txt >> resultados_accesiones_buscadas.txt
+awk '/access/ { print $0 }' ../proka_nombre_accesion_ftp.txt >> ../RESULTADOS/resultados_accesiones_buscadas.txt
 
 
 
