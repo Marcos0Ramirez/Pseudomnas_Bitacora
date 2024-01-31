@@ -113,7 +113,20 @@ more "$guarda"
 5. Despues el archivo, pretende guardar las direcciones FTP (para ello se probo, el comando cut y for para infresarlo a expresiones regulares y cambiar el url y descarlarlo desde ahi
 6. 
 ```
+#!/bin/bash
+datos="../DATOS/proka_nombre_accesion_ftp.txt"
 
+ftp=$(cut -f 3 $datos)
+
+for i in "$ftp"
+do
+n=0
+        while [ n < 10 ]
+        do
+                echo "$i"
+                ((n++))
+        done
+done
 ```
 -----------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------
