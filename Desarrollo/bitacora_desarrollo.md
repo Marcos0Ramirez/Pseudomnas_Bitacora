@@ -88,11 +88,12 @@ awk '/access/ { print $0 }' ../proka_nombre_accesion_ftp.txt >> ../RESULTADOS/re
 ```
 -----------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------
-Al final no funciono el codigo anterior, por lo que se opto por usar un codigo mas simpe y optimo
+Al final no funciono el codigo anterior, por lo que se opto por usar un codigo mas simple y optimo
 1. El cual, en Accessions.txt se tienen las accesiones en una columna
 2. Se comparan en el archivo nuevo, para el cual solo se tienen las columnas necesarias
 3. finalmente, guarda los resultados que tuvieron match en otra carpeta
 4. Se puede disponer del archivo
+
 ```
 #!/bin/bash
 
@@ -106,6 +107,13 @@ grep -F -f "$accessions" "$busca" > "$guarda"
 
 # Mostrar archivo
 more "$guarda"
+```
+
+## 31 de enero del 2024
+5. Despues el archivo, pretende guardar las direcciones FTP (para ello se probo, el comando cut y for para infresarlo a expresiones regulares y cambiar el url y descarlarlo desde ahi
+6. 
+```
+
 ```
 -----------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------
