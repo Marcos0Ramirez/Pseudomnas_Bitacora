@@ -74,7 +74,7 @@ echo "Accesiones: $access"
 #### ***NO.2CODE <FINAL>***
 
 30 de enero del 2024
-### ***NO.3CODE <INICIO>
+### ***NO.3CODE <INICIO>***
 ```
 #!/bin/bash
 Access="Accessions.txt"
@@ -108,10 +108,14 @@ grep -F -f "$accessions" "$busca" > "$guarda"
 # Mostrar archivo
 more "$guarda"
 ```
+-----------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 
+#### ***NO.3CODE <FIN>***
+
+#### ***NO.4CODE <INICIO>***
 ## 31 de enero del 2024
 5. Despues el archivo, pretende guardar las direcciones FTP (para ello se probo, el comando cut y for para infresarlo a expresiones regulares y cambiar el url y descarlarlo desde ahi
-6. 
 ```
 #!/bin/bash
 datos="../DATOS/proka_nombre_accesion_ftp.txt"
@@ -128,8 +132,58 @@ n=0
         done
 done
 ```
------------------------------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------
+(Algunas partes de los comandos fueron consultados con ChatGPT y asegurados con pruebas que funcionara)
+1. No funciono, pero se econtro otra forma de poder hacer la delimitacion de las impresiones para trabajar solo con eso
+2. Para ello se tiene que eliminar del corte de las columnas los encabezados que son los que aparecen primero
+```
+#!/bin/bash
+# Llamamos al archivo, para manipularlo
+datos="../DATOS/proka_nombre_accesion_ftp.txt"
 
-#### ***NO.3CODE <INICIO>
+# Tomamos la medida del numero de lineas o equivalente al numero posible de archivos (porque tambien contempla los que no tienen datos o "-").
+longitud=$(wc -l < $datos)
+# Ahora se extraen los datos de la columna 3, del archivo ya filtrado y se le tomas los que solo tienen las direcciones FTP
+ftp=$(cut -f 3 $datos)
 
+#Ahora que tenemos el conteo, ahora podemos delimitar la informacion, sin tomar en cuenta el encabezado y de ahi partir a considerar todas las demas secuencias
+# Finalmente se toma la variable ftp, porque es demasiada grande y se imprime como un texto, donde ahora se puede aplicar awk, para que busque desde ahi y no tenga que soportar la variable con todos los datos, y finalmente se delimita de quitando los dos primeros, que son los titulos y contemplando hasta el ultimo FTP.
+puro=$(echo "$ftp" | awk 'NR>=2 && NR<=$longitud {print $1}')
+
+n=0
+for i in $puro
+do
+
+        while [ $n -le 5 ] # Al parecer aqui no se contempla el limite de la suma
+        do
+                echo "$i" # Aqui se imprime y se espera que tome la linea de comandos
+                n=$((n+1)) # Va sumando y guardando el conteo para la siguiente iteración
+                [ $n -le 5 ] && break # Hasta aqui, se continua el conteo.
+        done
+
+done
+```
+Codigo sin descripción
+```
+#!/bin/bash
+datos="../DATOS/proka_nombre_accesion_ftp.txt"
+
+longitud=$(wc -l < $datos)
+ftp=$(cut -f 3 $datos)
+
+puro=$(echo "$ftp" | awk 'NR>=2 && NR<=$longitud {print $1}')
+
+n=0
+for i in $puro
+do
+
+        while [ $n -le 5 ]
+        do
+                echo "$i"
+                n=$((n+1))
+                [ $n -le 5 ] && break
+        done
+
+done
+```
+
+#### ***NO.4CODE <FIN>***
