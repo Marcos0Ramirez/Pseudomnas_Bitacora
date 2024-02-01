@@ -185,5 +185,16 @@ do
 
 done
 ```
-
 #### ***NO.4CODE <FIN>***
+
+#### ***NO.5CODE <INICIO>***
+Para este punto creamos el script: *exprReg.sh* para lograr la modificacion del archivo, y hacer que podamos el cambio de los datos. Antes de eso, realizamos una copia del archivo para que pueda ser manipulado el segundo, sin modificar el primero.
+
+
+```
+
+
+
+```
+
+#### ***NO.5CODE <FIN>***
