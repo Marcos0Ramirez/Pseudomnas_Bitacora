@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Archivos
+accessions="../DATOS/Accessions.txt"
+busca="../DATOS/proka_nombre_accesion_ftp.txt"
+guarda="../RESULTADOS/resultados_accesiones_buscadas.txt"
+
+# Obtener accesiones del archivo Accessions.txt
+accesiones=$(awk -F '\n' '{print $1}' "$accessions")
+echo "$accesiones"
+
+#Al parecer no encuentra nada, poque la variable accesiones se convierte en una lista y no en una cadena uno por uno
+for i in awk -F ',' '{print $'$num_columna'}' "$archivo"
+do
+	echo "$i"
+	echo "hola"
+# Se busca con awk y se almacenan los resuldados, sobreescribiendolos, sin borrar los ya encontrados
+	visual=$(awk '/$i/ { print $0 }' "$busca")
+	echo "$visual"
+	echo "$visual" >> "$guarda"
+done
+# Muestra archivo
+more "$guarda"
+rm "$guarda"
