@@ -192,9 +192,48 @@ Para este punto creamos el script: *exprReg.sh* para lograr la modificacion del 
 
 
 ```
+#!/bin/bash
+datox="../DATOS/proka_nombre_accesion_ftp.txt"
 
+cp $datox "../DATOS/copiadatospara_exprRegsh.txt"
+
+datos="../DATOS/copiadatospara_exprRegsh.txt"
+longitud=$(wc -l < $datos)
+ftp=$(cut -f 3 $datos)
+
+puro=$(echo "$ftp" | awk 'NR>=2 && NR<=$longitud {print $1}')
+
+echo "$puro" > ../DATOS/FTP_filtrado.txt
+# head -n 5 ../DATOS/FTP_filtrado.txt
+sed -E "s/GCA/GCF/g" ../DATOS/FTP_filtrado.txt > ../DATOS/FTP_filtrado-GCA-GCF.txt
+# head -n 5 ../DATOS/FTP_filtrado-GCA-GCF.txt
+sed -E "s/ftp:/http:/g" ../DATOS/FTP_filtrado-GCA-GCF.txt > ../DATOS/FTP_filtrado-GCA-GCF_FTP-HTTP.txt
+head -n 5 ../DATOS/FTP_filtrado-GCA-GCF_FTP-HTTP.txt
+sed -E "s/(GCF_(.*))/\1\/\1_genomic.fna.gz/g" ../DATOS/FTP_filtrado-GCA-GCF_FTP-HTTP.txt > ../DATOS/FTP_filtrado-GCA-GCF_FTP-HTTP_null-genomic.txt
+head -n 5 ../DATOS/FTP_filtrado-GCA-GCF_FTP-HTTP_null-genomic.txt
+
+filtr="../DATOS/FTP_filtrado-GCA-GCF_FTP-HTTP_null-genomic.txt"
+http=$(cut -f 1 $filtr)
+cd ../RESULTADOS/
+n=1
+for i in $http
+do
+
+        while [ $n -le 2 ]
+        do
+                echo "$i"
+                wget $i
+                n=$((n+1))
+                [ $n -le 2 ] && break
+        done
+
+done
+```
 
 
 ```
+
+```
+
 
 #### ***NO.5CODE <FIN>***
