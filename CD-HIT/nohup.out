@@ -1,0 +1,36 @@
+================================================================
+Program: CD-HIT, V4.8.1 (+OpenMP), Mar 22 2020, 15:35:52
+Command: cd-hit -i protcat.faa -o clusterprotcat -c 0.60 -n 4
+         -M 800 -d 0 -T 1
+
+Started: Thu Mar 21 08:39:12 2024
+================================================================
+                            Output                              
+----------------------------------------------------------------
+total seq: 11648
+longest and shortest : 4994 and 21
+Total letters: 3719425
+Sequences have been sorted
+
+Approximated minimal memory consumption:
+Sequence        : 5M
+Buffer          : 1 X 11M = 11M
+Table           : 1 X 3M = 3M
+Miscellaneous   : 0M
+Total           : 20M
+
+Table limit with the given memory limit:
+Max number of representatives: 1559403
+Max number of word counting entries: 97461521
+
+comparing sequences from          0  to      11648
+....................    10000  finished       7687  clusters
+.
+    11648  finished       9058  clusters
+
+Approximated maximum memory consumption: 42M
+writing new database
+writing clustering information
+program completed !
+
+Total CPU time 7.00
