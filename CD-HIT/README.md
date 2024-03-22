@@ -1016,6 +1016,39 @@ mostrar=$(ls) #muestra los archivos presentes en la carpeta
 # Aqui antes que nada se modifica el acceso a los genoomas y se corre desde otra capeta el script, para que no modifique la carpeta orginal donde estan los genomas.
 for i in $mostrar; do cat $i/$i.genes.faa >> ./hola.genes.faa; done #Finalmente con este scipt concatena todo los archivos presentes de la carpeta que se vaya a llamar.
 ```
+##### 22 de marzo del 2024
+Al final quedamos es con el script
+```
+#!/bin/bash
+PWD="/direccion/donde/esta/directorio/trabajo/Pseudomonas"
+mostrarnomcarpeta=$(ls $PWD/PSEUDOMONAS_GENOMAS)
+for i in $mostrarnomcarpeta; do cat $PWD/PSEUDOMONAS_GENOMAS/$i/$i.genes.faa >> $PWD/ANALYSIS_CDHIT/psedomonasIMGconcate
+nados.genes.faa; done
+```
+Considerando que se trabaja en la carpeta Pseudomonas, se crearon las carpetas `PSEUDOMONAS_GENOMAS` (donde se encuentran los genomas) y `ANALYSIS_CDHIT` (donde se van a alojar la concatenacion de los genomas).
+
+Asi, se procedio a cargar el modulo de CD-HIT y aplicar el comando siguiente
+```
+nohup cd-hit -i $PWD/ANALYSIS_CDHIT/psedomonasIMGconcatenados.genes.faa -o $PWD/ANALYSIS_CDHIT/RESULTSCLUSTERCDHIT/pseudocluster -c 0.60 -n 4 -M 16000 -d 0 -T 8 &
+```
+donde
+```
+nohup ... & | ayuda a que el script este trabajando aun y si no estoy conectado al cluster
+cd-hit -- comando inicial para analizar las secuencias de proteinas
+         -i | direccion y nombre del archivo con las secuenias de proteinas a analizar (.faa) es el archivo con las anotaciones de las proteinas del genoma)
+         -o | salida del analisis con un archivo con la secuencia representativa y asi con las agrupaciones e identidad de las proteinas
+         -c | porcentaje de identidad de las proteinas
+         -n | numero de nucleotidos para analizar las secuencias en la comparacion
+         M  | numero Megabytes a usar
+         -d | Si se desea eliminar o no los las secuencias duplicadas (0) significa que no
+         -T | numero de nucleos a usar (8) cores
+```
+
+
+
+
+
+
 
 
 
