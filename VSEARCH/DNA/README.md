@@ -51,7 +51,7 @@ Codigo para concatenar secuncias de ADN
 ```
 #!/bin/bash
 
-PWD="/mnt/atgc-d2/sur/shared_data/Pseudomonas"
+PWD="/direccion/donde/esta/directorio/trabajo/Pseudomonas"
 
 mostrarnomcarpeta=$(ls $PWD/PSEUDOMONAS_GENOMAS)
 
@@ -76,7 +76,7 @@ Con una salida del archivo `vsearchnohup.out`
 vsearch v2.27.0_linux_x86_64, 62.7GB RAM, 16 cores
 https://github.com/torognes/vsearch
 
-Reading file /direccion/de/las/proteinas/concatenadas/Pseudomonas/WORK/VSEARCH/psedomonasIMGconcatenados.genes.fna 100%
+Reading file /direccion/del/ADN/concatenadas/Pseudomonas/WORK/VSEARCH/psedomonasIMGconcatenados.genes.fna 100%
 21578563956 nt in 22881644 seqs, min 33, max 43590, avg 943
 minseqlength 32: 53 sequences discarded.
 Masking 100%
