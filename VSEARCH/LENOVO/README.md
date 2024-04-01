@@ -125,7 +125,8 @@ trkdgsyrvtndsm
 MGdkkvavggssrdvsasgavarsaghvavdtasggarraskvkvdsdsarsgkssagagvdvahggtgdgtadaggayt
 ```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Hoy 1 de abril del 2024
 Ahora se ejecutara este comando, para analizar las secuencias
 ```
-vsearch --cluster_fast DATA_FAA/fromscriptall.genes.faa --id 0.6 --centroids centroidsrPseudo.faa --clusterout_id --clusterout_sort --consout ./RESULTADOS/PRUEBAS2/consoutPseudoPrueba2.consout --msaout ./RESULTADOS/PRUEBAS2/msaoutPseudoPrueba2.msout --uc ./RESULTADOS/PRUEBAS2/UCPseudoPrueba2.uc
+vsearch --cluster_fast DATA_FAA/fromscriptall.genes.faa --id 0.6 --centroids ./RESULTADOS/PRUEBAS2/centroidsrPseudo.faa --clusterout_id --clusterout_sort --consout ./RESULTADOS/PRUEBAS2/consoutPseudoPrueba2.consout --msaout ./RESULTADOS/PRUEBAS2/msaoutPseudoPrueba2.msout --uc ./RESULTADOS/PRUEBAS2/UCPseudoPrueba2.uc
 ```
