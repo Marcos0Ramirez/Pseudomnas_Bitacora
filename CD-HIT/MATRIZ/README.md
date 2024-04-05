@@ -126,3 +126,221 @@ Ahora se vera como hacer para que el script
 3. De los genes que tiene en el cluster perteneciente, busque a que individuo pertence
 4. Concatenar el nombre del organismo en cada fila y los datos de (id del gen y identidad) los coloque en interseccion con el cluster perteneciente
 5. Localizar los demas genes de otros clusters y concatenar en donde ya esta el organismo o crear un nuevo fila con los nuevos datos.
+
+
+### Fecha 05 de abril del 2024
+Hasta el momento se sabe que el bucle while, cuando evalua los if's, los hace de manera simultanea, lo que indica que si colocamos un `echo "$n"` al inicio y al final (antes y despues de los if's):
+```
+#!/bin/bash
+
+# Nombre del archivo de entrada
+archivo="../CDHIT/TODOS/clusterprotcatALL2000.clstr"
+rm ../CDHIT/MATRIXDATA/clusterfile.txt
+rm ../CDHIT/MATRIXDATA/filegenes.txt
+rm ../CDHIT/MATRIXDATA/mapruclusterfile.txt
+# Patrón para identificar el inicio de un nuevo cluster
+patron1=">Cluster"
+patron2="[0-9]+aa"
+n=1
+# Iterar sobre el archivo
+while IFS= read -r linea; do
+        echo "$n"
+    # Comprobar si la línea coincide con el patrón
+        #echo "$linea"
+    if [[ $linea =~ $patron1 ]]; then
+        # Imprimir la línea
+        echo "$linea" >> ../CDHIT/MATRIXDATA/mapruclusterfile.txt
+         echo "$linea"
+    fi
+        if [[ $linea =~ $patron2 ]]; then
+                # Imprimir la línea
+                echo "$linea $n"
+                n=$((n+1))
+                echo "$linea" >> ../CDHIT/MATRIXDATA/mapruclusterfile.txt
+        fi
+        echo "$n"
+
+done < "$archivo" | head -n 50
+```
+
+sucede esto
+```
+1
+>Cluster 0
+1
+1
+0       6388aa, >2785749539... * 1
+2
+2
+>Cluster 1
+2
+2
+0       171aa, >2505553514... at 60.82% 2
+3
+3
+1       895aa, >2505554354... at 65.59% 3
+4
+4
+2       1002aa, >2505554355... at 83.93% 4
+5
+5
+3       5929aa, >2549668513... * 5
+6
+6
+4       154aa, >2633064784... at 89.61% 6
+7
+7
+5       313aa, >2633064986... at 86.90% 7
+8
+8
+6       1239aa, >2633064989... at 85.55% 8
+9
+9
+7       90aa, >2633064990... at 74.44% 9
+10
+10
+8       3475aa, >2633065112... at 87.08% 10
+11
+11
+9       5889aa, >2714614382... at 71.81% 11
+12
+12
+>Cluster 2
+12
+12
+0       5824aa, >2549670384... * 12
+13
+13
+1       389aa, >2549670765... at 97.94% 13
+14
+14
+2       105aa, >2549670769... at 98.10% 14
+```
+
+Si solo usamos el del inicio, resulta
+```
+1
+>Cluster 0
+1
+0       6388aa, >2785749539... * 1
+2
+>Cluster 1
+2
+0       171aa, >2505553514... at 60.82% 2
+3
+1       895aa, >2505554354... at 65.59% 3
+4
+2       1002aa, >2505554355... at 83.93% 4
+5
+3       5929aa, >2549668513... * 5
+6
+4       154aa, >2633064784... at 89.61% 6
+7
+5       313aa, >2633064986... at 86.90% 7
+8
+6       1239aa, >2633064989... at 85.55% 8
+9
+7       90aa, >2633064990... at 74.44% 9
+10
+8       3475aa, >2633065112... at 87.08% 10
+11
+9       5889aa, >2714614382... at 71.81% 11
+12
+>Cluster 2
+12
+0       5824aa, >2549670384... * 12
+13
+1       389aa, >2549670765... at 97.94% 13
+14
+2       105aa, >2549670769... at 98.10% 14
+15
+3       514aa, >2549670774... at 76.46% 15
+16
+4       4780aa, >2633066528... at 67.68% 16
+17
+5       1072aa, >2633066529... at 88.62% 17
+18
+6       4093aa, >2714616755... at 68.90% 18
+19
+>Cluster 3
+19
+0       5809aa, >2923166973... * 19
+20
+>Cluster 4
+20
+0       5797aa, >2972001972... * 20
+```
+Y si solo ponemos al final, sucede esto
+```
+>Cluster 0
+1
+0       6388aa, >2785749539... * 1
+2
+>Cluster 1
+2
+0       171aa, >2505553514... at 60.82% 2
+3
+1       895aa, >2505554354... at 65.59% 3
+4
+2       1002aa, >2505554355... at 83.93% 4
+5
+3       5929aa, >2549668513... * 5
+6
+4       154aa, >2633064784... at 89.61% 6
+7
+5       313aa, >2633064986... at 86.90% 7
+8
+6       1239aa, >2633064989... at 85.55% 8
+9
+7       90aa, >2633064990... at 74.44% 9
+10
+8       3475aa, >2633065112... at 87.08% 10
+11
+9       5889aa, >2714614382... at 71.81% 11
+12
+>Cluster 2
+12
+0       5824aa, >2549670384... * 12
+13
+1       389aa, >2549670765... at 97.94% 13
+14
+2       105aa, >2549670769... at 98.10% 14
+15
+3       514aa, >2549670774... at 76.46% 15
+16
+4       4780aa, >2633066528... at 67.68% 16
+17
+5       1072aa, >2633066529... at 88.62% 17
+18
+6       4093aa, >2714616755... at 68.90% 18
+19
+>Cluster 3
+19
+0       5809aa, >2923166973... * 19
+20
+>Cluster 4
+20
+0       5797aa, >2972001972... * 20
+21
+```
+Lo que indica que entra al bucle `while` imprime el numero, entra a evaluar el `if` y despues de evaluarlo, vuelve a imprimir el numero estando fuera, para reiniciar de nuevo el bucle, pero al parecer lo hace de manera indiscriminada del orden en el que esten colocados los comandos.
+
+¿Como solucionar esto y que solo los numeros se coloquen de esta forma?
+```
+>Cluster 0
+1
+0       6388aa, >2785749539... * 1
+>Cluster 1
+0       171aa, >2505553514... at 60.82% 2
+1       895aa, >2505554354... at 65.59% 3
+2       1002aa, >2505554355... at 83.93% 4
+3       5929aa, >2549668513... * 5
+4       154aa, >2633064784... at 89.61% 6
+5       313aa, >2633064986... at 86.90% 7
+6       1239aa, >2633064989... at 85.55% 8
+7       90aa, >2633064990... at 74.44% 9
+8       3475aa, >2633065112... at 87.08% 10
+9       5889aa, >2714614382... at 71.81% 11
+2
+...
+```
