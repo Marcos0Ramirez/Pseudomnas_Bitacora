@@ -450,3 +450,94 @@ while [[ $ni -le $nfinal ]]; do
         ni=$((ni+1))
 done
 ```
+Resultado
+```
+>Cluster 12
+0       4336aa, >2505553445... at 72.97%
+1       4342aa, >2556075010... *
+2       4317aa, >2518035654... at 69.63%
+3       4336aa, >2549669578... at 72.90%
+4       4336aa, >2633068181... at 73.02%
+5       2897aa, >2714614118... at 74.87%
+6       1447aa, >2714617557... at 69.32%
+7       4328aa, >2785750798... at 71.93%
+8       4298aa, >2923169007... at 66.71%
+9       4298aa, >2972005913... at 66.59%
+10      4332aa, >8011076810... at 75.28%
+>Cluster 13
+49,61
+>Cluster 13
+0       627aa, >2633065110... at 64.43%
+1       2092aa, >2714614383... at 61.52%
+2       4301aa, >2923167232... at 88.51%
+3       4303aa, >2972005190... *
+>Cluster 14
+61,66
+>Cluster 14
+0       4227aa, >2923168233... *
+1       3796aa, >2972004192... at 75.37%
+>Cluster 15
+```
+
+```
+#!/bin/bash
+
+# Nombre del archivo de entrada
+archivo="../CDHIT/TODOS/clusterprotcatALL2000.clstr"
+rm ../CDHIT/MATRIXDATA/clusterfile.txt
+rm ../CDHIT/MATRIXDATA/filegenes.txt
+rm ../CDHIT/MATRIXDATA/mapruclusterfile.txt
+# Patrón para identificar el inicio de un nuevo cluster
+patron1=">Cluster"
+patron2="[0-9]+aa"
+ni=0
+nfinal=$(grep -E "$patron1" $archivo | wc -l)
+nfinal=$((nfinal-1))
+echo $nfinal
+# Iterar sobre el archivo
+
+while [[ $ni -le $nfinal ]]; do
+        limitei=$(grep -o -n -w "Cluster $ni" ../CDHIT/TODOS/clusterprotcatALL2000.clstr | grep -Eo "^[0-9]+")
+        nf=$((ni+1))
+        limitef=$(grep -o -n -w "Cluster $nf" ../CDHIT/TODOS/clusterprotcatALL2000.clstr | grep -Eo "^[0-9]+")
+        limitef=$((limitef-1))
+        echo "$(sed -n "$limitei,${limitef}p" ../CDHIT/TODOS/clusterprotcatALL2000.clstr)"
+        echo "$limitei,$limitef"
+        ni=$((ni+1))
+done
+```
+Resultado
+```
+>Cluster 0
+0       6388aa, >2785749539... *
+1,2
+>Cluster 1
+0       171aa, >2505553514... at 60.82%
+1       895aa, >2505554354... at 65.59%
+2       1002aa, >2505554355... at 83.93%
+3       5929aa, >2549668513... *
+4       154aa, >2633064784... at 89.61%
+5       313aa, >2633064986... at 86.90%
+6       1239aa, >2633064989... at 85.55%
+7       90aa, >2633064990... at 74.44%
+8       3475aa, >2633065112... at 87.08%
+9       5889aa, >2714614382... at 71.81%
+3,13
+>Cluster 2
+0       5824aa, >2549670384... *
+1       389aa, >2549670765... at 97.94%
+2       105aa, >2549670769... at 98.10%
+3       514aa, >2549670774... at 76.46%
+4       4780aa, >2633066528... at 67.68%
+5       1072aa, >2633066529... at 88.62%
+6       4093aa, >2714616755... at 68.90%
+14,21
+>Cluster 3
+0       5809aa, >2923166973... *
+22,23
+```
+Ahora se va a buscar concatenar cada salida en un archivo y se va a separar cada resuldado de cluster por columna separado por tabs
+```
+
+```
+
