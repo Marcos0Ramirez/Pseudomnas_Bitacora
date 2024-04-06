@@ -423,6 +423,30 @@ grep "Cluster 1" ../CDHIT/TODOS/clusterprotcatALL2000.clstr
 >Cluster 17
 >Cluster 18
 ```
-
+Ahora con el comando mas desarrollado, podemos extraer la informaicon comodamente, por marcos de referencia:
 ```
+#!/bin/bash
+
+# Nombre del archivo de entrada
+archivo="../CDHIT/TODOS/clusterprotcatALL2000.clstr"
+rm ../CDHIT/MATRIXDATA/clusterfile.txt
+rm ../CDHIT/MATRIXDATA/filegenes.txt
+rm ../CDHIT/MATRIXDATA/mapruclusterfile.txt
+# Patrón para identificar el inicio de un nuevo cluster
+patron1=">Cluster"
+patron2="[0-9]+aa"
+ni=0
+nfinal=$(grep -E "$patron1" $archivo | wc -l)
+nfinal=$((nfinal-1))
+echo $nfinal
+# Iterar sobre el archivo
+
+while [[ $ni -le $nfinal ]]; do
+        limitei=$(grep -o -n -w "Cluster $ni" ../CDHIT/TODOS/clusterprotcatALL2000.clstr | grep -Eo "^[0-9]+")
+        nf=$((ni+1))
+        limitef=$(grep -o -n -w "Cluster $nf" ../CDHIT/TODOS/clusterprotcatALL2000.clstr | grep -Eo "^[0-9]+")
+        echo "$(sed -n "$limitei,${limitef}p" ../CDHIT/TODOS/clusterprotcatALL2000.clstr)"
+        echo "$limitei,$limitef"
+        ni=$((ni+1))
+done
 ```
