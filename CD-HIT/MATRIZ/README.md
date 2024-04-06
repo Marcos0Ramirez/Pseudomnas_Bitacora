@@ -344,3 +344,18 @@ Lo que indica que entra al bucle `while` imprime el numero, entra a evaluar el `
 2
 ...
 ```
+Fecha 6 de abril del 2024
+COn el comando 
+```
+grep -o -n -w "Cluster 1" ../CDHIT/TODOS/clusterprotcatALL2000.clstr | grep -Eo "^[0-9]+"
+```
+```
+las opciones
+-o | solo da los match
+-n | da el numero de linea
+-w | imprime la coincidencia exacta
+para el segundo grep
+-E | Usa las expresiones regulares
+-o | solo da el match
+^[0-9]+ | permite que solo sea la primera coincidencia
+```
