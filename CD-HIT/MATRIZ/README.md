@@ -359,3 +359,70 @@ para el segundo grep
 -o | solo da el match
 ^[0-9]+ | permite que solo sea la primera coincidencia
 ```
+Pasos en reversa para saber que es lo que pasa
+```
+grep -o -n -w "Cluster 1" ../CDHIT/TODOS/clusterprotcatALL2000.clstr | grep -Eo "^[0-9]+"
+
+Resultado:
+3
+```
+
+```
+grep -o -n -w "Cluster 1" ../CDHIT/TODOS/clusterprotcatALL2000.clstr | grep -Eo "[0-9]+"
+
+Resultado:
+3
+1
+```
+
+```
+grep -o -n -w "Cluster 1" ../CDHIT/TODOS/clusterprotcatALL2000.clstr
+Resultado:
+3:Cluster 1 # Donde solo marca Cluster 1
+```
+
+```
+grep -o -n "Cluster 1" ../CDHIT/TODOS/clusterprotcatALL2000.clstr
+Resultado:
+3:Cluster 1
+41:Cluster 1
+47:Cluster 1
+49:Cluster 1
+61:Cluster 1
+66:Cluster 1
+69:Cluster 1
+71:Cluster 1
+73:Cluster 1
+75:Cluster 1
+```
+
+```
+grep -n "Cluster 1" ../CDHIT/TODOS/clusterprotcatALL2000.clstr
+3:>Cluster 1
+41:>Cluster 10
+47:>Cluster 11
+49:>Cluster 12
+61:>Cluster 13
+66:>Cluster 14
+69:>Cluster 15
+71:>Cluster 16
+73:>Cluster 17
+75:>Cluster 18
+```
+
+```
+grep "Cluster 1" ../CDHIT/TODOS/clusterprotcatALL2000.clstr
+>Cluster 1
+>Cluster 10
+>Cluster 11
+>Cluster 12
+>Cluster 13
+>Cluster 14
+>Cluster 15
+>Cluster 16
+>Cluster 17
+>Cluster 18
+```
+
+```
+```
