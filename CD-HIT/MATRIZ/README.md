@@ -640,3 +640,30 @@ Cluster 2
 15,21
 ```
 ------------------------------------------------------------------------------------------------------------------------
+Al final de cuando termina el archivo es asi
+```
+>Cluster 18996
+0       25aa, >2714618651... *
+>Cluster 18997
+0       24aa, >2505557456... *
+>Cluster 18998
+0       22aa, >2505554779... *
+>Cluster 18999
+0       21aa, >2505555143... *
+>Cluster 19000
+0       21aa, >2505557421... *
+```
+Al terminar el comando, marca un error en sed con una coma ',' inesperada (toca ver dentro del scrript para corregir)
+Ademas tardo cerca de 1 h con 40 min.
+```
+Cluster 18996
+0       25aa, >2714618651... *  Cluster 18996   >2714618651 Ga0124767_12761 hypothetical protein [Pseudomonas syringae pv. primulae ICMP3956]
+Cluster 18997
+0       24aa, >2505557456... *  Cluster 18997   >2505557456 PphNPS3121_0084.00000080 hypothetical protein [Pseudomonas syringae PphNPS3121]
+Cluster 18998
+0       22aa, >2505554779... *  Cluster 18998   >2505554779 PphNPS3121_0047.00001090 hypothetical protein [Pseudomonas syringae PphNPS3121]
+Cluster 18999
+0       21aa, >2505555143... *  Cluster 18999   >2505555143 PphNPS3121_0051.00000010 hypothetical protein [Pseudomonas syringae PphNPS3121]
+Cluster 19000
+        Cluster 19000   >2505552086 PphNPS3121_0001.00000010 1-acyl-sn-glycerol-3-phosphate acyltransferase [Pseudomonas syringae PphNPS3121]
+```
