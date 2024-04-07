@@ -721,16 +721,36 @@ head -n 10 salidita.txt | cut -f 4 | grep -E -w "[[a-zA-Z]+ [[:alnum:]]+"
 Resultado
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/7636affb-aaa0-4250-93ad-eb9b38060e3f)
 ```
----------------------------------------------------------------------------------------------------------------------------------------------------
-        Resultado
+head -n 10 salidita.txt | cut -f 4 | grep -E -w "[[a-zA-Z]+ [[:alnum:]]+]"
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/97492bcc-b290-4417-8451-23fff1ab2cde)
 
----------------------------------------------------------------------------------------------------------------------------------------------------
+```
+head -n 10 salidita.txt | cut -f 4 | grep -o '\[.*\]'
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/679cf6f1-3241-44e0-8c23-aef5df1128ee)
+```
+head -n 10 salidita.txt | cut -f 4 | grep -v '\[.*\]'
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/a483bdac-a439-4b96-90e1-a70abaf06190)
+```
+head -n 10 salidita.txt | cut -f 4 | grep -o '* \[.*\]'
+```
+Resultado
+nada jaja
+```
+head -n 10 salidita.txt | cut -f 4 | grep -o '.* \['
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/667017de-db17-4ca0-8954-ffbc53b8636d)
+```
 
-        Resultado
----------------------------------------------------------------------------------------------------------------------------------------------------
-        Resultado
+```
+Resultado
 
----------------------------------------------------------------------------------------------------------------------------------------------------
+```
 
-        Resultado
 ```
