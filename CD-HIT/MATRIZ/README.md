@@ -738,6 +738,12 @@ Resultado
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/a483bdac-a439-4b96-90e1-a70abaf06190)
 ```
 head -n 10 salidita.txt | cut -f 4 | grep -o '* \[.*\]'
+head -n 10 salidita.txt | cut -f 4 | grep -o '[0-9]+ .* \['
+head -n 10 salidita.txt | cut -f 4 | grep -o '[0-9]^ .* \['
+head -n 10 salidita.txt | cut -f 4 | grep -o '^[0-9] .* \['
+head -n 10 salidita.txt | cut -f 4 | grep -o '[[0-9][0-9]] .* \['
+head -n 10 salidita.txt | cut -f 4 | grep -o '>[0-9]+ .* \['
+head -n 10 salidita.txt | cut -f 4 | grep -o '>[0-9]+ .*. \['
 ```
 Resultado
 nada jaja
@@ -747,6 +753,36 @@ head -n 10 salidita.txt | cut -f 4 | grep -o '.* \['
 Resultado
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/667017de-db17-4ca0-8954-ffbc53b8636d)
 ```
+head -n 10 salidita.txt | cut -f 4 | grep -o '^.* \['
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/1ca23d4d-b588-4c28-962a-f8f55daf9937)
+```
+head -n 10 salidita.txt | cut -f 4 | grep -o '7 .* \['
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/714bfa6a-6c0d-4a7d-962b-8e618dbd7cab)
+```
+head -n 10 salidita.txt | cut -f 4 | grep -o '[0-9] .* \['
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/a1ed7f40-3f48-4ea5-bfdd-34b226873929)
+
+```
+head -n 10 salidita.txt | cut -f 4 | grep -o '[0-9][0-9] .* \['
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/51be8cfc-3101-4de7-84a0-b0b823527b28)
+
+```
+head -n 10 salidita.txt | cut -f 4 | grep -o ' .*. \['
+head -n 10 salidita.txt | cut -f 4 | grep -o ' .*.. \['
+head -n 10 salidita.txt | cut -f 4 | grep -o ' .*... \['
+head -n 10 salidita.txt | cut -f 4 | grep -o ' ..*... \['
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/29be6d6f-6d6c-4c67-bf07-379bec0ce972)
+```
 
 ```
 Resultado
@@ -754,3 +790,5 @@ Resultado
 ```
 
 ```
+Resultado
+
