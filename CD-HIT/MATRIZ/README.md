@@ -667,3 +667,66 @@ Cluster 18999
 Cluster 19000
         Cluster 19000   >2505552086 PphNPS3121_0001.00000010 1-acyl-sn-glycerol-3-phosphate acyltransferase [Pseudomonas syringae PphNPS3121]
 ```
+
+### Fecha 7 de abril del 2024
+Hoy, pondremos en orden
+1. Numero del cluster como fila 1
+2. Secuencias representativas, como columna, representante del cluster como fila 2
+3. Aquellos individuos que compaginen con el representante como nombre de la fila
+4. El cruce entre la secuencia representante e individuo, el id de la proteina asi como el porcentaje de identidad
+    a. Y si es el caso de que haya secuencias del mismo organismo en un mismo cluster se concatenan como (id:identity% id2:identity2)
+Trabajamos con el archivo de salida
+```
+head -n 10 salidita.txt | cut -f 4
+        Resultado
+Cluster 1
+>2505553514 PphNPS3121_0030.00000010 Non-ribosomal peptide synthetase modules and related proteins [Pseudomonas syringae PphNPS3121]
+>2505554354 PphNPS3121_0043.00004260 Non-ribosomal peptide synthetase modules and related proteins [Pseudomonas syringae PphNPS3121]
+>2505554355 PphNPS3121_0043.00004270 amino acid adenylation domain-containing protein [Pseudomonas syringae PphNPS3121]
+>2549668513 NZ4DRAFT_03256 arthrofactin-type cyclic lipopeptide synthetase C [Pseudomonas syringae ICMP 18804]
+>2633064784 Ga0077257_10191 AMP-binding enzyme [Pseudomonas amygdali pv. tabaci yuexi-1]
+>2633064986 Ga0077257_108013 Thioesterase domain-containing protein [Pseudomonas amygdali pv. tabaci yuexi-1]
+>2633064989 Ga0077257_108016 amino acid adenylation domain-containing protein [Pseudomonas amygdali pv. tabaci yuexi-1]
+---------------------------------------------------------------------------------------------------------------------------------------------------
+head -n 10 salidita.txt | cut -f 4 | grep -v -E ">[0-9]+"
+        Resultado
+Cluster 0
+Cluster 1
+---------------------------------------------------------------------------------------------------------------------------------------------------
+head -n 10 salidita.txt | cut -f 4 | grep -E -w "[[:alnum:]]+ ["
+        Resultado
+grep: Invalid regular expression
+---------------------------------------------------------------------------------------------------------------------------------------------------
+head -n 10 salidita.txt | cut -f 4 | grep -E -w "^[[:alnum:]]+"
+        Resultado
+Cluster 0
+Cluster 1 #Solo selecciona las palabras 'Cluster'
+---------------------------------------------------------------------------------------------------------------------------------------------------
+head -n 10 salidita.txt | cut -f 4 | grep -E -w "[a-zA-Z]+"
+        Resultado
+Cluster 1
+>2505553514 PphNPS3121_0030.00000010 Non-ribosomal peptide synthetase modules and related proteins [Pseudomonas syringae PphNPS3121]
+>2505554354 PphNPS3121_0043.00004260 Non-ribosomal peptide synthetase modules and related proteins [Pseudomonas syringae PphNPS3121]
+>2505554355 PphNPS3121_0043.00004270 amino acid adenylation domain-containing protein [Pseudomonas syringae PphNPS3121]
+>2549668513 NZ4DRAFT_03256 arthrofactin-type cyclic lipopeptide synthetase C [Pseudomonas syringae ICMP 18804]
+>2633064784 Ga0077257_10191 AMP-binding enzyme [Pseudomonas amygdali pv. tabaci yuexi-1]
+>2633064986 Ga0077257_108013 Thioesterase domain-containing protein [Pseudomonas amygdali pv. tabaci yuexi-1]
+>2633064989 Ga0077257_108016 amino acid adenylation domain-containing protein [Pseudomonas amygdali pv. tabaci yuexi-1]
+#Solo selecciona lo que son las palabras, mas no los numeros y corchetes o aquellos que parezcan codigos
+---------------------------------------------------------------------------------------------------------------------------------------------------
+head -n 10 salidita.txt | cut -f 4 | grep -E -w "[[a-zA-Z]+ [[:alnum:]]+"
+        Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/7636affb-aaa0-4250-93ad-eb9b38060e3f)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+        Resultado
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+        Resultado
+---------------------------------------------------------------------------------------------------------------------------------------------------
+        Resultado
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+        Resultado
+```
