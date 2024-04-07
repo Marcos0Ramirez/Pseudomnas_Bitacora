@@ -566,7 +566,7 @@ while [[ $ni -le $nfinal ]]; do
 done
 ```
 
-====================================================================================================================================
+------------------------------------------------------------------------------------------------------------------------
 Codigo final hasta el dia de hoy, continuamos con la modificacion de el para adaptar los genes y los nombres de las especies a la matriz
 ```
 #!/bin/bash
@@ -639,3 +639,4 @@ Cluster 2
 6       4093aa, >2714616755... at 68.90%        Cluster 2       >2714616755 Ga0124767_11768 filamentous hemagglutinin [Pseudomonas syringae pv. primulae ICMP3956]
 15,21
 ```
+------------------------------------------------------------------------------------------------------------------------
