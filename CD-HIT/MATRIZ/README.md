@@ -714,9 +714,13 @@ Cluster 1
 >2633064989 Ga0077257_108016 amino acid adenylation domain-containing protein [Pseudomonas amygdali pv. tabaci yuexi-1]
 #Solo selecciona lo que son las palabras, mas no los numeros y corchetes o aquellos que parezcan codigos
 ---------------------------------------------------------------------------------------------------------------------------------------------------
+```
+```
 head -n 10 salidita.txt | cut -f 4 | grep -E -w "[[a-zA-Z]+ [[:alnum:]]+"
-        Resultado
+```
+Resultado
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/7636affb-aaa0-4250-93ad-eb9b38060e3f)
+```
 ---------------------------------------------------------------------------------------------------------------------------------------------------
         Resultado
 
