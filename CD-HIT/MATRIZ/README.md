@@ -566,3 +566,76 @@ while [[ $ni -le $nfinal ]]; do
 done
 ```
 
+====================================================================================================================================
+Codigo final hasta el dia de hoy, continuamos con la modificacion de el para adaptar los genes y los nombres de las especies a la matriz
+```
+#!/bin/bash
+
+# Nombre del archivo de entrada
+archivo="../CDHIT/TODOS/clusterprotcatALL2000.clstr"
+rm ../CDHIT/MATRIXDATA/clusterfile.txt
+rm ../CDHIT/MATRIXDATA/filegenes.txt
+rm ../CDHIT/MATRIXDATA/mapruclusterfile.txt
+rm ../CDHIT/MATRIXDATA/salidita.txt
+# Patrón para identificar el inicio de un nuevo cluster
+patron1=">Cluster"
+patron2="[0-9]+aa"
+ni=0
+nfinal=$(grep -E "$patron1" $archivo | wc -l)
+nfinal=$((nfinal-1))
+echo $nfinal
+# Iterar sobre el archivo
+
+while [[ $ni -le $nfinal ]]; do
+        limitei=$(grep -o -n -w "Cluster $ni" ../CDHIT/TODOS/clusterprotcatALL2000.clstr | grep -Eo "^[0-9]+")
+        nf=$((ni+1))
+        limitef=$(grep -o -n -w "Cluster $nf" ../CDHIT/TODOS/clusterprotcatALL2000.clstr | grep -Eo "^[0-9]+")
+        limitei=$((limitei+1))
+        limitef=$((limitef-1))
+        clusterset=$(sed -n "$limitei,${limitef}p" ../CDHIT/TODOS/clusterprotcatALL2000.clstr)
+        echo "Cluster $ni" >> ../CDHIT/MATRIXDATA/salidita.txt
+        echo "Cluster $ni"
+        echo "$clusterset" | while M= read -r  lineas; do
+                # echo "$lineas"
+                busqueda=$(echo "$lineas" | grep -E -o -w ">[0-9]+")
+                #echo "$lineas  $busqueda"
+                genes=$(grep "$busqueda" ../CDHIT/TODOS/fromscriptall.genes.faa | head -n 1)
+                echo "$lineas   Cluster $ni     $genes"
+                echo "Cluster $ni" >> ../CDHIT/MATRIXDATA/salidita.txt
+                echo "$lineas   Cluster $ni     $genes" >>  ../CDHIT/MATRIXDATA/salidita.txt
+        done
+        echo "$limitei,$limitef"
+        ni=$((ni+1))
+done
+```
+Salida
+```
+rm: cannot remove '../CDHIT/MATRIXDATA/clusterfile.txt': No such file or directory
+rm: cannot remove '../CDHIT/MATRIXDATA/filegenes.txt': No such file or directory
+rm: cannot remove '../CDHIT/MATRIXDATA/mapruclusterfile.txt': No such file or directory
+19000
+Cluster 0
+0       6388aa, >2785749539... *        Cluster 0       >2785749539 Ga0304784_1247 RIP homotypic interaction motif (RHIM)-containing protein [Pseudomonas psychrophila BIGb0477]
+2,2
+Cluster 1
+0       171aa, >2505553514... at 60.82% Cluster 1       >2505553514 PphNPS3121_0030.00000010 Non-ribosomal peptide synthetase modules and related proteins [Pseudomonas syringae PphNPS3121]
+1       895aa, >2505554354... at 65.59% Cluster 1       >2505554354 PphNPS3121_0043.00004260 Non-ribosomal peptide synthetase modules and related proteins [Pseudomonas syringae PphNPS3121]
+2       1002aa, >2505554355... at 83.93%        Cluster 1       >2505554355 PphNPS3121_0043.00004270 amino acid adenylation domain-containing protein [Pseudomonas syringae PphNPS3121]
+3       5929aa, >2549668513... *        Cluster 1       >2549668513 NZ4DRAFT_03256 arthrofactin-type cyclic lipopeptide synthetase C [Pseudomonas syringae ICMP 18804]
+4       154aa, >2633064784... at 89.61% Cluster 1       >2633064784 Ga0077257_10191 AMP-binding enzyme [Pseudomonas amygdali pv. tabaci yuexi-1]
+5       313aa, >2633064986... at 86.90% Cluster 1       >2633064986 Ga0077257_108013 Thioesterase domain-containing protein [Pseudomonas amygdali pv. tabaci yuexi-1]
+6       1239aa, >2633064989... at 85.55%        Cluster 1       >2633064989 Ga0077257_108016 amino acid adenylation domain-containing protein [Pseudomonas amygdali pv. tabaci yuexi-1]
+7       90aa, >2633064990... at 74.44%  Cluster 1       >2633064990 Ga0077257_108017 arthrofactin-type cyclic lipopeptide synthetase C [Pseudomonas amygdali pv. tabaci yuexi-1]
+8       3475aa, >2633065112... at 87.08%        Cluster 1       >2633065112 Ga0077257_108411 arthrofactin-type cyclic lipopeptide synthetase C [Pseudomonas amygdali pv. tabaci yuexi-1]
+9       5889aa, >2714614382... at 71.81%        Cluster 1       >2714614382 Ga0124767_1046121 arthrofactin-type cyclic lipopeptide synthetase C [Pseudomonas syringae pv. primulae ICMP3956]
+4,13
+Cluster 2
+0       5824aa, >2549670384... *        Cluster 2       >2549670384 NZ4DRAFT_05129 filamentous hemagglutinin [Pseudomonas syringae ICMP 18804]
+1       389aa, >2549670765... at 97.94% Cluster 2       >2549670765 NZ4DRAFT_05511 Large exoproteins involved in heme utilization or adhesion [Pseudomonas syringae ICMP 18804]
+2       105aa, >2549670769... at 98.10% Cluster 2       >2549670769 NZ4DRAFT_05515 filamentous hemagglutinin [Pseudomonas syringae ICMP 18804]
+3       514aa, >2549670774... at 76.46% Cluster 2       >2549670774 NZ4DRAFT_05520 Haemagluttinin repeat-containing protein [Pseudomonas syringae ICMP 18804]
+4       4780aa, >2633066528... at 67.68%        Cluster 2       >2633066528 Ga0077257_1099228 filamentous hemagglutinin [Pseudomonas amygdali pv. tabaci yuexi-1]
+5       1072aa, >2633066529... at 88.62%        Cluster 2       >2633066529 Ga0077257_1099229 filamentous hemagglutinin family N-terminal domain-containing protein [Pseudomonas amygdali pv. tabaci yuexi-1]
+6       4093aa, >2714616755... at 68.90%        Cluster 2       >2714616755 Ga0124767_11768 filamentous hemagglutinin [Pseudomonas syringae pv. primulae ICMP3956]
+15,21
+```
