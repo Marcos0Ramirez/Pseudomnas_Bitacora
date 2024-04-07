@@ -775,6 +775,7 @@ Resultado
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/51be8cfc-3101-4de7-84a0-b0b823527b28)
 
 ```
+head -n 10 salidita.txt | cut -f 4 | grep -o ' .* \['
 head -n 10 salidita.txt | cut -f 4 | grep -o ' .*. \['
 head -n 10 salidita.txt | cut -f 4 | grep -o ' .*.. \['
 head -n 10 salidita.txt | cut -f 4 | grep -o ' .*... \['
@@ -783,10 +784,10 @@ head -n 10 salidita.txt | cut -f 4 | grep -o ' ..*... \['
 Resultado
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/29be6d6f-6d6c-4c67-bf07-379bec0ce972)
 ```
-
+head -n 10 salidita.txt | cut -f 4 | grep -o '  .* \['
 ```
 Resultado
-
+nada jaja, se parece al de arriba, pero aparece nadota
 ```
 
 ```
