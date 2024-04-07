@@ -538,6 +538,31 @@ Resultado
 ```
 Ahora se va a buscar concatenar cada salida en un archivo y se va a separar cada resuldado de cluster por columna separado por tabs
 ```
+ #!/bin/bash
 
+# Nombre del archivo de entrada
+archivo="../CDHIT/TODOS/clusterprotcatALL2000.clstr"
+rm ../CDHIT/MATRIXDATA/clusterfile.txt
+rm ../CDHIT/MATRIXDATA/filegenes.txt
+rm ../CDHIT/MATRIXDATA/mapruclusterfile.txt
+# Patrón para identificar el inicio de un nuevo cluster
+patron1=">Cluster"
+patron2="[0-9]+aa"
+ni=0
+nfinal=$(grep -E "$patron1" $archivo | wc -l)
+nfinal=$((nfinal-1))
+echo $nfinal
+# Iterar sobre el archivo
+
+while [[ $ni -le $nfinal ]]; do
+        limitei=$(grep -o -n -w "Cluster $ni" ../CDHIT/TODOS/clusterprotcatALL2000.clstr | grep -Eo "^[0-9]+")
+        nf=$((ni+1))
+        limitef=$(grep -o -n -w "Cluster $nf" ../CDHIT/TODOS/clusterprotcatALL2000.clstr | grep -Eo "^[0-9]+")
+        limitef=$((limitef-1))
+        clusterset=$(sed -n "$limitei,${limitef}p" ../CDHIT/TODOS/clusterprotcatALL2000.clstr)
+
+        echo "$limitei,$limitef"
+        ni=$((ni+1))
+done
 ```
 
