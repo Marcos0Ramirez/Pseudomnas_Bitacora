@@ -789,6 +789,8 @@ head -n 10 salidita.txt | cut -f 4 | grep -o '  .* \['
 Resultado
 nada jaja, se parece al de arriba, pero aparece nadota
 
+## Fecha 8 de abril del 2024
+
 ```
 head -n 10 salidita.txt | grep "*" | cut -f 4 | grep -o '^[^[]*'
 ```
@@ -821,12 +823,35 @@ head -n 10 salidita.txt | grep "*" | cut -f 4 | grep -o '^[^[]*' | grep -o " .*"
 Resultado
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/3abfd96a-88ea-4739-b21d-04328b820177)
 Porfin se le pudo quitar el espacio que estaba antes del texto, esto gracias a ChatGPT, se puede anexar este comando, para filtrar la informacion y colocarla como columnas.
-
+-------------------------------------------------------------------------------------------------------------------------------------
+Ahora por otra parte, se busca entender como es que se puede concatenar la informacion de los nombres de las columnas
 ```
+#!/bin/bash
+n=1
+k=20
 
+lista=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k")
+
+varia=""
+letras=""
+while [[ $n -lt 21 ]]; do
+        echo "$n"
+        if [[ $n -gt 10 ]]; then
+                varia="$varia\t$n"
+                letras="$letras\t${lista[$n]}" #Llamamos los datos con la posicion y concatenandola, separandola por tabs en expresion regular
+        fi
+        n=$((n+1))
+        echo -e "$varia" > PIza
+        echo -e "$letras" >> PIza #Guardamos la info, imprimiendola, leyendola como una expresion regular
+
+done
 ```
 Resultado
-
+```
+less PIza
+        11      12      13      14      15      16      17      18      19      20
+        b       c       d       e       f       g       h       i       j       k
+```
 
 ```
 
