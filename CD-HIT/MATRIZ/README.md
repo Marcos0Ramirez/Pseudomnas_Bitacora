@@ -886,5 +886,15 @@ Resultado
         Ga0304784_1247 RIP homotypic interaction motif (RHIM)-containing protein        NZ4DRAFT_03256 arthrofactin-type cyclic lipopeptide synthetase C        NZ4DRAFT_05129 filamentous hemagglutinin        Ga0439903_01_207766_225195 filamentous hemagglutinin    Ga0398577_01_157522_174915 hypothetical protein         C163_0140 surface adhesion protein      Ga0077257_109861 Ca2+-binding protein, RTX toxin-related        Ga0439903_01_4493887_4509570 surface adhesion protein   Ga0398577_01_5612367_5627615 amino acid adenylation domain-containing protein   Q075_02967 non-ribosomal peptide synthase domain TIGR01720/amino acid adenylation domain-containing protein
         [Pseudomonas psychrophila BIGb0477]     [Pseudomonas syringae ICMP 18804]       [Pseudomonas syringae ICMP 18804]       [Pseudomonas sp. ADAK22]        [Pseudomonas synxantha 2-79]    [Pseudomonas sp. FGI182]        [Pseudomonas amygdali pv. tabaci yuexi-1]       [Pseudomonas sp. ADAK22]        [Pseudomonas synxantha 2-79]    [Pseudomonas aeruginosa BL21]
 ```
+Asi para reconocer de cual archivo se a extraido, porque puede ser que al final, haya muchos genomas de organismos de la misma especie y por tanto se puedan repetir y no saber diferenciar.
+Los que son los id de las proteinas:
+1. Se extrae el numero
+2. Se busca en las carpetas por independiente
+3. Se extrae el id del individuos y se anexa con el nombre entre corchetes y el id del individuo
+4. El id de la proteina se usa para anexar solo la informacion de la idproteina:identidad% en inteseccion con el representativo
+5. Asi finalmente se crea otro script relacional, entre el archivo saluditos y la matriz, para imprimir al informacion que se desea en orden.
 
+```
+
+```
 
