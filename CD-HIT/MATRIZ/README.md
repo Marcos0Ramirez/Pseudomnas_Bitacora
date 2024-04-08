@@ -788,8 +788,50 @@ head -n 10 salidita.txt | cut -f 4 | grep -o '  .* \['
 ```
 Resultado
 nada jaja, se parece al de arriba, pero aparece nadota
+
+```
+head -n 10 salidita.txt | grep "*" | cut -f 4 | grep -o '^[^[]*'
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/ba51732a-d6a3-4f3c-aca3-21dd717dd3b8)
+
+```
+head -n 10 salidita.txt | grep "*" | cut -f 4 | grep -o '[^[]*'
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/daa8d617-7c41-4f0c-ad6e-22e6693b41bc)
+
+```
+head -n 10 salidita.txt | grep "*" | cut -f 4 | grep -o '^[^[]*' | grep " .*"
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/2e8cdc65-6043-4063-b60d-78bac99bd142)
+
+
+```
+head -n 10 salidita.txt | grep "*" | cut -f 4 | grep -o '^[^[]*' | grep -o " .*"
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/9ced872f-1b52-4d71-a78b-a2b577e19631)
+
+
+```
+head -n 10 salidita.txt | grep "*" | cut -f 4 | grep -o '^[^[]*' | grep -o " .*" | grep -o '[^ ].*'
+```
+Resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/3abfd96a-88ea-4739-b21d-04328b820177)
+Porfin se le pudo quitar el espacio que estaba antes del texto, esto gracias a ChatGPT, se puede anexar este comando, para filtrar la informacion y colocarla como columnas.
+
 ```
 
 ```
 Resultado
+
+
+```
+
+```
+Resultado
+
+
 
