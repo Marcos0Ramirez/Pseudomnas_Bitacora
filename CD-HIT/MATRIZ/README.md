@@ -852,11 +852,39 @@ less PIza
         11      12      13      14      15      16      17      18      19      20
         b       c       d       e       f       g       h       i       j       k
 ```
-
+Finalmente, podemos poner a disposicion el codigo anexado para generar las columnas
 ```
+#!/bin/bash
+saluditos="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/salidita.txt"
+pizzerola=$(cat "$saluditos" | grep "*" | cut -f 3,4 | head -n 10)
 
+clustercols=""
+genecols=""
+bacteriacols=""
+
+while C= read -r cols; do
+        #echo "$cols"
+        namecluster=$(echo "$cols" | cut -f 1)
+        #echo "$namecluster"
+        clustercols="$clustercols\t$namecluster"
+        namegene=$(echo "$cols" | cut -f 2 | grep -o '^[^[]*' | grep -o " .*" | grep -o '[^ ].*')
+        #echo "$namegene"
+        genecols="$genecols\t$namegene"
+        namebacteria=$(echo "$cols" | cut -f 2 | grep -o '\[.*\]')
+        #echo "$namebacteria"
+        bacteriacols="$bacteriacols\t$namebacteria"
+        # echo -e "$bacteriacols"
+done <<< "$pizzerola"
+
+echo -e "$clustercols" >> "/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/columnas.txt"
+echo -e "$genecols" >> "/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/columnas.txt"
+echo -e "$bacteriacols" >> "/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/columnas.txt"
 ```
 Resultado
-
+```
+        Cluster 0       Cluster 1       Cluster 2       Cluster 3       Cluster 4       Cluster 5       Cluster 6       Cluster 7       Cluster 8       Cluster 9
+        Ga0304784_1247 RIP homotypic interaction motif (RHIM)-containing protein        NZ4DRAFT_03256 arthrofactin-type cyclic lipopeptide synthetase C        NZ4DRAFT_05129 filamentous hemagglutinin        Ga0439903_01_207766_225195 filamentous hemagglutinin    Ga0398577_01_157522_174915 hypothetical protein         C163_0140 surface adhesion protein      Ga0077257_109861 Ca2+-binding protein, RTX toxin-related        Ga0439903_01_4493887_4509570 surface adhesion protein   Ga0398577_01_5612367_5627615 amino acid adenylation domain-containing protein   Q075_02967 non-ribosomal peptide synthase domain TIGR01720/amino acid adenylation domain-containing protein
+        [Pseudomonas psychrophila BIGb0477]     [Pseudomonas syringae ICMP 18804]       [Pseudomonas syringae ICMP 18804]       [Pseudomonas sp. ADAK22]        [Pseudomonas synxantha 2-79]    [Pseudomonas sp. FGI182]        [Pseudomonas amygdali pv. tabaci yuexi-1]       [Pseudomonas sp. ADAK22]        [Pseudomonas synxantha 2-79]    [Pseudomonas aeruginosa BL21]
+```
 
 
