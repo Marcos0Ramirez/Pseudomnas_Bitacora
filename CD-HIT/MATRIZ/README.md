@@ -896,6 +896,6 @@ Los que son los id de las proteinas:
 
 A continaucion con el codigo, se sustituye la columna 1 por los nombres de los individuos con el id del genoma y el nombre del individuo.
 ```
-
+head -n 10 salidita.txt | grep -o -E " >[0-9]+" | grep -o '[^ ].*'
 ```
 
