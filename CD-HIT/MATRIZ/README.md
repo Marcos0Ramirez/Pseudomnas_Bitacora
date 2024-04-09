@@ -855,7 +855,7 @@ less PIza
 Finalmente, podemos poner a disposicion el codigo anexado para generar las columnas
 ```
 #!/bin/bash
-saluditos="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/salidita.txt"
+saluditos="/Direccion/Descargas_NCBI/CDHIT/MATRIXDATA/salidita.txt"
 pizzerola=$(cat "$saluditos" | grep "*" | cut -f 3,4 | head -n 10)
 
 clustercols=""
@@ -876,9 +876,9 @@ while C= read -r cols; do
         # echo -e "$bacteriacols"
 done <<< "$pizzerola"
 
-echo -e "$clustercols" >> "/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/columnas.txt"
-echo -e "$genecols" >> "/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/columnas.txt"
-echo -e "$bacteriacols" >> "/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/columnas.txt"
+echo -e "$clustercols" >> "/Direccion/Descargas_NCBI/CDHIT/MATRIXDATA/columnas.txt"
+echo -e "$genecols" >> "/Direccion/Descargas_NCBI/CDHIT/MATRIXDATA/columnas.txt"
+echo -e "$bacteriacols" >> "/Direccion/Descargas_NCBI/CDHIT/MATRIXDATA/columnas.txt"
 ```
 Resultado
 ```
@@ -894,6 +894,7 @@ Los que son los id de las proteinas:
 4. El id de la proteina se usa para anexar solo la informacion de la idproteina:identidad% en inteseccion con el representativo
 5. Asi finalmente se crea otro script relacional, entre el archivo saluditos y la matriz, para imprimir al informacion que se desea en orden.
 
+A continaucion con el codigo, se sustituye la columna 1 por los nombres de los individuos con el id del genoma y el nombre del individuo.
 ```
 
 ```
