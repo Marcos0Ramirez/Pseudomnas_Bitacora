@@ -899,3 +899,122 @@ A continaucion con el codigo, se sustituye la columna 1 por los nombres de los i
 head -n 10 salidita.txt | grep -o -E " >[0-9]+" | grep -o '[^ ].*'
 ```
 
+## Fecha 10 de abril del 2024
+para entender como funciona un script para concatenar la informacion idgenoma:nombreorganismo, se realizo esta parte del script
+```
+
+```
+
+Primero, guardo registro de como estaba quedando el script
+```
+#!/bin/bash
+# Generacion de columnas
+MATRIXDIR="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+saluditos="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/salidita.txt" #Salida del archivo donde se agrego el nombre del gen/proteina
+pizzerola=$(cat "$saluditos" | grep "*" | cut -f 3,4 | head -n 10)
+
+clustercols=""
+genecols=""
+bacteriacols=""
+
+while COLUMNAS= read -r cols; do
+        #echo "$cols"
+        namecluster=$(echo "$cols" | cut -f 1)
+        #echo "$namecluster"
+        clustercols="$clustercols\t$namecluster"
+        namegene=$(echo "$cols" | cut -f 2 | grep -o '^[^[]*' | grep -o " .*" | grep -o '[^ ].*')
+        #echo "$namegene"
+        genecols="$genecols\t$namegene"
+        namebacteria=$(echo "$cols" | cut -f 2 | grep -o '\[.*\]')
+        #echo "$namebacteria"
+        bacteriacols="$bacteriacols\t$namebacteria"
+        # echo -e "$bacteriacols"
+done <<< "$pizzerola"
+
+echo -e "$clustercols" > "$MATRIXDIR/columnas.txt"
+echo -e "$genecols" >> "$MATRIXDIR/columnas.txt"
+echo -e "$bacteriacols" >> "$MATRIXDIR/columnas.txt"
+
+
+
+# Aca se generan los nombres de las filas con ´idgenoma:nombreorganismo´
+PWD="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES/"
+cd $PWD #Donde se localizan los genomas
+ls * | head -n 1 */*faa > "$MATRIXDIR/idgenome_namespecie.txt"
+sed '/<==/{N;s/<==\n/ /}' $MATRIXDIR/idgenome_namespecie.txt > $MATRIXDIR/idgenome_namespecie2.txt
+mv $MATRIXDIR/idgenome_namespecie2.txt $MATRIXDIR/idgenome_namespecie.txt
+cat "$MATRIXDIR/idgenome_namespecie.txt" |
+while FILASNAME= read -r name; do
+        grep -E
+done <<< "$MATRIXDIR/idgenome_namespecie.txt"
+
+
+
+# De aqui que ya estan las columnas, ahora toca agregar la informacion.
+busqueda=$(grep -o -E " >[0-9]+" $saluditos | grep -o '[^ ].*' | head -n 10)
+while FILAS= read -r fila; do
+echo "$fila"
+ls * | grep -l "$fila" */*faa
+
+done <<< "$busqueda"
+```
+
+Ahora, modificamos el script, para que solo ponga el id y que directamente busque solo el nombre del organismo
+```
+#!/bin/bash
+# Generacion de columnas
+MATRIXDIR="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+saluditos="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/salidita.txt" #Salida del archivo donde se agrego el nombre del gen/proteina
+pizzerola=$(cat "$saluditos" | grep "*" | cut -f 3,4 | head -n 10)
+
+clustercols=""
+genecols=""
+bacteriacols=""
+
+while COLUMNAS= read -r cols; do
+        #echo "$cols"
+        namecluster=$(echo "$cols" | cut -f 1)
+        #echo "$namecluster"
+        clustercols="$clustercols\t$namecluster"
+        namegene=$(echo "$cols" | cut -f 2 | grep -o '^[^[]*' | grep -o " .*" | grep -o '[^ ].*')
+        #echo "$namegene"
+        genecols="$genecols\t$namegene"
+        namebacteria=$(echo "$cols" | cut -f 2 | grep -o '\[.*\]')
+        #echo "$namebacteria"
+        bacteriacols="$bacteriacols\t$namebacteria"
+        # echo -e "$bacteriacols"
+done <<< "$pizzerola"
+
+echo -e "$clustercols" > "$MATRIXDIR/columnas.txt"
+echo -e "$genecols" >> "$MATRIXDIR/columnas.txt"
+echo -e "$bacteriacols" >> "$MATRIXDIR/columnas.txt"
+
+
+
+# Aca se generan los nombres de las filas con ´idgenoma:nombreorganismo´
+PWD="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES/"
+cd $PWD #Donde se localizan los genomas
+rm $MATRIXDIR/idgenome_namespecie.txt $MATRIXDIR/idgenome_namespecie2.txt
+for i in *; do
+corchetes=$(head -n 1 $i/*faa | grep -Eo '\[.*\]')
+echo "$i"
+echo "$corchetes"
+
+echo "$i:$corchetes" >> $MATRIXDIR/idgenome_namespecie.txt
+done
+
+# sed '/<==/{N;s/<==\n/ /}' $MATRIXDIR/idgenome_namespecie.txt > $MATRIXDIR/idgenome_namespecie2.txt
+# mv $MATRIXDIR/idgenome_namespecie2.txt $MATRIXDIR/idgenome_namespecie.txt
+# cat "$MATRIXDIR/idgenome_namespecie.txt" |
+# while FILASNAME= read -r name; do
+#       grep -E
+# done <<< "$MATRIXDIR/idgenome_namespecie.txt"
+
+# De aqui que ya estan las columnas, ahora toca agregar la informacion.
+#busqueda=$(grep -o -E " >[0-9]+" $saluditos | grep -o '[^ ].*' | head -n 10)
+#while FILAS= read -r fila; do
+#echo "$fila"
+#ls * | grep -l "$fila" */*faa
+
+#done <<< "$busqueda"
+```
