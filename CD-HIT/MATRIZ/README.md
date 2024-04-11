@@ -1055,3 +1055,38 @@ Para el cual con respecto a identificar, donde se encuentra el gen/proteina.
 2972001829    | 0    | 0    |
 8011072914    | 0    | 0    |
 ```
+Avance del codigo, hasta la parte de obtener el nombre del archivo donde se encuntra la proteina identificada, solo falta generar la matriz y dividir por cluster
+```
+#!/bin/bash
+
+DIR="/mnt/c/Users/52477/Desktop/Descargas_NCBI"
+MATRIXCDOUT="CDHIT/MATRIXDATA"
+DATA="CDHIT/TODOS/clusterprotcatALL2000.clstr"
+
+#ls $DIR/$MATRIXCDOUT
+#head -n 10 $DIR/$DATA
+
+# Patrón para identificar el inicio de un nuevo cluster
+patron1=">Cluster"
+patron2="[0-9]+aa"
+ni=0
+nfinal=$(grep -E "$patron1" $DIR/$DATA | wc -l)
+nfinal=$((nfinal-1))
+echo $nfinal
+# Iterar sobre el archivo
+cd $DIR/IMGPSEUDOMONASGENOMES
+while [[ $ni -le $nfinal ]]; do
+        limitei=$(grep -o -n -w "Cluster $ni" $DIR/$DATA | grep -Eo "^[0-9]+")
+        nf=$((ni+1))
+        limitef=$(grep -o -n -w "Cluster $nf" $DIR/$DATA | grep -Eo "^[0-9]+")
+        limitei=$((limitei+1))
+        limitef=$((limitef-1))
+        clusterset=$(sed -n "$limitei,${limitef}p" $DIR/$DATA)
+        echo "$clusterset" | while M= read -r  lineas; do
+                busqueda=$(echo "$lineas" | grep -E -o -w ">[0-9]+")
+                #echo "$busqueda"
+                grep -l "$busqueda" */*faa | grep -Eo "^[0-9]+"
+        done
+        ni=$((ni+1))
+done
+```
