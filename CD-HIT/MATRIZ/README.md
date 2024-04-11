@@ -1018,3 +1018,40 @@ done
 
 #done <<< "$busqueda"
 ```
+
+## Fecha 11 de abril del 2024
+Por el momento, queda de constancia, que la matriz se quiere tener esta connotación
+Conjunto de datos muestra
+```
+0       171aa, >2505553514... at 60.82%         Cluster 1       >2505553514 PphNPS3121_0030.00000010 Non-ribosomal peptide synthetase modules and related proteins [Pseudomonas syringae PphNPS3121]
+1       895aa, >2505554354... at 65.59%         Cluster 1       >2505554354 PphNPS3121_0043.00004260 Non-ribosomal peptide synthetase modules and related proteins [Pseudomonas syringae PphNPS3121]
+2       1002aa, >2505554355... at 83.93%        Cluster 1       >2505554355 PphNPS3121_0043.00004270 amino acid adenylation domain-containing protein [Pseudomonas syringae PphNPS3121]
+3       5929aa, >2549668513... *        Cluster 1       >2549668513 NZ4DRAFT_03256 arthrofactin-type cyclic lipopeptide synthetase C [Pseudomonas syringae ICMP 18804]
+4       154aa, >2633064784... at 89.61%         Cluster 1       >2633064784 Ga0077257_10191 AMP-binding enzyme [Pseudomonas amygdali pv. tabaci yuexi-1]
+5       313aa, >2633064986... at 86.90%         Cluster 1       >2633064986 Ga0077257_108013 Thioesterase domain-containing protein [Pseudomonas amygdali pv. tabaci yuexi-1]
+6       1239aa, >2633064989... at 85.55%        Cluster 1       >2633064989 Ga0077257_108016 amino acid adenylation domain-containing protein [Pseudomonas amygdali pv. tabaci yuexi-1]
+7       90aa, >2633064990... at 74.44%  Cluster 1       >2633064990 Ga0077257_108017 arthrofactin-type cyclic lipopeptide synthetase C [Pseudomonas amygdali pv. tabaci yuexi-1]
+8       3475aa, >2633065112... at 87.08%        Cluster 1       >2633065112 Ga0077257_108411 arthrofactin-type cyclic lipopeptide synthetase C [Pseudomonas amygdali pv. tabaci yuexi-1]
+9       5889aa, >2714614382... at 71.81%        Cluster 1       >2714614382 Ga0124767_1046121 arthrofactin-type cyclic lipopeptide synthetase C [Pseudomonas syringae pv. primulae ICMP3956]
+```
+
+Para el cual con respecto a identificar, donde se encuentra el gen/proteina. 
+1. Se usa id del gen/proteina
+2. Se busca en que genoma se encuentra
+3. Finalmente se llama el nombre del genoma, se concatena la informacion en su respectiva columna y fila,
+4. Si no hay nada se pone 0, si hay alguno se va sumando con los otros.
+
+```
+              | 0    | 1   |
+--------------------------------
+2505313052    | 0    | 3    |
+2517572175    | 0    | 0    |
+2548876750    | 0    | 1    |
+2554235471    | 0    | 0    |
+2630968743    | 0    | 5    |
+2713896862    | 0    | 1    |
+2785510749    | 1    | 0    |
+2923166773    | 0    | 0    |
+2972001829    | 0    | 0    |
+8011072914    | 0    | 0    |
+```
