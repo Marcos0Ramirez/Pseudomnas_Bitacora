@@ -1082,11 +1082,17 @@ while [[ $ni -le $nfinal ]]; do
         limitei=$((limitei+1))
         limitef=$((limitef-1))
         clusterset=$(sed -n "$limitei,${limitef}p" $DIR/$DATA)
+        pizzitas=""
+        pizzitas="$pizzitas\t$ni" # Agrega el numero del cluster
         echo "$clusterset" | while M= read -r  lineas; do
-                busqueda=$(echo "$lineas" | grep -E -o -w ">[0-9]+")
+                busqueda=$(echo "$lineas" | grep -E -o -w ">[0-9]+") # Toma el id de la proteina para relizar la busqueda en los genomas
                 #echo "$busqueda"
-                grep -l "$busqueda" */*faa | grep -Eo "^[0-9]+"
-        done
+                queso=$(grep -l "$busqueda" */*faa | grep -Eo "^[0-9]+") # Hace la busqueda del id del genoma solo el que aparece por primera vez idgenome/idgenome.genes.faa
+                pizzitas="$pizzitas\t$queso" # Concatena la informacion, con respecto al cluster y al id de las proteinas
+        done <<< "$clusterset"
+        echo -e "$pizzitas" expresa la informacion respetando las expresiones regulares.
         ni=$((ni+1))
 done
 ```
+
+Fecha 12 de abril del 2024
