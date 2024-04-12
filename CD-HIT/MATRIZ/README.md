@@ -1096,3 +1096,55 @@ done
 ```
 
 Fecha 12 de abril del 2024
+El dia de hoy de modifico el codigo de esta forma:
+```
+        done <<< "$clusterset"
+        echo -e "$pizzitas" > "$DIR/$MATRIXCDOUT/clust.tmp"
+        echo -e "$pizzitas"
+        # head -n 15 "$DIR/$MATRIXCDOUT/clust.tmp"
+        for i in *
+        do
+                reps=$(grep -o "$i" "$DIR/$MATRIXCDOUT/clust.tmp" | wc -l)
+                echo "id genoma: $i y se repite: $reps"
+        done
+        ni=$((ni+1))
+done
+```
+lo que permite identificar, con que frecuencia aparecen los genomas, la cual concuerda con lo esperado. Solo queda concatenar para hacer una matriz
+```
+19000
+2505313052 2517572175 2548876750 2554235471 2630968743 2713896862 2785510749 2923166773 2972001829 8011072914
+        0
+2785510749
+id genoma: 2505313052 y se repite: 0
+id genoma: 2517572175 y se repite: 0
+id genoma: 2548876750 y se repite: 0
+id genoma: 2554235471 y se repite: 0
+id genoma: 2630968743 y se repite: 0
+id genoma: 2713896862 y se repite: 0
+id genoma: 2785510749 y se repite: 1
+id genoma: 2923166773 y se repite: 0
+id genoma: 2972001829 y se repite: 0
+id genoma: 8011072914 y se repite: 0
+        1
+2505313052
+2505313052
+2505313052
+2548876750
+2630968743
+2630968743
+2630968743
+2630968743
+2630968743
+2713896862
+id genoma: 2505313052 y se repite: 3
+id genoma: 2517572175 y se repite: 0
+id genoma: 2548876750 y se repite: 1
+id genoma: 2554235471 y se repite: 0
+id genoma: 2630968743 y se repite: 5
+id genoma: 2713896862 y se repite: 1
+id genoma: 2785510749 y se repite: 0
+id genoma: 2923166773 y se repite: 0
+id genoma: 2972001829 y se repite: 0
+id genoma: 8011072914 y se repite: 0
+```
