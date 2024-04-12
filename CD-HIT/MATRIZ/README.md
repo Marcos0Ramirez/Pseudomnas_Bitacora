@@ -1148,3 +1148,61 @@ id genoma: 2923166773 y se repite: 0
 id genoma: 2972001829 y se repite: 0
 id genoma: 8011072914 y se repite: 0
 ```
+Codigo final, de la ultima parte del comando de clusterizacion hasta la generacion de la matriz
+```
+#!/bin/bash
+
+DIR="/mnt/c/Users/52477/Desktop/Descargas_NCBI"
+MATRIXCDOUT="CDHIT/MATRIXDATA"
+DATA="CDHIT/TODOS/clusterprotcatALL2000.clstr"
+rm "$DIR/$MATRIXCDOUT/clust.tmp"
+#ls $DIR/$MATRIXCDOUT
+#head -n 10 $DIR/$DATA
+
+# Patrón para identificar el inicio de un nuevo cluster
+patron1=">Cluster"
+patron2="[0-9]+aa"
+ni=0
+nfinal=$(grep -E "$patron1" $DIR/$DATA | wc -l)
+nfinal=$((nfinal-1))
+echo $nfinal
+# Iterar sobre el archivo
+cd $DIR/IMGPSEUDOMONASGENOMES
+echo "idgenomas" > $DIR/$MATRIXCDOUT/matriz.txt
+ls | tr '\s' '\n' >> $DIR/$MATRIXCDOUT/matriz.txt
+# cat $DIR/$MATRIXCDOUT/matriz.txt
+while [[ $ni -le $nfinal ]]; do
+        limitei=$(grep -o -n -w "Cluster $ni" $DIR/$DATA | grep -Eo "^[0-9]+")
+        nf=$((ni+1))
+        limitef=$(grep -o -n -w "Cluster $nf" $DIR/$DATA | grep -Eo "^[0-9]+")
+        limitei=$((limitei+1))
+        limitef=$((limitef-1))
+        clusterset=$(sed -n "$limitei,${limitef}p" $DIR/$DATA)
+        pizzitas=""
+        pizzitas="$pizzitas\t$ni"
+        while M= read -r  lineas; do
+                busqueda=$(echo "$lineas" | grep -E -o -w ">[0-9]+")
+                #echo "$busqueda"
+                queso=$(grep -l "$busqueda" */*faa | grep -Eo "^[0-9]+")
+                pizzitas="$pizzitas\n$queso"
+        done <<< "$clusterset"
+
+
+        echo "$ni" > "$DIR/$MATRIXCDOUT/clust.tmp"
+        cont=""
+        echo "$ni"
+        for i in *
+        do
+                reps=$(echo -e "$pizzitas" | grep -o "$i" | wc -l)
+                cont="$cont\n$reps"
+                echo "$i: $reps"
+        done
+        n=$(ls | tr '\s' '\n' | wc -l)
+        #n=$(($n-1))
+        cont=$(echo -e "$cont" | tail -n $n)
+        echo -e "$cont" >> "$DIR/$MATRIXCDOUT/clust.tmp"
+        paste $DIR/$MATRIXCDOUT/matriz.txt $DIR/$MATRIXCDOUT/clust.tmp > $DIR/$MATRIXCDOUT/matriz.tmp && mv $DIR/$MATRIXCDOUT/matriz.tmp $DIR/$MATRIXCDOUT/matriz.txt
+        head -n $n $DIR/$MATRIXCDOUT/matriz.txt > $DIR/$MATRIXCDOUT/matriz.tmp && mv $DIR/$MATRIXCDOUT/matriz.tmp $DIR/$MATRIXCDOUT/matriz.txt
+        ni=$((ni+1))
+done
+```
