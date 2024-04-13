@@ -1206,3 +1206,45 @@ while [[ $ni -le $nfinal ]]; do
         ni=$((ni+1))
 done
 ```
+Empezo a las 5:50 pm y termino a las 10:50 pm, por lo que tardo 5 horas en hacer la matriz.
+Al final aparecio este mensaje
+```
+18998
+2505313052: 1
+2517572175: 0
+2548876750: 0
+2554235471: 0
+2630968743: 0
+2713896862: 0
+2785510749: 0
+2923166773: 0
+2972001829: 0
+8011072914: 0
+matriz.txt: 0
+18999
+2505313052: 1
+2517572175: 0
+2548876750: 0
+2554235471: 0
+2630968743: 0
+2713896862: 0
+2785510749: 0
+2923166773: 0
+2972001829: 0
+8011072914: 0
+matriz.txt: 0
+sed: -e expression #1, char 7: unexpected `,'
+19000
+2505313052: 1
+2517572175: 1
+2548876750: 1
+2554235471: 1
+2630968743: 1
+2713896862: 1
+2785510749: 1
+2923166773: 1
+2972001829: 1
+8011072914: 1
+matriz.txt: 0
+```
+Lo que indica que solo se debe agregar un condicional para el ultimo cluster y termine bien, sin que aparezca el ultimo mensaje.
