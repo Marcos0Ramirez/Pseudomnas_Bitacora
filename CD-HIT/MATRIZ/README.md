@@ -1248,3 +1248,17 @@ sed: -e expression #1, char 7: unexpected `,'
 matriz.txt: 0
 ```
 Lo que indica que solo se debe agregar un condicional para el ultimo cluster y termine bien, sin que aparezca el ultimo mensaje.
+Parte de la matriz de salida
+```
+idgenomas       0       1       2       3       4       5       6       7       8
+2505313052      0       3       0       0       0       0       1       0       1
+2517572175      0       0       0       0       0       1       0       0       0
+2548876750      0       1       4       0       0       0       1       0       0
+2554235471      0       0       0       0       0       0       0       0       0
+2630968743      0       5       2       0       0       0       1       0       0
+2713896862      0       1       1       0       0       0       0       0       0
+2785510749      1       0       0       0       0       0       0       0       0
+2923166773      0       0       0       1       0       0       0       1       0
+2972001829      0       0       0       0       1       0       0       0       1
+8011072914      0       0       0       0       0       0       0       0       0
+```
