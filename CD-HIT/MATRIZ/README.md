@@ -1318,8 +1318,10 @@ Respuesta
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/61b53707-1e2d-4d44-a165-f436f06c37ec)
 
 ```
-
+echo "$prueba" | grep -n "$ult" | grep -o "^[0-9]*"
 ```
+Respuesta
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/c4e77dd4-9bd7-4297-a032-ba0aa0a70837)
 
 
 
