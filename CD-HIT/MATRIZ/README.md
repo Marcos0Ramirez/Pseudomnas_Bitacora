@@ -1322,11 +1322,221 @@ echo "$prueba" | grep -n "$ult" | grep -o "^[0-9]*"
 ```
 Respuesta
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/c4e77dd4-9bd7-4297-a032-ba0aa0a70837)
+Finalmente quedo corregido el codigo, aunque sea posible sea unos segundos mas lento en procesar, asegura la correcta recoleccion de los datos para hacer la matriz:
+Para ello presentamos el la parte del set de datos a usar con las condiciones iguales al del archivo:
+```
+>Cluster 0
+0       6388aa, >2785749539... *
+>Cluster 1
+0       171aa, >2505553514... at 60.82%
+1       895aa, >2505554354... at 65.59%
+2       1002aa, >2505554355... at 83.93%
+3       5929aa, >2549668513... *
+4       154aa, >2633064784... at 89.61%
+5       313aa, >2633064986... at 86.90%
+6       1239aa, >2633064989... at 85.55%
+7       90aa, >2633064990... at 74.44%
+8       3475aa, >2633065112... at 87.08%
+9       5889aa, >2714614382... at 71.81%
+>Cluster 2
+0       5824aa, >2549670384... *
+1       389aa, >2549670765... at 97.94%
+2       105aa, >2549670769... at 98.10%
+3       514aa, >2549670774... at 76.46%
+4       4780aa, >2633066528... at 67.68%
+5       1072aa, >2633066529... at 88.62%
+6       4093aa, >2714616755... at 68.90%
+>Cluster 3
+0       5809aa, >2923166973... *
+>Cluster 4
+0       5797aa, >2972001972... *
+>Cluster 5
+0       5603aa, >2518032096... *
+>Cluster 6
+0       1547aa, >2505552225... at 99.10%
+1       215aa, >2549670875... at 72.56%
+```
+Con el codigo
+```
+#!/bin/bash
+
+DIR="/mnt/c/Users/52477/Desktop/Descargas_NCBI"
+MATRIXCDOUT="CDHIT/MATRIXDATA"
+DATA="CDHIT/TODOS/clusterprotcatALL2000.clstr"
+
+#Prueba rapida para el final del codigo
+head -n 30 $DIR/$DATA > "$DIR/CDHIT/TODOS/30rengclusterprotcatALL2000.clstr"
+DATA="CDHIT/TODOS/30rengclusterprotcatALL2000.clstr"
+rm "$DIR/$MATRIXCDOUT/clust2.tmp"
+#ls $DIR/$MATRIXCDOUT
+#head -n 10 $DIR/$DATA
+
+# Patrón para identificar el inicio de un nuevo cluster
+patron1=">Cluster"
+patron2="[0-9]+aa"
+ni=0
+nfinal=$(grep -E "$patron1" $DIR/$DATA | wc -l)
+nfinal=$((nfinal-1))
+echo $nfinal
+# Iterar sobre el archivo
+cd $DIR/IMGPSEUDOMONASGENOMES
+echo "idgenomas" > $DIR/$MATRIXCDOUT/matriz2.txt
+ls | tr '\s' '\n' >> $DIR/$MATRIXCDOUT/matriz2.txt
+# cat $DIR/$MATRIXCDOUT/matriz.txt
+while [[ $ni -le $nfinal ]]; do
+        limitei=$(grep -o -n -w "Cluster $ni" $DIR/$DATA | grep -Eo "^[0-9]+")
+        nf=$((ni+1))
+        limitef=$(grep -o -n -w "Cluster $nf" $DIR/$DATA | grep -Eo "^[0-9]+")
+        limitei=$((limitei+1))
+        limitef=$((limitef-1))
+        if [ $limitef != "-1" ]; then
+        clusterset=$(sed -n "$limitei,${limitef}p" "$DIR/$DATA")
+        else
+        echo "ultimoski pa"
+        ult=$(tail -n 1 $DIR/$DATA)
+        limitef=$(grep -n "$ult" $DIR/$DATA | grep -o "^[0-9]*")
+        clusterset=$(sed -n "$limitei,${limitef}p" "$DIR/$DATA")
+        fi
+        pizzitas=""
+        pizzitas="$pizzitas\t$ni"
+        while M= read -r  lineas; do
+                busqueda=$(echo "$lineas" | grep -E -o -w ">[0-9]+")
+                #echo "$busqueda"
+                queso=$(grep -l "$busqueda" */*faa | grep -Eo "^[0-9]+")
+                pizzitas="$pizzitas\n$queso"
+        done <<< "$clusterset"
 
 
-
-
-
+        echo "$ni" > "$DIR/$MATRIXCDOUT/clust2.tmp"
+        cont=""
+        echo "$ni"
+        for i in *
+        do
+                reps=$(echo -e "$pizzitas" | grep -o "$i" | wc -l)
+                cont="$cont\n$reps"
+                echo "$i: $reps"
+        done
+        n=$(ls | tr '\s' '\n' | wc -l)
+        #n=$(($n-1))
+        cont=$(echo -e "$cont" | tail -n $n)
+        echo -e "$cont" >> "$DIR/$MATRIXCDOUT/clust2.tmp"
+        paste $DIR/$MATRIXCDOUT/matriz2.txt $DIR/$MATRIXCDOUT/clust2.tmp > $DIR/$MATRIXCDOUT/matriz2.tmp && mv $DIR/$MATRIXCDOUT/matriz2.tmp $DIR/$MATRIXCDOUT/matriz2.txt
+        head -n $n $DIR/$MATRIXCDOUT/matriz2.txt > $DIR/$MATRIXCDOUT/matriz2.tmp && mv $DIR/$MATRIXCDOUT/matriz2.tmp $DIR/$MATRIXCDOUT/matriz2.txt
+        ni=$((ni+1))
+done
+echo "$ni"
+echo "$nf"
+echo "$limitei"
+echo "$limitef"
+```
+Y con salida al correr
+```
+6
+0
+2505313052: 0
+2517572175: 0
+2548876750: 0
+2554235471: 0
+2630968743: 0
+2713896862: 0
+2785510749: 1
+2923166773: 0
+2972001829: 0
+8011072914: 0
+matriz.txt: 0
+1
+2505313052: 3
+2517572175: 0
+2548876750: 1
+2554235471: 0
+2630968743: 5
+2713896862: 1
+2785510749: 0
+2923166773: 0
+2972001829: 0
+8011072914: 0
+matriz.txt: 0
+2
+2505313052: 0
+2517572175: 0
+2548876750: 4
+2554235471: 0
+2630968743: 2
+2713896862: 1
+2785510749: 0
+2923166773: 0
+2972001829: 0
+8011072914: 0
+matriz.txt: 0
+3
+2505313052: 0
+2517572175: 0
+2548876750: 0
+2554235471: 0
+2630968743: 0
+2713896862: 0
+2785510749: 0
+2923166773: 1
+2972001829: 0
+8011072914: 0
+matriz.txt: 0
+4
+2505313052: 0
+2517572175: 0
+2548876750: 0
+2554235471: 0
+2630968743: 0
+2713896862: 0
+2785510749: 0
+2923166773: 0
+2972001829: 1
+8011072914: 0
+matriz.txt: 0
+5
+2505313052: 0
+2517572175: 1
+2548876750: 0
+2554235471: 0
+2630968743: 0
+2713896862: 0
+2785510749: 0
+2923166773: 0
+2972001829: 0
+8011072914: 0
+matriz.txt: 0
+ultimoski pa
+6
+2505313052: 1
+2517572175: 0
+2548876750: 1
+2554235471: 0
+2630968743: 0
+2713896862: 0
+2785510749: 0
+2923166773: 0
+2972001829: 0
+8011072914: 0
+matriz.txt: 0
+7
+7
+29
+30
+```
+Y con la matriz del archivo matriz2.txt
+```
+idgenomas       0       1       2       3       4       5       6
+2505313052      0       3       0       0       0       0       1
+2517572175      0       0       0       0       0       1       0
+2548876750      0       1       4       0       0       0       1
+2554235471      0       0       0       0       0       0       0
+2630968743      0       5       2       0       0       0       0
+2713896862      0       1       1       0       0       0       0
+2785510749      1       0       0       0       0       0       0
+2923166773      0       0       0       1       0       0       0
+2972001829      0       0       0       0       1       0       0
+8011072914      0       0       0       0       0       0       0
+```
+Ahora solo queda que se genere una bitacora de salida y que agregue fecha y hora de inicio y fecha y hora de termino y con un script que pueda indicar cuales son las direcciones de los archivos y las salidas de trabajo.
 
 
 
