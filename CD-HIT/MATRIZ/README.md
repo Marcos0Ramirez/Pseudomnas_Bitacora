@@ -1264,3 +1264,79 @@ idgenomas       0       1       2       3       4       5       6       7       
 ```
 Fecha 13 de abril del 2024
 Para hacer el condicional y funcione bien la extraccion de lineas para el final del archivo, solo se trata de entender como hacer para que en automatico solo saque las ultimas lineas
+```
+prueba=$(head -n 30 ../CDHIT/TODOS/clusterprotcatALL2000.clstr)
+echo "$prueba"
+Respuesta
+>Cluster 0
+0       6388aa, >2785749539... *
+>Cluster 1
+0       171aa, >2505553514... at 60.82%
+1       895aa, >2505554354... at 65.59%
+2       1002aa, >2505554355... at 83.93%
+3       5929aa, >2549668513... *
+4       154aa, >2633064784... at 89.61%
+5       313aa, >2633064986... at 86.90%
+6       1239aa, >2633064989... at 85.55%
+7       90aa, >2633064990... at 74.44%
+8       3475aa, >2633065112... at 87.08%
+9       5889aa, >2714614382... at 71.81%
+>Cluster 2
+0       5824aa, >2549670384... *
+1       389aa, >2549670765... at 97.94%
+2       105aa, >2549670769... at 98.10%
+3       514aa, >2549670774... at 76.46%
+4       4780aa, >2633066528... at 67.68%
+5       1072aa, >2633066529... at 88.62%
+6       4093aa, >2714616755... at 68.90%
+>Cluster 3
+0       5809aa, >2923166973... *
+>Cluster 4
+0       5797aa, >2972001972... *
+>Cluster 5
+0       5603aa, >2518032096... *
+>Cluster 6
+0       1547aa, >2505552225... at 99.10%
+1       215aa, >2549670875... at 72.56%
+```
+```
+echo "$prueba" | tail -n 1
+
+Respuesta
+1       215aa, >2549670875... at 72.56%
+```
+```
+ult=$(echo "$prueba" | tail -n 1)
+echo "$prueba" | grep -n "$ult"
+```
+Respuesta
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/8f9b77da-d01b-43ef-b4ef-e9af1606aa6d)
+```
+echo "$prueba" | grep -n "$ult" | grep -o "^[0-9]"
+Respuesta
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/61b53707-1e2d-4d44-a165-f436f06c37ec)
+
+```
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
