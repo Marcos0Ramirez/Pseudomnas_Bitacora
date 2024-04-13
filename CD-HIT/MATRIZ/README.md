@@ -1263,3 +1263,4 @@ idgenomas       0       1       2       3       4       5       6       7       
 8011072914      0       0       0       0       0       0       0       0       0
 ```
 Fecha 13 de abril del 2024
+Para hacer el condicional y funcione bien la extraccion de lineas para el final del archivo, solo se trata de entender como hacer para que en automatico solo saque las ultimas lineas
