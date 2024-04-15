@@ -400,8 +400,10 @@ Resultado
 ```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/d1fecb2c-7c9b-4698-8f90-c59c01010d83)
 
+
+Con lo siguiente se busca comprobar si son la misma informacion la del C con la de S y si compaginan, las demas columnas sin agregar la primera, entonces si podemos usar la informacion con (S) como la refencia.
 ```
-#
+
 Resultado
 
 ```
