@@ -403,17 +403,53 @@ Resultado
 
 Con lo siguiente se busca comprobar si son la misma informacion la del C con la de S y si compaginan, las demas columnas sin agregar la primera, entonces si podemos usar la informacion con (S) como la refencia.
 ```
+grep -E "^C" ../RESULTADOS/PseudoPrueba.uc | cut -f 2,3,4,5,6,7,8,9,10 > ../MATRIXVSEARCH/C_comp.txt
+grep -E "^S" ../RESULTADOS/PseudoPrueba.uc | cut -f 2,3,4,5,6,7,8,9,10 > ../MATRIXVSEARCH/S_comp.txt
 
+#Toca comparar
+diff C_comp.txt S_comp.txt > CS_comp.txt
+mv CS_comp.txt CS_diffcomp.txt
 Resultado
-
+> 505   59      *       *       *       *       *       2556073553      *
+> 506   59      *       *       *       *       *       2972005211      *
+> 507   56      *       *       *       *       *       2518032230      *
+> 508   56      *       *       *       *       *       2633067652      *
+> 509   56      *       *       *       *       *       2972005192      *
+> 510   56      *       *       *       *       *       2972005194      *
+> 511   56      *       *       *       *       *       2972005551      *
+> 512   54      *       *       *       *       *       2972004696      *
+> 513   53      *       *       *       *       *       2518035936      *
+> 514   50      *       *       *       *       *       2505557391      *
+> 515   50      *       *       *       *       *       8011073038      *
+> 516   49      *       *       *       *       *       2518035892      *
+> 517   48      *       *       *       *       *       2923170748      *
+> 518   46      *       *       *       *       *       2972004202      *
+> 519   43      *       *       *       *       *       2518033594      *
+> 520   43      *       *       *       *       *       2518036416      *
+> 521   42      *       *       *       *       *       2714615947      *
+> 522   40      *       *       *       *       *       2549669480      *
+> 523   38      *       *       *       *       *       2785752907      *
+> 524   34      *       *       *       *       *       2505556714      *
 ```
+Si para `diff`
+    These format options provide fine-grained control over the output
+      of diff, generalizing -D/--ifdef.
+    LTYPE is 'old', 'new', or 'unchanged'.  GTYPE is LTYPE or 'changed'.
+    GFMT (only) may contain:
+      %<  lines from FILE1
+      %>  lines from FILE2
+      %=  lines common to FILE1 and FILE2
 ```
-#
+grep "<" CS_diffcomp.txt | wc -l
 Resultado
+525
 
+grep ">" CS_diffcomp.txt | wc -l
+Resultado
+525
 ```
 ```
-#
+
 Resultado
 
 ```
