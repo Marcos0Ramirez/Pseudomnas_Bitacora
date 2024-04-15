@@ -262,3 +262,161 @@ vnvtsvm--dakrrvahgyvdhnvyvrkkk------------
 --------------mdkydrmaadngrataarv--nsaavarvakasgvtg-yakvdmskgc-vrashgnayattchrvt
 ```
 
+# DESARROLLO PARA SCRIPT MATRIZ
+Para este punto ya como se vio antes se tienen las columnas con informacion de relevancia, como lo que es la
+1. columna 1: que contiene
+    a. (S) centroide sequence
+    b. (C) cluster sequence
+    c. (H) match sequence con el Centoide sequence
+2. columna 2: No cluster o centroide al que corresponde
+3. columna 9: id de la proteina que correspondiente
+4. columna 10: ide de la proteina a la que hizo match, o si corresponde a la (S o C) entonces queda en *
+
+Hasta este punto, para entender como se van a extraer y manejar los datos
+```
+grep "S" RESULTADOS/PseudoPrueba.uc
+grep "S" RESULTADOS/PseudoPrueba.uc | wc -l
+Resultado
+525
+```
+```
+grep "C" RESULTADOS/PseudoPrueba.uc | wc -l
+Resultado
+525
+```
+```
+grep "H" RESULTADOS/PseudoPrueba.uc | wc -l
+Resultado
+55175
+```
+El codigo siguiente es para entender si se refiere a la columna dos como el numero del cluster
+```
+grep "C" RESULTADOS/PseudoPrueba.uc | cut -f 2 | head -n 10
+Resultado
+461
+410
+391
+366
+381
+178
+454
+513
+425
+321
+```
+Con este otro lo confirmamos, solo queda definir cual va a ser si (S) o (C) los que dicten si es la secuencia representate para la matriz, que lo mas probable sea (S).
+```
+grep "S" RESULTADOS/PseudoPrueba.uc | cut -f 2 | head -n 10
+Resultado
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+```
+```
+grep "515" RESULTADOS/PseudoPrueba.uc
+Resultado
+...
+```
+Con mas resutados
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/4abfeaf6-b319-4361-bebd-f203ca5b0781)
+```
+# Lo que son varios comando con el mismo resultado
+grep "^515" RESULTADOS/PseudoPrueba.uc
+grep "^[515]" RESULTADOS/PseudoPrueba.uc
+grep "*[515]" RESULTADOS/PseudoPrueba.uc
+grep "*515" RESULTADOS/PseudoPrueba.uc
+grep -E "^515" RESULTADOS/PseudoPrueba.uc
+grep -E "^[515]" RESULTADOS/PseudoPrueba.uc
+grep -E "\[515\]" RESULTADOS/PseudoPrueba.uc
+grep -E "^\[515\]" RESULTADOS/PseudoPrueba.uc
+grep -E "^1" RESULTADOS/PseudoPrueba.uc
+grep -E "\t515" RESULTADOS/PseudoPrueba.uc
+grep -E " 515" RESULTADOS/PseudoPrueba.uc
+grep -E "[a-zA-Z]\t515" RESULTADOS/PseudoPrueba.uc
+grep -E "[a-zA-Z]*\t515" RESULTADOS/PseudoPrueba.uc
+grep -E "[A-Z]\t515" RESULTADOS/PseudoPrueba.uc
+grep -E "[A-Z]\t" RESULTADOS/PseudoPrueba.uc
+Resultado
+~ Nada pues
+```
+```
+grep -E "*515" RESULTADOS/PseudoPrueba.uc
+Resultado
+```
+Con mas resultados
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6ae5ec46-65cc-4c40-b6d9-1675eb81d593)
+
+```
+grep -E "1" RESULTADOS/PseudoPrueba.uc
+Resultado
+```
+Con mas resultados antes
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/c0e5b367-b3e5-4232-9dc0-e4f9b62bc6d7)
+
+```
+grep -E "1+" RESULTADOS/PseudoPrueba.uc
+Resultado
+```
+Con mas resultados antes
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/a910f3a2-b4a2-433d-a802-7bdbe9e32f99)
+```
+grep -E "[a-zA-Z]*515" RESULTADOS/PseudoPrueba.uc
+grep -E "[A-Z]*515" RESULTADOS/PseudoPrueba.uc
+Resultado
+```
+Con mas resultados antes
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/bf5d51d6-d236-4b39-963c-73ab949d08a9)
+
+```
+grep -E "[A-Z]" RESULTADOS/PseudoPrueba.uc
+Resultado
+```
+Con mas resultados antes
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/09e2703d-1b06-46cc-86b9-2d2076822cd5)
+
+```
+grep -E "[A-Z]\s" RESULTADOS/PseudoPrueba.uc
+Resultado
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/5c862f38-a7c1-446b-8273-11126ac9fc0c)
+
+```
+grep -E "[A-Z]\s515" RESULTADOS/PseudoPrueba.uc
+grep -E "^[A-Z]\s515" RESULTADOS/PseudoPrueba.uc
+Resultado
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/d1fecb2c-7c9b-4698-8f90-c59c01010d83)
+
+```
+#
+Resultado
+
+```
+```
+#
+Resultado
+
+```
+```
+#
+Resultado
+
+```
+```
+#
+Resultado
+
+```
