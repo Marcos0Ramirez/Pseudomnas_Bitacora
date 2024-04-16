@@ -520,8 +520,60 @@ Para este punto podemos generar otro archivo y solo trabajar con aquellos que ti
 
 Estas son variables `resultados` que guarda la direccion de resultados en VSEARCH y `code` que guarda la direccion donde se encuentra el script
 ```
+head -n 20 PseudoPrueba.uc | grep -E "[A-Z]\s2"
+Resultados
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/f9389908-ccd6-4c5b-ac45-40049789a9c2)
 
 ```
+head -n 20 PseudoPrueba.uc | grep -E "^[A-Z]\s2"
+Resultados
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/ae089c3b-5d12-4fce-9734-9aba87930407)
 
+Se guardo la info necesaria, y como sabemos solo se clusterizaron 525.
+```
+grep -v -E "^C" PseudoPrueba.uc > SH_PseudoPrueba.uc
+```
+Se guarda el avance necesario
+```
+#!/bin/bash
+
+# Esta es la direccion donde se aroojaran los resultados para la matriz
+GENOMAS="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+RESULTADO="Direccion/Descargas_NCBI/VSEARCH/MATRIXVSEARCH"
+INPUT="Direccion/Descargas_NCBI/VSEARCH/RESULTADOS"
+
+cd $GENOMAS
+totalS=$(grep -E "^S" $INPUT/SH_PseudoPrueba.uc | wc -l)
+
+for ((i=0; i<=$totalS; i++))
+do
+        cluster=$(grep -E "^[A-Z]\s$i" $INPUT/SH_PseudoPrueba.uc) # Llamada de los datos para ser procesados por correspondencia del numero del cluster.
+        while CLUST= read -r lineas; do
+                id=$(cut -f 9)
+                for j in $id
+                do
+                        grep -l "$j" */*genes.fna
+                        echo "$j"
+                done
+        done <<< $cluster
+done
+
+
+Resultados
+```
+```
+
+Resultados
+```
+```
+
+Resultados
+```
+```
+
+Resultados
+```
 
 
