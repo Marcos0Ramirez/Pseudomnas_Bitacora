@@ -450,12 +450,78 @@ Resultado
 525
 ```
 ```
-
+sort -n C_comp.txt | head -n 10
 Resultado
-
+0       1       *       *       *       *       *       2785749539      *
+1       2       *       *       *       *       *       2972001972      *
+2       4       *       *       *       *       *       2518032096      *
+3       4       *       *       *       *       *       2923170970      *
+4       6       *       *       *       *       *       2923168233      *
+5       2       *       *       *       *       *       2972004192      *
+6       2       *       *       *       *       *       2556078011      *
+7       2       *       *       *       *       *       2518034016      *
+8       14      *       *       *       *       *       8011076232      *
+9       6       *       *       *       *       *       2518034444      *
 ```
+Lo guardamos con la nueva configuracion
 ```
-#
+sort -n C_comp.txt > C_comp2.txt && mv C_comp2.txt C_comp.txt
+head -n 10 C_comp.txt
 Resultado
+0       1       *       *       *       *       *       2785749539      *
+1       2       *       *       *       *       *       2972001972      *
+2       4       *       *       *       *       *       2518032096      *
+3       4       *       *       *       *       *       2923170970      *
+4       6       *       *       *       *       *       2923168233      *
+5       2       *       *       *       *       *       2972004192      *
+6       2       *       *       *       *       *       2556078011      *
+7       2       *       *       *       *       *       2518034016      *
+8       14      *       *       *       *       *       8011076232      *
+9       6       *       *       *       *       *       2518034444      *
+```
+Pero como vimos en base a al orden de columnas de estas nuevas tablas, contienen distintos tipos de numeracion en la columna 2, aun que sean los mismo: vemos que lo id's de las proteinas coinciden con el orden numerico:
+```
+head -n 10 S_comp.txt
+0       4856    *       *       *       *       *       2785749539      *
+1       4480    *       *       *       *       *       2972001972      *
+2       4271    *       *       *       *       *       2518032096      *
+3       4029    *       *       *       *       *       2923170970      *
+4       3296    *       *       *       *       *       2923168233      *
+5       2934    *       *       *       *       *       2972004192      *
+6       2903    *       *       *       *       *       2556078011      *
+7       2745    *       *       *       *       *       2518034016      *
+8       2712    *       *       *       *       *       8011076232      *
+9       2432    *       *       *       *       *       2518034444      *
+
+head -n 10 C_comp.txt
+0       1       *       *       *       *       *       2785749539      *
+1       2       *       *       *       *       *       2972001972      *
+2       4       *       *       *       *       *       2518032096      *
+3       4       *       *       *       *       *       2923170970      *
+4       6       *       *       *       *       *       2923168233      *
+5       2       *       *       *       *       *       2972004192      *
+6       2       *       *       *       *       *       2556078011      *
+7       2       *       *       *       *       *       2518034016      *
+8       14      *       *       *       *       *       8011076232      *
+9       6       *       *       *       *       *       2518034444      *
+```
+Ahora corremos estos comandos para guardar de nueva manera, para finalmente comparar y ver si cambia algo
+```
+cut -f 1,3,4,5,6,7,8,9 S_comp.txt > S_comp2.txt && mv S_comp2.txt S_comp.txt
+cut -f 1,3,4,5,6,7,8,9 C_comp.txt > C_comp2.txt && mv C_comp2.txt C_comp.txt
+```
+Y como ahora no muestra diferencias, finalmente podemos decir que son lo mismo
+```
+diff S_comp.txt C_comp.txt
+Resultado
+Nada jeje
+```
+Para este punto podemos generar otro archivo y solo trabajar con aquellos que tienen la etiqueta de (S) y (H)
+
+Estas son variables `resultados` que guarda la direccion de resultados en VSEARCH y `code` que guarda la direccion donde se encuentra el script
+```
 
 ```
+
+
+
