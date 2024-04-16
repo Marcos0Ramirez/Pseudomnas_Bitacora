@@ -705,4 +705,6 @@ do
         head -n $n $RESULTADO/vmatriz.txt > $RESULTADO/vmatriz.tmp && mv $RESULTADO/vmatriz.tmp $RESULTADO/vmatriz.txt
 done
 ```
+Fecha 16 de abril del 2024
+Hoy se decidio probar el script, donde hay 525 clusters y empezo a las 6:50 am y termino a las 8:11 am osea una hora con veinte y uno minutos.
 
