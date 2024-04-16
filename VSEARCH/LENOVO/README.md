@@ -660,4 +660,49 @@ do
 done
 ```
 
+Este es el codigo final para generar la matriz, aunque aun hace falta darle los detalles y acondicionarlo para usarse en el cluster
+```
+#!/bin/bash
+
+# Esta es la direccion donde se aroojaran los resultados para la matriz
+GENOMAS="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+RESULTADO="Direccion/Descargas_NCBI/VSEARCH/MATRIXVSEARCH"
+INPUT="Direccion/Descargas_NCBI/VSEARCH/RESULTADOS"
+
+cd $GENOMAS
+totalS=$(grep -E "^S" $INPUT/SH_PseudoPrueba.uc | wc -l)
+echo "idgenomas" > $RESULTADO/vmatriz.txt
+ls | tr '\s' '\n' >> $RESULTADO/vmatriz.txt
+for ((i=0; i<=$totalS; i++))
+do
+        echo "$i"
+        pizzitas=""
+        cluster=$(grep -E "^[A-Z]\s$i\s" $INPUT/SH_PseudoPrueba.uc) # Llamada de los datos para ser procesados por correspondencia del numero del cluster.
+        #echo "$cluster"
+        while CLUST= read -r lineas; do
+                id=$(echo "$lineas" | cut -f 9)
+                echo "$lineas"
+                echo "$id"
+                queso=$(grep -l "$id" */*genes.fna | grep -Eo "^[0-9]+")
+                #echo "$queso"
+                pizzitas="$pizzitas\n$queso"
+        done <<< "$cluster"
+        #echo -e "$pizzitas"
+        echo "########################################################################################################"
+        cont=""
+        for k in *
+        do
+                reps=$(echo -e "$pizzitas" | grep -o "$k" | wc -l)
+                cont="$cont\n$reps"
+                echo "$k: $reps"
+        done
+
+        n=$(ls | tr '\s' '\n' | wc -l)
+        cont=$(echo -e "$cont" | tail -n $n)
+        echo "$i" > "$RESULTADO/vclust.tmp"
+        echo -e "$cont" >> "$RESULTADO/vclust.tmp"
+        paste $RESULTADO/vmatriz.txt $RESULTADO/vclust.tmp > $RESULTADO/vmatriz.tmp && mv $RESULTADO/vmatriz.tmp $RESULTADO/vmatriz.txt
+        head -n $n $RESULTADO/vmatriz.txt > $RESULTADO/vmatriz.tmp && mv $RESULTADO/vmatriz.tmp $RESULTADO/vmatriz.txt
+done
+```
 
