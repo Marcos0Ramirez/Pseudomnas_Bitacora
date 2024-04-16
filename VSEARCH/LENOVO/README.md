@@ -602,13 +602,62 @@ Resultados
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/0ead680d-a0de-435c-980a-5cc645bdfcee)
 
 Entra al proceso y lo completa la primera iteracion, pero cuando continua con las demas iteraciones, o vuelve a salir, pero al parecer es por la busqueda en el grep, no deja de buscar aquellos que al inicio tengan 1 como lo va a hacer 1, 10, 11, 100 etc. Asi que toca mejorar la busqueda.
-```
 
+Asi que se modifico para que tuviese una busqueda mas esctricta
+```
+grep -E "^[A-Z]\s1\s" SH_PseudoPrueba.uc
 Resultados
 ```
-```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/ea293d4c-d7c9-44a0-abfa-df11363e7315)
 
+```
+grep -E "^[A-Z]\s2\s" SH_PseudoPrueba.uc
 Resultados
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/93bdc0bb-1f59-4bbb-b312-b4dc5c5a3f56)
+
+```
+grep -E "^[A-Z]\s10\s" SH_PseudoPrueba.uc
+Resultados
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/4572be09-3f78-423c-8cf7-fd87f4a02582)
+
+Ya solo queda el rollo de concatenarlos en una matriz y listongo
+```
+#!/bin/bash
+
+# Esta es la direccion donde se aroojaran los resultados para la matriz
+GENOMAS="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+RESULTADO="Direccion/Descargas_NCBI/VSEARCH/MATRIXVSEARCH"
+INPUT="Direccion/Descargas_NCBI/VSEARCH/RESULTADOS"
+
+cd $GENOMAS
+totalS=$(grep -E "^S" $INPUT/SH_PseudoPrueba.uc | wc -l)
+
+for ((i=0; i<=$totalS; i++))
+do
+        echo "$i"
+        pizzitas=""
+        cluster=$(grep -E "^[A-Z]\s$i\s" $INPUT/SH_PseudoPrueba.uc) # Llamada de los datos para ser procesados por correspondencia del numero del cluster.
+        #echo "$cluster"
+        while CLUST= read -r lineas; do
+                id=$(echo "$lineas" | cut -f 9)
+                echo "$lineas"
+                echo "$id"
+                queso=$(grep -l "$id" */*genes.fna | grep -Eo "^[0-9]+")
+                #echo "$queso"
+                pizzitas="$pizzitas\n$queso"
+        done <<< "$cluster"
+        #echo -e "$pizzitas"
+        echo "########################################################################################################"
+        cont=""
+        for k in *
+        do
+                reps=$(echo -e "$pizzitas" | grep -o "$k" | wc -l)
+                cont="$cont\n$reps"
+                echo "$k: $reps"
+        done
+done
 ```
 
 
