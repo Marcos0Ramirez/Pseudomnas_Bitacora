@@ -559,14 +559,49 @@ do
                 done
         done <<< $cluster
 done
-
-
 Resultados
 ```
+Al parecer lo que hace al final de estas modificaciones del script
 ```
+#!/bin/bash
 
+# Esta es la direccion donde se aroojaran los resultados para la matriz
+GENOMAS="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+RESULTADO="Direccion/Descargas_NCBI/VSEARCH/MATRIXVSEARCH"
+INPUT="Direccion/Descargas_NCBI/VSEARCH/RESULTADOS"
+
+cd $GENOMAS
+totalS=$(grep -E "^S" $INPUT/SH_PseudoPrueba.uc | wc -l)
+
+for ((i=0; i<=$totalS; i++))
+do
+        echo "$i"
+        pizzitas=""
+        cluster=$(grep -E "^[A-Z]\s$i" $INPUT/SH_PseudoPrueba.uc) # Llamada de los datos para ser procesados por correspondencia del numero del cluster.
+        #echo "$cluster"
+        while CLUST= read -r lineas; do
+                id=$(echo "$lineas" | cut -f 9)
+                echo "$lineas"
+                echo "$id"
+                queso=$(grep -l "$id" */*genes.fna | grep -Eo "^[0-9]+")
+                #echo "$queso"
+                pizzitas="$pizzitas\n$queso"
+        done <<< "$cluster"
+        #echo -e "$pizzitas"
+        echo "########################################################################################################"
+        cont=""
+        for k in *
+        do
+                reps=$(echo -e "$pizzitas" | grep -o "$k" | wc -l)
+                cont="$cont\n$reps"
+                echo "$k: $reps"
+        done
+done
 Resultados
 ```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/0ead680d-a0de-435c-980a-5cc645bdfcee)
+
+Entra al proceso y lo completa la primera iteracion, pero cuando continua con las demas iteraciones, o vuelve a salir, pero al parecer es por la busqueda en el grep, no deja de buscar aquellos que al inicio tengan 1 como lo va a hacer 1, 10, 11, 100 etc. Asi que toca mejorar la busqueda.
 ```
 
 Resultados
