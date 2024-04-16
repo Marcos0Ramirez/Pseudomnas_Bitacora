@@ -262,6 +262,7 @@ vnvtsvm--dakrrvahgyvdhnvyvrkkk------------
 --------------mdkydrmaadngrataarv--nsaavarvakasgvtg-yakvdmskgc-vrashgnayattchrvt
 ```
 
+15 de abril del 2024
 # DESARROLLO PARA SCRIPT MATRIZ
 Para este punto ya como se vio antes se tienen las columnas con informacion de relevancia, como lo que es la
 1. columna 1: que contiene
