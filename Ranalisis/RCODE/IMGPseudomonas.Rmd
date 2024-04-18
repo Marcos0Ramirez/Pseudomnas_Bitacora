@@ -1,0 +1,1388 @@
+---
+title: "IMGdatabases_Pseudomonas"
+author: "Marcos Ramirez"
+date: "6 de febrero de 2024"
+output: html_document
+---
+
+
+```{r}
+PseudoAll <- read.csv(file = "./Pseudo_metadata_all.txt", header = TRUE, sep = "\t")
+PseudoAll[1:10, c(1, 54, 13, 63, 64, 65, 66, 67, 79, 80, 82, 89, 92, 93, 96, 109, 123, 129)] #Con esto probamos que se puede personalizar la extraccion de datos.
+```
+
+```{r}
+# Aqui solo se nombrara los encabezados de las columnas
+colnames(PseudoAll[,c(1, 54, 13, 63, 64, 65, 66, 67, 79, 80, 82, 89, 92, 93, 96, 109, 123, 129)])
+```
+
+
+```{r}
+#Ahora lo que buscamos es resumir, cuales especies hay y cuantas de ellas se extrajeron multiples veces, colocando en un vector todas las taxon_oi
+
+s_unico <- unique(PseudoAll[, 13]) # En este punto lo que se ha hecho es solo manejra los datos para obtener los nombres unicos y despues contar cuantos hay de cada uno.
+s_unico
+summary("Pseudomonas sp. MYb13" == PseudoAll[,13]) # Solo para probar, que si cuenta cuantos si son true o false
+
+resumen_numporespecie <- data.frame(especie = character(0),
+                                    cantidad = numeric(0),
+                                    accessiones = character(0))
+access = df_PseudoAll[df_PseudoAll$Species == "Pseudomonas protegens" ,2]
+
+```
+
+### Todo este codigo, sirve para probar que se pueden adicionar datos a la tabla que o tiene datos y que ademas se preserva.
+temp <- data.frame(especie = "queso",
+                   cantidad = "patas",
+                   accessiones = "hola")
+
+resumen_numporespecie <- rbind(resumen_numporespecie,temp) # con este codigo, permite agregar datos con un vector, cada dato en cada columna
+rm(temp)
+#rm(resumen_numporespecie)
+
+
+```{r}
+# Creamos una nueva tabla con la que podemos trabajar
+df_PseudoAll <- PseudoAll[, c(1, 54, 13, 63, 64, 65, 66, 67, 79, 80, 82, 89, 92, 93, 96, 109, 123, 129)]
+df_PseudoAll[1, c(1, 2, 3)]
+# head(df_PseudoAll, n = 1)
+#df_PseudoAll[df_PseudoAll$Species =="Pseudomonas sp. MYb13",2] # COn esto podemos extraer los datos de las especies y cada una de las accessiones
+#num <- df_PseudoAll[df_PseudoAll$Species =="Pseudomonas sp. MYb13",2]
+
+# Intentamos hacer que se cuente el numero de encuentros
+#length(num)
+colnames(df_PseudoAll)
+```
+
+
+
+```{r}
+#s_unico <- unique(df_PseudoAll[,3])
+#head(df_PseudoAll[,2])
+# Ahora si recurrimos a conseguir el conteo de la cantidad de datos por especie o nombre
+
+
+for (i in s_unico) {
+  access = df_PseudoAll[df_PseudoAll$Species == i ,2]
+  long = length(access)
+  acc_all = paste(access, collapse = " ")
+  temp = data.frame(especie = i,
+                    cantidad = long,
+                    accessiones = acc_all,
+                    stringsAsFactors = FALSE)
+  resumen_numporespecie <- rbind(resumen_numporespecie,temp)
+  rm(acc_all)
+  rm(temp)
+  rm(access)
+}
+head(resumen_numporespecie)
+
+```
+
+## Ecosystem.Type
+
+```{r}
+# Para este punto se va determinar cuales son los organismos hospederos, y que especies se han encontrado en cada uno de los hospederos.
+# Al parecer se va a utilizar el mismo codigo que el anterior.
+  host_contenidos <- data.frame(Tipo_ecosistema = character(0),
+                    cantidad_database = numeric(0),
+                    especies = character(0),
+                    stringsAsFactors = FALSE)
+
+host <- df_PseudoAll[, c(2, 3, 7)]
+host_unico <- df_PseudoAll[,7]
+for (i in host_unico) {
+  hospedero = df_PseudoAll[df_PseudoAll$Ecosystem.Type == i ,3]
+  long = length(hospedero)
+  hospedero = unique(hospedero)
+  casita = paste(hospedero, collapse = " ")
+  temp = data.frame(Tipo_ecosistema = i,
+                    cantidad_database = long,
+                    especies = casita,
+                    stringsAsFactors = FALSE)
+  host_contenidos <- rbind(host_contenidos,temp)
+
+}
+head(host_contenidos)
+```
+
+
+```{r}
+# Para este punto se va determinar cuales son los organismos hospederos, y que especies se han encontrado en cada uno de los hospederos.
+# Al parecer se va a utilizar el mismo codigo que el anterior.
+  Category <- data.frame(Categoria_ecosistema = character(0),
+                    cantidad_database = numeric(0),
+                    especies = character(0),
+                    stringsAsFactors = FALSE)
+
+Cat <- df_PseudoAll[, c(2, 3, 5)]
+Cat_unico <- unique(df_PseudoAll[,5])
+
+for (i in Cat_unico) {
+  categoria = df_PseudoAll[df_PseudoAll$Ecosystem.Category == i ,3]
+  long = length(categoria)
+  categoria = unique(categoria)
+  casita = paste(categoria, collapse = " ")
+  temp = data.frame(Categoria_ecosistema = i,
+                    cantidad_database = long,
+                    especies = casita,
+                    stringsAsFactors = FALSE)
+  Category <- rbind(Category,temp)
+
+}
+Category
+```
+
+
+```{r}
+Subtype <- data.frame(subtipo_ecosistema = character(0),
+                    cantidad_database = numeric(0),
+                    especies = character(0),
+                    stringsAsFactors = FALSE)
+
+Sub <- df_PseudoAll[, c(2, 3, 6)]
+Sub_unico <- unique(df_PseudoAll[,6])
+
+for (i in Sub_unico) {
+  subtipo = df_PseudoAll[df_PseudoAll$Ecosystem.Subtype == i ,3]
+  long = length(subtipo)
+  subtipo = unique(subtipo)
+  casita = paste(subtipo, collapse = " ")
+  temp = data.frame(Subtipo_ecosistema = i,
+                    cantidad_database = long,
+                    especies = casita,
+                    stringsAsFactors = FALSE)
+  Subtype <- rbind(Subtype,temp)
+
+}
+Subtype
+```
+
+
+```{r}
+Especifico <- data.frame(Ecosistema_especifico = character(0),
+                    cantidad_database = numeric(0),
+                    especies = character(0),
+                    stringsAsFactors = FALSE)
+
+Esp <- df_PseudoAll[, c(2, 3, 8)]
+Esp_unico <- unique(df_PseudoAll[,8])
+
+for (i in Esp_unico) {
+  espe = df_PseudoAll[df_PseudoAll$Ecosystem.Subtype == i ,3]
+  long = length(espe)
+  espe = unique(espe)
+  casita = paste(espe, collapse = " ")
+  temp = data.frame(Ecosistema_especifico = i,
+                    cantidad_database = long,
+                    especies = casita,
+                    stringsAsFactors = FALSE)
+  Especifico <- rbind(Especifico,temp)
+
+}
+Especifico
+```
+
+```{r}
+Phenotype <- data.frame(phenotype = character(0),
+                    cantidad_database = numeric(0),
+                    especies = character(0),
+                    stringsAsFactors = FALSE)
+
+Phe <- df_PseudoAll[, c(2, 3, 9)]
+Phe_unico <- unique(df_PseudoAll[,9])
+
+for (i in Phe_unico) {
+  fenotipo = df_PseudoAll[df_PseudoAll$Phenotype == i ,3]
+  long = length(fenotipo)
+  fenotipo = unique(fenotipo)
+  casita = paste(fenotipo, collapse = " ")
+  temp = data.frame(Ecosistema_especifico = i,
+                    cantidad_database = long,
+                    especies = casita,
+                    stringsAsFactors = FALSE)
+  Phenotype <- rbind(Phenotype,temp)
+
+}
+Phenotype
+```
+
+```{r}
+Relevance <- data.frame(Relevancia = character(0),
+                    cantidad_database = numeric(0),
+                    especies = character(0),
+                    stringsAsFactors = FALSE)
+
+rel <- df_PseudoAll[, c(2, 3, 10)]
+rel_unico <- unique(df_PseudoAll[,10])
+
+for (i in rel_unico) {
+  relevancia = df_PseudoAll[df_PseudoAll$Relevance == i ,3]
+  long = length(relevancia)
+  relevancia = unique(relevancia)
+  relevar = paste(relevancia, collapse = " ")
+  temp = data.frame(Relevancia = i,
+                    cantidad_database = long,
+                    especies = relevar,
+                    stringsAsFactors = FALSE)
+  Relevance <- rbind(Relevance,temp)
+
+}
+Relevance
+```
+
+
+
+
+
+### 02 de marzo del 2024
+```{r}
+# Para esta parte de comandos se quiere tomar datos de un vector y agregarlos a un dataframe
+# Se puede ver de esta manera que, se puedan colocar los datos para desppues generar una dataframe booleano y que ´pueda ser observado, si en caso de que se requiera o haya alguna inconsistencia.
+df_pru <- data.frame()
+vector <- c(1,2,3,4,5)
+vector2 <- c("a", "b", "c", "d", "e")
+df_pru <- rbind(df_pru, vector)
+df_pru <- rbind(df_pru, vector2)
+df_pru
+df_pru[,2]
+df_pru[1,]
+```
+
+
+
+# DATOS MIGRADOS DE FinalPseudomonas_code.Rmd a este script. Para dejar en Final..., solo el codigo necesario.
+### Definimos una nueva variable con nuevas columnas para resumir
+```{r}
+d2f_PseudoAll <- PseudoAll[, c(1, 54, 13, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 99, 100, 101)]
+
+# Por si es requerido para conocer le nombre de las columnas de las 18 que solo fueron extraidas.
+colnames(d2f_PseudoAll)
+```
+
+## 28 de febrero del 2024
+### Para este punto se van a discriminar los datos, por aquellos que sean extraidos por hospederos y no hospederos. Recopilando las accesiones y los nombres de las especies.
+#### Para este punto se va a descargar de nuevos los datos para trabajar con ellos, actualizados.
+
+```{r}
+d3f_PseudoAll <- PseudoAll[, c(1, 54, 13, 68, 90, 91, 73)]
+
+# Por si es requerido para conocer le nombre de las columnas de las 18 que solo fueron extraidas.
+colnames(d3f_PseudoAll)
+colnames(df_PseudoAll)
+```
+
+### Para empezar a categorizar los datos por no hospederos y hospederos, se requerira usar los siguientes columnas.
+### Ecosystem
+### Ecosystem.Category
+### Ecosystem.Subtype
+### Ecosystem.Type
+### Specific.Ecosystem
+### Relevance
+### Host.Name
+### Biotic.Relationships
+### Habitat
+### Isolation
+
+### Ahora se corroboro a detalle de manera manual o directa que las columnas 
+### Ecosystem
+### Ecosystem.Category
+### Ecosystem.Subtype
+### Ecosystem.Type
+### Specific.Ecosystem
+### Tienen el mismo numero de datos y los registros corresponden entre si, solo que en diferentes categorias. Por lo que armonicamente, podemos usar los datos provenientes de Ecosystem.Category para clasificar a las Pseudomonas, por hospedero y no hospedero.
+
+### Aun asi, se concatenaran los datos para revisarlos a detalle, por toas las columnas consideradas, para entender cual otra columna puede ser util para la clasificacion.
+```{r}
+dimportantf_PseudoAll <- PseudoAll[, c(1, 54, 13, 
+                                       68, 90, 91, 
+                                       79, 80, 109, 
+                                       73, 63, 64, 
+                                       65, 66, 67)]
+colnames(dimportantf_PseudoAll)
+```
+
+### Se procede a hacer una tabla de verdad sobre aquellas que no tengan datos, y ver cuales pueden ser utiles, asi como comparar entre estas columnas si hay algunas que tengan informacion extra que algunas columnas no tengan.
+### modificacion 02 de marzo 2024
+### Se volvio a modificar estos comandos el dia 03 de marzo del 2024.
+```{r, eval=FALSE}
+dimportantf_PseudoAll_bool <- data.frame()
+no_registros = length(dimportantf_PseudoAll[,1])
+
+
+col_num = length(dimportantf_PseudoAll[1, ])
+
+for (i in 1:no_registros) {
+  cadena = c()
+  for (j in dimportantf_PseudoAll[i,]) {
+    x = (j != "")
+   if (x == T) {
+     cadena = c(cadena, "V")
+   }
+    else{
+      cadena = c(cadena, "F")
+    }
+  }
+  dimportantf_PseudoAll_bool = rbind(dimportantf_PseudoAll_bool, cadena)
+}
+names(dimportantf_PseudoAll_bool) <- colnames(dimportantf_PseudoAll)
+```
+
+# Datos a eliminar o filtrar
+```{r}
+# de la tabla booleana que se hizo, se quiere identificar aquellas que no tienen las accesiones por posiciones.
+no_registros = length(dimportantf_PseudoAll[,1])
+lost_NCBIaccesion <- c()
+cuantoscondataEcosystem <- c()
+for (i in 1:no_registros) {
+  if (dimportantf_PseudoAll_bool[i,2] == "F") {
+    lost_NCBIaccesion <- c(lost_NCBIaccesion, i)
+    if (dimportantf_PseudoAll_bool[i,11] == "V") {
+      cuantoscondataEcosystem <- c(cuantoscondataEcosystem, i)
+      #print(paste("con informacion", i, sep = " "))
+    }else{
+      #print(paste("sin informacion", i, sep = " "))
+    }
+  }
+}
+
+length(lost_NCBIaccesion)
+length(cuantoscondataEcosystem)
+```
+
+
+### Ahora por otra parte, ya que se tienen identificados los que no tienen accesion, pero si tieenen metadatos de recoleccion, ahora se buscara, por cada uno de los datos que no tienen nombre en Ecosystem, ahora cuales tienen como dato unico, alguna de las otras columnas.
+### Para este punto del dia 3 de marzo, se recurre a tomar, los datos originales para clasificarlos por la presencia o no de datos, que se considera que va a ser lo mismo
+
+### Ahora con ayuda de chatGPT, permitio que esto pudise tomar las dos funciones nchar y as.character para evaluar si hay datos o no por la longitud de ellos. En base a la columna 
+```{r}
+# de la tabla booleana que se hizo, se quiere identificar aquellas que no tienen las accesiones por posiciones.
+no_registros = length(dimportantf_PseudoAll[,1])
+lost_NCBIaccesion <- c()
+cuantoscondataEcosystem <- c()
+for (i in 1:no_registros) {
+  if (nchar(as.character(dimportantf_PseudoAll[i,2])) == 0) {
+    lost_NCBIaccesion <- c(lost_NCBIaccesion, i)
+    if (nchar(as.character(dimportantf_PseudoAll[i,11])) != 0) {
+      cuantoscondataEcosystem <- c(cuantoscondataEcosystem, i)
+      #print(paste("con informacion", i, sep = " "))
+    }else{
+      #print(paste("sin informacion", i, sep = " "))
+    }
+  }
+}
+
+length(lost_NCBIaccesion)
+length(cuantoscondataEcosystem)
+
+```
+
+### 04 de marzo del 2024
+### 05 de marzo del 2024
+### En base a esta tabla dimportantf_PseudoAll, se buscara ver cuales no tienen datos de nada, asi como cuales tienen solo uno, dos hasta todos y verificar, cuales son unclassified y saber si pueden ser utiles o no. (Pero OJO, se hara con todos los datos de la tabla)
+```{r}
+# de la tabla booleana que se hizo, se quiere identificar aquellas que no tienen las accesiones por posiciones.
+no_registros = length(dimportantf_PseudoAll[,1])
+no_columnas = length(colnames(dimportantf_PseudoAll))
+utilconuno <- c()
+ninguno <- c()
+col12_data <- c()
+col12_data_pos <- c()
+difuno_difcero <- c()
+unclassified_o_empty <- c()
+unclass_vector_pos <- c()
+
+for (i in 1:no_registros) {
+  condata = c()
+  for (j in 4:no_columnas) {
+    
+    # con la condicion de que al ser comparados con todos, se contaran cuantos si tienen un datos o null de datos y cuantos tendran unclassified.
+    ev = dimportantf_PseudoAll[i,j]
+    if (ev == "unclassified" | ev == "" | ev == "Unclassified" | ev == "Undefined") {
+      #print(ev)
+      if (ev == "unclassified" | ev == "Unclassified" | ev == "Undefined") {
+      unclassified_o_empty = c(unclassified_o_empty, ev)
+      unclass_vector_pos = c(unclass_vector_pos, paste(i, j, sep = ","))
+      }
+    }
+    else {
+#Aqui es para encontrar, si hay registro en la columna Ecosystem.Category, debido a que inicialmente esta solumna puede ser muy util para catergorizar los datos
+    if (j == 12) {
+      col12_data = c(col12_data, ev)
+      col12_data_pos = c(col12_data_pos, paste(i, j, sep = ","))
+      }
+      condata = c(condata, paste(i, j, sep = ","))
+    }
+    
+
+  }
+  # Buscamos dentro del vector, para determinar la posicion del dato, debido a que en esta parte, solo pondra la que corresponde con la ultima columna, pero de la misma columna.
+    #print(condata)
+  largo = length(condata)
+  #print(largo)
+  if (largo == 1) {
+    for (k in condata) {
+      if (k != ""){
+      utilconuno = c(utilconuno, k)
+      }
+    }
+  }
+  # En esta otra parte se extraen aquellos datos que no teinen ningun registro de extraccion
+  if (largo == 0) {
+    ninguno = c(ninguno, i)
+  }
+  if (largo>1 & dimportantf_PseudoAll[i,12] == "") {
+    difuno_difcero = c(difuno_difcero, i)
+  }
+    if (largo>1 & dimportantf_PseudoAll[i,12] == "Unclassified") {
+    difuno_difcero = c(difuno_difcero, i)
+  }
+}
+#Hasta el momento que solo se han contemplado los 3923 genomas, se distribuyen
+# 2246 genomas que tienen informacion en Ecosystem.Category
+# 709 genomas que solo consideran un dato, y se sabe que si hay un dato ecosystem, entonces tienen mas datos
+# 776 genomas con ningun dato de registro
+## Es posible esperar que los demas genomas tengan mas de un registro de donde se tomo.
+
+```
+
+### 06 de marzo del 2024
+### Solo se filtro con Ecosystem y Host Name, para los otros 1500 y algo, se hara a mano, o considerando la relavancia y habitat.
+```{r}
+# Algo que puede ayudar muchismo es saber como clasificar la informacion
+# Hospedero y no No hospedero
+# hospedero
+# Para este punto puede funcionar que las columnas (por prioridad extraigamos la informacion)
+#   Ecosystem
+#     Si en caso de que este asociado a un hospedero o nombre (host name, se asigna a hospedero)
+#   Host Name (todos aquellos que si tengan registro)
+#   Evolution Category (aquellos que digan plant, human, invertebrates, Fungi, Artropoda)
+#   Biotic.Relationship
+Ecosystem_unique <- unique(dimportantf_PseudoAll$Ecosystem)
+Eco_uni_len <- length(Ecosystem_unique)
+
+
+ABC_ConHospedero <- data.frame(fila = numeric(0),
+                               columna = numeric(0),
+                               datos = character(0))
+ABC_NoHospedero <- data.frame(fila = numeric(0),
+                              columna = numeric(0),
+                               datos = character(0))
+filt_NoHoaConHo <- c()
+ABC_SinData11_sinclashost <- data.frame(fila = numeric(0),
+                             columna = numeric(0),
+                             datos = character(0))
+filt_SinDaConHo <- c()
+#for (i in Ecosystem_unique) {
+  for (j in 1:3923) {
+    for (k in c(11)) {
+      value = dimportantf_PseudoAll[j,k]
+      if (value == "Host-associated") {
+      h = data.frame(fila = j,
+                     columna = k,
+                     datos = value)
+      ABC_ConHospedero <- rbind(ABC_ConHospedero, h)
+      }
+      if (value != "Host-associated" & value != "") {
+      sh = data.frame(fila = j,
+                      columna = k,
+                     datos = value)
+      ABC_NoHospedero <- rbind(ABC_NoHospedero, sh)
+      }
+      if (value == "") {
+      n = data.frame(fila = j,
+                     columna = k,
+                     datos = value)
+      ABC_SinData11_sinclashost <- rbind(ABC_SinData11_sinclashost, n)
+    }
+  }
+}
+```
+
+
+```{r}
+# Algo que puede ayudar muchismo es saber como clasificar la informacion
+# Hospedero y no No hospedero
+# hospedero
+# Para este punto puede funcionar que las columnas (por prioridad extraigamos la informacion)
+#   Ecosystem
+#     Si en caso de que este asociado a un hospedero o nombre (host name, se asigna a hospedero)
+#   Host Name (todos aquellos que si tengan registro)
+#   Evolution Category (aquellos que digan plant, human, invertebrates, Fungi, Artropoda)
+#   Biotic.Relationship
+Ecosystem_unique <- unique(dimportantf_PseudoAll$Ecosystem)
+Eco_uni_len <- length(Ecosystem_unique)
+
+
+ABC_ConHospedero <- data.frame(fila = numeric(0),
+                               columna = numeric(0),
+                               datos = character(0))
+ABC_NoHospedero <- data.frame(fila = numeric(0),
+                              columna = numeric(0),
+                               datos = character(0))
+filt_NoHoaConHo <- c()
+ABC_SinData11_sinclashost <- data.frame(fila = numeric(0),
+                             columna = numeric(0),
+                             datos = character(0))
+filt_SinDaConHo <- c()
+#for (i in Ecosystem_unique) {
+  for (j in 1:3923) {
+    for (k in c(11, 9)) {
+      value = dimportantf_PseudoAll[j,k]
+      if (k == 11) {
+      if (value == "Host-associated") {
+      h = data.frame(fila = j,
+                     columna = k,
+                     datos = value)
+      ABC_ConHospedero <- rbind(ABC_ConHospedero, h)
+      }
+      if (value != "Host-associated" & value != "") {
+      sh = data.frame(fila = j,
+                      columna = k,
+                     datos = value)
+      ABC_NoHospedero <- rbind(ABC_NoHospedero, sh)
+      }
+      if (value == "") {
+      n = data.frame(fila = j,
+                     columna = k,
+                     datos = value)
+      ABC_SinData11_sinclashost <- rbind(ABC_SinData11_sinclashost, n)
+      }
+      } 
+      else {
+        if (j %in% ABC_ConHospedero$fila) {
+          #print(paste(j, k, sep = ","))
+          next
+        }
+
+      if (value != "" ) {
+        value2 = dimportantf_PseudoAll[j, k +2]
+      print(paste(j, value, value2, sep = ","))
+        m = data.frame(fila = j,
+                     columna = k,
+                     datos = value)
+      ABC_ConHospedero <- rbind(ABC_ConHospedero, m)
+      ABC_NoHospedero <- ABC_NoHospedero[!(ABC_NoHospedero$fila == j), ]
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == j),]
+      }
+        }
+    }
+  }
+```
+
+
+```{r}
+# Algo que puede ayudar muchismo es saber como clasificar la informacion
+# Hospedero y no No hospedero
+# hospedero
+# Para este punto puede funcionar que las columnas (por prioridad extraigamos la informacion)
+#   Ecosystem
+#     Si en caso de que este asociado a un hospedero o nombre (host name, se asigna a hospedero)
+#   Host Name (todos aquellos que si tengan registro)
+#   Evolution Category (aquellos que digan plant, human, invertebrates, Fungi, Artropoda)
+#   Biotic.Relationship
+Ecosystem_unique <- unique(dimportantf_PseudoAll$Ecosystem)
+Eco_uni_len <- length(Ecosystem_unique)
+
+
+ABC_ConHospedero <- data.frame(fila = numeric(0),
+                               columna = numeric(0),
+                               datos = character(0))
+ABC_NoHospedero <- data.frame(fila = numeric(0),
+                              columna = numeric(0),
+                               datos = character(0))
+filt_NoHoaConHo <- c()
+ABC_SinData11_sinclashost <- data.frame(fila = numeric(0),
+                             columna = numeric(0),
+                             datos = character(0))
+filt_SinDaConHo <- c()
+#for (i in Ecosystem_unique) {
+  for (j in 1:3923) {
+    for (k in c(11, 9)) {
+      value = dimportantf_PseudoAll[j,k]
+      if (k == 11) {
+      if (value == "Host-associated") {
+      h = data.frame(fila = j,
+                     columna = k,
+                     datos = value)
+      ABC_ConHospedero <- rbind(ABC_ConHospedero, h)
+      }
+      if (value != "Host-associated" & value != "") {
+      sh = data.frame(fila = j,
+                      columna = k,
+                     datos = value)
+      ABC_NoHospedero <- rbind(ABC_NoHospedero, sh)
+      }
+      if (value == "") {
+      n = data.frame(fila = j,
+                     columna = k,
+                     datos = value)
+      ABC_SinData11_sinclashost <- rbind(ABC_SinData11_sinclashost, n)
+      }
+      } 
+      else {
+        if (j %in% ABC_ConHospedero$fila) {
+          #print(paste(j, k, sep = ","))
+          next
+        }
+
+      if (value != "" ) {
+        value2 = dimportantf_PseudoAll[j, k +2]
+      print(paste(j, value, value2, sep = ","))
+        m = data.frame(fila = j,
+                     columna = k,
+                     datos = value)
+      ABC_ConHospedero <- rbind(ABC_ConHospedero, m)
+      ABC_NoHospedero <- ABC_NoHospedero[!(ABC_NoHospedero$fila == j), ]
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == j),]
+      }
+        }
+    }
+  }
+```
+
+
+
+  if (i == "Host-associated") {
+    ABC_ConHospedero = cbind(fila, columna)
+      fila <- c()
+  columna <- c()
+  }
+  if (i != "" | i != "Host-associated"){
+    ABC_NoHospedero = cbind(fila, columna)
+      fila <- c()
+  columna <- c()
+  }
+  if (i == ""){
+    ABC_SinData11 = cbind(fila, columna)
+    fila <- c()
+    columna <- c()
+  }
+  
+        if (value != "Host-associated" & value != "") {
+      sh = data.frame(fila = j,
+                      columna = k)
+      ABC_NoHospedero <- rbind(ABC_NoHospedero, sh)
+      }
+      if (nchar(as.character(value)) == 0 ) {
+      n = data.frame(fila = j,
+                     columna = k)
+      ABC_SinData11_sinclashost <- rbind(ABC_SinData11_sinclashost, n)
+      }
+  
+```{r}
+# Definir la cadena
+cadena <- "Hola mundo"
+# Definir una lista de valores
+valores <- c("mundo", "adiós", "hola")
+
+# Iterar sobre cada valor en la lista
+for (valor in valores) {
+  # Verificar si el valor está en la cadena
+  if (grepl(valor, cadena)) {
+    print(paste("El valor", valor, "está en la cadena."))
+    # Si se encuentra una coincidencia, continuar con el siguiente valor
+    next
+  }
+  # Si no se encuentra una coincidencia, continuar con el siguiente valor
+  print(paste("El valor", valor, "no está en la cadena."))
+}
+
+```
+  
+```{r}
+# Supongamos que tienes un data frame llamado "datos"
+# Y quieres eliminar la fila donde se encuentre el valor "valor_a_eliminar" en cualquier columna
+
+# Crear un ejemplo de un data frame
+datos <- data.frame(
+  nombre_columna = c("a", "b", "c", "d", "a"),
+  otra_columna = c(1, 2, 3, 4, 5)
+)
+
+# Valor que deseas eliminar
+valor_a_eliminar <- "a"
+
+# Crear un nuevo data frame excluyendo la fila que contiene el valor a eliminar
+datos_sin_valor <- datos[!(datos$nombre_columna == valor_a_eliminar), ]
+
+# Imprimir el nuevo data frame sin la fila que contiene el valor eliminado
+print(datos_sin_valor)
+```
+
+
+```{r}
+table(dimportantf_PseudoAll$Ecosystem)
+#table(dimportantf_PseudoAll$Isolation)
+#table(dimportantf_PseudoAll$Relevance)
+table(dimportantf_PseudoAll$Habitat)
+```
+
+### 10 de marzo del 2024
+### De los datos restantes que no tienen clasificacion, se tomara, para clasificarlos con Habitat.
+### Con observacion manual terminamos insolation para clasificar lo que resta con relevance
+
+```{r}
+dat_habitat <- c()
+pos_habitat <- c()
+dat_habitat
+pos_habitat
+
+for (i in ABC_SinData11_sinclashost$fila) {
+  datos = dimportantf_PseudoAll[i, 5]
+  if (datos != "") {
+    dat_habitat <- c(dat_habitat, datos)
+    pos_habitat <- c(pos_habitat, i)
+  }
+}
+length(dat_habitat)
+dat_habitat
+pos_habitat
+
+#fila manualmente
+Habitat_Host <- c(96,  496, 712, 755, 935,  998, 1119, 1338, 1942, 2133, 2232, 2418, 2462,  2829, 2847, 2856, 2988, 3140, 3187, 3294, 3534, 3595, 3601)
+Habitat_NoHost <- c(623, 715, 1249, 1529, 1729, 1930, 2821)
+for (i in c(Habitat_NoHost, Habitat_Host)) {
+  print(dimportantf_PseudoAll[i, 5])
+}
+```
+
+# 11 de marzo del 2024
+```{r}
+dat_insolation <- c()
+pos_insolation <- c()
+
+for (i in ABC_SinData11_sinclashost$fila) {
+  datos = dimportantf_PseudoAll[i, 6]
+  if (datos != "" & dimportantf_PseudoAll[i, 5] == "") {
+    dat_insolation <- c(dat_insolation, datos)
+    pos_insolation <- c(pos_insolation, i)
+  }
+}
+length(dat_insolation)
+dat_insolation
+pos_insolation
+
+# fila manualmente
+Insolation_Host <- c(141, 142, 207, 230, 287, 508, 683, 686, 742, 757, 800, 881, 1099, 1114, 1361, 1538, 1540, 1647, 1650, 1661, 1702, 1746, 1774,  1804, 1932, 2000, 2110, 2200, 2207, 2269, 2282, 2355, 2453, 2483, 2576, 2698, 2774, 2887, 2932, 3055, 3126, 3213, 3252, 3282, 3326, 3348, 3473, 3656, 3679, 3781, 3797)
+
+Insolation_NoHost <- c(173, 440, 736, 765, 792, 794, 820, 1000, 1029, 1050, 1210, 1224, 1357, 1413, 1497, 1567, 1618, 1635, 1780, 1830, 1916, 1944, 1975, 2024, 2112, 2127, 2343, 2414, 2480, 2505, 2554, 2571, 2585, 2647, 2691, 2886, 2911, 2977, 2994, 3180, 3195, 3332, 3405, 3811, 3832, 3861, 3885, 3909)
+```
+
+### Transladamos informacion a los que van en host y no host
+```{r}
+vectlenH <- c(length(Insolation_Host), length(Habitat_Host))
+vectH <- c(Insolation_Host, Habitat_Host)
+
+  for (j in 1:sum(vectlenH)) {
+    if (j <= length(Insolation_Host)) {
+      print(j)
+      value = dimportantf_PseudoAll[vectH[j],6]
+        m = data.frame(fila = j,
+                     columna = 6,
+                     datos = value)
+      ABC_ConHospedero <- rbind(ABC_ConHospedero, m)
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == vectH[j]),]
+    } else {
+      value = dimportantf_PseudoAll[vectH[j],5]
+        m = data.frame(fila = j,
+                     columna = 5,
+                     datos = value)
+      ABC_ConHospedero <- rbind(ABC_ConHospedero, m)
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == vectH[j]),]
+    }
+  }
+
+vectlenN <- c(length(Insolation_NoHost), length(Habitat_NoHost))
+vectN <- c(Insolation_NoHost, Habitat_NoHost)
+  for (j in 1:sum(vectlenN)) {
+    if (j <= length(Insolation_NoHost)) {
+      print(j)
+      value = dimportantf_PseudoAll[vectN[j],6]
+              m = data.frame(fila = j,
+                     columna = 6,
+                     datos = value)
+      ABC_NoHospedero <- rbind(ABC_NoHospedero, m)
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == vectN[j]),]
+    } else {
+      print(j)
+      value = dimportantf_PseudoAll[vectN[j],5]
+              m = data.frame(fila = j,
+                     columna = 5,
+                     datos = value)
+      ABC_NoHospedero <- rbind(ABC_NoHospedero, m)
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == vectN[j]),]
+    }
+  }
+```
+
+### 17 de marzo del 2024
+```{r}
+PseudoAll[PseudoAll$taxon_oid == 8085688997,] == PseudoAll[PseudoAll$IMG.Genome.ID == 8085688997,]
+
+```
+
+```{r}
+nombres_tablas <- c("ABC_ConHospedero", "ABC_NoHospedero", "ABC_SinData11_sinclashost")
+
+for (tablas in nombres_tablas) {
+  print(tablas)
+  tablas = get(tablas)
+  for (col in tablas$columna) {
+    #print(col)
+  }
+}
+```
+
+
+```{r}
+#A la vez que hacemos el cambio de numero de columna, en referencia a la tabla original, de la creada como "dimportantf_PseudoAll"
+#Finalmente que la tabla se tiene distribuida por los principales caracteristiacas de los datos
+# Retomamos el hecho de que en la tabla original, las columnas que usamos, tienen numeros de posicion de la columna de la tabla original, con orden de prioridad:
+# COLUMNA                     PSEUDO_ALL      DIMPORTANTF_PSEUDOALL
+# "Ecosystem"                   63                      11
+# "Ecosystem.Category"          64                      12
+# "Ecosystem.Subtype"           65                      13
+# "Ecosystem.Type"              66                      14
+# "Specific.Ecosystem"          67                      15
+# "Host.Name"                   109                     9
+# "Habitat"                     90                      5
+# "Isolation"                   91                      6
+c("ABC_ConHospedero", "ABC_NoHospedero", "ABC_SinData11_sinclashost")
+
+col_dimp_PsuedoAll <- c()
+for (i in ABC_ConHospedero$columna) {
+  if (i == 5) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 90)
+  }
+  if (i == 6) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 91)
+  }
+  if (i == 9) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 109)
+  }
+  if (i == 11) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 63)
+  }
+}
+ABC_ConHospedero$col_PsudoALL <- col_dimp_PsuedoAll
+
+col_dimp_PsuedoAll <- c()
+for (i in ABC_NoHospedero$columna) {
+  if (i == 5) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 90)
+  }
+  if (i == 6) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 91)
+  }
+  if (i == 9) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 109)
+  }
+  if (i == 11) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 63)
+  }
+}
+ABC_NoHospedero$col_PsudoALL <- col_dimp_PsuedoAll
+
+col_dimp_PsuedoAll <- c()
+  for (i in ABC_SinData11_sinclashost$columna) {
+  if (i == 5) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 90)
+  }
+  if (i == 6) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 91)
+  }
+  if (i == 9) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 109)
+  }
+  if (i == 11) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 63)
+  }
+}
+ABC_SinData11_sinclashost$col_PsudoALL <- col_dimp_PsuedoAll
+```
+
+```{r}
+# OPtimizacion del codigo anterior, para establecerlo en pocas variable y script
+tablas <- c("ABC_ConHospedero", "ABC_NoHospedero", "ABC_SinData11_sinclashost")
+
+for (i in tablas) { #Debido a que ya estan creadas las tablas, se llaman para usarlas
+  tabla = get(i)
+  #print(i) OK
+  col_dimp_PsuedoAll <- c()
+  # print(i$columna) OK
+  for (j in tabla$columna) {
+  if (j == 5) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 90)
+  }
+  if (j == 6) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 91)
+  }
+  if (j == 9) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 109)
+  }
+  if (j == 11) {
+    col_dimp_PsuedoAll <- c(col_dimp_PsuedoAll, 63)
+  }
+  }
+  # print(length(col_dimp_PsuedoAll)) OK
+  # print(col_dimp_PsuedoAll)OK
+  print(head(i,n=10))
+  tabla$col_PsudoALL <- col_dimp_PsuedoAll
+  assign(i, tabla)
+}
+
+```
+
+
+
+```{r}
+#Dataframe con 205 colmunas sobre los que si tienen hospedero registrado
+Host_PseudoAll <- data.frame()
+for (i in ABC_ConHospedero$fila) {
+  Host_PseudoAll <- rbind(Host_PseudoAll, PseudoAll[i,])
+  
+}
+
+#Dataframe con 205 colmunas sobre los que no tienen hospedero registrado, pero si ambiental
+NoHost_PseudoAll <- data.frame()
+for (i in ABC_NoHospedero$fila) {
+  NoHost_PseudoAll <- rbind(NoHost_PseudoAll, PseudoAll[i,])
+}
+
+#Dataframe con 205 colmunas sobre los que no tienen hospedero registrado, ni ambiental
+Unclass_PseudoAll <- data.frame()
+for (i in ABC_SinData11_sinclashost$fila) {
+  Unclass_PseudoAll <- rbind(Unclass_PseudoAll, PseudoAll[i,])
+}
+
+#Finalmente que la tabla se tiene distribuida por los principales caracteristiacas de los datos
+# Retomamos el hecho de que en la tabla original, las columnas que usamos, tienen numeros de posicion de la columna de la tabla original, con orden de prioridad:
+# "Ecosystem"                   63
+# "Ecosystem.Category"          64
+# "Ecosystem.Subtype"           65
+# "Ecosystem.Type"              66
+# "Specific.Ecosystem"          67
+# "Host.Name"                   109
+# "Habitat"                     90
+# "Isolation"                   91
+
+```
+
+```{r}
+# Procedemos a optimizar el codigo anterior
+Host_PseudoAll <- data.frame()
+NoHost_PseudoAll <- data.frame()
+Unclass_PseudoAll <- data.frame()
+
+empty_tablas <- c("Host_PseudoAll", "NoHost_PseudoAll", "Unclass_PseudoAll")
+tablas <- c("ABC_ConHospedero", "ABC_NoHospedero", "ABC_SinData11_sinclashost")
+n = 1
+while (n <= 3) {
+  Etabla = get(empty_tablas[n])
+  #print(head(Etabla, n=10))
+  Fintabla = get(tablas[n])
+  #print(head(Fintabla, n =10))
+  for (i in Fintabla$fila) {
+    # print(i)
+    Etabla <- rbind(Etabla, PseudoAll[i,])
+  }
+  assign(empty_tablas[n], Etabla)
+  n=n+1
+  print(n)
+}
+```
+
+### Para despues pasar con toda la clasificacion de los que tienen hospederos a plantas, mamiferos y humanos
+### Creando una tabla con los datos de las filas y finalmente crear tablas con todos las columnas pero por clasificacion del tipo de reino.
+```{r}
+# COn esta tabla se usa para realizar una busqueda mas sencilla en los datos
+# Filtrandolos, se clasifica el tipo de hospedero de acuerdo a las columnas principales
+tipo_host_sinclasificar_PseudoAll <- Host_PseudoAll[,c(1, 63, 64, 
+                                                  65, 66, 67, 
+                                                  109, 90, 91)]
+```
+
+
+### POR AQUI DEBE ESTAR EL ERROR #########################################################################################################
+### De los datos restantes que no tienen clasificacion, se tomara, para clasificarlos con Habitat.
+```{r}
+dat_habitat <- c()
+pos_habitat <- c()
+
+for (i in ABC_SinData11_sinclashost$fila) {
+  datos = dimportantf_PseudoAll[i, 5]
+  if (datos != "") {
+    dat_habitat <- c(dat_habitat, datos)
+    pos_habitat <- c(pos_habitat, i)
+  }
+}
+length(dat_habitat)
+dat_habitat
+pos_habitat
+
+#fila manualmente
+Habitat_Host <- c(96,  496, 712, 755, 935,  998, 1119, 1338, 1942, 2133, 2232, 2418, 2462,  2829, 2847, 2856, 2988, 3140, 3187, 3294, 3534, 3595, 3601)
+Habitat_NoHost <- c(623, 715, 1249, 1529, 1729, 1930, 2821)
+for (i in c(Habitat_NoHost, Habitat_Host)) {
+  print(dimportantf_PseudoAll[i, 5])
+}
+```
+
+### Asi se clasificara por insolation, de manera manual, cual fue por hospedador o fuera.
+```{r}
+dat_insolation <- c()
+pos_insolation <- c()
+
+for (i in ABC_SinData11_sinclashost$fila) {
+  datos = dimportantf_PseudoAll[i, 6]
+  if (datos != "" & dimportantf_PseudoAll[i, 5] == "") {
+    dat_insolation <- c(dat_insolation, datos)
+    pos_insolation <- c(pos_insolation, i)
+  }
+}
+length(dat_insolation)
+dat_insolation
+pos_insolation
+
+# fila manualmente
+Insolation_Host <- c(141, 142, 207, 230, 287, 508, 683, 686, 742, 757, 800, 881, 1099, 1114, 1361, 1538, 1540, 1647, 1650, 1661, 1702, 1746, 1774,  1804, 1932, 2000, 2110, 2200, 2207, 2269, 2282, 2355, 2453, 2483, 2576, 2698, 2774, 2887, 2932, 3055, 3126, 3213, 3252, 3282, 3326, 3348, 3473, 3656, 3679, 3781, 3797)
+
+Insolation_NoHost <- c(173, 440, 736, 765, 792, 794, 820, 1000, 1029, 1050, 1210, 1224, 1357, 1413, 1497, 1567, 1618, 1635, 1780, 1830, 1916, 1944, 1975, 2024, 2112, 2127, 2343, 2414, 2480, 2505, 2554, 2571, 2585, 2647, 2691, 2886, 2911, 2977, 2994, 3180, 3195, 3332, 3405, 3811, 3832, 3861, 3885, 3909)
+```
+
+
+
+### Transladamos informacion a los que van en host y no host
+```{r}
+vectlenH <- c(length(Insolation_Host), length(Habitat_Host))
+vectH <- c(Insolation_Host, Habitat_Host)
+
+  for (j in 1:sum(vectlenH)) {
+    if (j <= length(Insolation_Host)) {
+      print(j)
+      value = dimportantf_PseudoAll[vectH[j],6]
+        m = data.frame(fila = j,
+                     columna = 6,
+                     datos = value)
+      ABC_ConHospedero <- rbind(ABC_ConHospedero, m)
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == vectH[j]),]
+    } else {
+      value = dimportantf_PseudoAll[vectH[j],5]
+        m = data.frame(fila = j,
+                     columna = 5,
+                     datos = value)
+      ABC_ConHospedero <- rbind(ABC_ConHospedero, m)
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == vectH[j]),]
+    }
+  }
+
+vectlenN <- c(length(Insolation_NoHost), length(Habitat_NoHost))
+vectN <- c(Insolation_NoHost, Habitat_NoHost)
+  for (j in 1:sum(vectlenN)) {
+    if (j <= length(Insolation_NoHost)) {
+      print(j)
+      value = dimportantf_PseudoAll[vectN[j],6]
+              m = data.frame(fila = j,
+                     columna = 6,
+                     datos = value)
+      ABC_NoHospedero <- rbind(ABC_NoHospedero, m)
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == vectN[j]),]
+    } else {
+      print(j)
+      value = dimportantf_PseudoAll[vectN[j],5]
+              m = data.frame(fila = j,
+                     columna = 5,
+                     datos = value)
+      ABC_NoHospedero <- rbind(ABC_NoHospedero, m)
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == vectN[j]),]
+    }
+  }
+```
+
+#### HASTA AQUI SE ENCUNTRA DE ALGUNA FORMA  #########################################################################################################
+
+
+```{r}
+## Cf. the examples for agrep.
+x <- c("1 lazy", "1", "1 LAZY")
+grep("1", x)
+#aregexec("(lay)(sy)", x, max.distance = 2)
+#aregexec("(lay)(sy)", x, max.distance = 2, ignore.case = TRUE)
+#m <- aregexec("(lay)(sy)", x, max.distance = 2)
+#regmatches(x, m)
+```
+
+
+###### Reprogramamos el codigo de clasificacion a uno mas corto y con la correccion necesaria para que filte y traslade los datos correctamente #############
+```{r}
+# Considerando que son correctas las filas, debido a que fueron clasificadas manualmente y revisadas manualmente, se confia que con correctas los vectores
+# clasificatorios, Insolation_NoHost, Insolation_Host, Habitat_NoHost, Habitat_Host
+
+# Se procede con la creacion del vector que contendra el nombre de los vectores
+filas_class <- c("Insolation_Host",  "Habitat_Host", "Insolation_NoHost", "Habitat_NoHost")
+# Debido a que se crearon con anterioridad se confia en el funcionamiento de la funcion get
+for (i in filas_class) {
+  tipos = get(i)
+  print(grep("_No", i))
+  x = grep("_No", i)
+  print(x)
+  print(length(x))
+  print(x == "integer(0)")
+  
+  if (length(x) > 0) {
+    print(i)
+    print(tipos)
+  }
+  else{
+        #print(i)
+    #print(tipos)
+  }
+} 
+
+
+```
+
+```{r}
+# Considerando que son correctas las filas, debido a que fueron clasificadas manualmente y revisadas manualmente, se confia que con correctas los vectores
+# clasificatorios, Insolation_NoHost, Insolation_Host, Habitat_NoHost, Habitat_Host
+
+# Se procede con la creacion del vector que contendra el nombre de los vectores
+filas_class <- c("Insolation_Host",  "Habitat_Host", "Insolation_NoHost", "Habitat_NoHost")
+colnum_filas_class <- c(6, 5, 6, 5)
+# Debido a que se crearon con anterioridad se confia en el funcionamiento de la funcion get
+n=1
+while (n <= 4) {
+  a = filas_class[n]
+  tabla_tipos = get(a)
+  print(grep("_No", a))
+  x = grep("_No", a)
+  
+  b = colnum_filas_class[n]
+
+  if (length(x) > 0) {
+    for (i in tabla_tipos) {
+      ABC_NoHospedero <- rbind(ABC_NoHospedero, c(as.numeric(i), b, dimportantf_PseudoAll[i,b]))
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == i),]
+    }
+  }
+  else{
+    for (i in tabla_tipos) {
+      ABC_ConHospedero <- rbind(ABC_ConHospedero, c(as.numeric(i), b, dimportantf_PseudoAll[i,b]))
+      ABC_SinData11_sinclashost <- ABC_SinData11_sinclashost[!(ABC_SinData11_sinclashost$fila == i),]
+    }
+  }
+  n = n + 1
+}
+```
+
+```{r}
+print(paste(length(ABC_NoHospedero$fila), length(unique(ABC_NoHospedero$fila))))
+
+print(paste(length(ABC_ConHospedero$fila), length(unique(ABC_ConHospedero$fila))))
+
+unique(c(1,2,3,1))
+```
+
+
+### 19 de marzo del 2024
+### Para despues pasar con toda la clasificacion de los que tienen hospederos a plantas, mamiferos y humanos
+### Creando una tabla con los datos de las filas y finalmente crear tablas con todos las columnas pero por clasificacion del tipo de reino.
+```{r}
+# COn esta tabla se usa para realizar una busqueda mas sencilla en los datos
+# Filtrandolos, se clasifica el tipo de hospedero de acuerdo a las columnas principales
+tipo_host_sinclasificar_PseudoAll <- Host_PseudoAll[,c(1, 63, 64, 
+                                                  65, 66, 67, 
+                                                  109, 90, 91)]
+```
+
+
+```{r}
+prueba = c("Plants" = "P", "Algae" = "AL", "Fungi" = "F", "Mammals: Human" = "H", "Arthropoda: Insects" = "I", "Fish" = "A", "Arthropoda: Crustaceans" = "Ac", "Birds" = "A", "Mollusca" = "A", "Mammals" = "A", "Invertebrates" = "A")
+print(prueba["P"])
+```
+
+
+```{r}
+# En estas listas iran las filas donde se localiza cada tipo de hospedero
+host_plants <- data.frame()
+host_acuaticas <- data.frame()
+host_fungi <- data.frame()
+host_human <- data.frame()
+host_animals <- data.frame()
+host_insectos <- data.frame()
+host_otros <- data.frame()
+
+
+Eco_Category = c("Plants", "Algae", "Fungi", "Mammals: Human", "Arthropoda: Insects", "Fish", "Arthropoda: Crustaceans", "Birds", "Mollusca", "Mammals", "Invertebrates")
+type_Ecocategory = c("P", "AL", "F", "H", "A", "A", "A", "A", "A", "A", "A")
+#Animales: "Arthropoda: Insects", "Fish", "Arthropoda: Crustaceans", "Birds", "Mollusca", "Mammals"
+# Plantas: "Plants", "Algae", "Fungi"
+
+n = 1
+
+  while (n <= length(Eco_Category)) {
+    b = Eco_Category[n]
+    c = type_Ecocategory[n]
+    vector_cat = tipo_host_sinclasificar_PseudoAll$Ecosystem.Category
+    for (j in 1:length(vector_cat)) {
+      if (vector_cat[j] == b & c == "P") {
+        lista_plants <- rbind(lista_plants, tipo_host_sinclasificar_PseudoAll[j,])
+      }
+      
+      if (vector_cat[j] == b & c == "H"){
+        lista_human <- rbind(lista_human, tipo_host_sinclasificar_PseudoAll[j,])
+      }
+      if (vector_cat[j] == b & c == "A"){
+        lista_animals <- rbind(lista_animals, tipo_host_sinclasificar_PseudoAll[j,])
+      }
+      if (!(tipo_host_sinclasificar_PseudoAll$Ecosystem.Category[j] %in% Eco_Category) & n == length(Eco_Category)) {
+        lista_otros <- rbind(lista_otros, tipo_host_sinclasificar_PseudoAll[j,])
+      }
+    }
+    n = n + 1
+  }
+
+
+```
+
+```{r}
+prueba = c("Plants" = "P", "Algae" = "AL", "Fungi" = "F", "Mammals: Human" = "H", "Arthropoda: Insects" = "I", "Fish" = "A", "Arthropoda: Crustaceans" = "Ac", "Birds" = "A", "Mollusca" = "A", "Mammals" = "A", "Invertebrates" = "A")
+print(prueba["Plants"])
+for (i  in prueba) {
+  print(i)
+}
+
+print(prueba[1])
+names(prueba)
+unname(prueba)
+
+```
+
+### Modicacion del codigo anteior de clasificacion
+#AUN NO FUNCIONA
+```{r}
+# En estas listas iran las filas donde se localiza cada tipo de hospedero
+host_plants <- data.frame()
+host_acuaticas <- data.frame()
+host_fungi <- data.frame()
+host_human <- data.frame()
+host_animals <- data.frame()
+host_insectos <- data.frame()
+host_otros <- data.frame()
+
+
+Eco_Category <- c("Plants" = "host_plants", "Algae" = "host_acuaticas", "Fungi" = "host_fungi", "Mammals: Human" = "host_human", "Arthropoda: Insects" = "host_insectos", "Fish" = "host_animals", "Arthropoda: Crustaceans" = "host_animals", "Birds" = "host_animals", "Mollusca" = "host_animals", "Mammals" = "host_animals", "Invertebrates" = "host_animals")
+#unname(Eco_Category)
+
+  b = unique(unname(Eco_Category))
+  c = tipo_host_sinclasificar_PseudoAll$Ecosystem.Category
+  n = 1
+for (i in b) {
+  print(i)
+  for (j in 1:length(c)) {
+    print(j)
+    hey = (Eco_Category[c[j]] == i)
+    print(hey)
+    #print(paste(hey, paste(Eco_Category[c(j)], i, sep = " | "), sep = " < "))
+    if (c[j] %in% names(Eco_Category) & hey == TRUE) {
+      print(paste(hey, paste(Eco_Category[c(j)], i, sep = " | "), sep = " < "))
+      dataframe = get(i)
+      dataframe = rbind(dataframe, tipo_host_sinclasificar_PseudoAll[j,])
+      assign(i, dataframe)
+    }
+    if (!(Eco_Category[c[j]] %in% b) & n == 1) {
+      host_otros = rbind(host_otros, tipo_host_sinclasificar_PseudoAll[j,])
+    }
+    
+  }
+  n=n+1
+}
+
+```
+
+### 23 y 24 de marxo del 2024
+### Discriminacion de datos manual de la tabla lista_otros
+animales c(2784746681, 8076357719, 8076369461, 8071176039, 2531839176, 8078989883, 8010874315, 8055900207, 2788499855, 8076363586, 2885972705, 2980577565, 8035001888, 2872572790, 8070048847, 2886075046, 2897202802, 8010849382, 8076347631, 8076353353, 8071432906, 2980667846, )
+
+plantas c(2588253838, 2877826310, 2806311032, 8087597119, 2554235131, 8044050095, 8043900492, 3007285674, 8011286121, 3007608298, 2814123167, 8043947167, 8076663451, 8046831383, 8055151307, 3007755928, 8044190415, 8011055147, 2806311009, 8084628194, 2579778624, 3007522935, 3007534628, 8084413206, 2563367036, 8072423853, 2563367044, 2562617135, 8010981081, 2811995180, 8087603415, 8035186099, 8057842822, 2962447044, 2588253837, 8011175907, 2563367039, 2814123168, 2791355582, 2880177480, 2972014215, 2870356601, 2923128604, 8044131741, 8011181369, 2579779090, 8056561870, 8058083673, 8085016530, 8056267460, 2814123169, 8047933937, 2939507003, 8087590616, 3007589180, 2870344659, 2565956802, 2554235228, 8011303955, 8079054357, 2563367047, 8079462635, 3007506733, 8035134703, 8054219894, 8055567319, 2728368930, 8034942525, 8057061539, 8078361596, 2508501056, 2508501061, 2508501065, 645951814, 2508501062, 2507262017, 2508501063, 2508501060, 2537561708, 2508501054, 2508501058, 2547132202, 2507262018, 2508501064, 2508501059, 647000300)
+
+ambiente c(8084092649, 8077497886, 8011165741, 8085688997)
+
+otro_nobiendefinido c(2860879904, 2695420356, 8055675366, 2667527722, 2667527847, 8010861066, 2609459787, 2636415941, 2568526011)
+
+human c(2744054677, 2724679038, 2980643513, 2724679067, 8052546233, 2908429345, 2724679101, 8071801242, 2724679066, 2687453218, 2917026592, 2700989384, 2687453307, 8052564626, 2663763257, 8071838952, 2965929610, 2744054530, 2700989388, 2687453536, 2675903518, 8010830596, 2744054678, 2660238384, 2663763146, 2724679032, 2700989385, 2897178995, 2690316016, 2897142147, 2912953232, 2681813132, 2724679180, 2724679100, 2728369079, 2671181129, 2965903435, 2667528018, 2690316322, 2660238621, 2897172664, 2663763191, 2886142980, 2886136146)
+
+
+### Discriminacion de datos manual de la tabla NoHost_PseudoAll
+
+
+plantas c(650716074, 2508501057, 2563366748)
+
+
+### Discriminacion de datos manual de la tabla lista_plants
+algas_acuaticas c()
+hongos c()
+### 25 de marzo del 2024
+#### Al final se propone solo modificar las tablas
+#### Host_PseudoAll
+#### NoHost_PseudoAll
+#### Unclass_PseudoAll
+#### Para ello ocupamos el siguiente codigo
+```{r}
+Host_PseudoAll <- Host_PseudoAll[,c(1, 63, 64, 
+                                    65, 66, 67, 
+                                    109, 90, 91)]
+NoHost_PseudoAll <- NoHost_PseudoAll[,c(1, 63, 64, 
+                                    65, 66, 67, 
+                                    109, 90, 91)]
+Unclass_PseudoAll <- Unclass_PseudoAll[,c(1, 63, 64, 
+                                    65, 66, 67, 
+                                    109, 90, 91)]
+```
+
+
+
+#### Host_PseudoAll
+Con esto se discriminan los datos, para finalmente termiar con el filtrado de los datos.
+```{r}
+### Discriminacion de datos manual de la tabla lista_otros
+animals <-  c(2784746681, 8076357719, 8076369461, 8071176039, 2531839176, 8078989883, 8010874315, 8055900207, 2788499855, 8076363586, 2885972705, 2980577565, 8035001888, 2872572790, 8070048847, 2886075046, 2897202802, 8010849382, 8076347631, 8076353353, 8071432906, 2980667846)
+
+plants <- c(2588253838, 2877826310, 2806311032, 8087597119, 2554235131, 8044050095, 8043900492, 3007285674, 8011286121, 3007608298, 2814123167, 8043947167, 8076663451, 8046831383, 8055151307, 3007755928, 8044190415, 8011055147, 2806311009, 8084628194, 2579778624, 3007522935, 3007534628, 8084413206, 2563367036, 8072423853, 2563367044, 2562617135, 8010981081, 2811995180, 8087603415, 8035186099, 8057842822, 2962447044, 2588253837, 8011175907, 2563367039, 2814123168, 2791355582, 2880177480, 2972014215, 2870356601, 2923128604, 8044131741, 8011181369, 2579779090, 8056561870, 8058083673, 8085016530, 8056267460, 2814123169, 8047933937, 2939507003, 8087590616, 3007589180, 2870344659, 2565956802, 2554235228, 8011303955, 8079054357, 2563367047, 8079462635, 3007506733, 8035134703, 8054219894, 8055567319, 2728368930, 8034942525, 8057061539, 8078361596, 2508501056, 2508501061, 2508501065, 645951814, 2508501062, 2507262017, 2508501063, 2508501060, 2537561708, 2508501054, 2508501058, 2547132202, 2507262018, 2508501064, 2508501059, 647000300)
+
+NoHost <- c(8084092649, 8077497886, 8011165741, 8085688997)
+
+otro_nobiendefinido <- c(2860879904, 2695420356, 8055675366, 2667527722, 2667527847, 8010861066, 2609459787, 2636415941, 2568526011)
+
+human <- c(2744054677, 2724679038, 2980643513, 2724679067, 8052546233, 2908429345, 2724679101, 8071801242, 2724679066, 2687453218, 2917026592, 2700989384, 2687453307, 8052564626, 2663763257, 8071838952, 2965929610, 2744054530, 2700989388, 2687453536, 2675903518, 8010830596, 2744054678, 2660238384, 2663763146, 2724679032, 2700989385, 2897178995, 2690316016, 2897142147, 2912953232, 2681813132, 2724679180, 2724679100, 2728369079, 2671181129, 2965903435, 2667528018, 2690316322, 2660238621, 2897172664, 2663763191, 2886142980, 2886136146)
+
+
+
+Hosts_lista <- c("animals", "plants", "NoHost", "human")
+host_dataframes <- unique(unname(Eco_Category))
+host_dataframes[8] <- "NoHost_PseudoAll"
+#print(host_dataframes)
+### Discriminacion de datos manual de la tabla NoHost_PseudoAll
+#plantas: 650716074, 2508501057, 2563366748
+
+### Aca transladamos la informacion para las tablas correspondientes HOST
+print(host_dataframes)
+for (i in Hosts_lista) {
+  x = grep(i, host_dataframes)
+  y = get(i)
+  print(i)
+  #print(x)
+  print(host_dataframes[x])
+  z = get(host_dataframes[x])
+  #print(z)
+  for (j in y) {
+    #print(j)
+    capsun = host_otros[host_otros$taxon_oid == j,]
+    host_otros <- host_otros[!(host_otros$taxon_oid == j),]
+    #print(capsun)
+    z = rbind(z, capsun)
+  }
+  assign(host_dataframes[x], z)
+}
+```

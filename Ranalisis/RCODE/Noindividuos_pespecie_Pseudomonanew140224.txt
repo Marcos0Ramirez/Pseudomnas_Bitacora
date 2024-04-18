@@ -1,0 +1,355 @@
+"especie"	"cantidad"
+"Pseudomonas aeruginosa"	975
+"Pseudomonas fulva"	9
+"Pseudomonas furukawaii"	1
+"Pseudomonas amygdali"	93
+"Pseudomonas syringae"	235
+"Pseudomonas sp. R21(2017)"	1
+"Pseudomonas guangdongensis"	1
+"Pseudomonas putida"	114
+"Pseudomonas helmanticensis"	2
+"Pseudomonas sp. SJZ073"	1
+"Pseudomonas sp. GD03919"	1
+"Pseudomonas sp. R2-7-07"	1
+"Pseudomonas sp. N40(2020)"	1
+"Pseudomonas reinekei"	8
+"Pseudomonas sp. GM49"	1
+"Pseudomonas chlororaphis"	87
+"Pseudomonas viridiflava"	181
+"Pseudomonas coronafaciens"	70
+"Pseudomonas sp."	18
+"Pseudomonas sp. FW305-25"	1
+"Pseudomonas sp. FW306-2-11AA"	1
+"Pseudomonas sp. CMR5c"	2
+"Pseudomonas thivervalensis"	6
+"Pseudomonas silensiensis"	2
+"Pseudomonas corrugata"	9
+"Pseudomonas fluorescens"	138
+"Pseudomonas sp. NFPP08"	1
+"Pseudomonas lini"	5
+"Pseudomonas kurunegalensis"	1
+"Pseudomonas savastanoi"	110
+"Pseudomonas sp. JAI115"	1
+"Pseudomonas alcaliphila"	5
+"Pseudomonas mosselii"	7
+"Pseudomonas cannabina"	11
+"Pseudomonas vlassakiae"	1
+"Pseudomonas sp. JdFR-91"	1
+"Pseudomonas sp. R4-34-07"	1
+"Pseudomonas avellanae"	14
+"Pseudomonas congelans"	7
+"Pseudomonas prosekii"	5
+"Pseudomonas punonensis"	2
+"Pseudomonas syringae group genomosp. 3"	31
+"Pseudomonas sp. A25(2017)"	1
+"Pseudomonas protegens"	34
+"Pseudomonas sp. 30_B"	1
+"Pseudomonas sp. MPC6"	1
+"Pseudomonas chengduensis"	3
+"Pseudomonas sp. B21_DOA"	1
+"Pseudomonas weihenstephanensis"	2
+"Pseudomonas sp. Leaf58"	2
+"Pseudomonas sihuiensis"	3
+"Pseudomonas sp. NFPP19"	1
+"Pseudomonas sp. FW306-2-1A-C05A"	1
+"unclassified"	56
+"Pseudomonas sp. Irchel 3A7"	1
+"Pseudomonas sp. BLCC-B13"	1
+"Pseudomonas sp. QTF5"	1
+"Pseudomonas guariconensis"	3
+"Pseudomonas sp. NFACC43"	1
+"Pseudomonas sp. LPH1"	1
+"Pseudomonas sp. PA27(2017)"	1
+"Pseudomonas sp. GW456-L12"	1
+"Pseudomonas psychrophila"	10
+"Pseudomonas sp. Ag1"	1
+"Pseudomonas sp. S09G 359"	1
+"Pseudomonas sp. SLBN-2"	1
+"Pseudomonas sp. LS-2"	1
+"Pseudomonas sp. H1D6A"	1
+"Pseudomonas syringae pv. coryli"	2
+"Pseudomonas tolaasii"	5
+"Pseudomonas sp. GP01-A6"	1
+"Pseudomonas khorasanensis"	1
+"Pseudomonas sp. GW247-5R2A"	1
+"Pseudomonas sp. 21"	1
+"Pseudomonas psychrotolerans"	21
+"Pseudomonas sp. NFACC06-1"	1
+"Pseudomonas sp. CC120222-01a"	1
+"Pseudomonas sp. R32"	1
+"Pseudomonas sp. HTZ2"	1
+"Pseudomonas cichorii"	11
+"Pseudomonas sp. ABAC21"	1
+"Pseudomonas grimontii"	2
+"Pseudomonas baltica"	1
+"Pseudomonas sp. 31-12"	1
+"Pseudomonas atacamensis"	2
+"Pseudomonas sp. BP8"	1
+"Pseudomonas koreensis"	13
+"Pseudomonas sp. JdFR-92"	1
+"Pseudomonas sp. ZM25"	1
+"Pseudomonas fragi"	20
+"Pseudomonas oleovorans"	18
+"Pseudomonas haemolytica"	2
+"Pseudomonas tremae"	1
+"Pseudomonas sp. OV657"	1
+"Pseudomonas sp. SID14000"	1
+"Pseudomonas trivialis"	6
+"Pseudomonas poae"	13
+"Pseudomonas pharmacofabricae"	1
+"Pseudomonas sp. S9"	1
+"Pseudomonas sp. 1 R 17"	1
+"Pseudomonas sp. A2"	1
+"Pseudomonas sp. TCU-HL1"	1
+"Pseudomonas knackmussii"	2
+"Pseudomonas cavernae"	1
+"Pseudomonas graminis"	5
+"Pseudomonas sp. TH15"	1
+"Pseudomonas sp. LAMO17WK12:I12"	1
+"Pseudomonas sp. FW305-42"	1
+"Pseudomonas gingeri"	5
+"Pseudomonas asplenii"	5
+"Pseudomonas sp. GM78"	1
+"Pseudomonas sp. GW460-12-1-14-LB3"	1
+"Pseudomonas sp. 45MFCol3.1"	1
+"Pseudomonas sp. NBRC 111118"	1
+"Pseudomonas maumuensis"	1
+"Pseudomonas cremoris"	2
+"Pseudomonas sp. GGS8"	1
+"Pseudomonas thermotolerans"	2
+"Pseudomonas abietaniphila"	3
+"Pseudomonas donghuensis"	3
+"Pseudomonas eucalypticola"	1
+"Pseudomonas alcaligenes"	12
+"Pseudomonas sp. LP_4_YM"	1
+"Pseudomonas sp. NBRC 111138"	1
+"Pseudomonas sp. NFACC37-1"	1
+"Pseudomonas sp. URIL14HWK12:I2"	1
+"Pseudomonas umsongensis"	5
+"Pseudomonas soli"	3
+"Pseudomonas costantinii"	2
+"Pseudomonas tohonis"	4
+"Pseudomonas mediterranea"	7
+"Pseudomonas cyclaminis"	2
+"Pseudomonas canadensis"	1
+"Pseudomonas sp. 7SR1"	1
+"Pseudomonas brassicacearum"	14
+"Pseudomonas sp. R11-23-07"	1
+"Pseudomonas sp. GP01-A4"	1
+"Pseudomonas kilonensis"	9
+"Pseudomonas sp. NFACC08-1"	1
+"Pseudomonas sp. ANT_H12B"	1
+"Pseudomonas sp. NBRC 111136"	1
+"Pseudomonas sp. FW306-2-2C-A10BC"	1
+"Pseudomonas veronii"	6
+"Pseudomonas sp. OV081"	1
+"Pseudomonas khavaziana"	1
+"Pseudomonas alkylphenolica"	4
+"Pseudomonas sp. PvP006"	1
+"Pseudomonas sp. LAIL14HWK12:I12"	1
+"Pseudomonas sp. 2(2015)"	1
+"Pseudomonas sp. NFACC32-1"	1
+"Pseudomonas sp. NFPP12"	1
+"Pseudomonas gessardii"	2
+"Pseudomonas synxantha"	13
+"Pseudomonas oryzihabitans"	7
+"Pseudomonas yangonensis"	3
+"Pseudomonas otitidis"	3
+"Pseudomonas sp. NFIX28"	1
+"Pseudomonas sp. URIL14HWK12:I7"	1
+"Pseudomonas sp. PDM04"	1
+"Pseudomonas sp. SJZ074"	1
+"Pseudomonas sp. R3-18-08"	1
+"Pseudomonas sp. FH4"	1
+"Pseudomonas sp. PvP009"	1
+"Pseudomonas mendocina"	19
+"Pseudomonas sp. PA1G7"	1
+"Pseudomonas sp. OV144"	1
+"Pseudomonas sp. GV071"	1
+"Pseudomonas sp. R4-39-08"	1
+"Pseudomonas sp. 20P_3.2_Bac5"	1
+"Pseudomonas sp. GP01-A5"	1
+"Pseudomonas sp. H1F10D"	1
+"Pseudomonas guryensis"	1
+"Pseudomonas kairouanensis"	1
+"Pseudomonas sp. ANT_H4"	1
+"Pseudomonas sp. GV058"	1
+"Pseudomonas simiae"	6
+"Pseudomonas rhizosphaerae"	1
+"Pseudomonas alvandae"	1
+"Pseudomonas sp. URIL14HWK12:I11"	1
+"Pseudomonas sp. CFT9"	1
+"Pseudomonas sp. 443"	1
+"Pseudomonas sp. GV041"	1
+"Pseudomonas sp. Root68"	1
+"Pseudomonas sp. FW215-E1"	1
+"Pseudomonas sp. NFPP16"	1
+"Pseudomonas monteilii"	16
+"Pseudomonas sp. GW460-4"	1
+"Pseudomonas saudiphocaensis"	1
+"Pseudomonas sp. R40(2017)"	1
+"Pseudomonas sp. R38(2017)"	1
+"Pseudomonas sp. UC 17F4"	1
+"Pseudomonas sp. Tri1"	1
+"Pseudomonas sp. P97.38"	1
+"Pseudomonas asiatica"	9
+"Pseudomonas entomophila"	5
+"Pseudomonas sp. BIOMIG1BD"	1
+"Pseudomonas sp. 8 R 14"	1
+"Pseudomonas deceptionensis"	2
+"Pseudomonas sp. FeS53a"	1
+"Pseudomonas composti"	3
+"Pseudomonas sp. SJZ124"	1
+"Pseudomonas parafulva"	10
+"Pseudomonas izuensis"	2
+"Pseudomonas sp. NFACC02"	1
+"Pseudomonas moraviensis"	5
+"Pseudomonas sp. NBRC 111144"	1
+"Pseudomonas sp. ADAK7"	1
+"Pseudomonas sp. ICMP22404"	1
+"Pseudomonas sp. GP01-A8"	1
+"Pseudomonas orientalis"	7
+"Pseudomonas sp. 1033"	1
+"Pseudomonas inefficax"	1
+"Pseudomonas sp. R4-35-07"	1
+"Pseudomonas sp. TH43"	1
+"Pseudomonas sp. LAIL14HWK12:I10"	1
+"Pseudomonas sp. S30"	1
+"Pseudomonas sp. FW305-130"	1
+"Pseudomonas nitroreducens"	13
+"Pseudomonas mohnii"	2
+"Pseudomonas sp. JdFR-93"	1
+"Pseudomonas sp. FW306-02-H05-BA"	1
+"Pseudomonas cedrina"	5
+"Pseudomonas triticifolii"	1
+"Pseudomonas sp. R41(2017)"	1
+"Pseudomonas sp. C27(2019)"	1
+"Pseudomonas sp. MN1F"	1
+"Pseudomonas sp. GP01-A1"	1
+"Pseudomonas lurida"	4
+"Pseudomonas sp. GW456-12-1-14-LB3"	1
+"Pseudomonas sp. SJZ080"	1
+"Pseudomonas sp. 2FG"	1
+"Pseudomonas sp. JMN1"	1
+"Pseudomonas extremorientalis"	1
+"Pseudomonas lopnurensis"	1
+"Pseudomonas sp. ok272"	1
+"Pseudomonas agarici"	3
+"Pseudomonas azotoformans"	6
+"Pseudomonas moorei"	1
+"Pseudomonas saponiphila"	1
+"Pseudomonas sp. SJZ083"	1
+"Pseudomonas sp. GV086"	1
+"Pseudomonas extremaustralis"	4
+"Pseudomonas sp. FW306-2-2C-D06C"	1
+"Pseudomonas sp. 1766"	1
+"Pseudomonas sp. PONIH3"	1
+"Pseudomonas sp. LB-090624"	1
+"Pseudomonas sp. R43(2017)"	1
+"Pseudomonas sp. GD03867"	1
+"Pseudomonas marginalis"	11
+"Pseudomonas marincola"	1
+"Pseudomonas mangiferae"	1
+"Pseudomonas sp. W4I3"	1
+"Pseudomonas sp. CFII68"	1
+"Pseudomonas cerasi"	3
+"Pseudomonas sp. 2FE"	1
+"Pseudomonas sp. B7(2017)"	1
+"Pseudomonas sp. NFACC19-2"	1
+"Pseudomonas sp. UK4"	1
+"Pseudomonas sp. NFACC11-2"	1
+"Pseudomonas sp. NFACC16-2"	1
+"Pseudomonas lundensis"	23
+"Pseudomonas sp. R39(2017)"	1
+"Pseudomonas sp. Q12-87"	1
+"Pseudomonas sp. RIT-PI-AD"	1
+"Pseudomonas sp. GV082"	1
+"Pseudomonas frederiksbergensis"	18
+"Pseudomonas sp. PvP100"	1
+"Pseudomonas iranensis"	1
+"Pseudomonas fitomaticsae"	1
+"Pseudomonas sp. URIL14HWK12:I6"	1
+"Pseudomonas sp. NFACC25"	1
+"Pseudomonas kribbensis"	2
+"Pseudomonas sp. NFPP15"	1
+"Pseudomonas quercus"	1
+"Pseudomonas sp. NBRC 111135"	1
+"Pseudomonas sp. BN417"	1
+"Pseudomonas quasicaspiana"	1
+"Pseudomonas sp. NFPP10"	1
+"Pseudomonas sp. BIOMIG1BAC"	1
+"Pseudomonas sp. MPR-LB5"	1
+"Pseudomonas sp. NFACC05-1"	1
+"Pseudomonas sp. Leaf129"	1
+"Pseudomonas sp. BCA17"	1
+"Pseudomonas sp. LAIL14HWK12:I8"	1
+"Pseudomonas sp. G5(2012)"	1
+"Pseudomonas sp. 3400"	1
+"Pseudomonas hunanensis"	3
+"Pseudomonas sp. SCB32"	1
+"Pseudomonas sp. ADAK20"	1
+"Pseudomonas sp. GW460-C3"	1
+"Pseudomonas sp. LAIL14HWK12:I5"	1
+"Pseudomonas flavescens"	3
+"Pseudomonas sp. GM30"	1
+"Pseudomonas sp. NP10-3"	1
+"Pseudomonas sp. 14P_8.1_Bac3"	1
+"Pseudomonas sp. JV551A1"	1
+"Pseudomonas triticicola"	1
+"Pseudomonas sp. BIGb0164"	1
+"Pseudomonas sp. 52 E 6"	1
+"Pseudomonas sp. AA-38"	1
+"Pseudomonas taiwanensis"	2
+"Pseudomonas sp. B9(2017)"	1
+"Pseudomonas sp. MPR-R2A7"	1
+"Pseudomonas sp. GW460-E13"	1
+"Pseudomonas sp. AK6U"	1
+"Pseudomonas sp. B17(2017)"	1
+"Pseudomonas sp. FW306-2-2C-B10A"	1
+"Pseudomonas mandelii"	9
+"Pseudomonas sp. NFACC14"	1
+"Pseudomonas caricapapayae"	4
+"Pseudomonas sp. OV286"	1
+"Pseudomonas sp. MYb115"	1
+"Pseudomonas sp. v388"	1
+"Pseudomonas sp. phDV1"	1
+"Pseudomonas paralcaligenes"	1
+"Pseudomonas leptonychotis"	1
+"Pseudomonas rhizoryzae"	2
+"Pseudomonas sp. PvP027"	1
+"Pseudomonas sp. C5pp"	2
+"Pseudomonas bohemica"	1
+"Pseudomonas guineae"	1
+"Pseudomonas plecoglossicida"	8
+"Pseudomonas asuensis"	1
+"Pseudomonas sp. Z003-0.4C(8344-21)"	1
+"Pseudomonas sp. BIOMIG1N"	1
+"Pseudomonas sp. FW215-L2"	1
+"Pseudomonas sp. 10B238"	1
+"Pseudomonas sp. B18(2017)"	1
+"Pseudomonas sp. WS 5079"	1
+"Pseudomonas lactis"	2
+"Pseudomonas sp. PA14H7"	1
+"Pseudomonas sp. 1-7"	1
+"Pseudomonas sp. NFPP28"	1
+"Pseudomonas sp. NFACC10-1"	1
+"Pseudomonas sp. LAIL14HWK12:I3"	1
+"Pseudomonas sp. WPR_5_2"	1
+"Pseudomonas sp. URMO17WK12:I5"	1
+"Pseudomonas bubulae"	2
+"Pseudomonas caspiana"	2
+"Pseudomonas sp. GV091"	1
+"Pseudomonas oryzae"	1
+"Pseudomonas sp. IPO3778"	1
+"Pseudomonas sediminis"	1
+"Pseudomonas sp. 31 E 6"	1
+"Pseudomonas dryadis"	3
+"Pseudomonas jinjuensis"	2
+"Pseudomonas sp. MOIL14HWK12:I1"	1
+"Pseudomonas sagittaria"	1
+"Pseudomonas sp. C2"	1
+"Pseudomonas sp. NFACC42-2"	1
+"Pseudomonas sp. fls2-241-R2A-110"	1
+"Pseudomonas morbosilactucae"	1
+"Pseudomonas sp. GW704-F3"	1
+"Pseudomonas sp. HLS-6"	1

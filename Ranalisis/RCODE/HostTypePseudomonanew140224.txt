@@ -1,0 +1,48 @@
+"especie"	"cantidad_database"
+"Respiratory system"	145
+"Unclassified"	1001
+"Soil"	336
+""	1608
+"Tissue"	1
+"Nematoda"	23
+"Roots"	259
+"Circulatory system"	27
+"Freshwater"	225
+"Marine"	27
+"Rhizome"	8
+"Digestive system"	30
+"Phyllosphere"	78
+"Dairy products"	26
+"Urinary system"	15
+"Industrial wastewater"	6
+"Composting"	4
+"Meat products"	22
+"Visual system"	1
+"Integumentary system"	6
+"Hospital"	6
+"Sewage"	8
+"Head"	1
+"Mycelium"	8
+"Activated Sludge"	4
+"Sediment"	7
+"Culture media"	1
+"Abdominal/Peritoneal cavity"	1
+"Agricultural field"	4
+"Indoor Air"	5
+"Rock-dwelling (endoliths)"	3
+"Nest"	1
+"Oil refinery"	3
+"Auditory/Hearing system"	1
+"Thermal springs"	2
+"Aquaculture"	1
+"Bacteria"	2
+"Ootheca/Egg mass"	2
+"Fungi"	1
+"Wood"	1
+"Deep subsurface"	3
+"Seeds"	4
+"Non-marine Saline and Alkaline"	2
+"Animal waste"	1
+"Wastewater"	1
+"Unspecified system"	1
+"Geologic"	1
