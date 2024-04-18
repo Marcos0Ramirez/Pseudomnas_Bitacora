@@ -2,15 +2,48 @@
 ### Fecha 18 de abril del 2024
 ```
 #!/bin/bash
+# Use current working directory
+#$ -cwd
+#
+# Join stdout and stderr
+#$ -j y
+#
+# Run job through bash shell
+#$ -S /bin/bash
+#
+#You can edit the scriptsince this line
+#
+# Your job name
+#$ -N MatrixCDHIT
+#
+# Send an email after the job has finished
+#$ -m e
+#$ -M marcosu...
+#
+#
+# Resources of compute
+# -pe 8
+# -l mem=10
+#
+# output files to run
+#
+#$ -o ../matrizcdhit_output.$JOB_ID.out # Salida estandar
+#$ -e ../matrizcdhit_output.$JOB_ID.err # Archivo con los errores
+#
+# If modules are needed, source modules environment (Do not delete the next line):
+#  Con el gato, ya no necesitamos algun modulo de ambiente.
+#
+# Add any modules you might require:
 
-DIR="/mnt/c/Users/52477/Desktop/Descargas_NCBI"
-MATRIXCDOUT="CDHIT/MATRIXDATA"
-DATA="CDHIT/TODOS/clusterprotcatALL2000.clstr"
+#
+# Write your commands in the next line
+
+DIR="Direccion/Pseudomonas"
+MATRIXCDOUT="WORK/ANALYSIS_CDHIT/MATRIXCDHIT"
+DATA="WORK/ANALYSIS_CDHIT/RESULTSCLUSTERCDHIT/pseudocluster.clstr"
 
 #Prueba rapida para el final del codigo
-head -n 30 $DIR/$DATA > "$DIR/CDHIT/TODOS/30rengclusterprotcatALL2000.clstr"
-DATA="CDHIT/TODOS/30rengclusterprotcatALL2000.clstr"
-rm "$DIR/$MATRIXCDOUT/clust2.tmp"
+rm "$DIR/$MATRIXCDOUT/clust.tmp"
 
 # Patrón para identificar el inicio de un nuevo cluster
 patron1=">Cluster"
@@ -21,9 +54,9 @@ nfinal=$((nfinal-1))
 echo $nfinal
 
 # Iterar sobre el archivo
-cd $DIR/IMGPSEUDOMONASGENOMES
-echo "idgenomas" > $DIR/$MATRIXCDOUT/matriz2.txt
-ls | tr '\s' '\n' >> $DIR/$MATRIXCDOUT/matriz2.txt
+cd $DIR/PSEUDOMONAS_GENOMAS
+echo "idgenomas" > $DIR/$MATRIXCDOUT/cdmatrizhit.txt
+ls | tr '\s' '\n' >> $DIR/$MATRIXCDOUT/cdmatrizhit.txt
 while [[ $ni -le $nfinal ]]; do
         limitei=$(grep -o -n -w "Cluster $ni" $DIR/$DATA | grep -Eo "^[0-9]+")
         nf=$((ni+1))
@@ -45,7 +78,7 @@ while [[ $ni -le $nfinal ]]; do
                 pizzitas="$pizzitas\n$queso"
         done <<< "$clusterset"
 
-        echo "$ni" > "$DIR/$MATRIXCDOUT/clust2.tmp"
+        echo "$ni" > "$DIR/$MATRIXCDOUT/clust.tmp"
         cont=""
         echo "$ni"
         for i in *
@@ -56,9 +89,10 @@ while [[ $ni -le $nfinal ]]; do
         done
         n=$(ls | tr '\s' '\n' | wc -l)
         cont=$(echo -e "$cont" | tail -n $n)
-        echo -e "$cont" >> "$DIR/$MATRIXCDOUT/clust2.tmp"
-        paste $DIR/$MATRIXCDOUT/matriz2.txt $DIR/$MATRIXCDOUT/clust2.tmp > $DIR/$MATRIXCDOUT/matriz2.tmp && mv $DIR/$MATRIXCDOUT/matriz2.tmp $DIR/$MATRIXCDOUT/matriz2.txt
-        head -n $n $DIR/$MATRIXCDOUT/matriz2.txt > $DIR/$MATRIXCDOUT/matriz2.tmp && mv $DIR/$MATRIXCDOUT/matriz2.tmp $DIR/$MATRIXCDOUT/matriz2.txt
+        echo -e "$cont" >> "$DIR/$MATRIXCDOUT/clust.tmp"
+        paste $DIR/$MATRIXCDOUT/cdmatrizhit.txt $DIR/$MATRIXCDOUT/clust.tmp > $DIR/$MATRIXCDOUT/cdmatrizhit.tmp && mv $DIR/$MATRIXCDOUT/cdmatrizhit.tmp $DIR/$MATRIXCDO$
+        head -n $n $DIR/$MATRIXCDOUT/cdmatrizhit.txt > $DIR/$MATRIXCDOUT/cdmatrizhit.tmp && mv $DIR/$MATRIXCDOUT/cdmatrizhit.tmp $DIR/$MATRIXCDOUT/cdmatrizhit.txt
         ni=$((ni+1))
 done
 ```
+Empezo a correr el script a las 07:17:26 del 18 de abril del 2024
