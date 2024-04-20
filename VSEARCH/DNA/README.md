@@ -139,8 +139,8 @@ drwxr-xr-x 4 ENESL-MarcosR sur   40 Apr  1 16:00 ..
 ```
 Con la informacion expedida, usado un `head -n 50 *`
 ```
-/Pseudomonas/WORK/VSEARCH/RESULTADOS/UNO/*
-==> /mnt/atgc-d2/sur/shared_data/Pseudomonas/WORK/VSEARCH/RESULTADOS/UNO/pseudovsearch.centroids <==
+.../Pseudomonas/WORK/VSEARCH/RESULTADOS/UNO/*
+==> .../Pseudomonas/WORK/VSEARCH/RESULTADOS/UNO/pseudovsearch.centroids <==
 >2503653315;clusterid=16973
 MKVVATCCGAGCATTTNVTTdaahnrkvvtadadhaakskavgdgdgwtdtyatavntdghdavcgarrgttntvyayyg
 gvsddkasgvsvnTCSYS
@@ -192,7 +192,7 @@ karvmkdakddvTK
 mkrkadmasdsscgdarrhvvssvTTSTAKRAATDATATGAATGACASYGVHTADVVGTRVGTavvamkmhvkavaGVVT
 DVANGVAGATG
 
-==> /mnt/atgc-d2/sur/shared_data/Pseudomonas/WORK/VSEARCH/RESULTADOS/UNO/pseudovsearch.consout <==
+==> .../Pseudomonas/WORK/VSEARCH/RESULTADOS/UNO/pseudovsearch.consout <==
 >centroid=2503653315;seqs=99950;clusterid=16973
 GAGAATAAAGTAAAAAAAAAGTAAAAAAAAAAAAGGGAGATATAATAAATAGAAAAAGAAAGTTATAAAAAGGAAGAAAA
 GAAAAAA
@@ -244,7 +244,7 @@ AAAA
 AAAAAAAAAGAAAAAAAAGATAAAAGAAAGGATATGAAGGAAAGGGAATAAAAGAAAGTAAAAAAAAAAAAAGAAAAGAA
 GAAGA
 
-==> /mnt/atgc-d2/sur/shared_data/Pseudomonas/WORK/VSEARCH/RESULTADOS/UNO/pseudovsearch.msout <==
+==> .../Pseudomonas/WORK/VSEARCH/RESULTADOS/UNO/pseudovsearch.msout <==
 
 >*2503653315
 -----------------MKVVATCCGA-G---C------A-----T----T----T-----NVT------T------da-
@@ -296,7 +296,7 @@ mrkm-------------gdrravmdsw-d---d------m-----t----m----s-----vgg------v------ga-
 --
 >2503654261
 
-==> /mnt/atgc-d2/sur/shared_data/Pseudomonas/WORK/VSEARCH/RESULTADOS/UNO/pseudovsearch.uc <==
+==> .../Pseudomonas/WORK/VSEARCH/RESULTADOS/UNO/pseudovsearch.uc <==
 S       0       9769    *       *       *       *       *       2655476425      *
 H       0       9565    74.1    +       0       0       47I104M2I152M11I118M7I172M8I300M6D138M4D110M4D221M4I101MI59MI125M12I236M4D59MI168M5D99MI100M4D183M6D123M3I372M3I110M5D87M4I101M2D26MD82M2D141MI66M5I372MD355M2D197MD100MD66M2I55M5I267M8I271M2I87M5I418MD45M2D183M2I155M9I77M3I409MI279MD180MI607M9I110M8I308M3I167MI92M4I110M5I243M8I26M5I315MI275MD65M11I76MD48M54I   2998094689      2655476425
 H       0       9563    73.2    +       0       0       44I155M12I110M4I65MD143M9I59M9I153M3I199M2D116MI257MI117M5I325MI141M4D77MI61M7I96M3I72M2D242M14I313M8I219M3I61M8I332M2D316M7I34M8I71MI249M7I35M6I110MI267M10D135M7I341MD270M9I65M3I165M2D156M2I58M3I667M6I110M6I168M3I170MD61M6I93MI330M4I76MI114M7I258MI58M4I173M2D93M3D449M12I175M2D164M3D37MI395M2D98M2I106M2D76M2I68M2I     2757750746      2655476425
@@ -348,4 +348,57 @@ H       5       8517    69.6    +       0       0       5I44MD65MD118M3D116MD205
 H       5       8517    69.6    +       0       0       5I44MD65MD118M3D116MD205M9D148M14D121M5D112M2D58MD188M3D202M3D179M7D331M4D89MD22MD186MD40MD148MI143M2D364MD113MD331MD340M4I171M7I128MI80M5I243M14I137MD161M7D346MI134MI188M6I306M7I102M6I152M7I249M18I62M7I262M5I494M6I120M4I53M10I190M18I299M5I130MI197MD271M5I273MI34M4I             2646464090       2687872603
 H       5       8515    69.2    +       0       0       5I105M9D148M5D199M9D338M3D136MI150M2I149M4D141M3D256M11D82M3D90M11D107M5I99M3I141M8I93MI132MD71M4I224M2D63M5D502M2D103M3D256MI81M5I194M7I148M4I187M12I341MD342M6I234M3D51MD65M11D358M8D88M3D84MD156M7I523M4I100M3I101M10I184M2I244MI146MD84M2I80M2I131MI148M13I437MI323M69I            2525310789       2687872603
 ```
+## 14 de abril del 2024
+Script para correrlo con QSUB y se quede trabajando en el cluster, usando los recursos.
+```
+#!/bin/bash
+# Use current working directory
+#$ -cwd
+#
+# Join stdout and stderr
+#$ -j y
+#
+# Run job through bash shell
+#$ -S /bin/bash
+#
+#You can edit the scriptsince this line
+#
+# Your job name
+#$ -N RUNvsearch
+#
+# Send an email after the job has finished
+#$ -m e
+#$ -M mar...7@outlook.com
+#
+#
+# Resources of compute
+# -pe 10
+# -l mem=20
+#
+# output files to run
+#
+#$ -o ../vsearch_output.$JOB_ID.out # Salida estandar
+#$ -e ../vsearch_output.$JOB_ID.err # Archivo con los errores
+#
+# If modules are needed, source modules environment (Do not delete the next line):
+. /etc/profile.d/modules.sh
+#
+# Add any modules you might require:
+module load vsearch/2.27.0
+#
+# Write your commands in the next line
 
+PWDUNO="/mnt/atgc-d2/sur/shared_data/Pseudomonas/WORK/VSEARCH"
+PWDDOS="/mnt/atgc-d2/sur/shared_data/Pseudomonas/WORK/VSEARCH/RESULTADOS/DOS"
+
+vsearch --cluster_fast $PWDUNO/psedomonasIMGconcatenados.genes.fna \
+        --id 0.6 \
+        --centroids $PWDDOS/pseudovsearch.centroids \
+        --clusterout_id \
+        --clusterout_sort \
+        --consout $PWDDOS/pseudovsearch.consout \
+        --msaout $PWDDOS/pseudovsearch.msout \
+        --uc $PWDDOS/pseudovsearch.uc
+```
+## 19 de abril del 2024
+Termino de correr el cluster a las 5:04 am del 19 de abril y con el estimado con la ultima modificacion del script para vsearch, a las 14:35 pm del 14 de abril del 2024, en total tardo: 110 horas con 30 min aproximados
