@@ -97,6 +97,12 @@ grep -E -o ">[0-9]+" */*faa | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}'
 Resultado
 ```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/0711ea3c-38aa-4ab8-b21c-02d5bec4c7bd)
+
+Lugar donde se guarda la salida
+```
+grep -E -o ">[0-9]+" */*faa | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > ../CDHIT/MATRIXDATA/200424_grepfaa.txt
+```
+
 ```
 Asi permite que la busqueda solo tenga las accesiones id del genoma y de la proteina
 Y por otra parte awk, con -F excluye lo que se encuentra en el patron y asi permite que la infor que este entre ellos se dividan en nuevos y sean impresos separados por ":"
@@ -115,6 +121,9 @@ awk -F ">" '{print $2}' clusterprotcatALL2000.clstr | awk -F "." '{print $1}'
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/af344cfc-13b6-4f6e-a9a5-c44801b9faed)
 
 Asi con la salida de esta busqueda, podemos trabajar
-
+```
+awk -F ">" '{print $2}' clusterprotcatALL2000.clstr | awk -F "." '{print $1}' > ../MATRIXDATA/filtclusterprotcatALL2000.clstr
+```
+Y establecer como va a ser el conteo para guardarlo en la matriz
 
 
