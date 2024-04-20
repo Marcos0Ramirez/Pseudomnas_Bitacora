@@ -103,10 +103,15 @@ Y por otra parte awk, con -F excluye lo que se encuentra en el patron y asi perm
 
 Asi por otra parte con la tabla de salida de CD-HIT clusterprotcatALL2000.clstr:
 ```
+awk -F ">" '{print $2}' clusterprotcatALL2000.clstr
+Resultado
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/66ae443b-10fd-4154-bd28-669690640026)
 
 ```
-
-
+awk -F ">" '{print $2}' clusterprotcatALL2000.clstr | awk -F "." '{print $1}'
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/af344cfc-13b6-4f6e-a9a5-c44801b9faed)
 
 
 
