@@ -76,3 +76,39 @@ echo "$nf"
 echo "$limitei"
 echo "$limitef"
 ```
+
+En este momento se pretende entender como es que se puede extraer y guardarlos en una variable para trabajar con ello podemos guardar todas lad porteinas
+```
+grep -E ">" */*faa > ../CDHIT/MATRIXDATA/200424_grepfaa.txt
+Resultado
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/bec1e382-0918-478a-831b-52d4197205b8)
+
+Asi se guarda y podemos usar solo lo que necesitamos, las accesiones
+```
+grep -E -o ">[0-9]+" */*faa > ../CDHIT/MATRIXDATA/200424_grepfaa.txt
+Resultado
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/b74df911-cc88-45a1-911c-071b3e1aebb8)
+
+```
+grep -E -o ">[0-9]+" */*faa | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}'
+Resultado
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/0711ea3c-38aa-4ab8-b21c-02d5bec4c7bd)
+```
+Asi permite que la busqueda solo tenga las accesiones id del genoma y de la proteina
+Y por otra parte awk, con -F excluye lo que se encuentra en el patron y asi permite que la infor que este entre ellos se dividan en nuevos y sean impresos separados por ":"
+```
+
+Asi por otra parte con la tabla de salida de CD-HIT clusterprotcatALL2000.clstr:
+```
+
+```
+
+
+
+
+
+
+
