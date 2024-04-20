@@ -78,6 +78,7 @@ echo "$limitef"
 ```
 
 En este momento se pretende entender como es que se puede extraer y guardarlos en una variable para trabajar con ello podemos guardar todas lad porteinas
+Trabajamos dentro de la carpta donde estan los genomas
 ```
 grep -E ">" */*faa > ../CDHIT/MATRIXDATA/200424_grepfaa.txt
 Resultado
@@ -113,7 +114,7 @@ awk -F ">" '{print $2}' clusterprotcatALL2000.clstr | awk -F "." '{print $1}'
 ```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/af344cfc-13b6-4f6e-a9a5-c44801b9faed)
 
-
+Asi con la salida de esta busqueda, podemos trabajar
 
 
 
