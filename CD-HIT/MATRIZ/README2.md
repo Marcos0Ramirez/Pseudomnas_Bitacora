@@ -125,5 +125,32 @@ Asi con la salida de esta busqueda, podemos trabajar
 awk -F ">" '{print $2}' clusterprotcatALL2000.clstr | awk -F "." '{print $1}' > ../MATRIXDATA/filtclusterprotcatALL2000.clstr
 ```
 Y establecer como va a ser el conteo para guardarlo en la matriz
+Por otra parte, vemos como actuaria `for` para leer las lineas de `filtclusterprotcatALL2000.clstr`
+```
+for i in $(cat filtclusterprotcatALL2000.clstr); do echo $i; done
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/f8bb1bca-04c3-4bf8-aafc-764b9859ac3c)
+
+Pero ahora lo que hacemos es quita el espacio para que aparezca asi
+```
+awk '{gsub(/\s/, "", $0); print}' filtclusterprotcatALL2000.clstr
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/692c174d-0df2-46c3-ab43-980b90d78af8)
+
+Asi para guardarlo en el mismo archivo, solo lo movemos
+```
+awk '{gsub(/\s/, "", $0); print}' filtclusterprotcatALL2000.clstr > tmp.tmp && mv tmp.tmp filtclusterprotcatALL2000.clstr
+```
+Finalmente solo para comprobar que tanto tiempo puee tardar con hacer busquedas con un `for` y `grep`.
+```
+date +%H:%M:%S && for i in $(cat filtclusterprotcatALL2000.clstr); do grep "$i" 200424_grepfaa.txt | grep -E "^[0-9]+" >> tmp.tmp; done && date +%H:%M:%S
+```
+Con un inicio de horas `23:37:04` y termino a las ``
+
+
+
+
+
+
 
 
