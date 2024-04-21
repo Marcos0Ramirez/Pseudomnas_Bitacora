@@ -380,6 +380,31 @@ real    51m8.429s
 user    17m37.156s
 sys     40m10.250s
 ```
+Ahora lo intentamos con tan solo el awk sin condicionales
+```
+#!/bin/bash
 
+GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Direccion/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm temp2.temp
+io=$(date +%H:%M:%S)
+while read linea
+do
+        awk -v pattern="$linea" '$0 ~ pattern' "$WORK/200424_grepfaa.txt" >> temp2.temp
+done < "$WORK/filtclusterprotcatALL2000.clstr"
+f=$(date +%H:%M:%S)
 
+echo "while read con awk para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+```
+Resultado con tan solo 68186 lineas quitando los 19000 lineas de los nombres de cluster.
+```
+while read con awk para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las 16:10:57 y termino a las 17:14:19
 
+real    63m21.833s
+user    23m4.578s
+sys     33m45.156s
+```
+Retrocedemos al script anterior del inicio con grep para ver si es porque el rendiemiento de la computadora bajo o si es el script mas lento
+```
+
+```
