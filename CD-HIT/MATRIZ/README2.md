@@ -145,6 +145,7 @@ Finalmente solo para comprobar que tanto tiempo puee tardar con hacer busquedas 
 ```
 date +%H:%M:%S && for i in $(cat filtclusterprotcatALL2000.clstr); do grep "$i" 200424_grepfaa.txt | grep -E "^[0-9]+" >> tmp.tmp; done && date +%H:%M:%S
 ```
+Si tenemos un total de lineas `grep -v -c "Cluster" filtclusterprotcatALL2000.clstr`: `56287`
 Con un inicio de horas `23:37:04` y termino a las ``
 
 
