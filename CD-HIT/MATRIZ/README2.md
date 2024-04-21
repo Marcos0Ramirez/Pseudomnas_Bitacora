@@ -343,3 +343,19 @@ ahora veremos como es que resulta en el archivo filtrado
 sort filtclusterprotcatALL2000.clstr | uniq -c | grep -E "2\s" | wc -l
 ```
 No hay duplicados, por tanto tiene que ver con la busqueda que haga linea por linea.
+
+Asi si buscamos en el archivo de busqueda `200424_grepfaa.txt` solo se repite un id de uns proteina dos veces y las demas son unicas
+```
+sort 200424_grepfaa.txt | uniq -c | grep -E "1\s" | wc -l
+```
+con 56290 y 
+```
+sort 200424_grepfaa.txt | uniq -c | grep -E "2\s" | wc -l
+```
+con 1, por tanto no puede ser los archivos de referencia, es mas por el comando y el tipo de busqueda que ofrece. ahora cambiamos el while por un for para intentar
+
+
+
+
+
+
