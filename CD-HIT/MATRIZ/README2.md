@@ -193,5 +193,5 @@ echo "while read con awk para busqueda en un segundo archivo inicio a las $io y 
 ```
 asi
 ```
-while read con awk para busqueda en un segundo archivo inicio a las 10:50:06 y termino a las 11:11:37
+while read con grep para busqueda en un segundo archivo inicio a las 10:50:06 y termino a las 11:11:37
 ```
