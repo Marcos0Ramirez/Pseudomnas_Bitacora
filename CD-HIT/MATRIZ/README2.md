@@ -353,7 +353,26 @@ con 56290 y
 sort 200424_grepfaa.txt | uniq -c | grep -E "2\s" | wc -l
 ```
 con 1, por tanto no puede ser los archivos de referencia, es mas por el comando y el tipo de busqueda que ofrece. ahora cambiamos el while por un for para intentar
+```
+#!/bin/bash
 
+GENOMES="Dir/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Dir/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm temp.temp
+io=$(date +%H:%M:%S)
+for i in $(cat "$WORK/filtclusterprotcatALL2000.clstr")
+do
+        if [[ "$i" =~ "Cluster" ]]
+        then
+                echo "$i" >> temp.temp
+        else
+                awk -v pattern="$i" '$0 ~ pattern' "$WORK/200424_grepfaa.txt" | grep -E "^[0-9]+" >> temp.temp
+        fi
+done
+f=$(date +%H:%M:%S)
+
+echo "for con awk para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+```
 
 
 
