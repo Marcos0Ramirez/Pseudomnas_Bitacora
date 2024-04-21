@@ -323,5 +323,23 @@ while read con awk para busqueda en un segundo archivo y almacena nombre cluster
 ```
 COn un total de lineas de 87187 se tardo 50 minutos.
 
-Al parecer hay id's de proteinas que se repiten en distintos genomas y que por tanto eso hace que en elarchivo temporal aparezcan mas `grep -E "[0-9]+:" temp.temp | wc -l`: 68186 y `grep -E "^[0-9]+" /mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/filtclusterprotcatALL2000.clstr | wc -l`: 56287
+Al parecer hay id's de proteinas que se repiten en distintos genomas y que por tanto eso hace que en elarchivo temporal aparezcan mas `grep -E "[0-9]+:" temp.temp | wc -l`: 68186 y `grep -E "^[0-9]+" /mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/filtclusterprotcatALL2000.clstr | wc -l`: 56287 y por otro se tienen 56292 del archivo `wc -l 200424_grepfaa.txt`
 
+```
+sort temp.temp | uniq -c
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/faba1b7b-b772-458e-b37e-687b16f7ce62)
+
+El primer numero describe cuantas veces aparece
+
+Asi buscamos los que se repitan y los contamos
+```
+sort temp.temp | uniq -c | grep -E "2\s" | wc -l
+```
+aparecen 11897, por lo que en la busqueda sihay valores repetidos
+
+ahora veremos como es que resulta en el archivo filtrado
+```
+sort filtclusterprotcatALL2000.clstr | uniq -c | grep -E "2\s" | wc -l
+```
+No hay duplicados, por tanto tiene que ver con la busqueda que haga linea por linea.
