@@ -374,7 +374,12 @@ f=$(date +%H:%M:%S)
 echo "for con awk para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
 ```
 
-
+```
+for con awk para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las 15:03:56 y termino a las 15:55:04
+real    51m8.429s
+user    17m37.156s
+sys     40m10.250s
+```
 
 
 
