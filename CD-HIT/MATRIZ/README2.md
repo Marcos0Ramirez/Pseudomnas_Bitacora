@@ -146,12 +146,52 @@ Finalmente solo para comprobar que tanto tiempo puee tardar con hacer busquedas 
 date +%H:%M:%S && for i in $(cat filtclusterprotcatALL2000.clstr); do grep "$i" 200424_grepfaa.txt | grep -E "^[0-9]+" >> tmp.tmp; done && date +%H:%M:%S
 ```
 Si tenemos un total de lineas `grep -v -c "Cluster" filtclusterprotcatALL2000.clstr`: `56287`
-Con un inicio de horas `23:37:04` y termino a las `00:17:50`, pero al final corrio con `wc -l ../CDHIT/MATRIXDATA/tmp.tmp`: `68186` lo que tal vez fue porque dentro del archivo `filtclusterprotcatALL2000.clstr` tambien se encuentra `Cluster[0-9]+` algun numero, por lo que puede buscar coincidencias con respecto a los numeros, pero faltara ver que show con el comando y ver si es mas rapido con `awk`
+Con un inicio de horas `23:37:04` y termino a las `00:17:50`, pero al final corrio con `wc -l ../CDHIT/MATRIXDATA/tmp.tmp`: `68186` lo que tal vez fue porque dentro del archivo `filtclusterprotcatALL2000.clstr` tambien se encuentra `Cluster[0-9]+` algun numero, por lo que puede buscar coincidencias con respecto a los numeros, pero faltara ver que show con el comando y ver si es mas rapido con `awk`. Tiempo aprox 40 min.
 
 Asi podemos agregar un `if` al script para que detecte los Cluster y empiece a contar linea por linea.
 
+## Fecha 21 de abril del 2024
+Hoy se vio que es mas rapido de trabajar y se desarrollo un script para medir el tiempo y ver cual es mar rapido si `awk` o `for`
+```
+#!/bin/bash
 
+GENOMES="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
 
+io=$(date +%H:%M:%S)
+awk '/[0-9]+/' $WORK/filtclusterprotcatALL2000.clstr
+f=$(date +%H:%M:%S)
 
+ig=$(date +%H:%M:%S)
+for i in $(cat $WORK/filtclusterprotcatALL2000.clstr); do echo $i; done
+fg=$(date +%H:%M:%S)
 
+echo "awk inicio a las $io y termino a las $f"
+echo "for inicio a las $ig y termino a las $fg"
+```
+Con tiempos de termino 
+```
+awk inicio a las 10:06:19 y termino a las 10:06:36
+for inicio a las 10:06:36 y termino a las 10:06:59
+```
+y por tanto `awk` es mas rapido con 17 segundos y `for` con 20 segundos
+Ahora con awk y con un resultado igual al anteiorr con las busquedas por `for` se obtuvieron a la mitad de tiempo 
+```
+#!/bin/bash
 
+GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Dirección/Descargas_NCBI/CDHIT/MATRIXDATA"
+
+io=$(date +%H:%M:%S)
+while read linea
+do
+    grep "$linea" "$WORK/200424_grepfaa.txt" >> temp.temp
+done < "$WORK/filtclusterprotcatALL2000.clstr"
+f=$(date +%H:%M:%S)
+
+echo "while read con awk para busqueda en un segundo archivo inicio a las $io y termino a las $f"
+```
+asi
+```
+while read con awk para busqueda en un segundo archivo inicio a las 10:50:06 y termino a las 11:11:37
+```
