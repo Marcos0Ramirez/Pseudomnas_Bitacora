@@ -195,3 +195,24 @@ asi
 ```
 while read con grep para busqueda en un segundo archivo inicio a las 10:50:06 y termino a las 11:11:37
 ```
+
+Ahora con pequeñas modificaciones para que pueda responder a agregar Cluster en el archivo temporal
+```
+#!/bin/bash
+
+GENOMES="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm temp.temp
+io=$(date +%H:%M:%S)
+while read linea
+do
+        if [[ $linea =~ "Cluster" ]]
+        then
+                echo "$linea" >> temp.temp
+        fi
+        grep "$linea" "$WORK/200424_grepfaa.txt" >> temp.temp
+done < "$WORK/filtclusterprotcatALL2000.clstr"
+f=$(date +%H:%M:%S)
+
+echo "while read con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+```
