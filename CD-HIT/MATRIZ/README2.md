@@ -148,7 +148,7 @@ date +%H:%M:%S && for i in $(cat filtclusterprotcatALL2000.clstr); do grep "$i" 
 Si tenemos un total de lineas `grep -v -c "Cluster" filtclusterprotcatALL2000.clstr`: `56287`
 Con un inicio de horas `23:37:04` y termino a las ``
 
-
+Asi podemos agregar un `if` al script para que detecte los Cluster y empiece a contar linea por linea.
 
 
 
