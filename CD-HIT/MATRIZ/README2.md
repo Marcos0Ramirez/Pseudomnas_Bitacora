@@ -290,11 +290,11 @@ do
 done
 f=$(date +%H:%M:%S)
 
-echo "while read con nano para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+echo "while read con awk para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
 ```
 Con un total de tiempo y el cual `temp.temp` resulta en 100 líneas 
 ```
-while read con nano para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las 12:55:11 y termino a las 12:55:14
+while read con awk para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las 12:55:11 y termino a las 12:55:14
 ```
 Ahora lo intentamos con todos, pero en modo de tunel con los datos
 ```
@@ -315,5 +315,10 @@ do
 done
 f=$(date +%H:%M:%S)
 
-echo "while read con nano para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+echo "while read con awk para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
 ```
+Con salida
+```
+while read con awk para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las 12:56:27 y termino a las 13:46:37
+```
+COn un total de lineas de 87187 se tardo 50 minutos.
