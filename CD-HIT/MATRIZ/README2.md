@@ -200,8 +200,8 @@ Ahora con pequeñas modificaciones para que pueda responder a agregar Cluster en
 ```
 #!/bin/bash
 
-GENOMES="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
-WORK="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Direccion/Descargas_NCBI/CDHIT/MATRIXDATA"
 rm temp.temp
 io=$(date +%H:%M:%S)
 while read linea
@@ -215,4 +215,105 @@ done < "$WORK/filtclusterprotcatALL2000.clstr"
 f=$(date +%H:%M:%S)
 
 echo "while read con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+```
+Por esta parte funciona agregar, pero sigue haciendo proceso de mas, por lo que es posible que este tomando info de los numero de CLuster y los use para buscar en las similitudes de numeros y por tanto aparezcan de mas, si tenemos del archivo `filtclusterprotcatALL2000.clstr` 75288 lineas y con la salida final de 
+`temp.temp` tenemos un total de 87187 con 23 minutos
+```
+while read con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las 11:42:52 y termino a las 12:05:22
+```
+
+Finalmente de corregir con un condicional bien estructurado, se rompio record a la hora de correr el script y termino muy pronto con menos de un minuto
+```
+#!/bin/bash
+
+GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Direccion/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm temp.temp
+io=$(date +%H:%M:%S)
+while read linea
+do
+        if [[ $linea =~ "Cluster" ]]
+        then
+                echo "$linea" >> temp.temp
+        else
+                echo "$linea" "$WORK/200424_grepfaa.txt" >> temp.temp
+        fi
+done < "$WORK/filtclusterprotcatALL2000.clstr"
+f=$(date +%H:%M:%S)
+
+echo "while read con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+```
+Resultado
+```
+while read con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las 12:09:37 y termino a las 12:10:09
+```
+## OLVIDEN ESO, ME EQUIVOQUE EN ELSE, EN LUGAR DE ECHO VA GREP
+Aca corregido
+Ahora agregando el comando para hacer que solo de el numero de id del genoma
+```
+#!/bin/bash
+
+GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Direccion/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm temp.temp
+io=$(date +%H:%M:%S)
+while read linea
+do
+        if [[ $linea =~ "Cluster" ]]
+        then
+                echo "$linea" >> temp.temp
+        else
+                grep "$linea" "$WORK/200424_grepfaa.txt" >> temp.temp
+        fi
+done < "$WORK/filtclusterprotcatALL2000.clstr"
+f=$(date +%H:%M:%S)
+
+echo "while read con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+```
+nunca termino
+Ahora solo con un pequeño set de datos, veremos que esta pasando
+```
+#!/bin/bash
+
+GENOMES="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm temp.temp
+io=$(date +%H:%M:%S)
+head -n 100 "$WORK/filtclusterprotcatALL2000.clstr" | while read linea
+do
+        if [[ $linea =~ "Cluster" ]]
+        then
+                echo "$linea" >> temp.temp
+        else
+                awk -v pattern="$linea" '$0 ~ pattern' "$WORK/200424_grepfaa.txt" >> temp.temp
+        fi
+done
+f=$(date +%H:%M:%S)
+
+echo "while read con nano para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+```
+Con un total de tiempo y el cual `temp.temp` resulta en 100 líneas 
+```
+while read con nano para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las 12:55:11 y termino a las 12:55:14
+```
+Ahora lo intentamos con todos, pero en modo de tunel con los datos
+```
+#!/bin/bash
+
+GENOMES="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm temp.temp
+io=$(date +%H:%M:%S)
+cat "$WORK/filtclusterprotcatALL2000.clstr" | while read linea
+do
+        if [[ $linea =~ "Cluster" ]]
+        then
+                echo "$linea" >> temp.temp
+        else
+                awk -v pattern="$linea" '$0 ~ pattern' "$WORK/200424_grepfaa.txt" >> temp.temp
+        fi
+done
+f=$(date +%H:%M:%S)
+
+echo "while read con nano para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
 ```
