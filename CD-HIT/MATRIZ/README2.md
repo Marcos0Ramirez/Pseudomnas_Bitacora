@@ -420,3 +420,11 @@ f=$(date +%H:%M:%S)
 
 echo "while read con awk para busqueda en un segundo archivo inicio a las $io y termino a las $f"
 ```
+SALIDA
+```
+while read con grep para busqueda en un segundo archivo inicio a las 17:37:16 y termino a las 18:14:28
+
+real    52m55.334s
+user    2m9.438s
+sys     24m18.469s
+```
