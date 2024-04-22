@@ -428,3 +428,6 @@ real    52m55.334s
 user    2m9.438s
 sys     24m18.469s
 ```
+Al parecer si la computadora se realientizo
+# Fecha 22 de abril del 2024
+El dia de hoy se hara una pequeña modificacion, para ver como actua la busqueda de las accessiones, eliminandolas del archivo `filtclusterprotcatALL2000.clstr` y contandolas, asi como ver que puede hacerse para major crear una tabla o hacer otro filtro para las busquedas y no suceda que con los originales encuentre mas de dos y sea un caos con la conformaicon de la matriz
