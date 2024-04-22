@@ -406,5 +406,17 @@ sys     33m45.156s
 ```
 Retrocedemos al script anterior del inicio con grep para ver si es porque el rendiemiento de la computadora bajo o si es el script mas lento
 ```
+#!/bin/bash
 
+GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Dirección/Descargas_NCBI/CDHIT/MATRIXDATA"
+
+io=$(date +%H:%M:%S)
+while read linea
+do
+    grep "$linea" "$WORK/200424_grepfaa.txt" >> temp.temp
+done < "$WORK/filtclusterprotcatALL2000.clstr"
+f=$(date +%H:%M:%S)
+
+echo "while read con awk para busqueda en un segundo archivo inicio a las $io y termino a las $f"
 ```
