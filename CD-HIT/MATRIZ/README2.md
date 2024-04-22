@@ -431,3 +431,57 @@ sys     24m18.469s
 Al parecer si la computadora se realientizo
 # Fecha 22 de abril del 2024
 El dia de hoy se hara una pequeña modificacion, para ver como actua la busqueda de las accessiones, eliminandolas del archivo `filtclusterprotcatALL2000.clstr` y contandolas, asi como ver que puede hacerse para major crear una tabla o hacer otro filtro para las busquedas y no suceda que con los originales encuentre mas de dos y sea un caos con la conformaicon de la matriz
+
+Ahora modificamos el formato con este script
+```
+#!/bin/bash
+
+GENOMES="Dir/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Dir/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm /TEMPSALIDA/temp4.temp
+filtdata_file=$(cat "$WORK/filtclusterprotcatALL2000.clstr")
+
+io=$(date +%H:%M:%S)
+echo $filtdata_file | sed 's/\sCluster/\nCluster/g' | while IFS= read -r linea
+do
+        n=$(echo "$linea" | grep -E -o "Cluster[0-9]+" | grep -E -o "[0-9]+")
+        echo "$linea" | sed -E "s/\s/ Cluster$n:/g" | sed -E 's/(Cluster[0-9]+ )//g' | sed -E 's/\s/\n/g'
+done
+f=$(date +%H:%M:%S)
+
+echo "while con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+```
+Con salida
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/c461ba51-98a0-4d1f-8679-0c0edf557f65)
+
+Y esto para ello  ahora usaremos solo las accesiones para hacer la busqeuda, elimindo las lineas que tienen cluster y el numero, asi evitamos que pueda ser que se ocupen los numero de esas lineas y se pueda continuar trabajando.
+Este es el script final con nombre `./temporalmat.sh`
+```
+#!/bin/bash
+
+GENOMES="Dir/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Dir/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm "$WORK/filtclstr_a_tempseek.txt"
+filtdata_file=$(cat "$WORK/filtclusterprotcatALL2000.clstr")
+
+io=$(date +%H:%M:%S)
+echo $filtdata_file | sed 's/\sCluster/\nCluster/g' | while IFS= read -r linea
+do
+        n=$(echo "$linea" | grep -E -o "Cluster[0-9]+" | grep -E -o "[0-9]+")
+        echo "$linea" | sed -E "s/\s/ Cluster$n:/g" | sed -E 's/(Cluster[0-9]+ )//g' | sed -E 's/\s/\n/g' >> "$WORK/filtclstr_a_tempseek.txt"
+done
+f=$(date +%H:%M:%S)
+
+echo "while con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+```
+
+tiempo de 22 minutos
+```
+while con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las 08:46:27 y termino a las 09:08:24
+```
+la salida del archivo que se va usar para hacer las busquedas se va a llamar `filtclstr_a_tempseek.txt` y con ello procedemos a hacer las busquedas y comparaciones para concatenar la informacion.
+
+
+
+
