@@ -481,6 +481,28 @@ tiempo de 22 minutos
 while con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las 08:46:27 y termino a las 09:08:24
 ```
 la salida del archivo que se va usar para hacer las busquedas se va a llamar `filtclstr_a_tempseek.txt` y con ello procedemos a hacer las busquedas y comparaciones para concatenar la informacion.
+Ahora se tardo 19 minutos en correr la busqueda dentro de `200424_grepfaa.txt`
+```
+#!/bin/bash
+
+GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+
+rm "$WORK/temporal.txt"
+
+io=$(date +%H:%M:%S)
+awk -F ":" '{print $2}' "$WORK/filtclstr_a_tempseek.txt" | while read linea
+do
+        echo "$linea"
+        grep "$linea" "$WORK/200424_grepfaa.txt" >> "$WORK/temporal.txt"
+done
+f=$(date +%H:%M:%S)
+
+echo "while read con grep para busqueda en un segundo archivo inicio a las $io y termino a las $f"
+
+
+while read con grep para busqueda en un segundo archivo inicio a las 09:54:40 y termino a las 10:13:33
+```
 
 
 
