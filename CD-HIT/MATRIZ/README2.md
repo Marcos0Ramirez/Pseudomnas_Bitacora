@@ -529,5 +529,26 @@ f=$(date +%H:%M:%S)
 
 echo "while read con grep para busqueda en un segundo archivo inicio a las $io y termino a las $f"
 ```
+No funciono este script por que no guardo nada en el archivo
+pero se corrigio con este `tmat.sh`
+```
+#!/bin/bash
 
+GENOMES="DIR/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="DIR/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm "$WORK/temporalconca.txt"
 
+io=$(date +%H:%M:%S)
+idproteinas=$(cat "$WORK/filtclstr_a_tempseek.txt")
+echo "$idproteinas" | while read linea
+do
+        busca=$(echo "$linea" |  awk -F ":" '{print $2}')
+        resulta=$(grep -E ":$busca" "$WORK/200424_grepfaa.txt")
+        echo -e "$linea\t$resulta"
+        echo -e "$linea\t$resulta" >> "$WORK/temporalconca.txt"
+done
+f=$(date +%H:%M:%S)
+
+echo "while read con grep para busqueda en un segundo archivo inicio a las $io y termino a las $f"
+```
+y tiene un total de lineas de 56287 y ninguno se repite, ahora no se. ya se me rompio la chompa como es que ahora si funciona :C
