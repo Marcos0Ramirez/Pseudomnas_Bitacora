@@ -504,6 +504,30 @@ echo "while read con grep para busqueda en un segundo archivo inicio a las $io y
 while read con grep para busqueda en un segundo archivo inicio a las 09:54:40 y termino a las 10:13:33
 ```
 
+```
+#!/bin/bash
 
+GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Dir/Descargas_NCBI/CDHIT/MATRIXDATA"
+
+rm "$WORK/temporalconca.txt"
+
+io=$(date +%H:%M:%S)
+
+var_comparacion=""
+idproteinas=$(cat "$WORK/filtclstr_a_tempseek.txt")
+echo "$idproteinas" | while read linea
+do
+        busca=$(echo "$linea" |  awk -F ":" '{print $2}')
+        resulta=$(grep -E ":$busca" "$WORK/200424_grepfaa.txt")
+        echo -e "$linea\t$resulta"
+        var_comparacion="$var_comparacion\n$linea\t$resulta"
+        # echo -e "$var_comparacion"
+done
+echo -e "$var_comparacion" >> "$WORK/temporalconca.txt"
+f=$(date +%H:%M:%S)
+
+echo "while read con grep para busqueda en un segundo archivo inicio a las $io y termino a las $f"
+```
 
 
