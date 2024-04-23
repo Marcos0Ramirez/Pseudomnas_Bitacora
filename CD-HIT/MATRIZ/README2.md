@@ -155,8 +155,8 @@ Hoy se vio que es mas rapido de trabajar y se desarrollo un script para medir el
 ```
 #!/bin/bash
 
-GENOMES="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
-WORK="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+GENOMES="direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="direccion/Descargas_NCBI/CDHIT/MATRIXDATA"
 
 io=$(date +%H:%M:%S)
 awk '/[0-9]+/' $WORK/filtclusterprotcatALL2000.clstr
@@ -275,8 +275,8 @@ Ahora solo con un pequeño set de datos, veremos que esta pasando
 ```
 #!/bin/bash
 
-GENOMES="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
-WORK="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Direccion/Descargas_NCBI/CDHIT/MATRIXDATA"
 rm temp.temp
 io=$(date +%H:%M:%S)
 head -n 100 "$WORK/filtclusterprotcatALL2000.clstr" | while read linea
@@ -300,8 +300,8 @@ Ahora lo intentamos con todos, pero en modo de tunel con los datos
 ```
 #!/bin/bash
 
-GENOMES="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
-WORK="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Direccion/Descargas_NCBI/CDHIT/MATRIXDATA"
 rm temp.temp
 io=$(date +%H:%M:%S)
 cat "$WORK/filtclusterprotcatALL2000.clstr" | while read linea
@@ -323,7 +323,7 @@ while read con awk para busqueda en un segundo archivo y almacena nombre cluster
 ```
 COn un total de lineas de 87187 se tardo 50 minutos.
 
-Al parecer hay id's de proteinas que se repiten en distintos genomas y que por tanto eso hace que en elarchivo temporal aparezcan mas `grep -E "[0-9]+:" temp.temp | wc -l`: 68186 y `grep -E "^[0-9]+" /mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/filtclusterprotcatALL2000.clstr | wc -l`: 56287 y por otro se tienen 56292 del archivo `wc -l 200424_grepfaa.txt`
+Al parecer hay id's de proteinas que se repiten en distintos genomas y que por tanto eso hace que en elarchivo temporal aparezcan mas `grep -E "[0-9]+:" temp.temp | wc -l`: 68186 y `grep -E "^[0-9]+" Direccion/Descargas_NCBI/CDHIT/MATRIXDATA/filtclusterprotcatALL2000.clstr | wc -l`: 56287 y por otro se tienen 56292 del archivo `wc -l 200424_grepfaa.txt`
 
 ```
 sort temp.temp | uniq -c
@@ -460,7 +460,7 @@ Este es el script final con nombre `./temporalmat.sh`
 ```
 #!/bin/bash
 
-GENOMES="Dir/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+GENOMES="Dir/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
 WORK="Dir/Descargas_NCBI/CDHIT/MATRIXDATA"
 rm "$WORK/filtclstr_a_tempseek.txt"
 filtdata_file=$(cat "$WORK/filtclusterprotcatALL2000.clstr")
@@ -486,7 +486,7 @@ Ahora se tardo 19 minutos en correr la busqueda dentro de `200424_grepfaa.txt`
 #!/bin/bash
 
 GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
-WORK="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+WORK="Direccion/Descargas_NCBI/CDHIT/MATRIXDATA"
 
 rm "$WORK/temporal.txt"
 
