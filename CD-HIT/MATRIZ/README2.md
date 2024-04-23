@@ -552,3 +552,6 @@ f=$(date +%H:%M:%S)
 echo "while read con grep para busqueda en un segundo archivo inicio a las $io y termino a las $f"
 ```
 y tiene un total de lineas de 56287 y ninguno se repite, ahora no se. ya se me rompio la chompa como es que ahora si funciona :C
+
+# 23 de abril del 2024
+Hoy se vera si ningun dato se repite y to funciona correctamente. Para saber si asi hacer que el codigo corra y solo optimizar la busqueda para que no sea tan lento porque se tardo como 1hr `tmat.sh`
