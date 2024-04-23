@@ -641,6 +641,13 @@ f=$(date +%H:%M:%S)
 
 echo "while read con grep para busqueda en un segundo archivo inicio a las $io y termino a las $f"
 ```
+Con salida
+```
+rm: cannot remove '/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/clugen.txt': No such file or directory
 
+real    40m49.257s
+user    2m16.047s
+sys     32m10.234s
+while read con grep para busqueda en un segundo archivo inicio a las 10:16:13 y termino a las 10:57:02
 ```
-```
+Solo se pensaria en usar un comando para que cuente todo aquello que se repita y empezar a contar todos
