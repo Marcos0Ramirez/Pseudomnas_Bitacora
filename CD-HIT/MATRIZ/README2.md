@@ -555,3 +555,26 @@ y tiene un total de lineas de 56287 y ninguno se repite, ahora no se. ya se me r
 
 # 23 de abril del 2024
 Hoy se vera si ningun dato se repite y to funciona correctamente. Para saber si asi hacer que el codigo corra y solo optimizar la busqueda para que no sea tan lento porque se tardo como 1hr `tmat.sh`
+
+Se quiere crear un script llamado `comp.sh`, pero antes, tenemos los resultados de como funcionaba antes el script y salian los duplicados, salida `temp3.temp`, con esto se vera cuales son los datos duplicados con respecto al que si salio bien, salida `temporalconca.txt`. Y con las accesiones de los duplicados se extraeran del archivo que salen bien. para buscar las diferencias. Los genoams que se duplican y se sacaron de `temporalconca.txt` se guardaran en un archivo llamado `extracciontemporalconca.txt`
+
+Asi por otra parte al buscar en los duplicados, tomamos de ejemplo la proteina `2972001969` y por ejemplo podemos ver que 
+```
+grep "2972001969" temp3.temp
+```
+que resulto en 
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/c2e8e6a1-e64b-4857-b41f-cf0025e97f4b)
+
+Y por otra parte en la busqueda
+```
+grep "2972001969" temporalconca.txt
+```
+resulta en 
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/8950dee1-8641-4298-869d-5d17934d7b07)
+
+Y por tanto, ¿que puede hacer que la busqueda del codigo anterior pueda hacer que se duplique?
+para ello lo que haremos es recurrir al script que hizo la busqueda y duplico algunos y en si al archivo original y ver si hay algo que haga que se duplique.
+
+Con el archivo `` y script ``
