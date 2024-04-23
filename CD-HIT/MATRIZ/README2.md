@@ -620,7 +620,7 @@ grep -E "2972001829" 200424_grepfaa.txt
 ```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/3aad210d-43f3-467c-92b2-a049b89248bd)
 
-Con esta premisa, lo unique que se va a hacer es modificar el script mas rapido y se añade lo de cluster para finalmente aplicar un comando para juntar genomas con cluster y asi hacer el conteo
+Con esta premisa, lo unique que se va a hacer es modificar el script mas rapido y se añade lo de cluster para finalmente aplicar un comando para juntar genomas con cluster y asi hacer el conteo: nombre del archivo `ClusterGenome.sh`.
 ```
 #!/bin/bash
 
@@ -628,14 +628,19 @@ GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
 WORK="Dirección/Descargas_NCBI/CDHIT/MATRIXDATA"
 
 io=$(date +%H:%M:%S)
+time {
+rm "$WORK/clugen.txt"
 while read linea
 do
-    grep ":$linea" "$WORK/200424_grepfaa.txt" >> temp.temp
-done < "$WORK/filtclusterprotcatALL2000.clstr"
+        busca=$(echo "$linea" |  awk -F ":" '{print $2}')
+        resulta=$(grep ":$busca" "$WORK/200424_grepfaa.txt")
+        echo -e "$linea\t$resulta" >> "$WORK/clugen.txt"
+done < "$WORK/filtclstr_a_tempseek.txt"
+}
 f=$(date +%H:%M:%S)
 
 echo "while read con grep para busqueda en un segundo archivo inicio a las $io y termino a las $f"
 ```
-```
 
+```
 ```
