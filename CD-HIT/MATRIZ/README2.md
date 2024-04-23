@@ -189,7 +189,7 @@ do
 done < "$WORK/filtclusterprotcatALL2000.clstr"
 f=$(date +%H:%M:%S)
 
-echo "while read con awk para busqueda en un segundo archivo inicio a las $io y termino a las $f"
+echo "while read con grep para busqueda en un segundo archivo inicio a las $io y termino a las $f"
 ```
 asi
 ```
@@ -577,4 +577,65 @@ resulta en
 Y por tanto, ¿que puede hacer que la busqueda del codigo anterior pueda hacer que se duplique?
 para ello lo que haremos es recurrir al script que hizo la busqueda y duplico algunos y en si al archivo original y ver si hay algo que haga que se duplique.
 
-Con el archivo `` y script ``
+Bien, de la accesion anterior se busco
+```
+grep -E "2972001969" 200424_grepfaa.txt
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/c1dc3b7b-2ddb-416d-b1d8-256ba2249014)
+
+```
+grep "2972001969" temporalconca.txt
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/2d8864c6-59c8-4fde-990c-c89af9f2b78d)
+
+```
+grep "2972001969" 200424_grepfaa.txt
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/bb782db6-8a59-4bcd-aadc-e143b6789865)
+
+```
+grep "2972001969" filtclstr_a_tempseek.txt
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/81721645-2a54-455b-863f-e1875513c09d)
+
+```
+grep "2972001969" filtclusterprotcatALL2000.clstr
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/bf09edcd-a951-4a2b-be63-0019a8f1cfb7)
+
+```
+grep -E ":2972001969" 200424_grepfaa.txt
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/9e458fae-f247-43b7-98ed-cd342b049330)
+
+Finalmente se vio que pasara si se busca la misma accession del genoma como del de la proteina
+```
+grep -E ":2972001829" 200424_grepfaa.txt
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/eda3dc29-3a04-417b-8fde-b5083d525e6a)
+
+Algo que evidentemente sin la restriccion de las `:` busca todo aquello que tenga el id del genoma que tambien es de al proteina y que por tanto se duplique
+```
+grep -E "2972001829" 200424_grepfaa.txt
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/3aad210d-43f3-467c-92b2-a049b89248bd)
+
+Con esta premisa, lo unique que se va a hacer es modificar el script mas rapido y se añade lo de cluster para finalmente aplicar un comando para juntar genomas con cluster y asi hacer el conteo
+```
+#!/bin/bash
+
+GENOMES="Direccion/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Dirección/Descargas_NCBI/CDHIT/MATRIXDATA"
+
+io=$(date +%H:%M:%S)
+while read linea
+do
+    grep ":$linea" "$WORK/200424_grepfaa.txt" >> temp.temp
+done < "$WORK/filtclusterprotcatALL2000.clstr"
+f=$(date +%H:%M:%S)
+
+echo "while read con grep para busqueda en un segundo archivo inicio a las $io y termino a las $f"
+```
+```
+
+```
