@@ -7,7 +7,7 @@ Ahora se vera como desarrollar el script para que corrar mas rapido el analisis 
 ```
 #!/bin/bash
 
-DIR="/mnt/c/Users/52477/Desktop/Descargas_NCBI"
+DIR="direccion/Desktop/Descargas_NCBI"
 MATRIXCDOUT="CDHIT/MATRIXDATA"
 DATA="CDHIT/TODOS/clusterprotcatALL2000.clstr"
 
