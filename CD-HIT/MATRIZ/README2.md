@@ -694,3 +694,34 @@ ANTES UNA PRUEBA, CONCATENAMOS `200424_grepfaa.txt` Y `filtclstr_a_tempseek.txt`
 paste 200424_grepfaa.txt filtclstr_a_tempseek.txt > grepfaa_filtclstr.txt
 ```
 primero los ordenamos
+```
+awk -F ":" '{print $2 ":" $1}' filtclstr_a_tempseek.txt | sort -n | awk -F ":" '{print $2":"$1}'
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/bd234471-a00b-4f8f-98bc-3e0417eb9711)
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/be3ff70d-22f1-4d53-8e75-54d92d1f5ae9)
+
+```
+awk -F ":" '{print $2 ":" $1}' 200424_grepfaa.txt | sort -n | awk -F ":" '{print $2":"$1}'
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/73fd2c59-8ae0-4f71-ab54-9084b6f10a6c)
+
+los gurdamos y finalmente los concatenamos
+```
+awk -F ":" '{print $2 ":" $1}' filtclstr_a_tempseek.txt | sort -n | awk -F ":" '{print $2":"$1}' > temp && mv temp filtclstr_a_tempseek.txt
+awk -F ":" '{print $2 ":" $1}' 200424_grepfaa.txt | sort -n | awk -F ":" '{print $2":"$1}' > temp && mv temp 200424_grepfaa.txt
+```
+tenemos tamaños numeros de lineas respectivas de `filtclstr_a_tempseek.txt`:56287  y `200424_grepfaa.txt`:56292. Son 5 accesiones que no estan en `filt...` para ello hay que ver si hay alguna opcion en `CDHIT` arroje los que no fueron incluidos en los resultados.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
