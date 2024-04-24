@@ -651,3 +651,11 @@ sys     32m10.234s
 while read con grep para busqueda en un segundo archivo inicio a las 10:16:13 y termino a las 10:57:02
 ```
 Solo se pensaria en usar un comando para que cuente todo aquello que se repita y empezar a contar todos
+## 24 de abril del 2024
+---------------------------------------------------------------------------------------------------------------------
+Conjuncion del script
+```
+grep -E -o ">[0-9]+" */*faa | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > ../CDHIT/MATRIXDATA/200424_grepfaa.txt
+
+```
+--------------------------------------------------------------------------------------------------------------------
