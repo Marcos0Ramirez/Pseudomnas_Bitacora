@@ -685,3 +685,12 @@ echo "while con grep para busqueda en un segundo archivo y almacena nombre clust
 
 ```
 --------------------------------------------------------------------------------------------------------------------
+
+Antes de ello pensaba modificar la busqueda a que si se tienen los formatos `idgenomas:idproteina` en el arhivo `200424_grepfaa.txt` y `Cluster[0-9]+:idproteina` del archivo `filtclstr_a_tempseek.txt`.
+Eliminar aquellos `idgenomas:idproteina` que no se encuentren con la `idproteina` en `filtclstr_a_tempseek.txt` y despues ordenarlos por `idproteina`.
+
+ANTES UNA PRUEBA, CONCATENAMOS `200424_grepfaa.txt` Y `filtclstr_a_tempseek.txt` PARA HACER UNA BUSQUEDA POR COINCIDENCIA CON GREP, NUEVO ARCHIVO `grepfaa_filtclstr.txt`
+```
+paste 200424_grepfaa.txt filtclstr_a_tempseek.txt > grepfaa_filtclstr.txt
+```
+primero los ordenamos
