@@ -655,7 +655,33 @@ Solo se pensaria en usar un comando para que cuente todo aquello que se repita y
 ---------------------------------------------------------------------------------------------------------------------
 Conjuncion del script
 ```
+#!/bin/bash
+# Buscamos la salida en formato idgenoma:idproteina de las fuentes originales
 grep -E -o ">[0-9]+" */*faa | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > ../CDHIT/MATRIXDATA/200424_grepfaa.txt
+
+# Por aca solo obtenemos las accesiones del analisis en CD-HIT
+awk -F ">" '{print $2}' clusterprotcatALL2000.clstr | awk -F "." '{print $1}' > ../MATRIXDATA/filtclusterprotcatALL2000.clstr
+
+# Mantiene el formato Cluster[0-9]+
+awk '{gsub(/\s/, "", $0); print}' filtclusterprotcatALL2000.clstr > tmp.tmp && mv tmp.tmp filtclusterprotcatALL2000.clstr
+
+# Con esto hacemos el formato de Cluster[0-9]+:idproteina
+GENOMES="Dir/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Dir/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm "$WORK/filtclstr_a_tempseek.txt"
+filtdata_file=$(cat "$WORK/filtclusterprotcatALL2000.clstr")
+
+io=$(date +%H:%M:%S)
+echo $filtdata_file | sed 's/\sCluster/\nCluster/g' | while IFS= read -r linea
+do
+        n=$(echo "$linea" | grep -E -o "Cluster[0-9]+" | grep -E -o "[0-9]+")
+        echo "$linea" | sed -E "s/\s/ Cluster$n:/g" | sed -E 's/(Cluster[0-9]+ )//g' | sed -E 's/\s/\n/g' >> "$WORK/filtclstr_a_tempseek.txt"
+done
+f=$(date +%H:%M:%S)
+
+echo "while con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+
+
 
 ```
 --------------------------------------------------------------------------------------------------------------------
