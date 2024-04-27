@@ -713,7 +713,21 @@ awk -F ":" '{print $2 ":" $1}' 200424_grepfaa.txt | sort -n | awk -F ":" '{print
 tenemos tamaños numeros de lineas respectivas de `filtclstr_a_tempseek.txt`:56287  y `200424_grepfaa.txt`:56292. Son 5 accesiones que no estan en `filt...` para ello hay que ver si hay alguna opcion en `CDHIT` arroje los que no fueron incluidos en los resultados.
 
 ## 27 de abril del 2024
-
+Por esta parte se buscar como usar codigo en pyhton dentro de un script de bash y asi generar la matriz
+```
+#!/bin/bash
+echo "hola en bash"
+# Guardamos una variable aca para ver si funciona
+saludo="Que tal! es un gusto saludar, quiero saber si se puede comunicar bash con python"
+export saludo
+python3 << END
+#Codigo python
+import os
+saludo=os.environ['saludo']
+print("hola en python")
+print(saludo)
+END
+```
 
 
 
