@@ -767,9 +767,54 @@ END
 echo "me despido ahora estoy en bash de nuevo"
 ```
 Con salida
+
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/8ac81850-9045-492f-a3da-10b51bac061c)
 
 
+Como no se puede usar una variable python en bash de regreso, mejor la salida de la matriz, la guardo en un archivo y de ahi trabajo con bash
+```
+#!/bin/bash
+echo "hola en bash"
+# Guardamos una variable aca para ver si funciona
+saludo="Que tal! es un gusto saludar, quiero saber si se puede comunicar bash con python"
+export saludo
+python3 << END
+#Codigo python
+import os
+saludo=os.environ['saludo']
+print("hola en python")
+print(saludo)
+
+# Con este saludo, ahora busco generar una matriz en una variable
+#veamos con una pequeña
+import numpy as np
+
+# Quiero crar una matriz por default con 0's
+matriz_ceros = np.zeros((4, 5))
+print("matriz")
+print(matriz_ceros)
+
+#Por esta parte crearemos un dataframe basico para saber como actua
+import pandas as pd
+
+# Suponiendo que queremos un data el cual tienen variables y se quieren añadir
+# nombres de las columnas
+columnas = ['col1', 'col2', 'col3']
+filas = ['1', '2']
+marcolectura = pd.DataFrame(0, index=filas, columns=columnas)
+print("Dataframe")
+print(marcolectura)
+
+#FINALMENTE PARA HACER QUE SE PUEDA EXPORTAR UNA VARIABLE DE PYTHON A BASH HACEMOS
+os.environ["DtFr_PYTHONaBASH"] = marcolectura
+END
+
+echo "me despido ahora estoy en bash de nuevo" 
+echo "EXPORTAMOS EL DATAFRAME PARA USARLA EN BASH, LA CUAL SE NOMBRO COMO DtFr_PYTHONaBASH: $DtFr_PYTHONaBASH"
+```
+Salida
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/608c3f11-a2f7-48b8-8349-cc765f7a28fe)
 
 
 
