@@ -816,7 +816,29 @@ Salida
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/608c3f11-a2f7-48b8-8349-cc765f7a28fe)
 
+# ADAPTAMOS PYTHON EN BASH
+```
+#!/bin/bash
+echo "INICIO PARA FORMAR LAS MATRICES BASH"
+DIRMATRIZ="dir/Descargas_NCBI/CDHIT/MATRIXDATA"
+cols=$(grep "Clu" $DIRMATRIZ/filtclusterprotcatALL2000.clstr)
+export cols
+python3 << END
+#Codigo python
+import os
+import pandas as pd
 
+print("Nos encontramos en PYTHON")
+
+# Imprimimos cols que tiene todos los numeros de cluster para saber en que formato trabaja
+print(cols)
+END
+
+echo "Terminos, ahora estamos en BASH" 
+```
+Salida
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/8b910fc4-39ff-4946-a7e6-b5767544294c)
 
 
 
