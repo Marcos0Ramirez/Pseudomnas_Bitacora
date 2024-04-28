@@ -885,7 +885,39 @@ Con salida
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/8214a4a5-49a3-4fc3-9712-1720c5aceabc)
 
 Y con el archivo de salida `grepfaa_filtclstr.txt`. Asi podemos considerar el comando para unir estos y usarlos para la matriz en la busqueda con python
+Con este comando
+```
+awk -F ":" '{print $1 ":" $2}' grepfaa_filtclstr.txt > temp.txt
+```
+Tiene una salida asi
 
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/e2116708-def7-494e-9efb-cc758ceb806e)
 
+En cambio el comando asi
+```
+awk -F ":" '{print $2 ":" $1}' grepfaa_filtclstr.txt > temp.txt
+```
+Salida
 
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/f7a658a6-b4e7-444c-9632-fae043cee023)
 
+Confirmando que todo esta en orden
+A lo cual con una pequeña modificacion aplicamos
+```
+awk -F ":" '{print $2 ":" $1}' grepfaa_filtclstr.txt | cut -f 2 > temp.txt
+```
+Salida
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/9dfda655-a626-4d81-9257-37d8825bf8f0)
+
+Ademas con este comando sale cuantos salen 
+```
+awk -F ":" '{print $2 ":" $1}' grepfaa_filtclstr.txt | cut -f 2 | uniq -c > temp.txt
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/b950ff88-8d56-4a66-8fa9-586aa09cdfbb)
+
+Y podemos aplicar otro comando mas para que quede en orden y solo sea usar un for y obtenga cada llamado y lo ponga como output
+```
+awk -F ":" '{print $2 ":" $1}' grepfaa_filtclstr.txt | cut -f 2 | uniq -c | awk -F " " '{print $2 ":" $1}'
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/f8a7134f-6374-4736-b5c4-1439796d196c)
