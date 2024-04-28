@@ -921,3 +921,8 @@ Y podemos aplicar otro comando mas para que quede en orden y solo sea usar un fo
 awk -F ":" '{print $2 ":" $1}' grepfaa_filtclstr.txt | cut -f 2 | uniq -c | awk -F " " '{print $2 ":" $1}'
 ```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/f8a7134f-6374-4736-b5c4-1439796d196c)
+
+Asi lo guardamos
+```
+awk -F ":" '{print $2 ":" $1}' grepfaa_filtclstr.txt | cut -f 2 | uniq -c | awk -F " " '{print $2 ":" $1}' > inputmatrizcdhit.mtcdhit
+```
