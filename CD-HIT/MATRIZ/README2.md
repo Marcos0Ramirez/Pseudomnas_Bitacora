@@ -657,7 +657,7 @@ Conjuncion del script
 ```
 #!/bin/bash
 # Buscamos la salida en formato idgenoma:idproteina de las fuentes originales
-grep -E -o ">[0-9]+" */*faa | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > ../CDHIT/MATRIXDATA/200424_grepfaa.txt
+grep -E -o "^>[0-9]+" */*faa | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > ../CDHIT/MATRIXDATA/200424_grepfaa.txt
 
 # Por aca solo obtenemos las accesiones del analisis en CD-HIT
 awk -F ">" '{print $2}' clusterprotcatALL2000.clstr | awk -F "." '{print $1}' > ../MATRIXDATA/filtclusterprotcatALL2000.clstr
@@ -840,7 +840,51 @@ Salida
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/8b910fc4-39ff-4946-a7e6-b5767544294c)
 
+Con el codigo avanzado de script de python pidemos proceder a hacer la matriz y el conteo
+```
+#!/bin/bash
+echo "INICIO PARA FORMAR LAS MATRICES BASH"
+DIRMATRIZ="DIR/Descargas_NCBI/CDHIT/MATRIXDATA"
+GENOMES="DIR/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
 
+paste $DIRMATRIZ/200424_grepfaa.txt $DIRMATRIZ/filtclstr_a_tempseek.txt > $DIRMATRIZ/grepfaa_filtclstr.txt
+
+cols=$(grep "Clu" $DIRMATRIZ/filtclusterprotcatALL2000.clstr)
+echo $cols > "$DIRMATRIZ/shtopy_Clust.txt"
+
+filas=$(ls $GENOMES | tr '\n' ' ')
+echo -e "$filas" > "$DIRMATRIZ/shtopy_genomes.txt"
+python3 - << END
+#Codigo python
+import os
+import pandas as pd
+import sys
+
+print("Nos encontramos en PYTHON")
+
+# Imprimimos cols que tiene todos los numeros de cluster para saber en que formato trabaja
+with open('DIR/Descargas_NCBI/CDHIT/MATRIXDATA/shtopy_Clust.txt', 'r') as Clus:
+    cols = Clus.read().strip()
+    cols = cols.split(' ')
+
+with open('/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/shtopy_genomes.txt', 'r') as fila:
+    fl = fila.read().strip()
+    fl = fl.split(' ')
+print(cols)
+print(fl)
+
+# Hacemos el dataframe
+zerocdhit = pd.DataFrame(0, index=fl, columns=cols)
+print(zerocdhit)
+END
+
+echo "Terminos, ahora estamos en BASH" 
+```
+Con salida
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/8214a4a5-49a3-4fc3-9712-1720c5aceabc)
+
+Y con el archivo de salida `grepfaa_filtclstr.txt`. Asi podemos considerar el comando para unir estos y usarlos para la matriz en la busqueda con python
 
 
 
