@@ -926,3 +926,213 @@ Asi lo guardamos
 ```
 awk -F ":" '{print $2 ":" $1}' grepfaa_filtclstr.txt | cut -f 2 | uniq -c | awk -F " " '{print $2 ":" $1}' > inputmatrizcdhit.mtcdhit
 ```
+
+Aqui terminamos el script funcionando y arrojando la matriz
+```
+#!/bin/bash
+echo "INICIO PARA FORMAR LAS MATRICES BASH"
+DIRMATRIZ="Dir/Descargas_NCBI/CDHIT/MATRIXDATA"
+GENOMES="Dir/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+
+paste $DIRMATRIZ/200424_grepfaa.txt $DIRMATRIZ/filtclstr_a_tempseek.txt > $DIRMATRIZ/grepfaa_filtclstr.txt
+
+cols=$(grep "Clu" $DIRMATRIZ/filtclusterprotcatALL2000.clstr)
+echo $cols > "$DIRMATRIZ/shtopy_Clust.txt"
+
+filas=$(ls $GENOMES | tr '\n' ' ')
+echo -e "$filas" > "$DIRMATRIZ/shtopy_genomes.txt"
+python3 - << END
+#Codigo python
+import os
+import pandas as pd
+import sys
+
+print("Nos encontramos en PYTHON")
+
+# Imprimimos cols que tiene todos los numeros de cluster para saber en que formato trabaja
+with open('Dir/Descargas_NCBI/CDHIT/MATRIXDATA/shtopy_Clust.txt', 'r') as Clus:
+    cols = Clus.read().strip()
+    cols = cols.split(' ')
+
+with open('Dir/Descargas_NCBI/CDHIT/MATRIXDATA/shtopy_genomes.txt', 'r') as fila:
+    fl = fila.read().strip()
+    fl = fl.split(' ')
+#print(cols)
+#print(fl)
+
+# Hacemos el dataframe
+zerocdhit = pd.DataFrame(0, index=fl, columns=cols)
+#print(zerocdhit)
+
+with open('Dir/Descargas_NCBI/CDHIT/MATRIXDATA/inputmatrizcdhit.mtcdhit', 'r') as entrada:
+    input = entrada.read().strip()
+    input = input.split('\n')
+#print(input)
+#print(len(input))
+#print(type(input))
+
+n = 0
+while n < len(input):
+    #print("hola", input[n])
+    subconjunto = input[n].split(":")
+    #print(subconjunto)
+    #print(subconjunto[1], subconjunto[0], subconjunto[2])
+
+    # Ahora si la entrada de los datos para formar la matriz
+    zerocdhit.at[ subconjunto[1], subconjunto[0] ] = subconjunto[2]
+    n+=1
+
+# Lo guardamos
+zerocdhit.to_csv('Dir/Descargas_NCBI/CDHIT/MATRIXDATA/pymatrizcdhit.csv', index=True)
+
+END
+
+echo "Terminos, ahora estamos en BASH" 
+```
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/0b6a50f6-45cb-40e5-a210-ae5a6513b212)
+
+Pero no coincide el numero de proteinas por cluster contadas anteriormente, si recordamos las contadas a mano no coinciden con la salida
+```
+idgenomas       0       1       2       3       4       5       6       7       8
+2505313052      0       3       0       0       0       0       1       0       1
+2517572175      0       0       0       0       0       1       0       0       0
+2548876750      0       1       4       0       0       0       1       0       0
+2554235471      0       0       0       0       0       0       0       0       0
+2630968743      0       5       2       0       0       0       1       0       0
+2713896862      0       1       1       0       0       0       0       0       0
+2785510749      1       0       0       0       0       0       0       0       0
+2923166773      0       0       0       1       0       0       0       1       0
+2972001829      0       0       0       0       1       0       0       0       1
+8011072914      0       0       0       0       0       0       0       0       0
+```
+
+hora buscamos por `Cluster1`, para ver como hacer el conteo con `uniq -c`
+```
+grep -E "^Cluster1:" inputmatrizcdhit.mtcdhit
+```
+salida
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/b8a3e7ee-4194-4f45-b43f-d335451d1c45)
+
+usamos este comando para modificar
+```
+awk -F ":" '{print $2 ":" $1}' grepfaa_filtclstr.txt | cut -f 2 | sort | uniq -c | awk -F " " '{print $2 ":" $1}' | wc -l
+53907
+```
+Y como salia antes
+```
+awk -F ":" '{print $2 ":" $1}' grepfaa_filtclstr.txt | cut -f 2 | uniq -c | awk -F " " '{print $2 ":" $1}' | wc -l
+55924
+```
+con la modificacion en el archivo vemos que sucede
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6b13f261-3a27-41ea-9974-e3e3e5c3c89b)
+
+En efecto el sort si ayuda a tener la correccion y funciona muy bien.
+Solo otro detalle con la salida del archivo, no aparecen las accesiones, se puede simplemente agregar un nombre a ala columna donde van las accesiones o solo eliminar la opcion de index, que si la eliminamos solo obtenemos esta matriz.
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/85ec7783-1738-49ff-a5e7-04c775a78750)
+
+finalmente. agregamos todo el codigo para que pueda ser entendido y funcional
+```
+#!/bin/bash
+# Buscamos la salida en formato idgenoma:idproteina de las fuentes originales
+grep -E -o "^>[0-9]+" */*faa | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > ../CDHIT/MATRIXDATA/200424_grepfaa.txt
+
+# Por aca solo obtenemos las accesiones del analisis en CD-HIT
+awk -F ">" '{print $2}' clusterprotcatALL2000.clstr | awk -F "." '{print $1}' > ../MATRIXDATA/filtclusterprotcatALL2000.clstr
+
+# Mantiene el formato Cluster[0-9]+
+awk '{gsub(/\s/, "", $0); print}' filtclusterprotcatALL2000.clstr > tmp.tmp && mv tmp.tmp filtclusterprotcatALL2000.clstr
+
+# Con esto hacemos el formato de Cluster[0-9]+:idproteina
+GENOMES="Dir/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+WORK="Dir/Descargas_NCBI/CDHIT/MATRIXDATA"
+rm "$WORK/filtclstr_a_tempseek.txt"
+filtdata_file=$(cat "$WORK/filtclusterprotcatALL2000.clstr")
+
+io=$(date +%H:%M:%S)
+echo $filtdata_file | sed 's/\sCluster/\nCluster/g' | while IFS= read -r linea
+do
+        n=$(echo "$linea" | grep -E -o "Cluster[0-9]+" | grep -E -o "[0-9]+")
+        echo "$linea" | sed -E "s/\s/ Cluster$n:/g" | sed -E 's/(Cluster[0-9]+ )//g' | sed -E 's/\s/\n/g' >> "$WORK/filtclstr_a_tempseek.txt"
+done
+f=$(date +%H:%M:%S)
+
+echo "while con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+
+awk -F ":" '{print $2 ":" $1}' grepfaa_filtclstr.txt | cut -f 2 | sort | uniq -c | awk -F " " '{print $2 ":" $1}' > inputmatrizcdhit.mtcdhit
+
+#!/bin/bash
+echo "INICIO PARA FORMAR LAS MATRICES BASH"
+DIRMATRIZ="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+GENOMES="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+
+paste $DIRMATRIZ/200424_grepfaa.txt $DIRMATRIZ/filtclstr_a_tempseek.txt > $DIRMATRIZ/grepfaa_filtclstr.txt
+
+cols=$(grep "Clu" $DIRMATRIZ/filtclusterprotcatALL2000.clstr)
+echo $cols > "$DIRMATRIZ/shtopy_Clust.txt"
+
+filas=$(ls $GENOMES | tr '\n' ' ')
+echo -e "$filas" > "$DIRMATRIZ/shtopy_genomes.txt"
+python3 - << END
+#Codigo python
+import os
+import pandas as pd
+import sys
+
+print("Nos encontramos en PYTHON")
+
+# Imprimimos cols que tiene todos los numeros de cluster para saber en que formato trabaja
+with open('/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/shtopy_Clust.txt', 'r') as Clus:
+    cols = Clus.read().strip()
+    cols = cols.split(' ')
+
+with open('/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/shtopy_genomes.txt', 'r') as fila:
+    fl = fila.read().strip()
+    fl = fl.split(' ')
+#print(cols)
+#print(fl)
+
+# Hacemos el dataframe
+zerocdhit = pd.DataFrame(0, index=fl, columns=cols)
+#print(zerocdhit)
+
+with open('/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/inputmatrizcdhit.mtcdhit', 'r') as entrada:
+    input = entrada.read().strip()
+    input = input.split('\n')
+#print(input)
+#print(len(input))
+#print(type(input))
+
+n = 0
+while n < len(input):
+    #print("hola", input[n])
+    subconjunto = input[n].split(":")
+    #print(subconjunto)
+    #print(subconjunto[1], subconjunto[0], subconjunto[2])
+
+    # Ahora si la entrada de los datos para formar la matriz
+    zerocdhit.at[ subconjunto[1], subconjunto[0] ] = subconjunto[2]
+    n+=1
+
+# Lo guardamos
+zerocdhit.to_csv('/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/pymatrizcdhit.csv')
+
+END
+
+echo "Terminos, ahora estamos en BASH" 
+```
+
+
+
+
+
+
+
+
+
+
+
+
