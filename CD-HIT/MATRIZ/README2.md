@@ -1377,7 +1377,24 @@ f=$(date +%H:%M:%S)
 echo "while con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
 ```
 Queda comprobar si funciona y corregir.
+ Salida
+```
 
+./testpysh.sh: line 23: time{: command not found
+INICIO PARA FORMAR LA MATRIZ BASH
+rm: cannot remove 'DIR/Descargas_NCBI/CDHIT/MATRIXDATA/testpysh_filtchangeformat.clustidp': No such file or directory
+./testpysh.sh: line 58: DIR/Descargas_NCBI/CDHIT/MATRIXDATA/: Is a directory
+Nos encontramos en PYTHON
+Traceback (most recent call last):
+  File "<stdin>", line 14, in <module>
+  File "/usr/lib/python3.8/posixpath.py", line 90, in join
+    genericpath._check_arg_types('join', a, *p)
+  File "/usr/lib/python3.8/genericpath.py", line 152, in _check_arg_types
+    raise TypeError(f'{funcname}() argument must be str, bytes, or '
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
+Terminos, ahora estamos en BASH
+./testpysh.sh: line 121: syntax error near unexpected token `}'
+./testpysh.sh: line 121: `} '```
 
 
 
