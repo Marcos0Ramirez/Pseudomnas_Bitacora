@@ -1127,7 +1127,97 @@ echo "Terminos, ahora estamos en BASH"
 ```
 
 
+Codigo con correcciones en las rutas des escritorios y el orden de operacion del codigo
+```
+#!/bin/bash
+io=$(date +%H:%M:%S)
+time{
+echo "INICIO PARA FORMAR LAS MATRICES BASH"
+DIRMATRIZ="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA"
+GENOMES="/mnt/c/Users/52477/Desktop/Descargas_NCBI/IMGPSEUDOMONASGENOMES"
+OUTCDHIT="/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/TODOS"
 
+# Buscamos la salida en formato idgenoma:idproteina de las fuentes originales para concatenarlos en un solo archivo.
+grep -E -o "^>[0-9]+" $GENOMES/*/*faa | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > $DIRMATRIZ/200424_grepfaa.txt
+
+# Por aca solo obtenemos las accesiones del analisis en CD-HIT
+awk -F ">" '{print $2}' $OUTCDHIT/clusterprotcatALL2000.clstr | awk -F "." '{print $1}' > $DIRMATRIZ/filtclusterprotcatALL2000.clstr
+
+# Mantiene el formato, pero cambiamos de "Cluster [0-9]+" a "Cluster[0-9]+" del filtrado de la salida de "CDHIT"
+awk '{gsub(/\s/, "", $0); print}' $DIRMATRIZ/filtclusterprotcatALL2000.clstr > $DIRMATRIZ/tmp.tmp && mv $DIRMATRIZ/tmp.tmp $DIRMATRIZ/filtclusterprotcatALL2000.clstr
+
+# Con esto hacemos el formato de Cluster[0-9]+:idproteina
+rm "$DIRMATRIZ/filtclstr_a_tempseek.txt"
+filtdata_file=$(cat "$DIRMATRIZ/filtclusterprotcatALL2000.clstr")
+echo $filtdata_file | sed 's/\sCluster/\nCluster/g' | while IFS= read -r linea
+do
+        n=$(echo "$linea" | grep -E -o "Cluster[0-9]+" | grep -E -o "[0-9]+")
+        echo "$linea" | sed -E "s/\s/ Cluster$n:/g" | sed -E 's/(Cluster[0-9]+ )//g' | sed -E 's/\s/\n/g' >> "$DIRMATRIZ/filtclstr_a_tempseek.txt"
+done
+
+# Despues de concatenar en "200424_grepfaa.txt" en formato "idgenoma:idproteina" y en "filtclstr_a_tempseek.txt" en formato "Cluster[0-9]+:idproteina"
+# Simplemente pasamos a juntarlos "idgenoma:idproteina" y "Cluster[0-9]+:idproteina"
+paste $DIRMATRIZ/200424_grepfaa.txt $DIRMATRIZ/filtclstr_a_tempseek.txt > $DIRMATRIZ/grepfaa_filtclstr.txt
+
+# Para este ultimo lo pasamos a formato "Cluster[0-9]+:idgenoma:No.Repeticiones" (importante sort y despues uniq -c en ese orden)
+awk -F ":" '{print $2 ":" $1}' $DIRMATRIZ/grepfaa_filtclstr.txt | cut -f 2 | sort | uniq -c | awk -F " " '{print $2 ":" $1}' > $DIRMATRIZ/inputmatrizcdhit.mtcdhit
+
+# Antes creamos unas variables para introducirlas a codigo en PYTHON
+# extraemos todos los Cluster[0-9]+
+cols=$(grep "Cluster" $DIRMATRIZ/filtclusterprotcatALL2000.clstr)
+echo $cols > "$DIRMATRIZ/shtopy_Clust.txt"
+
+# Extraemos todos los genomas que fueron usados.
+filas=$(ls $GENOMES | tr '\n' ' ')
+echo -e "$filas" > "$DIRMATRIZ/shtopy_genomes.txt"
+
+python3 - << END
+#Codigo python
+import os
+import pandas as pd
+import sys
+print("Nos encontramos en PYTHON")
+
+# Imprimimos cols que tiene todos los numeros de cluster para saber en que formato trabaja
+with open('/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/shtopy_Clust.txt', 'r') as Clus:  # Se guarda en una variable Clus
+    cols = Clus.read().strip()                                                                          # Los datos los guarda con otro tipo de variable para trabajar
+    cols = cols.split(' ')                                                                              # Quita los espacios para convertir el set de Cluster en una lista gigante
+
+# Llamamos el archivo con las accesiones de los genomas.
+with open('/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/shtopy_genomes.txt', 'r') as fila:    # Se guarda en una variable fila
+    fl = fila.read().strip()                                                                                # Los datos los guarda con otro tipo de variable para trabajar
+    fl = fl.split(' ')                                                                                      # Quita los espacios para convertir el set de genomas en una lista
+
+# Hacemos el dataframe lleno de ceros.
+zerocdhit = pd.DataFrame(0, index=fl, columns=cols)
+
+# Llamamos al archivo de entrada con formato "Cluster[0-9]+:idgenoma:No.Repeticiones" para generar el conteo y guardarlo en la matriz.
+with open('/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/inputmatrizcdhit.mtcdhit', 'r') as entrada:   # Se guarda en una variable entrada
+    input = entrada.read().strip()                                                                                  # Los datos los guarda con otro tipo de variable para trabajar
+    input = input.split('\n')                                                                                       # Quita los espacios para convertir el set de entrada en una lista gigante
+
+# Comienza el conteo desde 0, para hacer el llamado del dato inicial
+n = 0
+while n < len(input):
+    subconjunto = input[n].split(":")                                   # Como hace el llamado por linea, quita ":" para crear micro listas
+    # Ahora si la entrada de los datos para formar la matriz
+    zerocdhit.at[ subconjunto[1], subconjunto[0] ] = subconjunto[2]     # Ahora con las microlistas, con
+                                                                        # subconjunto[1] nombra la accesion genoma, 
+                                                                        # subconjunto[0] llama Cluster y 
+                                                                        # subconjunto[2] en esa interseccion agrega el numero de veces que aparece
+    n+=1                                                                # Permite continuar con el siguiente microset
+
+# Ya con las modificaciones, se guarda la matriz.
+zerocdhit.to_csv('/mnt/c/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/pymatrizcdhit.csv')
+
+END
+
+echo "Terminos, ahora estamos en BASH"
+} 
+f=$(date +%H:%M:%S)
+
+echo "while con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
+```
 
 
 
