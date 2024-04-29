@@ -1218,7 +1218,7 @@ f=$(date +%H:%M:%S)
 
 echo "while con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
 ```
-
+Con esto terminamos de darle el toque con el nombramiento de los archivos por default, para que solo se piense en el nombre de entrada y salida.
 
 
 
