@@ -1034,6 +1034,7 @@ Solo otro detalle con la salida del archivo, no aparecen las accesiones, se pued
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/85ec7783-1738-49ff-a5e7-04c775a78750)
 
+# 28 de abril del 2024
 finalmente. agregamos todo el codigo para que pueda ser entendido y funcional
 ```
 #!/bin/bash
