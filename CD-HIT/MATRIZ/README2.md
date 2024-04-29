@@ -1219,8 +1219,35 @@ f=$(date +%H:%M:%S)
 echo "while con grep para busqueda en un segundo archivo y almacena nombre cluster en segundo archivo inicio a las $io y termino a las $f"
 ```
 Con esto terminamos de darle el toque con el nombramiento de los archivos por default, para que solo se piense en el nombre de entrada y salida.
+Asi, solo probamos como hacer que puedan ponerse las direcciones
+```
+#!/bin/bash
 
+direccionbash="DIR/Desktop/ITRASIG"
+otrdireccion="DIR/Desktop/SABE"
+ 
+export direccionbash otrdireccion 
 
+python3 - << END
+import os
+
+direccionbash = os.environ.get('direccionbash')
+otrdireccion = os.environ.get('otrdireccion')
+
+input_file = os.path.join(direccionbash, 'entradaoutput.txt')
+input_file2 = os.path.join(otrdireccion, 'saludo.txt')
+
+with open(input_file, 'r') as ffile:
+	input = ffile.read().strip()
+
+with open(input_file2, 'r') as sal:
+	input2 = sal.read().strip()
+
+print(input)
+print(input2)
+END
+```
+Y funciona para la salida.
 
 
 
