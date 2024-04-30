@@ -1249,6 +1249,7 @@ END
 ```
 Y funciona para la salida.
 
+# 29 de abril del 2024
 Asi el codigo final
 ```
 #!/bin/bash
