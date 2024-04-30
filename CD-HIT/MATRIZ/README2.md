@@ -1412,9 +1412,64 @@ Salio este resultado
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/27e27e33-6855-4233-8446-b7ca176cc786)
 
 Pero entro a python y de ahi ya no continuo. al parecer no se encuentra una variable exportada
+```
+# EXPORTANDO PARA PYTHON
+export DIRMATRIZ solonamecluster inputmatrizfile outputmatrizfile
 
+python3 - << END
+#Codigo python
+import os
+import pandas as pd
+import sys
+print("Nos encontramos en PYTHON")
 
+# LLAMAMOS LAS VARIABLES DE LAS DIRECCIONES Y ARCHIVOS QUE NECESITAMOS
+DIRMATRIZ = os.environ.get('DIRMATRIZ')
 
+solonamecluster = os.environ.get('solonamecluster')
+listclust = os.path.join(DIRMATRIZ, solonamecluster)
+
+onlynamegenomes = os.environ.get('onlynamegenomes')
+listgenome = os.path.join(DIRMATRIZ, onlynamegenomes)
+
+inputmatrizfile = os.environ.get('inputmatrizfile')
+inputmtz = os.path.join(DIRMATRIZ, inputmatrizfile)
+
+outputmatrizfile = os.environ.get('outputmatrizfile')
+outputmtz = os.path.join(DIRMATRIZ, outputmatrizfile)
+```
+
+```
+# Buscamos la salida en formato idgenoma:idproteina de las fuentes originales para concatenarlos en un solo archivo.
+grep -E -o "^>[0-9]+" $GENOMES/*/*faa | grep -E -w -o "[0-9]+/[0-9]+.*" | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > $DIRMATRIZ/$concatimgenome
+
+# Por aca solo obtenemos las accesiones del analisis en CD-HIT
+awk -F ">" '{print $2}' $OUTCDHIT/$outfilecdhit | awk -F "." '{print $1}' > $DIRMATRIZ/$filtrado
+
+# Mantiene el formato, pero cambiamos de "Cluster [0-9]+" a "Cluster[0-9]+" del filtrado de la salida de "CDHIT"
+awk '{gsub(/\s/, "", $0); print}' $DIRMATRIZ/$filtrado > $DIRMATRIZ/tmp.tmp && mv $DIRMATRIZ/tmp.tmp $DIRMATRIZ/$filtrado
+
+# Con esto hacemos el formato de Cluster[0-9]+:idproteina
+rm "$DIRMATRIZ/$clu_prot"
+filtdata_file=$(cat "$DIRMATRIZ/$filtrado")
+echo $filtdata_file | sed 's/\sCluster/\nCluster/g' | while IFS= read -r linea
+do
+        n=$(echo "$linea" | grep -E -o "Cluster[0-9]+" | grep -E -o "[0-9]+")
+        echo "$linea" | sed -E "s/\s/ Cluster$n:/g" | sed -E 's/(Cluster[0-9]+ )//g' | sed -E 's/\s/\n/g' >> "$DIRMATRIZ/$clu_prot"
+done
+
+# Despues de concatenar en "$concatimgenome" en formato "idgenoma:idproteina" y en "$clu_prot" en formato "Cluster[0-9]+:idproteina"
+# Simplemente pasamos a juntarlos "idgenoma:idproteina" y "Cluster[0-9]+:idproteina"
+paste $DIRMATRIZ/$concatimgenome $DIRMATRIZ/$clu_prot > $DIRMATRIZ/$pegaconcaclu
+
+# Para este ultimo lo pasamos a formato "Cluster[0-9]+:idgenoma:No.Repeticiones" (importante sort y despues uniq -c en ese orden)
+awk -F ":" '{print $2 ":" $1}' $DIRMATRIZ/$pegaconcaclu | cut -f 2 | sort | uniq -c | awk -F " " '{print $2 ":" $1}' > $DIRMATRIZ/$inputmatrizfile
+
+# Antes creamos unas variables para introducirlas a codigo en PYTHON
+# extraemos todos los Cluster[0-9]+
+cols=$(grep "Cluster" $DIRMATRIZ/$filtrado)
+echo $cols > "$DIRMATRIZ/$solonamecluster"
+```
 
 
 
