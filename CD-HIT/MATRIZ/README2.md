@@ -1633,7 +1633,8 @@ Con salida
 Y resultado
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/63528655-102f-427a-865c-a7e3d61f2d4a)
 
-
+Y que por tanto sea sea un 93% mas rapido que el script original. Ayuda mucho a que se pueda procesar un set de datos mucho mas grande.
+Solo falta adaptarlo para usarlo en el cluster.
 
 
 
