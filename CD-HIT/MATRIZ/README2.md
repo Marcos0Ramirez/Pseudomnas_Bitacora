@@ -1406,3 +1406,32 @@ Para ello se modificara.
 ```
 grep -E -o "^>[0-9]+" $GENOMES/*/*faa | grep -E -w -o "[0-9]+/[0-9]+.*" | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > $DIRMATRIZ/$concatimgenome
 ```
+
+Salio este resultado
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/27e27e33-6855-4233-8446-b7ca176cc786)
+
+Pero entro a python y de ahi ya no continuo. al parecer no se encuentra una variable exportada
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
