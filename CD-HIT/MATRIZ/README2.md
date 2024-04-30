@@ -1469,6 +1469,10 @@ awk -F ":" '{print $2 ":" $1}' $DIRMATRIZ/$pegaconcaclu | cut -f 2 | sort | uniq
 # extraemos todos los Cluster[0-9]+
 cols=$(grep "Cluster" $DIRMATRIZ/$filtrado)
 echo $cols > "$DIRMATRIZ/$solonamecluster"
+
+# Extraemos todos los genomas que fueron usados.
+filas=$(ls $GENOMES | tr '\n' ' ')
+echo -e "$filas" > "$DIRMATRIZ/$onlynamegenomes"
 ```
 
 
