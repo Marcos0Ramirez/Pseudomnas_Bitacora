@@ -1439,6 +1439,10 @@ outputmatrizfile = os.environ.get('outputmatrizfile')
 outputmtz = os.path.join(DIRMATRIZ, outputmatrizfile)
 ```
 Finalmente corregimos y obtenemos que estaba mal escrito la variable `onlynamegenomes` y no es encontraba. Asi ya permite trabajar con python sin problemas.
+
+Por otra parte se encontro que estan apareciendo microset de `cluster:idgenome:Noreps` son muchos menos al contemplados, porque en el supuesto esperado es de 53907 y no 19007
+
+Puesto que en `testpysh_concat.idgidpclustidp` guardado en la variable `pegaconcaclu`, no aparecen ordendos `cluster:idproteina`
 ```
 # Buscamos la salida en formato idgenoma:idproteina de las fuentes originales para concatenarlos en un solo archivo.
 grep -E -o "^>[0-9]+" $GENOMES/*/*faa | grep -E -w -o "[0-9]+/[0-9]+.*" | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > $DIRMATRIZ/$concatimgenome
