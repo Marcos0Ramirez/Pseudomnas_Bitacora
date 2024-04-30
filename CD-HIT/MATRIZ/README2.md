@@ -1489,6 +1489,7 @@ Y en efecto al solo ejecutar el resto del codigo, ya aparece el resultado espera
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/ca533ee5-3de0-483c-8d2f-7fb255092565)
 
 
+Finalmente para comprobar que funciona, eliminamos los archivos de salida ya aplicados y solo dejamos los necesarios como el output de cdhit.
 
 
 
