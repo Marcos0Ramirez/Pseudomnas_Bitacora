@@ -1398,6 +1398,8 @@ Terminos, ahora estamos en BASH
 ```
 El comando con el que empezamos, guarda toda la direccion y no solo el nombre de las carpetas que tiene id de los genomas
 
+Se elimino el comando `time{}`
+
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/d1ec9db2-db36-43eb-8045-8339cbab0037)
 
 Para ello se modificara.
