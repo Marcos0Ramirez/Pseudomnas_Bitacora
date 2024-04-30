@@ -1627,6 +1627,11 @@ seconds=$((elapsed_time % 60))
 
 echo "El script inicio a las $io y termino a las $f. Con un tiempo transcurrido: $hours horas, $minutes minutos, $seconds segundos."
 ```
+Con salida
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/f51149c4-4825-4b1a-9233-4e06e48ce05d)
+
+Y resultado
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/63528655-102f-427a-865c-a7e3d61f2d4a)
 
 
 
