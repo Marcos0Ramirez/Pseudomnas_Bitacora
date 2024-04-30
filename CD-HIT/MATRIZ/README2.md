@@ -1442,7 +1442,8 @@ Finalmente corregimos y obtenemos que estaba mal escrito la variable `onlynamege
 
 Por otra parte se encontro que estan apareciendo microset de `cluster:idgenome:Noreps` son muchos menos al contemplados, porque en el supuesto esperado es de 53907 y no 19007
 
-Puesto que en `testpysh_concat.idgidpclustidp` guardado en la variable `pegaconcaclu`, no aparecen ordendos `cluster:idproteina`
+Puesto que en `testpysh_concat.idgidpclustidp` guardado en la variable `pegaconcaclu`, no aparecen ordenados `cluster:idproteina`
+Asi con el codigo que contempla algunas cosas, vemos como interactua despues de el ordenamiento
 ```
 # Buscamos la salida en formato idgenoma:idproteina de las fuentes originales para concatenarlos en un solo archivo.
 grep -E -o "^>[0-9]+" $GENOMES/*/*faa | grep -E -w -o "[0-9]+/[0-9]+.*" | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > $DIRMATRIZ/$concatimgenome
@@ -1462,6 +1463,10 @@ do
         echo "$linea" | sed -E "s/\s/ Cluster$n:/g" | sed -E 's/(Cluster[0-9]+ )//g' | sed -E 's/\s/\n/g' >> "$DIRMATRIZ/$clu_prot"
 done
 
+# Antes de concatenar, vamos a ordenar por accesion de proteina tanto el archivo que tiene la variable "concatimgenome" y "clu_prot"
+awk -F ":" '{print $2 ":" $1}' "$DIRMATRIZ/$concatimgenome" | sort -n | awk -F ":" '{print $2":"$1}' > "$DIRMATRIZ/temp" && mv "$DIRMATRIZ/temp" "$DIRMATRIZ/$concatimgenome"
+awk -F ":" '{print $2 ":" $1}' "$DIRMATRIZ/$clu_prot" | sort -n | awk -F ":" '{print $2":"$1}' > "$DIRMATRIZ/temp" && mv "$DIRMATRIZ/temp" "$DIRMATRIZ/$clu_prot"
+
 # Despues de concatenar en "$concatimgenome" en formato "idgenoma:idproteina" y en "$clu_prot" en formato "Cluster[0-9]+:idproteina"
 # Simplemente pasamos a juntarlos "idgenoma:idproteina" y "Cluster[0-9]+:idproteina"
 paste $DIRMATRIZ/$concatimgenome $DIRMATRIZ/$clu_prot > $DIRMATRIZ/$pegaconcaclu
@@ -1479,6 +1484,9 @@ filas=$(ls $GENOMES | tr '\n' ' ')
 echo -e "$filas" > "$DIRMATRIZ/$onlynamegenomes"
 ```
 
+Y en efecto al solo ejecutar el resto del codigo, ya aparece el resultado esperado.
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/ca533ee5-3de0-483c-8d2f-7fb255092565)
 
 
 
