@@ -1438,7 +1438,7 @@ inputmtz = os.path.join(DIRMATRIZ, inputmatrizfile)
 outputmatrizfile = os.environ.get('outputmatrizfile')
 outputmtz = os.path.join(DIRMATRIZ, outputmatrizfile)
 ```
-
+Finalmente corregimos y obtenemos que estaba mal escrito la variable `onlynamegenomes` y no es encontraba. Asi ya permite trabajar con python sin problemas.
 ```
 # Buscamos la salida en formato idgenoma:idproteina de las fuentes originales para concatenarlos en un solo archivo.
 grep -E -o "^>[0-9]+" $GENOMES/*/*faa | grep -E -w -o "[0-9]+/[0-9]+.*" | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > $DIRMATRIZ/$concatimgenome
