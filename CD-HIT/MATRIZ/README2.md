@@ -1394,7 +1394,10 @@ Traceback (most recent call last):
 TypeError: join() argument must be str, bytes, or os.PathLike object, not 'NoneType'
 Terminos, ahora estamos en BASH
 ./testpysh.sh: line 121: syntax error near unexpected token `}'
-./testpysh.sh: line 121: `} '```
+./testpysh.sh: line 121: `} '
+```
+El comando con el que empezamos, guarda toda la direccion y no solo el nombre de las carpetas que tiene id de los genomas
 
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/d1ec9db2-db36-43eb-8045-8339cbab0037)
 
-
+Para ello se modificara.
