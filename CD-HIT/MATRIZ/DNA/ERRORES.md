@@ -19,12 +19,34 @@ lo que son 6 accesiones menos usados, pero hace falta encontrar los que no fuero
 
 con una cantidad de lineas `22332436`y que como podemos ver al hacer una busqueda
 
+```
+grep -E "^[0-9]+:[0-9]+\sClu" fast_matrizcdhit_concat.idgidpclustidp
+```
 
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/89ce67d4-36d9-4870-a336-97b191b4a58c)
 
+Si bien en el archvo concatendao, se encuentran los que quedaron solos, toca ver cuales de esos en los archivos originales aparecen en el formato `FASTA` o en el nombre de una proteina, para tener cuidado.
+```
+grep -E -v "^[0-9]+:[0-9]+\sClu" fast_matrizcdhit_concat.idgidpclustidp
+```
 
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/0fa4ac81-c060-4dd2-9c82-7281cd2bc754)
 
+Y como podemos ver de los que aparecen imparentados, si tienen pareja en CLuster, pero no estan ordenados, lo que quiere decir que hay datos que aparecen entre y hace que al final en el input de la matriz aparezcan los que no tienen pareja.
 
+```
+grep "8088481126" fast_matrizcdhit_concat.idgidpclustidp
+```
 
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/296de4aa-5218-470d-bd81-d96dc91fd8ac)
+
+```
+grep "8088481120" fast_matrizcdhit_concat.idgidpclustidp
+```
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/3cf76cd3-d631-4c75-bb6f-da88b930b61f)
+
+Asi que en lo siguiente, toca ver cuales son esas accesiones que aparecen extra.
 
 
 
