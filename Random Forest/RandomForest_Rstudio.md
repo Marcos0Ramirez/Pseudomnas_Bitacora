@@ -134,4 +134,7 @@ El resultado de la fusión será una tabla que contiene todas las columnas de am
 3       Genoma3        7        9        1     Hospedero
 ```
 En este ejemplo, la tabla datos_combinados tendrá las columnas de la matriz de frecuencia de genomas en clusters y la columna adicional de clasificación de genomas. Cada fila representará un genoma con su respectiva clasificación y frecuencia en cada cluster.
+
 ---------------------------------------------------------------------------------------------------------------------------------------
+
+Continuando con lo demas
