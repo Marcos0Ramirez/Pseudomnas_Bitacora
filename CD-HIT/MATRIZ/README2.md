@@ -1554,7 +1554,8 @@ echo $cols > "$DIRMATRIZ/$solonamecluster"
 
 # Extraemos todos los genomas que fueron usados.
 filas=$(ls $GENOMES | tr '\n' ' ')
-echo -e "$filas" > "$DIRMATRIZ/$onlynamegenomes"
+echo "Genomas" > "$DIRMATRIZ/$onlynamegenomes"
+echo -e "$filas" >> "$DIRMATRIZ/$onlynamegenomes"
 
 # EXPORTANDO PARA PYTHON
 export DIRMATRIZ solonamecluster onlynamegenomes inputmatrizfile outputmatrizfile
