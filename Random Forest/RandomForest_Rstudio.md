@@ -152,7 +152,7 @@ Genomas,Nicho
 8011072914,Unclassified
 ```
 ## 06 de abril del 2024
-Y ahora vamos a hacer el codigo para correr randomforest
+Y ahora vamos a hacer el codigo para correr randomforest, este script desarrollado con ChatGPT, se llama `RandomForest_pyscript.py`
 ```
 # -*- coding: utf-8 -*-
 """
@@ -193,11 +193,15 @@ rf_model.fit(X_train, y_train)
 y_pred = rf_model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print("Exactitud del modelo RandomForest:", accuracy)
+```
+Por aca se pone los resultados que aparecieron del codigo anterior
+```
 
 ```
 
+Se va a desarrollar tambien el script por medio de esta pagina https://towardsdatascience.com/random-forest-in-python-24d0893d51c0 
 
-
+## 06 de mayo del 2024
 
 
 
