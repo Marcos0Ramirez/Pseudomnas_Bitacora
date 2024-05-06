@@ -136,7 +136,7 @@ El resultado de la fusión será una tabla que contiene todas las columnas de am
 En este ejemplo, la tabla datos_combinados tendrá las columnas de la matriz de frecuencia de genomas en clusters y la columna adicional de clasificación de genomas. Cada fila representará un genoma con su respectiva clasificación y frecuencia en cada cluster.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
-
+Pero el nivel de procesamiento en R, en mi computadora local es muy lento y por tanto se procedio a trabajar con python.
 Continuando con lo demas, se hizo a mano la tabla de clasificacion.
 ```
 Genomas,Nicho
@@ -151,8 +151,48 @@ Genomas,Nicho
 2972001829,Unclassified
 8011072914,Unclassified
 ```
+## 06 de abril del 2024
 Y ahora vamos a hacer el codigo para correr randomforest
 ```
+# -*- coding: utf-8 -*-
+"""
+Created on Sun May  5 21:21:40 2024
+
+@author: 52477
+"""
+
+# Cargamos las librerias
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+# Abrimos la matriz
+rutamtz=r"C:\Users\52477\Desktop\Descargas_NCBI\CDHIT\MATRIXDATA\testpysh_pymatrizcdhit.csv"
+matriz = pd.read_csv(rutamtz)
+
+# Extremos la tabla de extraccion
+rutaclass=r"C:\Users\52477\Desktop\Descargas_NCBI\CDHIT\MATRIXDATA\classificacion_genomas.txt"
+classificacion = pd.read_csv(rutaclass)
+
+# Juntamos ambos archivos 
+mtz_class = pd.merge(matriz, classificacion, on='Genomas')
+# Confirmamos que si se hayan juntado
+mtz_class["Nicho"]
+
+# Hablamos 
+X = mtz_class.drop(['Genomas', 'Nicho'], axis=1)  # Elimina la columna de ID_genoma y la columna de clase
+y = mtz_class['Nicho']  # La columna de clase es la etiqueta que queremos predecir
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_model.fit(X_train, y_train)
+
+y_pred = rf_model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print("Exactitud del modelo RandomForest:", accuracy)
 
 ```
 
