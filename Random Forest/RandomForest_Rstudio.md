@@ -137,4 +137,33 @@ En este ejemplo, la tabla datos_combinados tendrá las columnas de la matriz de 
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-Continuando con lo demas
+Continuando con lo demas, se hizo a mano la tabla de clasificacion.
+```
+Genomas,Nicho
+2505313052,Patogeno
+2517572175,HostHuman
+2548876750,HostFungi
+2554235471,Patogeno
+2630968743,Ambiente
+2713896862,Ambiente
+2785510749,Hostalga
+2923166773,Hostanimal
+2972001829,Unclassified
+8011072914,Unclassified
+```
+Y ahora vamos a hacer el codigo para correr randomforest
+```
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
