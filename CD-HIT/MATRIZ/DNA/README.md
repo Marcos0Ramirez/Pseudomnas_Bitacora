@@ -97,6 +97,7 @@ done
 ```
 Empezo a correr el script a las 07:17:26 del 18 de abril del 2024
 
+# Actualizado 5 de mayo del 2024
 Aqui el script para utilizar en DNA con un 93% mas de rapidez que el anterior
 ```
 #!/bin/bash
@@ -234,6 +235,7 @@ with open(listgenome, 'r') as fila:    # Se guarda en una variable fila
 
 # Hacemos el dataframe lleno de ceros.
 zerocdhit = pd.DataFrame(0, index=fl, columns=cols)
+zerocdhit = zerocdhit.rename_axis("Genomas")
 
 # Llamamos al archivo de entrada con formato "Cluster[0-9]+:idgenoma:No.Repeticiones" para generar el conteo y guardarlo en la matriz.
 with open(inputmtz, 'r') as entrada:   # Se guarda en una variable entrada
@@ -269,3 +271,4 @@ seconds=$((elapsed_time % 60))
 
 echo "El script inicio a las $io y termino a las $f. Con un tiempo transcurrido: $hours horas, $minutes minutos, $seconds segundos."
 ```
+Falta actualizar en el cluster
