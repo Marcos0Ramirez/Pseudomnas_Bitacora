@@ -244,7 +244,7 @@ classificacion = pd.read_csv(rutaclass)
 
 # Juntamos ambos archivos 
 mtz_class = pd.merge(matriz, classificacion, on='Genomas')
-
+sub1_mtz_class = mtz_class.iloc[:,19000:]
 
 
 
@@ -254,7 +254,7 @@ mtz_class = pd.merge(matriz, classificacion, on='Genomas')
 ### -- One-Hot Encoding -- ###
     # Aqui buscaremos una variable categorica, que pueda ayudar a hacer el One-Hot Encoding
 mtz_class = pd.get_dummies(mtz_class)
-sub_mtz_class = mtz_class.iloc[:,19000:].head(5)
+sub2_mtz_class = mtz_class.iloc[:,19000:]
 
 
 ### -- Caracteristicas y Objetivos, y Convertir Datos en Arreglos -- ###
@@ -302,6 +302,8 @@ print('Testing Labels Shape:', test_labels.shape)
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/c2b44cc3-3b5e-454e-8432-2aacc62264a5)
 
+---
+-- Metadatos
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/61a7cbc6-7131-40ce-b624-c453ab3b4c40)
 
-
-
+## 
