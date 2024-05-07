@@ -201,8 +201,32 @@ Por aca se pone los resultados que aparecieron del codigo anterior
 
 Se va a desarrollar tambien el script por medio de esta pagina https://towardsdatascience.com/random-forest-in-python-24d0893d51c0 
 
-## 06 de mayo del 2024
+## 07 de mayo del 2024
+Ahora que ya hemos aplicado estas partes del codigo, como resultado tenemos funcionando el comando para hacer la matriz
+```
+# Importamos las librerias necesarias
+import pandas as pd
 
+# Extraemos la data
+rutamtz=r"Dir\Descargas_NCBI\CDHIT\MATRIXDATA\testpysh_pymatrizcdhit.csv"
+matriz = pd.read_csv(rutamtz)
+
+# Extremos la tabla de clasificacion
+rutaclass=r"Dir\Descargas_NCBI\CDHIT\MATRIXDATA\classificacion_genomas.txt"
+classificacion = pd.read_csv(rutaclass)
+
+# Juntamos ambos archivos 
+mtz_class = pd.merge(matriz, classificacion, on='Genomas')
+
+# One-Hot Encoding
+    # Aqui buscaremos una variable categorica, que pueda ayudar a hacer el One-Hot Encoding
+mtz_class = pd.get_dummies(mtz_class)
+```
+Asi observadmos el resultado de las columnas nuevas
+```
+sub_mtz_class = mtz_class.iloc[:,19000:].head(5)
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/181dbbde-7a58-407d-bf51-4e365ae729df)
 
 
 
