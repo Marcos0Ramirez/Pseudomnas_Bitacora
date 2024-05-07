@@ -288,6 +288,7 @@ print('Testing Labels Shape:', test_labels.shape)
 ###################### -- | -- ######################
 ```
 ## Extraccion de los datos.
+-- One-Hot Encoding --
 1. matriz
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/d8e2cdca-5697-4674-ad97-6d292b82c47a)
@@ -318,23 +319,54 @@ a. Metadatos
 
 ---
 2. Etiquetas
+labels = np.array(mtz_class.iloc[:,0:19001])
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/b659d1ba-cdda-4a38-8150-3070438ee818)
+
+Con la correccion
+labels = np.array(mtz_class.iloc[:,1:19002])
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/2378ab4a-a36b-4fff-beb9-0dd5d1797934)
 
 ---
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/f8dda5af-0f12-45c9-abc5-4c6ae1d24cf3)
 
+Con la correccion
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/1302e27d-d4f0-408d-8805-756582a475bf)
+
 ---
 
-3. 
+3. Eliminacion
 
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/d3ec6b3f-9caa-424e-bee3-f2fef6f82fb0)
 
+---
 
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/9483ec4d-460a-4296-b6ae-0a477c17b76e)
 
+---
 
+4. Lista
 
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/0c71fe29-c0af-421f-a6a0-404b5a588051)
 
+---
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/770513b1-29cd-445c-ac55-e78c0718a40a)
+
+---
+
+5. Arreglo
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/9b45c14c-1c9b-402e-a813-0c941f403f21)
+
+---
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/50871db0-46b8-479a-aed5-9770c0e21c5f)
+
+---
 
 
 
