@@ -288,10 +288,13 @@ print('Testing Labels Shape:', test_labels.shape)
 ###################### -- | -- ######################
 ```
 En la extraccion de los datos reaulta este archivo
-> matriz
+1. matriz
+
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/d8e2cdca-5697-4674-ad97-6d292b82c47a)
 
-> Classificacion
+---
+2. Classificacion
+
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6118cdfa-67cd-49e6-8aec-50b8bbc0f47b)
 
 
