@@ -304,6 +304,7 @@ print('Testing Labels Shape:', test_labels.shape)
 
 ---
 -- Metadatos
+
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/61a7cbc6-7131-40ce-b624-c453ab3b4c40)
 
 ## 
