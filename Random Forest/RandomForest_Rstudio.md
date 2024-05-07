@@ -228,7 +228,7 @@ sub_mtz_class = mtz_class.iloc[:,19000:].head(5)
 ```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/181dbbde-7a58-407d-bf51-4e365ae729df)
 
-El codigo realizado hasta el dia de hoy
+El codigo realizado hasta el dia de hoy, nombre del archivo `RandomForest_pagedevelop.py`
 ```
 # Importamos las librerias necesarias
 import pandas as pd
