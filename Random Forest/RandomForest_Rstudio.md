@@ -303,8 +303,57 @@ print('Testing Labels Shape:', test_labels.shape)
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/c2b44cc3-3b5e-454e-8432-2aacc62264a5)
 
 ---
--- Metadatos
+a. Metadatos
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/61a7cbc6-7131-40ce-b624-c453ab3b4c40)
 
-## 
+## PREPARACION DE LOS DATOS
+1. Reordenamiento
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6104e20c-c085-46ee-a335-b5683acc1457)
+
+---
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/755bd7ff-85bc-416b-9410-5d07f3368d45)
+
+---
+2. Etiquetas
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/b659d1ba-cdda-4a38-8150-3070438ee818)
+
+---
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/f8dda5af-0f12-45c9-abc5-4c6ae1d24cf3)
+
+---
+
+3. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
