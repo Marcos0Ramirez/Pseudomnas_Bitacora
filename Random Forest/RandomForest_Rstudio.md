@@ -287,7 +287,7 @@ print('Testing Labels Shape:', test_labels.shape)
 
 ###################### -- | -- ######################
 ```
-En la extraccion de los datos reaulta este archivo
+## Extraccion de los datos.
 1. matriz
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/d8e2cdca-5697-4674-ad97-6d292b82c47a)
@@ -297,6 +297,10 @@ En la extraccion de los datos reaulta este archivo
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6118cdfa-67cd-49e6-8aec-50b8bbc0f47b)
 
+---
+3. Unión
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/c2b44cc3-3b5e-454e-8432-2aacc62264a5)
 
 
 
