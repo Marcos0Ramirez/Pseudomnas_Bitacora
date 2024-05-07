@@ -288,7 +288,6 @@ print('Testing Labels Shape:', test_labels.shape)
 ###################### -- | -- ######################
 ```
 ## Extraccion de los datos.
--- One-Hot Encoding --
 1. matriz
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/d8e2cdca-5697-4674-ad97-6d292b82c47a)
@@ -309,6 +308,8 @@ a. Metadatos
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/61a7cbc6-7131-40ce-b624-c453ab3b4c40)
 
 ## PREPARACION DE LOS DATOS
+### One-Hot Encoding
+
 1. Reordenamiento
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6104e20c-c085-46ee-a335-b5683acc1457)
@@ -318,6 +319,8 @@ a. Metadatos
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/755bd7ff-85bc-416b-9410-5d07f3368d45)
 
 ---
+### Caracteristicas y Objetivos, y Convertir Datos en Arreglos
+
 2. Etiquetas
 labels = np.array(mtz_class.iloc[:,0:19001])
 
@@ -368,7 +371,7 @@ Con la correccion
 
 ---
 
-
+### Entrenamiento y comprobacion de conjuntos
 
 
 
