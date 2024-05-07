@@ -228,8 +228,70 @@ sub_mtz_class = mtz_class.iloc[:,19000:].head(5)
 ```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/181dbbde-7a58-407d-bf51-4e365ae729df)
 
+El codigo realizado hasta el dia de hoy
+```
+# Importamos las librerias necesarias
+import pandas as pd
+import numpy as np
+###################### -- EXTRACCION DE LOS DATOS -- ######################
+# Extraemos la data
+rutamtz=r"Dir\Descargas_NCBI\CDHIT\MATRIXDATA\testpysh_pymatrizcdhit.csv"
+matriz = pd.read_csv(rutamtz)
+
+# Extremos la tabla de clasificacion
+rutaclass=r"Dir\Descargas_NCBI\CDHIT\MATRIXDATA\classificacion_genomas.txt"
+classificacion = pd.read_csv(rutaclass)
+
+# Juntamos ambos archivos 
+mtz_class = pd.merge(matriz, classificacion, on='Genomas')
 
 
+
+
+
+
+###################### -- PREPARACION DE LOS DATOS -- ######################
+### -- One-Hot Encoding -- ###
+    # Aqui buscaremos una variable categorica, que pueda ayudar a hacer el One-Hot Encoding
+mtz_class = pd.get_dummies(mtz_class)
+sub_mtz_class = mtz_class.iloc[:,19000:].head(5)
+
+
+### -- Caracteristicas y Objetivos, y Convertir Datos en Arreglos -- ###
+# Pasamos a usar numpy
+#### import numpy as np
+# Cuales son las etiquetas que voy a predecir
+labels = np.array(mtz_class.iloc[:,0:19001])
+# Eliminamos la etiquetas de la matriz
+# axis 1 se refiere a las columnas
+mtz_class = mtz_class.drop(mtz_class.columns[0:19001], axis=1)
+# Guardamos los cluster para su posterior uso
+mtz_class_list = list(mtz_class.columns)
+# Lo convertimos en arreglo de numpy
+mtz_class = np.array(mtz_class)
+
+
+### -- Entrenamiento y comprobacion de conjuntos -- ###
+# Using Skicit-learn to split data into training and testing sets
+from sklearn.model_selection import train_test_split
+# Split the data into training and testing sets
+train_features, test_features, train_labels, test_labels = train_test_split(mtz_class, labels, test_size = 0.25, random_state = 42)
+
+print('Training Features Shape:', train_features.shape)
+print('Training Labels Shape:', train_labels.shape)
+print('Testing Features Shape:', test_features.shape)
+print('Testing Labels Shape:', test_labels.shape)
+
+
+
+
+###################### -- | -- ######################
+```
+En la extraccion de los datos reaulta este archivo
+- matriz
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/d8e2cdca-5697-4674-ad97-6d292b82c47a)
+- Classificacion
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6118cdfa-67cd-49e6-8aec-50b8bbc0f47b)
 
 
 
