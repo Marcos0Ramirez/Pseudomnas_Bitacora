@@ -264,7 +264,7 @@ sub2_mtz_class = mtz_class.iloc[:,19000:]
 labels = np.array(mtz_class.iloc[:,0:19001])
 # Eliminamos la etiquetas de la matriz
 # axis 1 se refiere a las columnas
-mtz_class = mtz_class.drop(mtz_class.columns[0:19001], axis=1)
+mtz_class = mtz_class.drop(mtz_class.columns[1:19002], axis=1)
 # Guardamos los cluster para su posterior uso
 mtz_class_list = list(mtz_class.columns)
 # Lo convertimos en arreglo de numpy
