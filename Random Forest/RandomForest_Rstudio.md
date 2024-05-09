@@ -375,9 +375,87 @@ Con la correccion
 
 
 
+# 9 de mayo del 2024
+
+```
+# -*- coding: utf-8 -*-
+"""
+Created on Tue May  7 07:36:23 2024
+
+@author: 52477
+"""
+# Importamos las librerias necesarias
+import pandas as pd
+import numpy as np
+###################### -- EXTRACCION DE LOS DATOS -- ######################
+# Extraemos la data
+rutamtz=r"C:\Users\52477\Desktop\Descargas_NCBI\CDHIT\MATRIXDATA\testpysh_pymatrizcdhit.csv"
+matriz = pd.read_csv(rutamtz)
+
+# Extremos la tabla de clasificacion
+rutaclass=r"C:\Users\52477\Desktop\Descargas_NCBI\CDHIT\MATRIXDATA\classificacion_genomas.txt"
+classificacion = pd.read_csv(rutaclass)
+
+# Juntamos ambos archivos 
+mtz_class_caracteres = pd.merge(matriz, classificacion, on='Genomas')
+sub1_mtz_class = mtz_class_caracteres.iloc[:,19000:]
 
 
 
+
+###################### -- PREPARACION DE LOS DATOS -- ######################
+### -- One-Hot Encoding -- ###
+    # Aqui buscaremos una variable categorica, que pueda ayudar a hacer el One-Hot Encoding
+dummies_specie = pd.get_dummies(mtz_class_caracteres["Specie"])
+mtz_class_caracteres = pd.concat([mtz_class_caracteres.drop(columns=['Specie']), dummies_specie], axis=1)
+sub2_mtz_class = mtz_class_caracteres.iloc[:,19000:]
+
+
+### -- Caracteristicas y Objetivos, y Convertir Datos en Arreglos -- ###
+# Pasamos a usar numpy
+#### import numpy as np
+# Cuales son las etiquetas que voy a predecir
+labels = np.array(mtz_class_caracteres["Nicho"])
+# Eliminamos la etiquetas de la matriz
+# axis 1 se refiere a las columnas
+mtz_class_caracteres = mtz_class_caracteres.drop("Nicho", axis=1)
+sub3_mtz_class = mtz_class_caracteres.iloc[:,19000:]
+# Guardamos los cluster para su posterior uso
+mtz_class_caracteres_list = list(mtz_class_caracteres.columns)
+# Lo convertimos en arreglo de numpy
+mtz_class_caracteres = np.array(mtz_class_caracteres)
+
+
+### -- Entrenamiento y comprobacion de conjuntos -- ###
+# Using Skicit-learn to split data into training and testing sets
+from sklearn.model_selection import train_test_split
+# Split the data into training and testing sets
+train_mtz_class_caracteres, test_mtz_class_caracteres, train_labels,  test_labels = train_test_split(mtz_class_caracteres, labels, test_size = 0.25, random_state = 42)
+
+print('Training Features Shape:', train_mtz_class_caracteres.shape)
+print('Training Labels Shape:', train_labels.shape)
+print('Testing Features Shape:', test_mtz_class_caracteres.shape)
+print('Testing Labels Shape:', test_labels.shape)
+
+
+
+
+###################### -- ESTABLECIMIENTO DE LINEA BASE -- ######################
+
+# The baseline predictions are the historical averages
+indices_caracteristicas = [mtz_class_caracteres_list.index(nombre) for nombre in mtz_class_caracteres_list[1:19002]]
+baseline_preds = test_mtz_class_caracteres[:, indices_caracteristicas]
+# Baseline errors, and display average baseline error
+#baseline_errors = abs(baseline_preds - test_labels)
+#print('Average baseline error: ', round(np.mean(baseline_errors), 2))
+
+
+
+
+
+
+###################### -- | -- ######################
+```
 
 
 
