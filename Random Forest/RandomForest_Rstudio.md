@@ -376,7 +376,7 @@ Con la correccion
 
 
 # 9 de mayo del 2024
-
+Al parecer en la parte de errore, no funciona bien.
 ```
 # -*- coding: utf-8 -*-
 """
@@ -458,7 +458,7 @@ baseline_preds = test_mtz_class_caracteres[:, indices_caracteristicas]
 ```
 
 
-
+# 11 de mayo del 2024
 
 
 
