@@ -590,6 +590,23 @@ predictions
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/99f5d548-e74e-4f82-bcaa-b9208e53d936)
 
 
+```
+train_mtz_class_caracteres, test_mtz_class_caracteres, train_labels,  test_labels = train_test_split(mtz_class_caracteres, encoded_labels, test_size = 0.50, random_state = 81)
+```
+Training Features Shape: (5, 19009)
+Training Labels Shape: (5,)
+Testing Features Shape: (5, 19009)
+Testing Labels Shape: (5,)
+Mean Absolute Error: 1.8 degrees.
+Accuracy: 50.55 %
 
+errors
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6c1f86e9-085a-43b3-bbd7-362c924d2920)
+
+test_labels
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/3866c20f-f6a9-4676-a38c-e2f3bebe6207)
+
+predictions
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/99f5d548-e74e-4f82-bcaa-b9208e53d936)
 
 
