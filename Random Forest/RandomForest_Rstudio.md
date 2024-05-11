@@ -389,11 +389,11 @@ import pandas as pd
 import numpy as np
 ###################### -- EXTRACCION DE LOS DATOS -- ######################
 # Extraemos la data
-rutamtz=r"C:\Users\52477\Desktop\Descargas_NCBI\CDHIT\MATRIXDATA\testpysh_pymatrizcdhit.csv"
+rutamtz=r"DirDescargas_NCBI\CDHIT\MATRIXDATA\testpysh_pymatrizcdhit.csv"
 matriz = pd.read_csv(rutamtz)
 
 # Extremos la tabla de clasificacion
-rutaclass=r"C:\Users\52477\Desktop\Descargas_NCBI\CDHIT\MATRIXDATA\classificacion_genomas.txt"
+rutaclass=r"Dir\Descargas_NCBI\CDHIT\MATRIXDATA\classificacion_genomas.txt"
 classificacion = pd.read_csv(rutaclass)
 
 # Juntamos ambos archivos 
@@ -459,12 +459,135 @@ baseline_preds = test_mtz_class_caracteres[:, indices_caracteristicas]
 
 
 # 11 de mayo del 2024
+Finalmente despues de probar y hacer modificaciones, la siguiente parte, se enfoco en solo ver que tanta precision partia al modificar diferentes variables.
+```
+import pandas as pd
+import numpy as np
+###################### -- EXTRACCION DE LOS DATOS -- ######################
+# Extraemos la data
+rutamtz=r"DirDescargas_NCBI\CDHIT\MATRIXDATA\testpysh_pymatrizcdhit.csv"
+matriz = pd.read_csv(rutamtz)
+
+# Extremos la tabla de clasificacion
+rutaclass=r"Dir\Descargas_NCBI\CDHIT\MATRIXDATA\classificacion_genomas.txt"
+classificacion = pd.read_csv(rutaclass)
+
+# Juntamos ambos archivos 
+mtz_class_caracteres = pd.merge(matriz, classificacion, on='Genomas')
+sub1_mtz_class = mtz_class_caracteres.iloc[:,19000:]
+
+
+
+
+###################### -- PREPARACION DE LOS DATOS -- ######################
+### -- One-Hot Encoding -- ###
+    # Aqui buscaremos una variable categorica, que pueda ayudar a hacer el One-Hot Encoding
+dummies_specie = pd.get_dummies(mtz_class_caracteres["Specie"])
+mtz_class_caracteres = pd.concat([mtz_class_caracteres.drop(columns=['Genomas', 'Specie']), dummies_specie], axis=1)
+sub2_mtz_class = mtz_class_caracteres.iloc[:,19000:]
+
+
+### -- Caracteristicas y Objetivos, y Convertir Datos en Arreglos -- ###
+# Pasamos a usar numpy
+#### import numpy as np
+
+
+# Cuales son las etiquetas que voy a predecir
+labels = np.array(mtz_class_caracteres["Nicho"])
+# La columna Nicho, se traducira en numeros, para que el programa lo pueda leer.
+encoded_labels, mapping_index = pd.factorize(labels)
+
+
+# Eliminamos la etiquetas de la matriz
+# axis 1 se refiere a las columnas
+mtz_class_caracteres = mtz_class_caracteres.drop("Nicho", axis=1)
+sub3_mtz_class = mtz_class_caracteres.iloc[:,19000:]
+# Guardamos los cluster para su posterior uso
+mtz_class_caracteres_list = list(mtz_class_caracteres.columns)
+# Lo convertimos en arreglo de numpy
+mtz_class_caracteres = np.array(mtz_class_caracteres)
+
+
+### -- Entrenamiento y comprobacion de conjuntos -- ###
+# Using Skicit-learn to split data into training and testing sets
+from sklearn.model_selection import train_test_split
+# Split the data into training and testing sets
+train_mtz_class_caracteres, test_mtz_class_caracteres, train_labels,  test_labels = train_test_split(mtz_class_caracteres, encoded_labels, test_size = 0.50, random_state = 99)
+
+print('Training Features Shape:', train_mtz_class_caracteres.shape)
+print('Training Labels Shape:', train_labels.shape)
+print('Testing Features Shape:', test_mtz_class_caracteres.shape)
+print('Testing Labels Shape:', test_labels.shape)
+
+
+
+
+###################### -- ESTABLECIMIENTO DE LINEA BASE -- ######################
+
+# The baseline predictions are the historical averages
+indices_caracteristicas = [mtz_class_caracteres_list.index(nombre) for nombre in mtz_class_caracteres_list[1:19002]]
+baseline_preds = test_mtz_class_caracteres[:, indices_caracteristicas]
+# Baseline errors, and display average baseline error
+#baseline_errors = abs(baseline_preds - test_labels)
+#print('Average baseline error: ', round(np.mean(baseline_errors), 2))
 
 
 
 
 
+###################### -- ENTRENAMIENTO DEL MODELO -- ######################
 
+# Import the model we are using
+from sklearn.ensemble import RandomForestRegressor
+# Instantiate model with 1000 decision trees
+rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
+# Train the model on training data
+rf.fit(train_mtz_class_caracteres, train_labels);
+
+
+
+
+
+###################### -- Hacemos predicciones con el conjunto de prueba -- ######################
+
+# Use the forest's predict method on the test data
+predictions = rf.predict(test_mtz_class_caracteres)
+# Calculate the absolute errors
+errors = abs(predictions - test_labels)
+# Print out the mean absolute error (mae)
+print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
+
+
+
+
+###################### -- Determinar métricas de rendimiento -- ######################
+# Calculate mean absolute percentage error (MAPE)
+mape = 100 * (errors / test_labels)
+# Calculate and display accuracy
+accuracy = 100 - np.mean(mape)
+print('Accuracy:', round(accuracy, 2), '%.')
+```
+
+En la cual al modficiar el `random_state` la precision de las predicciones puede aumentar mas o ser menos preciso.
+Como podemos ver 
+```
+train_mtz_class_caracteres, test_mtz_class_caracteres, train_labels,  test_labels = train_test_split(mtz_class_caracteres, encoded_labels, test_size = 0.50, random_state = 99)
+```
+Training Features Shape: (5, 19009)
+Training Labels Shape: (5,)
+Testing Features Shape: (5, 19009)
+Testing Labels Shape: (5,)
+Mean Absolute Error: 1.8 degrees.
+Accuracy: 50.55 %
+
+errors
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6c1f86e9-085a-43b3-bbd7-362c924d2920)
+
+test_labels
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/3866c20f-f6a9-4676-a38c-e2f3bebe6207)
+
+predictions
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/99f5d548-e74e-4f82-bcaa-b9208e53d936)
 
 
 
