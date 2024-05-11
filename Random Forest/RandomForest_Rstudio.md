@@ -597,16 +597,16 @@ Training Features Shape: (5, 19009)
 Training Labels Shape: (5,)
 Testing Features Shape: (5, 19009)
 Testing Labels Shape: (5,)
-Mean Absolute Error: 1.8 degrees.
-Accuracy: 50.55 %
+Mean Absolute Error: 2.01 degrees.
+Accuracy: 49.34 %.
 
 errors
-![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6c1f86e9-085a-43b3-bbd7-362c924d2920)
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/448a8606-5905-47dc-a364-d9ea6bbe2bbd)
 
 test_labels
-![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/3866c20f-f6a9-4676-a38c-e2f3bebe6207)
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/03869224-6175-4331-9baf-c584331c1638)
 
 predictions
-![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/99f5d548-e74e-4f82-bcaa-b9208e53d936)
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/17fc2d73-b7b0-4243-8740-88fe9bd008b1)
 
 
