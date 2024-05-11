@@ -573,13 +573,14 @@ Como podemos ver
 ```
 train_mtz_class_caracteres, test_mtz_class_caracteres, train_labels,  test_labels = train_test_split(mtz_class_caracteres, encoded_labels, test_size = 0.50, random_state = 99)
 ```
+```
 Training Features Shape: (5, 19009)
 Training Labels Shape: (5,)
 Testing Features Shape: (5, 19009)
 Testing Labels Shape: (5,)
 Mean Absolute Error: 1.8 degrees.
 Accuracy: 50.55 %
-
+```
 errors
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6c1f86e9-085a-43b3-bbd7-362c924d2920)
 
@@ -589,9 +590,10 @@ test_labels
 predictions
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/99f5d548-e74e-4f82-bcaa-b9208e53d936)
 
-
+Y con otro valor de `random_state`
 ```
 train_mtz_class_caracteres, test_mtz_class_caracteres, train_labels,  test_labels = train_test_split(mtz_class_caracteres, encoded_labels, test_size = 0.50, random_state = 81)
+```
 ```
 Training Features Shape: (5, 19009)
 Training Labels Shape: (5,)
@@ -599,7 +601,7 @@ Testing Features Shape: (5, 19009)
 Testing Labels Shape: (5,)
 Mean Absolute Error: 2.01 degrees.
 Accuracy: 49.34 %.
-
+```
 errors
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/448a8606-5905-47dc-a364-d9ea6bbe2bbd)
 
@@ -608,5 +610,47 @@ test_labels
 
 predictions
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/17fc2d73-b7b0-4243-8740-88fe9bd008b1)
+
+
+Y con otro valor de `random_state`
+```
+train_mtz_class_caracteres, test_mtz_class_caracteres, train_labels,  test_labels = train_test_split(mtz_class_caracteres, encoded_labels, test_size = 0.50, random_state = 42)
+```
+```
+Training Features Shape: (5, 19009)
+Training Labels Shape: (5,)
+Testing Features Shape: (5, 19009)
+Testing Labels Shape: (5,)
+Mean Absolute Error: 1.88 degrees.
+Accuracy: -inf %.
+RuntimeWarning: divide by zero encountered in divide
+  mape = 100 * (errors / test_labels)
+```
+errors
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/ac399686-fd05-46eb-bc0e-31be4b01e959)
+
+test_labels
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/e1e9adc2-4c50-41ae-8331-1c43b7d196fa)
+
+predictions
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/09b6a386-bd60-4e4a-b3fc-c5fa1bbf8c84)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
