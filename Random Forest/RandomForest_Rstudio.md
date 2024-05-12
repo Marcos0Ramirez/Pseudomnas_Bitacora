@@ -670,6 +670,20 @@ rf = RandomForestRegressor(n_estimators = 1000000, random_state = 1000000)
 ```
 En `RandomForestRegressor` al ir aumentando el numero de estimaciones y de `random_state`. Se encontraban mayores porcentajes de precision, asi mismo al tomar mas cantidad de datos (`test_size` < 0.40) para hacer las precisiones, se obtenian resultados (Accuracy > 70%)
 
+Si tan solo
+```
+train_test_split(test_size = 0.30, random_state = 99999)
+RandomForestRegressor(n_estimators = 1x10^5, random_state = 1x10^5)
+```
+Resulto en 
+```
+Training Features Shape: (7, 19019)
+Training Labels Shape: (7,)
+Testing Features Shape: (3, 19019)
+Testing Labels Shape: (3,)
+Mean Absolute Error: 0.62 degrees.
+Accuracy: 83.56 %.
+```
 
 
 
