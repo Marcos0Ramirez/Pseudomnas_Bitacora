@@ -638,7 +638,8 @@ predictions
 
 Asi modificando partes del codigo, como por ejemplo tomar la configuracion mejor que se tuvo anteriormente y no eliminar la column de `Genomas`
 ```
-mtz_class_caracteres = pd.concat([mtz_class_caracteres.drop(columns=['Specie']), dummies_specie], axis=1)
+dummies_Genomas = pd.get_dummies(mtz_class_caracteres["Genomas"])
+mtz_class_caracteres = pd.concat([mtz_class_caracteres.drop(columns=['Genomas', 'Specie']), dummies_specie, dummies_Genomas], axis=1)
 
 y
 
