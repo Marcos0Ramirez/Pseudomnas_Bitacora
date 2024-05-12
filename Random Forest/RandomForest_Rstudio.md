@@ -658,9 +658,17 @@ Accuracy: 50.09 %.
 
 La siguiente pregunta, es como intrducir los datos de caracteres para que se puedan aplicar correctamente y tengan una mayor precision a la hora de hacer predicciones.
 
+# 12 de abril del 2024
+Por lo visto, del codigo anterior ya desarollado. Al modificar distintos parametros, encontramos una mejoria en la precision de las predicciones.
 
+```
+mtz_class_caracteres = pd.concat([mtz_class_caracteres.drop(columns=['Genomas', 'Specie']), dummies_specie, dummies_Genomas], axis=1)
 
+train_mtz_class_caracteres, test_mtz_class_caracteres, train_labels,  test_labels = train_test_split(mtz_class_caracteres, encoded_labels, test_size = 0.30, random_state = 99999)
 
+rf = RandomForestRegressor(n_estimators = 1000000, random_state = 1000000)
+```
+En `RandomForestRegressor` al ir aumentando el numero de estimaciones y de `random_state`. Se encontraban mayores porcentajes de precision, asi mismo al tomar mas cantidad de datos (`test_size` < 0.40) para hacer las precisiones, se obtenian resultados (Accuracy > 70%)
 
 
 
