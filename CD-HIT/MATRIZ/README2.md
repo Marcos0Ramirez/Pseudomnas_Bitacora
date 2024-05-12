@@ -1639,7 +1639,7 @@ Y que por tanto sea sea un 93% mas rapido que el script original. Ayuda mucho a 
 Solo falta adaptarlo para usarlo en el cluster.
 
 
-# 05 de abril del 2024
+# 05 de mayo del 2024
 Finalmente para corregir el detalle de la matriz, para agregarle nombre a al indice de las matrices como Genome, solo queda agregar un pequeño comando.
 ```
 zerocdhit = zerocdhit.rename_axis("Genoma")
