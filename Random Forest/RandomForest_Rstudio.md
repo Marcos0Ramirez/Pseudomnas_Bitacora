@@ -684,7 +684,7 @@ Testing Labels Shape: (3,)
 Mean Absolute Error: 0.62 degrees.
 Accuracy: 83.56 %.
 ```
-
+Con un tiempo menor a 20 min
 Y por otra parte
 ```
 train_test_split(test_size = 0.30, random_state = 99999)
@@ -692,9 +692,14 @@ RandomForestRegressor(n_estimators = 1x10^6, random_state = 1x10^6)
 ```
 Resulto en 
 ```
-
+Training Features Shape: (7, 19019)
+Training Labels Shape: (7,)
+Testing Features Shape: (3, 19019)
+Testing Labels Shape: (3,)
+Mean Absolute Error: 0.62 degrees.
+Accuracy: 83.59 %.
 ```
-
+Con un tiempo de 2hrs aproximadas
 
 
 
