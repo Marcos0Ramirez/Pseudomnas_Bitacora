@@ -685,7 +685,15 @@ Mean Absolute Error: 0.62 degrees.
 Accuracy: 83.56 %.
 ```
 
+Y por otra parte
+```
+train_test_split(test_size = 0.30, random_state = 99999)
+RandomForestRegressor(n_estimators = 1x10^6, random_state = 1x10^6)
+```
+Resulto en 
+```
 
+```
 
 
 
