@@ -636,11 +636,26 @@ predictions
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/09b6a386-bd60-4e4a-b3fc-c5fa1bbf8c84)
 
 
+Asi modificando partes del codigo, como por ejemplo tomar la configuracion mejor que se tuvo anteriormente y no eliminar la column de `Genomas`
+```
+mtz_class_caracteres = pd.concat([mtz_class_caracteres.drop(columns=['Specie']), dummies_specie], axis=1)
+
+y
+
+train_mtz_class_caracteres, test_mtz_class_caracteres, train_labels,  test_labels = train_test_split(mtz_class_caracteres, encoded_labels, test_size = 0.50, random_state = 99)
+
+```
+```
+Training Features Shape: (5, 19019)
+Training Labels Shape: (5,)
+Testing Features Shape: (5, 19019)
+Testing Labels Shape: (5,)
+Mean Absolute Error: 1.83 degrees.
+Accuracy: 50.09 %.
+```
 
 
-
-
-
+La siguiente pregunta, es como intrducir los datos de caracteres para que se puedan aplicar correctamente y tengan una mayor precision a la hora de hacer predicciones.
 
 
 
