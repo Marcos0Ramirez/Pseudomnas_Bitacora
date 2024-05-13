@@ -289,11 +289,11 @@ Procedemos a avanzar con la generacion de la matriz, pero usando `PYTHON 2.7.5` 
 #You can edit the scriptsince this line
 #
 # Your job name
-#$ -N MatrixCDHIT
+#$ -N Fast_MatrixCDHIT
 #
 # Send an email after the job has finished
 #$ -m e
-#$ -M marcosu...
+#$ -M marcos...
 #
 #
 # Resources of compute
@@ -302,8 +302,8 @@ Procedemos a avanzar con la generacion de la matriz, pero usando `PYTHON 2.7.5` 
 #
 # output files to run
 #
-#$ -o ../matrizcdhit_output.$JOB_ID.out # Salida estandar
-#$ -e ../matrizcdhit_output.$JOB_ID.err # Archivo con los errores
+#$ -o ../fast_matrizcdhit_output.$JOB_ID.out # Salida estandar
+#$ -e ../fast_matrizcdhit_output.$JOB_ID.err # Archivo con los errores
 #
 # If modules are needed, source modules environment (Do not delete the next line):
 #  Con el gato, ya no necesitamos algun modulo de ambiente.
@@ -314,7 +314,7 @@ Procedemos a avanzar con la generacion de la matriz, pero usando `PYTHON 2.7.5` 
 # Write your commands in the next line
 
 ##### SIEMPRE DE PREFERENCIA RUTA COMPLETA #####
-outfilecdhit="clusterprotcatALL2000.clstr"                # Colocar aqui el nombre del archivo que tiene la salida con el outfile ".clstr"
+outfilecdhit="pseudocluster.clstr"                                # Colocar aqui el nombre del archivo que tiene la salida con el outfile ".clstr"
 OUTCDHIT="DIR/Descargas_NCBI/CDHIT/TODOS"            # Coloque la direccion donde se encuentra la salida de cd-hit
 
 inputmatrizfile="testpysh_inputmatrizcdhit.mtcdhit"       # El nombre del archivo que se genera en automatico, input para generar la matriz
