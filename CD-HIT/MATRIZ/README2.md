@@ -1938,8 +1938,18 @@ echo "El script inicio a las $io y termino a las $f. Con un tiempo transcurrido:
 
 ```
 
+Asi, se procedio a correr el script para ver que todo este funcionando correctamente.
 
+Mientras tanto, podemos observar que en el pequeño script `../Descargas_NCBI/Codigo/CD_HIT/ENHANCEMATRIXCODE/BASHPYTHON/llamarpy275.sh`
+con codigo
 
+```
+#!/bin/bash
 
+python275 - << END
+print("hola")
+END
+```
+Funciona correctamente, pero es posible que como las librerias de numpy y pandas no han sido instaladas en el python275 localmente, pueda tener error en la parte de python.
 
 
