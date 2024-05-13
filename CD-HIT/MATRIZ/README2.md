@@ -1804,6 +1804,140 @@ seconds=$((elapsed_time % 60))
 echo "El script inicio a las $io y termino a las $f. Con un tiempo transcurrido: $hours horas, $minutes minutos, $seconds segundos."
 ```
 
+Resultado de que las paqueterias necesarias se encuentran en otra version de Python, aplicamos la modifiacion, para hacer la llamada de de la version 2.7.5 de Python.
+
+Asi, del archivo `testpysh.sh`
+```
+#!/bin/bash
+
+##### SIEMPRE DE PREFERENCIA RUTA COMPLETA #####
+outfilecdhit="clusterprotcatALL2000.clstr"                # Colocar aqui el nombre del archivo que tiene la salida con el outfile ".clstr"
+OUTCDHIT="DIR/Descargas_NCBI/CDHIT/TODOS"            # Coloque la direccion donde se encuentra la salida de cd-hit
+
+inputmatrizfile="testpyshpy275_inputmatrizcdhit.mtcdhit"       # El nombre del archivo que se genera en automatico, input para generar la matriz
+outputmatrizfile="testpyshpy275_pymatrizcdhit.csv"             # Coloca el nombre de salida para la matriz en ".csv"
+DIRMATRIZ="DIR/Descargas_NCBI/CDHIT/MATRIXDATA"      # Coloque la direccion donde se arrojara las salidas de procesamiento para la matriz
+
+GENOMES="DIR/Descargas_NCBI/IMGPSEUDOMONASGENOMES"   # Coloque la direccion donde esta el conjunto de genomas a procesar.
+
+# DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAU>concatimgenome="testpyshpy275_genomasproteinas.idgidp"         # Nombre del archivo donde va la salida en formato idgenoma:idproteina
+filtrado="testpyshpy275_filtclstr.cdhitpy"                     # Aqui va el nombre de la salida del archivo que solo tiene el cluster y sus accesiones respectivas de l>clu_prot="testpyshpy275_filtchangeformat.clustidp"             # En este archivo ya con el "filtrado" simplemente se les da formato "Cluster[0-9]+:idproteina"
+pegaconcaclu="testpyshpy275_concat.idgidpclustidp"             # Resultado de concatenar "$concatimgenome" y "$clu_prot" para despues usarlo y generar el input para py>solonamecluster="testpyshpy275_clusters.txt"                   # Aqui solo se concatena todos los cluster
+onlynamegenomes="testpyshpy275_genomes.txt"                    # Solo van los nombres de los genomas
+
+PYTHON="/usr/local/bin/python275"                         # Ruta en la que se encuentra la version de python.
+# DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAU>
+io=$(date +%H:%M:%S)
+start_time=$(date +%s)
+echo "INICIO PARA FORMAR LA MATRIZ BASH"
+
+# Buscamos la salida en formato idgenoma:idproteina de las fuentes originales para concatenarlos en un solo archivo.
+grep -E -o "^>[0-9]+" $GENOMES/*/*faa | grep -E -w -o "[0-9]+/[0-9]+.*" | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > $DIRMATRIZ/$concatimgenome
+
+# Por aca solo obtenemos las accesiones del analisis en CD-HIT
+awk -F ">" '{print $2}' $OUTCDHIT/$outfilecdhit | awk -F "." '{print $1}' > $DIRMATRIZ/$filtrado
+
+# Mantiene el formato, pero cambiamos de "Cluster [0-9]+" a "Cluster[0-9]+" del filtrado de la salida de "CDHIT"
+awk '{gsub(/\s/, "", $0); print}' $DIRMATRIZ/$filtrado > $DIRMATRIZ/tmp.tmp && mv $DIRMATRIZ/tmp.tmp $DIRMATRIZ/$filtrado
+
+# Con esto hacemos el formato de Cluster[0-9]+:idproteina
+rm "$DIRMATRIZ/$clu_prot"
+filtdata_file=$(cat "$DIRMATRIZ/$filtrado")
+echo $filtdata_file | sed 's/\sCluster/\nCluster/g' | while IFS= read -r linea
+do
+        n=$(echo "$linea" | grep -E -o "Cluster[0-9]+" | grep -E -o "[0-9]+")
+        echo "$linea" | sed -E "s/\s/ Cluster$n:/g" | sed -E 's/(Cluster[0-9]+ )//g' | sed -E 's/\s/\n/g' >> "$DIRMATRIZ/$clu_prot"
+done
+
+# Antes de concatenar, vamos a ordenar por accesion de proteina tanto el archivo que tiene la variable "concatimgenome" y "clu_prot"
+awk -F ":" '{print $2 ":" $1}' "$DIRMATRIZ/$concatimgenome" | sort -n | awk -F ":" '{print $2":"$1}' > "$DIRMATRIZ/temp" && mv "$DIRMATRIZ/temp" "$DIRMATRIZ/$concatimg>awk -F ":" '{print $2 ":" $1}' "$DIRMATRIZ/$clu_prot" | sort -n | awk -F ":" '{print $2":"$1}' > "$DIRMATRIZ/temp" && mv "$DIRMATRIZ/temp" "$DIRMATRIZ/$clu_prot"
+
+# Despues de concatenar en "$concatimgenome" en formato "idgenoma:idproteina" y en "$clu_prot" en formato "Cluster[0-9]+:idproteina"
+# Simplemente pasamos a juntarlos "idgenoma:idproteina" y "Cluster[0-9]+:idproteina"
+paste $DIRMATRIZ/$concatimgenome $DIRMATRIZ/$clu_prot > $DIRMATRIZ/$pegaconcaclu
+
+# Para este ultimo lo pasamos a formato "Cluster[0-9]+:idgenoma:No.Repeticiones" (importante sort y despues uniq -c en ese orden)
+awk -F ":" '{print $2 ":" $1}' $DIRMATRIZ/$pegaconcaclu | cut -f 2 | sort | uniq -c | awk -F " " '{print $2 ":" $1}' > $DIRMATRIZ/$inputmatrizfile
+
+# Antes creamos unas variables para introducirlas a codigo en PYTHON
+# extraemos todos los Cluster[0-9]+
+cols=$(grep "Cluster" $DIRMATRIZ/$filtrado)
+echo $cols > "$DIRMATRIZ/$solonamecluster"
+
+# Extraemos todos los genomas que fueron usados.
+filas=$(ls $GENOMES | tr '\n' ' ')
+echo -e "$filas" > "$DIRMATRIZ/$onlynamegenomes"
+
+# EXPORTANDO PARA PYTHON
+export DIRMATRIZ solonamecluster onlynamegenomes inputmatrizfile outputmatrizfile
+
+$PYTHON - << END
+#Codigo python
+import os
+import pandas as pd
+import sys
+print("Nos encontramos en PYTHON2.7.5")
+
+# LLAMAMOS LAS VARIABLES DE LAS DIRECCIONES Y ARCHIVOS QUE NECESITAMOS
+DIRMATRIZ = os.environ.get('DIRMATRIZ')
+
+solonamecluster = os.environ.get('solonamecluster')
+listclust = os.path.join(DIRMATRIZ, solonamecluster)
+
+onlynamegenomes = os.environ.get('onlynamegenomes')
+listgenome = os.path.join(DIRMATRIZ, onlynamegenomes)
+
+inputmatrizfile = os.environ.get('inputmatrizfile')
+inputmtz = os.path.join(DIRMATRIZ, inputmatrizfile)
+
+outputmatrizfile = os.environ.get('outputmatrizfile')
+outputmtz = os.path.join(DIRMATRIZ, outputmatrizfile)
+
+# Imprimimos cols que tiene todos los numeros de cluster para saber en que formato trabaja
+with open(listclust, 'r') as Clus:  # Se guarda en una variable Clus
+    cols = Clus.read().strip()                                                                          # Los datos los guarda con otro tipo de variable para trabajar
+    cols = cols.split(' ')                                                                              # Quita los espacios para convertir el set de Cluster en una li>
+# Llamamos el archivo con las accesiones de los genomas.
+with open(listgenome, 'r') as fila:    # Se guarda en una variable fila
+    fl = fila.read().strip()                                                                                # Los datos los guarda con otro tipo de variable para traba>    fl = fl.split(' ')                                                                                      # Quita los espacios para convertir el set de genomas en un>
+# Hacemos el dataframe lleno de ceros.
+zerocdhit = pd.DataFrame(0, index=fl, columns=cols)
+zerocdhit = zerocdhit.rename_axis("Genomas")
+
+# Llamamos al archivo de entrada con formato "Cluster[0-9]+:idgenoma:No.Repeticiones" para generar el conteo y guardarlo en la matriz.
+with open(inputmtz, 'r') as entrada:   # Se guarda en una variable entrada
+    input = entrada.read().strip()                                                                                  # Los datos los guarda con otro tipo de variable pa>    input = input.split('\n')                                                                                       # Quita los espacios para convertir el set de entra>
+# Comienza el conteo desde 0, para hacer el llamado del dato inicial
+
+n = 0
+while n < len(input):
+    subconjunto = input[n].split(":")                                   # Como hace el llamado por linea, quita ":" para crear micro listas
+    # print(subconjunto)
+    # Ahora si la entrada de los datos para formar la matriz
+    zerocdhit.at[ subconjunto[1], subconjunto[0] ] = subconjunto[2]     # Ahora con las microlistas, con
+                                                                        # subconjunto[1] nombra la accesion genoma,
+                                                                        # subconjunto[0] llama Cluster y
+                                                                        # subconjunto[2] en esa interseccion agrega el numero de veces que aparece
+    n+=1                                                                # Permite continuar con el siguiente microset
+
+# Ya con las modificaciones, se guarda la matriz.
+zerocdhit.to_csv(outputmtz)
+
+END
+
+echo "Terminos, ahora estamos en BASH"
+
+f=$(date +%H:%M:%S)
+end_time=$(date +%s)
+elapsed_time=$(($end_time - $start_time))
+hours=$((elapsed_time / 3600))
+minutes=$(( (elapsed_time % 3600) / 60 ))
+seconds=$((elapsed_time % 60))
+
+echo "El script inicio a las $io y termino a las $f. Con un tiempo transcurrido: $hours horas, $minutes minutos, $seconds segundos."
+
+```
+
 
 
 
