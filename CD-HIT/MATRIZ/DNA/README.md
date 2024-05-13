@@ -706,3 +706,4 @@ seconds=$((elapsed_time % 60))
 
 echo "El script inicio a las $io y termino a las $f. Con un tiempo transcurrido: $hours horas, $minutes minutos, $seconds segundos."
 ```
+Tiene salida de 472245
