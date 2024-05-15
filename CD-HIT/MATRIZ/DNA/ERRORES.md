@@ -48,6 +48,39 @@ grep "8088481120" fast_matrizcdhit_concat.idgidpclustidp
 
 Asi que en lo siguiente, toca ver cuales son esas accesiones que aparecen extra.
 
+# 15 de mayo del 2024
+El dia de hoy se retoma el problema sobre los id extras que hacen que no aparezcan correctamente ajustados con sus parejas.
+Al parecer lo visto con los comandos
+```
+grep "8088474632" fast_matrizcdhit_concat.idgidpclustidp | less
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/a68ede92-5b25-4290-91e6-253194645521)
+
+Y tambien 
+```
+grep "8088468458" fast_matrizcdhit_concat.idgidpclustidp | less
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/4f6ac4dc-4406-4987-a76f-91d2e41e430d)
+
+```
+grep "8088461797" fast_matrizcdhit_concat.idgidpclustidp | less
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/c782fcb8-04c9-4e94-ab13-a02145b75d37)
+
+```
+grep ":8088461797" fast_matrizcdhit_concat.idgidpclustidp | less
+```
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/167043d3-5e99-453f-95f4-685334646606)
+
+Y al suceder con el otro genoma
+
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/19c68539-7679-4f3b-9989-7ceeaaebb6ee)
+
+
+
+
 
 
 
