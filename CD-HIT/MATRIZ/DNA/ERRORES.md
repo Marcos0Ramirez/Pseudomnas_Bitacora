@@ -149,6 +149,11 @@ Solo es el unico que aparecio
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/0f5a1005-f719-4b58-ad7e-62aa157db8ec)
 
+Como aparecio 6 veces al parecer, en la primera buscqueda en los resultados de `CD-HIT` del archivo `` aparece esto
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/a18507aa-5380-408c-a619-5096185c9a64)
+
+Y al buscar dentro si habia mas coincidencias, solo se encontro esa.
 
 
 
