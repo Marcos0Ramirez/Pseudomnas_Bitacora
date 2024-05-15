@@ -90,7 +90,15 @@ Asi hasta llegar a este genoma, ya no se encontro mas genomas que sucedieran y s
 
 Sin embargo antes se revisara en la extraccion de los `idgenomas:idproteinas` para verificar cuantos son 
 
+Al explorar dentro de `fast_matrizcdhit_genomasproteinas.idgidp` se encuentra este primer id
 
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/d2441596-2a5c-419d-b6d7-163cd71e7106)
+
+Pero al buscar el genoma `637000218` dentro de la carpeta `PSEUDOMONAS_GENOMAS` si se encontro. Y al abrir la carpeta con todos los genomas y aplicando un sort, resulta
+```
+ls PSEUDOMONAS_GENOMAS/ | sort -n | less
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/5c785c20-b613-4af9-8d17-aeda03ae9239)
 
 
 
