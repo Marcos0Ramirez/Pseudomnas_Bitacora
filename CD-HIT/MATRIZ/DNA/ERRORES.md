@@ -74,11 +74,12 @@ grep ":8088461797" fast_matrizcdhit_concat.idgidpclustidp | less
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/167043d3-5e99-453f-95f4-685334646606)
 
 Y al suceder con el otro genoma
-
-
+```
+grep "8088455273" fast_matrizcdhit_concat.idgidpclustidp | less
+```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/19c68539-7679-4f3b-9989-7ceeaaebb6ee)
 
-
+Por lo que toca ver dentro de los genomas si hay dichos ids de proteinas dentro.
 
 
 
