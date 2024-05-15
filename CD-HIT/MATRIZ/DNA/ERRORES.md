@@ -136,10 +136,18 @@ Si para comprobar, ni en `fast_matrizcdhit_filtclstr.cdhitpy` y `fast_matrizcdhi
 
 Debido a esta incongruencia podemos ver que en la matriz por no tener correctos los ids, todo aparece en 0´s.
 
+Incluyendo ademas en el archivo de entrada para realizar la matriz, encontramos la primera anomalia `fast_matrizcdhit_inputmatrizcdhit.mtcdhit`
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/b5e1c8e0-7a0f-428f-b55a-0f9abf85b393)
 
 
+El cual no tiene union de cluster y para ello hacemos una busqueda rapida para ver que show
+```
+grep -E "^:[0-9]+:" fast_matrizcdhit_inputmatrizcdhit.mtcdhit
+```
+Solo es el unico que aparecio
 
-
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/0f5a1005-f719-4b58-ad7e-62aa157db8ec)
 
 
 
