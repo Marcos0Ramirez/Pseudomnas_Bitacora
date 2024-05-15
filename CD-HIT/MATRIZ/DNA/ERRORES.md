@@ -100,7 +100,56 @@ ls PSEUDOMONAS_GENOMAS/ | sort -n | less
 ```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/5c785c20-b613-4af9-8d17-aeda03ae9239)
 
-Para ver en que parte empieza el desfase, se descargo `fast_matrizcdhit_concat.idgidpclustidp` para verlo en un gestor de texto como `sublime`.
+Para ver en que parte empieza el desfase, se descargo `fast_matrizcdhit_concat.idgidpclustidp` para verlo en un gestor de texto como `sublime`. Mejor utilizamos el lector de texto por defecto de windows.
+
+Se empezo a ver el desfase de los ids a partir del genoma `2506783016` y justo aqui
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/6329a1a7-96c5-476a-91c0-5c9d7c4d41a4)
+
+A partir del 
+```
+2506783016:2506882742   Cluster27115:2506882744
+```
+en adelante, ahora buscamos tanto en los genomas
+```
+grep "2506882742" 2506783016/*faa
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/4c8e4886-e2ea-4d68-8a2e-e8bc5b97fb1e)
+
+El cual si se encuentra en dicho genoma
+Por otra parte en la concatenacion de los datos, archivo `psedomonasIMGconcatenados.genes.faa` 
+```
+grep "2506882742" psedomonasIMGconcatenados.genes.faa
+```
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/909fd983-a201-4c29-aec4-b2d3051d02b2)
+
+Ahora por otra parte al ser usado por `CD-HIT` en los resultados
+```
+grep "2506882742" pseudocluster
+grep "2506882742" pseudocluster.clstr
+```
+No muestra nadaa
+
+Por lo que al parecer quiere decir que no lo uso para hacer el clustering y que por tanto puede indicar que es importante hacer un pqueño filtrado en los datos de concatenacion `idgenoma:idproteina cluster:idproteina` para que todo vaya acorde.
+Si para comprobar, ni en `fast_matrizcdhit_filtclstr.cdhitpy` y `fast_matrizcdhit_filtchangeformat.clustidp` se encuentra el `idproteina:2506882742` y por tanto queda agregar al codigo un pequeño filtrado.
+
+Debido a esta incongruencia podemos ver que en la matriz por no tener correctos los ids, todo aparece en 0´s.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
