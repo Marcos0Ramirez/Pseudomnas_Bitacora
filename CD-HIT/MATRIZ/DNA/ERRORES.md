@@ -79,7 +79,16 @@ grep "8088455273" fast_matrizcdhit_concat.idgidpclustidp | less
 ```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/19c68539-7679-4f3b-9989-7ceeaaebb6ee)
 
-Por lo que toca ver dentro de los genomas si hay dichos ids de proteinas dentro.
+```
+grep "8087728815" fast_matrizcdhit_concat.idgidpclustidp | less
+```
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/cf378729-399b-4f79-b9d5-6f24ff4f8e6c)
+
+Asi hasta llegar a este genoma, ya no se encontro mas genomas que sucedieran y se encontraran en otro. Pero aun asi, no se encuentra ordenado. Por lo que falta aun ver en que parte es donde no comienza a haber una congruencia con el orden.
+
+> Por lo que toca ver dentro de los genomas si hay dichos ids de proteinas dentro.
+
+Sin embargo antes se revisara en la extraccion de los `idgenomas:idproteinas` para verificar cuantos son 
 
 
 
