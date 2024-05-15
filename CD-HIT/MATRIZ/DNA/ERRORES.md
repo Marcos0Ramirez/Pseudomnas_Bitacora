@@ -100,7 +100,7 @@ ls PSEUDOMONAS_GENOMAS/ | sort -n | less
 ```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/5c785c20-b613-4af9-8d17-aeda03ae9239)
 
-
+Para ver en que parte empieza el desfase, se descargo `fast_matrizcdhit_concat.idgidpclustidp` para verlo en un gestor de texto como `sublime`.
 
 
 
