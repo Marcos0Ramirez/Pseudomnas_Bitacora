@@ -243,7 +243,45 @@ print("Esperando que salga el mismo numero de id de proteinas tanto de los genom
 END
 ```
 
+```
+#!/bin/bash
 
+
+python2 - << END
+
+import re
+
+with open('/mnt/atgc-d2/sur/shared_data/Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/fast_matrizcdhit_genomasproteinas.idgidp') as file:
+        idgidp = file.read()
+lista1 = idgidp.split("\n")
+with open('/mnt/atgc-d2/sur/shared_data/Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/fast_matrizcdhit_filtchangeformat.clustidp') as file2:
+        clustidp = file2.read()
+
+idpgenomas = re.findall(r"(?<=:)(\d+)", idgidp)
+cdhitidp = re.findall(r"Cluster\d+:(\d+)\n", clustidp)
+
+genomas = re.findall(r"(\d+):", idgidp)
+cluster = re.findall(r"Cluster\d+", clustidp)
+
+#print(genomas)
+
+
+print("Si no concuerdan el numero de id's de proteinas de los extraidos en genomas: ", len(idpgenomas), "y los usados por CD-HIT", len(cdhitidp))
+print("entonces ... ")
+clustergenoma=[]
+n = 0
+while n < len(cdhitidp):
+        if idpgenomas[n] != cdhitidp[n]:
+                print("eliminamos idgenoma:idproteina", lista1.pop(n), "de la proteina", idpgenomas.pop(n))
+                genomas.pop(n)
+                print("comprobamos que los siguientes esten correctos", "idgidp: ", idpgenomas[n], "cluster:idp: ", cdhitidp[n])
+        else:
+                clustergenoma.append(str(cluster[n]) + ':' + str(genomas[n]))
+                n+=1
+#print(clustergenoma)
+print("Esperando que salga el mismo numero de id de proteinas tanto de los genomas: ", len(idpgenomas), "como de los usados por CD-HIT: ", len(cdhitidp))
+END
+```
 
 
 
