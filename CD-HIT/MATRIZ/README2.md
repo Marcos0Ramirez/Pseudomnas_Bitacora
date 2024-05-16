@@ -1952,4 +1952,4 @@ END
 ```
 Funciona correctamente, pero es posible que como las librerias de numpy y pandas no han sido instaladas en el python275 localmente, pueda tener error en la parte de python.
 
-
+# 15 de mayo del 2025
