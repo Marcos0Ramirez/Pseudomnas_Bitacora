@@ -193,8 +193,55 @@ END
 ```
 
 Con salida
+```
+(22332436, 22332430)
+2506882742
+('2506882744', '2506882744')
+2508795298
+('2508795299', '2508795299')
+2511300800
+('2511300801', '2511300801')
+2511855715
+('2511855716', '2511855716')
+2549660264
+('2549660265', '2549660265')
+2597933538
+('2597933539', '2597933539')
+(22332430, 22332430)
+```
+
+Y finalmente le dimos la optimizacion al codigo para que pudiese hacer las evaluaciones, con un tiempo estimado de 23 segundos
+```
+#!/bin/bash
 
 
+python2 - << END
+
+import re
+
+with open('Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/fast_matrizcdhit_genomasproteinas.idgidp') as file:
+        idgidp = file.read()
+lista1 = idgidp.split("\n")
+with open('Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/fast_matrizcdhit_filtchangeformat.clustidp') as file2:
+        clustidp = file2.read()
+
+idpgenomas = re.findall(r"(?<=:)(\d+)", idgidp)
+cdhitidp = re.findall(r"Cluster\d+:(\d+)\n", clustidp)
+
+print("Si no concuerdan el numero de id's de proteinas de los extraidos en genomas: ", len(idpgenomas), "y los usados por CD-HIT", len(cdhitidp))
+print("entonces ... ")
+
+n = 0
+while n < len(cdhitidp):
+        if idpgenomas[n] != cdhitidp[n]:
+                print("eliminamos idgenoma:idproteina", lista1.pop(n), "de la proteina", idpgenomas.pop(n))
+                print("comprobamos que los siguientes esten correctos", "idgidp: ", idpgenomas[n], "cluster:idp: ", cdhitidp[n])
+        else:
+                n+=1
+
+print("Esperando que salga el mismo numero de id de proteinas tanto de los genomas: ", len(idpgenomas), "como de los usados por CD-HIT: ", len(cdhitidp))
+END
+```
 
 
 
