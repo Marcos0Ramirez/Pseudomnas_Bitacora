@@ -155,9 +155,44 @@ Como aparecio 6 veces al parecer, en la primera buscqueda en los resultados de `
 
 Y al buscar dentro si habia mas coincidencias, solo se encontro esa.
 
+# 16 de mayo del 2024
+Se finalizo el filtrado sobre el desfase de `idgenoma:idproteina` con `Cluster[0-9]+:idproteina` con el script de python en base a bash
+```
+#!/bin/bash
 
 
+python2 - << END
 
+import re
+
+with open('Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/fast_matrizcdhit_genomasproteinas.idgidp') as file:
+        idgidp = file.read()
+with open(Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/fast_matrizcdhit_filtchangeformat.clustidp') as file2:
+        clustidp = file2.read()
+
+idpgenomas = re.findall(r"(?<=:)(\d+)", idgidp)
+cdhitidp = re.findall(r"Cluster\d+:(\d+)\n", clustidp)
+
+print(len(idpgenomas), len(cdhitidp))
+
+n = 0
+m = 0
+while n < len(cdhitidp):
+        if idpgenomas[m] != cdhitidp[n]:
+                print(idpgenomas.pop(m))
+                if idpgenomas[m] == cdhitidp[n]:
+                        print(idpgenomas[m] , cdhitidp[n])
+                        m+=1
+                        n+=1
+        else:
+                m+=1
+                n+=1
+print(len(idpgenomas), len(cdhitidp))
+END
+
+```
+
+Con salida
 
 
 
