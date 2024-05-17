@@ -36,24 +36,22 @@
 # Write your commands in the next line
 
 ##### SIEMPRE DE PREFERENCIA RUTA COMPLETA #####
-outfilecdhit="pseudocluster.clstr"                                # Colocar aqui el nombre del archivo que tiene la salida con el outfile ".clstr"
-OUTCDHIT="DIR/Descargas_NCBI/CDHIT/TODOS"            # Coloque la direccion donde se encuentra la salida de cd-hit
+outfilecdhit="pseudocluster.clstr"                              # Colocar aqui el nombre del archivo que tiene la salida con el outfile ".clstr"
+OUTCDHIT="DIR/DONDE/SE/ENCUENTRA/EL/CD-HIT/ANALYSIS"            # Coloque la direccion donde se encuentra la salida de cd-hit
 
-inputmatrizfile="testpysh_inputmatrizcdhit.mtcdhit"       # El nombre del archivo que se genera en automatico, input para generar la matriz
-outputmatrizfile="testpysh_pymatrizcdhit.csv"             # Coloca el nombre de salida para la matriz en ".csv"
-DIRMATRIZ="DIR/Descargas_NCBI/CDHIT/MATRIXDATA"      # Coloque la direccion donde se arrojara las salidas de procesamiento para la matriz
+outputmatrizfile="cdhit_clustermatriz.csv"                      # Coloca el nombre de salida para la matriz en ".csv"
+DIRMATRIZ="DIR/DONDE/SE/DEPOSITARA/LA/MATRIZ"                   # Coloque la direccion donde se arrojara las salidas de procesamiento para la matriz
 
-GENOMES="DIR/Descargas_NCBI/IMGPSEUDOMONASGENOMES"   # Coloque la direccion donde esta el conjunto de genomas a procesar.
+GENOMES="DIR/DONDE/ESTAN/LOS/GENOMAS"   # Coloque la direccion donde esta el conjunto de genomas a procesar.
 
 # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT
-concatimgenome="testpysh_genomasproteinas.idgidp"         # Nombre del archivo donde va la salida en formato idgenoma:idproteina
-filtrado="testpysh_filtclstr.cdhitpy"                     # Aqui va el nombre de la salida del archivo que solo tiene el cluster y sus accesiones respectivas de las proteinas respetando el original
-clu_prot="testpysh_filtchangeformat.clustidp"             # En este archivo ya con el "filtrado" simplemente se les da formato "Cluster[0-9]+:idproteina"
-pegaconcaclu="testpysh_concat.idgidpclustidp"             # Resultado de concatenar "$concatimgenome" y "$clu_prot" para despues usarlo y generar el input para python
-solonamecluster="testpysh_clusters.txt"                   # Aqui solo se concatena todos los cluster
-onlynamegenomes="testpysh_genomes.txt"                    # Solo van los nombres de los genomas
+idgen_idprot="a_genomasproteinas.idgidp"              # idgenoma:idproteina SALIDA
+filtrado="b_cambio_clustnidp.cdhitpy"                   # Aqui va el nombre de la salida del archivo que solo tiene el cluster y sus accesiones respectivas de las proteinas respetando el original
+cluster_idprot="c_clusteridproteina.clustidp"                 # En este archivo ya con el "filtrado" simplemente se les da formato "Cluster[0-9]+:idproteina"
+solonamecluster="d_clusters.txt"                        # Aqui solo se concatena todos los cluster
+onlynamegenomes="e_genomes.txt"                         # Solo van los nombres de los genomas
 
-PYTHON="python2"                         # Ruta en la que se encuentra la version de python.
+PYTHON="python2"                                        # Ruta en la que se encuentra la version de python.
 # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT
 
 io=$(date +%H:%M:%S)
@@ -61,26 +59,27 @@ start_time=$(date +%s)
 echo "INICIO PARA FORMAR LA MATRIZ BASH"
 
 # Buscamos la salida en formato idgenoma:idproteina de las fuentes originales para concatenarlos en un solo archivo.
-grep -E -o "^>[0-9]+" $GENOMES/*/*faa | grep -E -w -o "[0-9]+/[0-9]+.*" | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > $DIRMATRIZ/$concatimgenome
+######## Comprobado que funciona correctamente esta parte del codigo con la discrimiacion de cluster y id de proteinas
+grep -E -o "^>[0-9]+" $GENOMES/*/*faa | grep -E -w -o "[0-9]+/[0-9]+.*" | awk -F "/[0-9]+.genes.faa:>" '{print $1 ":" $2}' > $DIRMATRIZ/$idgen_idprot
 
-# Por aca solo obtenemos las accesiones del analisis en CD-HIT
+# Cambiamos el formato original del archivo de salida de CD-HIT para solo quedarnos con Cluster[0-9]+\nidp1\n...\nidpk
 awk -F ">" '{print $2}' $OUTCDHIT/$outfilecdhit | awk -F "." '{print $1}' > $DIRMATRIZ/$filtrado
 
 # Mantiene el formato, pero cambiamos de "Cluster [0-9]+" a "Cluster[0-9]+" del filtrado de la salida de "CDHIT"
 awk '{gsub(/\s/, "", $0); print}' $DIRMATRIZ/$filtrado > $DIRMATRIZ/tmp.tmp && mv $DIRMATRIZ/tmp.tmp $DIRMATRIZ/$filtrado
 
 # Con esto hacemos el formato de Cluster[0-9]+:idproteina
-rm "$DIRMATRIZ/$clu_prot"
+rm "$DIRMATRIZ/$cluster_idprot"
 filtdata_file=$(cat "$DIRMATRIZ/$filtrado")
 echo $filtdata_file | sed 's/\sCluster/\nCluster/g' | while IFS= read -r linea
 do
         n=$(echo "$linea" | grep -E -o "Cluster[0-9]+" | grep -E -o "[0-9]+")
-        echo "$linea" | sed -E "s/\s/ Cluster$n:/g" | sed -E 's/(Cluster[0-9]+ )//g' | sed -E 's/\s/\n/g' >> "$DIRMATRIZ/$clu_prot"
+        echo "$linea" | sed -E "s/\s/ Cluster$n:/g" | sed -E 's/(Cluster[0-9]+ )//g' | sed -E 's/\s/\n/g' >> "$DIRMATRIZ/$cluster_idprot"
 done
 
-# Antes de concatenar, vamos a ordenar por accesion de proteina tanto el archivo que tiene la variable "concatimgenome" y "clu_prot"
-awk -F ":" '{print $2 ":" $1}' "$DIRMATRIZ/$concatimgenome" | sort -n | awk -F ":" '{print $2":"$1}' > "$DIRMATRIZ/temp" && mv "$DIRMATRIZ/temp" "$DIRMATRIZ/$concatimgenome"
-awk -F ":" '{print $2 ":" $1}' "$DIRMATRIZ/$clu_prot" | sort -n | awk -F ":" '{print $2":"$1}' > "$DIRMATRIZ/temp" && mv "$DIRMATRIZ/temp" "$DIRMATRIZ/$clu_prot"
+# Antes de concatenar, vamos a ordenar por accesion de proteina tanto el archivo que tiene la variable "idgen_idprot" y "cluster_idprot"
+awk -F ":" '{print $2 ":" $1}' "$DIRMATRIZ/$idgen_idprot" | sort -n | awk -F ":" '{print $2":"$1}' > "$DIRMATRIZ/temp" && mv "$DIRMATRIZ/temp" "$DIRMATRIZ/$idgen_idprot"
+awk -F ":" '{print $2 ":" $1}' "$DIRMATRIZ/$cluster_idprot" | sort -n | awk -F ":" '{print $2":"$1}' > "$DIRMATRIZ/temp" && mv "$DIRMATRIZ/temp" "$DIRMATRIZ/$cluster_idprot"
 
 # Antes creamos unas variables para introducirlas a codigo en PYTHON
 # extraemos todos los Cluster[0-9]+
@@ -92,7 +91,7 @@ filas=$(ls $GENOMES | tr '\n' ' ')
 echo -e "$filas" > "$DIRMATRIZ/$onlynamegenomes"
 
 # EXPORTANDO PARA PYTHON
-export DIRMATRIZ solonamecluster onlynamegenomes concatimgenome clu_prot outputmatrizfile
+export DIRMATRIZ solonamecluster onlynamegenomes idgen_idprot cluster_idprot outputmatrizfile
 
 $PYTHON - << END
 
@@ -107,11 +106,11 @@ listclust = os.path.join(DIRMATRIZ, solonamecluster)
 onlynamegenomes = os.environ.get('onlynamegenomes')
 listgenome = os.path.join(DIRMATRIZ, onlynamegenomes)
 
-concatimgenome = os.environ.get('concatimgenome')
-catgenopro = os.path.join(DIRMATRIZ, concatimgenome)
+idgen_idprot = os.environ.get('idgen_idprot')
+catgenopro = os.path.join(DIRMATRIZ, idgen_idprot)
 
-clu_prot = os.environ.get('clu_prot')
-clusterprot = os.path.join(DIRMATRIZ, clu_prot)
+cluster_idprot = os.environ.get('cluster_idprot')
+clusterprot = os.path.join(DIRMATRIZ, cluster_idprot)
 
 outputmatrizfile = os.environ.get('outputmatrizfile')
 outputmtz = os.path.join(DIRMATRIZ, outputmatrizfile)
