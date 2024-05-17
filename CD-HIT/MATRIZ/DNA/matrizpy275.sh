@@ -24,8 +24,8 @@
 #
 # output files to run
 #
-#$ -o ../fast_matrizcdhit_output.$JOB_ID.out # Salida estandar
-#$ -e ../fast_matrizcdhit_output.$JOB_ID.err # Archivo con los errores
+#$ -o ../matrizpy275cdhit_output.$JOB_ID.out # Salida estandar
+#$ -e ../matrizpy275cdhit_output.$JOB_ID.err # Archivo con los errores
 #
 # If modules are needed, source modules environment (Do not delete the next line):
 #  Con el gato, ya no necesitamos algun modulo de ambiente.
@@ -118,21 +118,23 @@ outputmtz = os.path.join(DIRMATRIZ, outputmatrizfile)
 #from collections import Counter
 # Imprimimos cols que tiene todos los numeros de cluster para saber en que formato trabaja
 with open(listclust, 'r') as Clus:  # Se guarda en una variable Clus
-    cols = Clus.read().strip()                                                                          # Los datos los guarda con otro tipo de variable para trabajar
-    cols = cols.split(' ')                                                                              # Quita los espacios para convertir el set de Cluster en una lista gigante
+    cols = Clus.read().strip()      # Los datos los guarda con otro tipo de variable para trabajar
+    cols = cols.split(' ')          # Quita los espacios para convertir el set de Cluster en una lista gigante
 
 # Llamamos el archivo con las accesiones de los genomas.
 with open(listgenome, 'r') as fila:    # Se guarda en una variable fila
-    fl = fila.read().strip()                                                                                # Los datos los guarda con otro tipo de variable para trabajar
-    fl = fl.split(' ')                                                                                      # Quita los espacios para convertir el set de genomas en una lista
+    fl = fila.read().strip()           # Los datos los guarda con otro tipo de variable para trabajar
+    fl = fl.split(' ')                 # Quita los espacios para convertir el set de genomas en una lista
 
 with open(catgenopro, 'r') as entrada1:   # para idg:idp
-    input1 = entrada1.read().strip()                                                                                  # Los datos los guarda con otro tipo de variable para trabajar
-    idgidp = input1.split('\n')                                                                                       # Quita los espacios para convertir el set de entrada en una lista gigante
+    input1 = entrada1.read().strip()      # Los datos los guarda con otro tipo de variable para trabajar
+    idgidp = input1.split('\n')           # Quita los espacios para convertir el set de entrada en una lista gigante
+
+lista1 = idgidp.split("\n")      #Creamos la lista para mostrar los idg:idp que se van a eliminar
 
 with open(clusterprot, 'r') as entrada2:   # para cluster:idp
-    input2 = entrada2.read().strip()                                                                                  # Los datos los guarda con otro tipo de variable para trabajar
-    clustidp = input2.split('\n')                                                                                       # Quita los espacios para convertir el set de entrada en una lista gigante
+    input2 = entrada2.read().strip()       # Los datos los guarda con otro tipo de variable para trabajar
+    clustidp = input2.split('\n')          # Quita los espacios para convertir el set de entrada en una lista gigante
 
 idpgenomas = re.findall(r"(?<=:)(\d+)", idgidp)
 cdhitidp = re.findall(r"Cluster\d+:(\d+)\n", clustidp)
