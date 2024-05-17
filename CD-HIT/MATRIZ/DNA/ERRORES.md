@@ -284,7 +284,81 @@ END
 ```
 
 
+```
+#!/bin/bash
 
+# Antes creamos unas variables para introducirlas a codigo en PYTHON
+# extraemos todos los Cluster[0-9]+
+cols=$(grep "Cluster" Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/fast_matrizcdhit_filtclstr.cdhitpy)
+echo $cols > "WORK/ANALYSIS_CDHIT/MATRIXCDHIT/tempclust.cluster"
+
+# Extraemos todos los genomas que fueron usados.
+filas=$(ls Pseudomonas/PSEUDOMONAS_GENOMAS/ | tr '\n' ' ')
+echo -e "$filas" > "Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/tempgenomas.genomes"
+
+python2 - << END
+
+import re
+import os
+import pandas as pd
+import sys
+
+with open('Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/tempclust.cluster') as cl:
+        cols = cl.read()
+        cols = cols.split(' ')
+#print(cols)
+
+with open('Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/tempgenomas.genomes') as g:
+        fl = g.read()
+        fl = fl.split(' ')
+
+#print(fl)
+
+zerocdhit = pd.DataFrame(0, index=fl, columns=cols)
+zerocdhit = zerocdhit.rename_axis("Genomas")
+
+print(zerocdhit)
+
+#from collections import Counter
+with open('Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/fast_matrizcdhit_genomasproteinas.idgidp') as file:
+        idgidp = file.read()
+lista1 = idgidp.split("\n")
+with open('WORK/ANALYSIS_CDHIT/MATRIXCDHIT/fast_matrizcdhit_filtchangeformat.clustidp') as file2:
+        clustidp = file2.read()
+
+idpgenomas = re.findall(r"(?<=:)(\d+)", idgidp)
+cdhitidp = re.findall(r"Cluster\d+:(\d+)\n", clustidp)
+
+genomas = re.findall(r"(\d+):", idgidp)
+cluster = re.findall(r"Cluster\d+", clustidp)
+
+#Creacion de la matriz
+
+print("Si no concuerdan el numero de id's de proteinas de los extraidos en genomas: ", len(idpgenomas), "y los usados por CD-HIT", len(cdhitidp))
+print("entonces ... ")
+clustergenoma=[]
+frecuencia={}
+n = 0
+while n < len(cdhitidp):
+        if idpgenomas[n] != cdhitidp[n]:
+                print("eliminamos idgenoma:idproteina", lista1.pop(n), "de la proteina", idpgenomas.pop(n))
+                genomas.pop(n)
+                print("comprobamos que los siguientes esten correctos", "idgidp: ", idpgenomas[n], "cluster:idp: ", cdhitidp[n])
+        else:
+                clustergenoma.append(str(cluster[n]) + ':' + str(genomas[n]))
+                if clustergenoma[n] in frecuencia:
+                        frecuencia[clustergenoma[n]] += 1
+                else:
+                        frecuencia[clustergenoma[n]] = 1
+                coordenadas=clustergenoma[n].split(":")
+                zerocdhit.at[ coordenadas[1], coordenadas[0] ] = frecuencia[clustergenoma[n]]
+                n+=1
+
+print("Esperando que salga el mismo numero de id de proteinas tanto de los genomas: ", len(idpgenomas), "como de los usados por CD-HIT: ", len(cdhitidp))
+zerocdhit.to_csv("Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/tempfinalmtriz.mtz")
+
+END
+```
 
 
 
