@@ -15,7 +15,7 @@
 #
 # Send an email after the job has finished
 #$ -m e
-#$ -M marcos...
+#$ -M correo@electronico.com
 #
 #
 # Resources of compute
@@ -46,10 +46,10 @@ GENOMES="DIR/DONDE/ESTAN/LOS/GENOMAS"   # Coloque la direccion donde esta el con
 
 # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT
 idgen_idprot="a_genomasproteinas.idgidp"              # idgenoma:idproteina SALIDA
-filtrado="b_cambio_clustnidp.cdhitpy"                   # Aqui va el nombre de la salida del archivo que solo tiene el cluster y sus accesiones respectivas de las proteinas respetando el original
-cluster_idprot="c_clusteridproteina.clustidp"                 # En este archivo ya con el "filtrado" simplemente se les da formato "Cluster[0-9]+:idproteina"
-solonamecluster="d_clusters.txt"                        # Aqui solo se concatena todos los cluster
-onlynamegenomes="e_genomes.txt"                         # Solo van los nombres de los genomas
+filtrado="b_cambio_clustnidp.cdhitpy"                 # Aqui va el nombre de la salida del archivo que solo tiene el cluster y sus accesiones respectivas de las proteinas respetando el original
+cluster_idprot="c_clusteridproteina.clustidp"         # En este archivo ya con el "filtrado" simplemente se les da formato "Cluster[0-9]+:idproteina"
+solonamecluster="d_clusters.txt"                      # Aqui solo se concatena todos los cluster
+onlynamegenomes="e_genomes.txt"                       # Solo van los nombres de los genomas
 
 PYTHON="python2"                                        # Ruta en la que se encuentra la version de python.
 # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT # DEFAULT
