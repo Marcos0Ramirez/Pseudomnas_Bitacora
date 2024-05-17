@@ -107,6 +107,14 @@ listclust = os.path.join(DIRMATRIZ, solonamecluster)
 onlynamegenomes = os.environ.get('onlynamegenomes')
 listgenome = os.path.join(DIRMATRIZ, onlynamegenomes)
 
+concatimgenome = os.environ.get('concatimgenome')
+catgenopro = os.path.join(DIRMATRIZ, concatimgenome)
+
+clu_prot = os.environ.get('clu_prot')
+clusterprot = os.path.join(DIRMATRIZ, clu_prot)
+
+outputmatrizfile = os.environ.get('outputmatrizfile')
+outputmtz = os.path.join(DIRMATRIZ, outputmatrizfile)
 
 #from collections import Counter
 # Imprimimos cols que tiene todos los numeros de cluster para saber en que formato trabaja
@@ -119,9 +127,13 @@ with open(listgenome, 'r') as fila:    # Se guarda en una variable fila
     fl = fila.read().strip()                                                                                # Los datos los guarda con otro tipo de variable para trabajar
     fl = fl.split(' ')                                                                                      # Quita los espacios para convertir el set de genomas en una lista
 
+with open(catgenopro, 'r') as entrada1:   # para idg:idp
+    input1 = entrada1.read().strip()                                                                                  # Los datos los guarda con otro tipo de variable para trabajar
+    idgidp = input1.split('\n')                                                                                       # Quita los espacios para convertir el set de entrada en una lista gigante
 
-
-
+with open(clusterprot, 'r') as entrada2:   # para cluster:idp
+    input2 = entrada2.read().strip()                                                                                  # Los datos los guarda con otro tipo de variable para trabajar
+    clustidp = input2.split('\n')                                                                                       # Quita los espacios para convertir el set de entrada en una lista gigante
 
 idpgenomas = re.findall(r"(?<=:)(\d+)", idgidp)
 cdhitidp = re.findall(r"Cluster\d+:(\d+)\n", clustidp)
@@ -154,66 +166,6 @@ while n < len(cdhitidp):
                 n+=1
 
 print("Esperando que salga el mismo numero de id de proteinas tanto de los genomas: ", len(idpgenomas), "como de los usados por CD-HIT: ", len(cdhitidp))
-zerocdhit.to_csv("Pseudomonas/WORK/ANALYSIS_CDHIT/MATRIXCDHIT/tempfinalmtriz.mtz")
-
-END
-
-
-
-
-$PYTHON - << END
-#Codigo python
-import os
-import pandas as pd
-import sys
-print("Nos encontramos en PYTHON2.7.5")
-
-# LLAMAMOS LAS VARIABLES DE LAS DIRECCIONES Y ARCHIVOS QUE NECESITAMOS
-DIRMATRIZ = os.environ.get('DIRMATRIZ')
-
-solonamecluster = os.environ.get('solonamecluster')
-listclust = os.path.join(DIRMATRIZ, solonamecluster)
-
-onlynamegenomes = os.environ.get('onlynamegenomes')
-listgenome = os.path.join(DIRMATRIZ, onlynamegenomes)
-
-inputmatrizfile = os.environ.get('inputmatrizfile')
-inputmtz = os.path.join(DIRMATRIZ, inputmatrizfile)
-
-outputmatrizfile = os.environ.get('outputmatrizfile')
-outputmtz = os.path.join(DIRMATRIZ, outputmatrizfile)
-
-# Imprimimos cols que tiene todos los numeros de cluster para saber en que formato trabaja
-with open(listclust, 'r') as Clus:  # Se guarda en una variable Clus
-    cols = Clus.read().strip()                                                                          # Los datos los guarda con otro tipo de variable para trabajar
-    cols = cols.split(' ')                                                                              # Quita los espacios para convertir el set de Cluster en una lista gigante
-
-# Llamamos el archivo con las accesiones de los genomas.
-with open(listgenome, 'r') as fila:    # Se guarda en una variable fila
-    fl = fila.read().strip()                                                                                # Los datos los guarda con otro tipo de variable para trabajar
-    fl = fl.split(' ')                                                                                      # Quita los espacios para convertir el set de genomas en una lista
-
-# Hacemos el dataframe lleno de ceros.
-zerocdhit = pd.DataFrame(0, index=fl, columns=cols)
-zerocdhit = zerocdhit.rename_axis("Genomas")
-
-# Llamamos al archivo de entrada con formato "Cluster[0-9]+:idgenoma:No.Repeticiones" para generar el conteo y guardarlo en la matriz.
-with open(inputmtz, 'r') as entrada:   # Se guarda en una variable entrada
-    input = entrada.read().strip()                                                                                  # Los datos los guarda con otro tipo de variable para trabajar
-    input = input.split('\n')                                                                                       # Quita los espacios para convertir el set de entrada en una lista gigante
-
-# Comienza el conteo desde 0, para hacer el llamado del dato inicial
-
-n = 0
-while n < len(input):
-    subconjunto = input[n].split(":")                                   # Como hace el llamado por linea, quita ":" para crear micro listas
-    # print(subconjunto)
-    # Ahora si la entrada de los datos para formar la matriz
-    zerocdhit.at[ subconjunto[1], subconjunto[0] ] = subconjunto[2]     # Ahora con las microlistas, con
-                                                                        # subconjunto[1] nombra la accesion genoma, 
-                                                                        # subconjunto[0] llama Cluster y 
-                                                                        # subconjunto[2] en esa interseccion agrega el numero de veces que aparece
-    n+=1                                                                # Permite continuar con el siguiente microset
 
 # Ya con las modificaciones, se guarda la matriz.
 zerocdhit.to_csv(outputmtz)
