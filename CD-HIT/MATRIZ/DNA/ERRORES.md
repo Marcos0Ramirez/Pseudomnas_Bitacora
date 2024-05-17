@@ -242,7 +242,7 @@ while n < len(cdhitidp):
 print("Esperando que salga el mismo numero de id de proteinas tanto de los genomas: ", len(idpgenomas), "como de los usados por CD-HIT: ", len(cdhitidp))
 END
 ```
-
+# 16 de mayo del 2024
 ```
 #!/bin/bash
 
