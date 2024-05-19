@@ -850,12 +850,14 @@ sklearn.metrics.accuracy_score(test_labels, prediction_discrete)
 
 #sklearn.metrics.recall_score(test_labels, prediction_discrete)
 
-
-
-
-
-
 ```
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/52b8f1b3-278d-4376-9509-bca1b24ec820)
 
+Por otra parte al modiicar el codigo madre en esta parte
+```
+train_mtz_class_caracteres, test_mtz_class_caracteres, train_labels,  test_labels = train_test_split(mtz_class_caracteres, 
+                                                                                                     encoded_labels, 
+                                                                                                     test_size = 0.20, 
+                                                                                                     random_state = 99)
+```
