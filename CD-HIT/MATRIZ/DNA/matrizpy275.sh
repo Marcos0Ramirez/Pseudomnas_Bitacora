@@ -100,6 +100,8 @@ import os
 import pandas as pd
 import sys
 
+DIRMATRIZ = os.environ.get('DIRMATRIZ')
+
 solonamecluster = os.environ.get('solonamecluster')
 listclust = os.path.join(DIRMATRIZ, solonamecluster)
 
