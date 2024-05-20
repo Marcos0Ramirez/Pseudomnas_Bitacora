@@ -1,0 +1,11 @@
+Genomas,Nicho,Specie
+2505313052,Patogeno,P. aeruginosa
+2517572175,HostHuman,P. aeruginosa
+2548876750,HostFungi,P. stutzeri
+2554235471,Patogeno,P. aeruginosa 
+2630968743,Ambiente,P. putrefaciens
+2713896862,Ambiente,P. aeruginosa
+2785510749,Hostalga,P. putida
+2923166773,Hostanimal,P. fluorescens
+2972001829,Unclassified,P. maltophilia
+8011072914,Unclassified,P. cepacia
