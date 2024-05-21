@@ -6,7 +6,7 @@ import os
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score # , ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 start_time = time.time()
 ###################### -- EXTRACCION DE LOS DATOS -- ######################
@@ -90,15 +90,9 @@ predictions = rf.predict(test_mtz_class_caracteres)
 ##################### -- Matriz de Confusion -- ######################
 prediction_discrete = np.round(predictions).astype(int)
 mc = confusion_matrix(test_labels, prediction_discrete)
-
+print(mc)
 ##################### -- Visualizacion de la Matriz de Confusion -- ######################
-vis = ConfusionMatrixDisplay(mc)
-# Crear la visualización de la matriz de confusión
-vis.plot()
-# Ajustar el diseño para que no se recorten los elementos
-plt.tight_layout()
-# Guardar la gráfica como un archivo PNG con el tamaño y resolución especificados
-plt.savefig(rutaconfusion, format='png', dpi=300, bbox_inches='tight')
+
 ##################### -- Exactitud Matriz de Confusion -- ######################
 accuracy = accuracy_score(test_labels, prediction_discrete)
 precision = precision_score(test_labels, prediction_discrete, average='weighted', zero_division=0)
