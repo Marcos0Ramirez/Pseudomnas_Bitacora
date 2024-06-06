@@ -111,5 +111,11 @@ print("F1 Score:", f1)
 
 ```
 
-# 24 de mayo del 2024
-Se termino el script final para correr en el cluster y analizar las 3,894 secuencias de IMG, el cual esta a disposicion aqui []
+# 25 de mayo del 2024
+Se termino el script final para correr en el cluster y analizar las 3,894 secuencias de IMG, el cual esta a disposicion aqui https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/tree/main/Random%20Forest/DNA 
+
+Con el ejecutador del script `runpygraphconfusion.sh` y el script de Python que hace el analisis `RandomForest.py`
+
+# 26 de mayo del 2024
+Termino el script y con resultados exitosos del analisis, lo cuales podemos contar con el grafico de importancia
+
