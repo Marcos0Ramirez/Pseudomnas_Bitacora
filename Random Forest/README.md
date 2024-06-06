@@ -129,7 +129,7 @@ Pero con el script `dataframeconfusionTOgraph.py` Se pudo obtener el grafico de 
 
 ![Confusion_graph](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/cad56c29-ed1d-40e4-a8f5-52220c7ee104)
 
-# 26 de mayo del 2024
+# 27 de mayo del 2024
 Se observo que genomas se encuntran en le cluster mas importante `Cluster 50634`, los cuales los observados son proteinas reductasas.
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/b41ae281-fb55-4e20-bc77-07b0684d433c)
