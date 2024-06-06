@@ -1,0 +1,266 @@
+---
+title: "Pseudomonas_Genomeclass"
+author: "Marcos Ramirez"
+date: "2024-05-19"
+output: html_document
+---
+# Tabla de datos Actualizados 28 de febrero del 2024
+```{r}
+# Con este comando se provee del documento con los datos ordenados de manera correcta y listos para ser manupulados. 
+  PseudoAll <- read.csv(file = "./28feb2024_PseudomonasIMG.txt", header = TRUE, sep = "\t")
+```
+
+# Genomas descargados en el cluster
+```{r}
+# Codigo agregado el dia 16 de mayo del 2024
+downloadgenomecluster <- read.csv(file = "./DNAgenomesdownload.list", header = TRUE, sep = "\t")
+
+eliminartaxoids <- c(8084820202, 8085341477, 8084395441, 8085688997, 8085347597, 8084092649, 8084807198, 8085085956, 8019775933, 637000224, 8085016530, 8083583212, 8085092110, 8084839925, 8084413206, 8085098197, 8084767992, 8086259606, 8084850413, 8084102989, 8085237721, 8084400239, 8084628194, 8084693108, 8084813701, 8084762373, 8083775200, 8084856734, 8084097705, 8084833194, 8023655410, 8084826874)
+
+for (i in eliminartaxoids) {
+  print(any(downloadgenomecluster$GENOMETAXOID == i))
+}
+# Al parecer ninguno de los que no estaban disponibles se colo en la descarga
+
+for (i in eliminartaxoids) {
+  print(any(PseudoAll$taxon_oid == i))
+}
+# Y por otra parte, si se encuentra en los metadatos (antes de eliminarlos)
+```
+
+```{r}
+# Los elimina
+for (i in eliminartaxoids) {
+  PseudoAll <- PseudoAll[!(PseudoAll$taxon_oid == i),]
+}
+```
+
+# Revisando los genomas que no estan
+```{r}
+for (i in downloadgenomecluster$GENOMETAXOID) {
+  #print(any(df_PseudoAll$taxon_oid == i))
+  if (any(PseudoAll$taxon_oid == i) == FALSE) {
+    print(i)
+  }
+}
+```
+
+```{r}
+Microset_PseudoAll <- read.csv(file = "./exported_img_data170524_3genomes.tsv", header = TRUE, sep = "\t")
+
+df_Microset_PseudoAll <- Microset_PseudoAll[, c(1, 54, 13, 63, 64, 65, 66, 67, 79, 80, 82, 89, 92, 93, 96, 109, 123, 129)]
+
+colnames(PseudoAll)
+colnames(df_Microset_PseudoAll)
+
+colnames(df_Microset_PseudoAll) <- colnames(PseudoAll)
+```
+
+### 12 de marzo del 2024
+# Creacion del dataframe para delimitar los datos con los que se van a trabajar
+```{r}
+pseudomonas <- PseudoAll[, c(1, 54, 13, 
+                            68, 90, 91, 
+                            79, 80, 109, 
+                            73, 63, 64, 
+                            65, 66, 67)]
+
+# Codigo agregado el dia 16 de mayo del 2024
+eliminartaxoids <- c(8084820202, 8085341477, 8084395441, 8085688997, 8085347597, 8084092649, 8084807198, 8085085956, 8019775933, 637000224, 8085016530, 8083583212, 8085092110, 8084839925, 8084413206, 8085098197, 8084767992, 8086259606, 8084850413, 8084102989, 8085237721, 8084400239, 8084628194, 8084693108, 8084813701, 8084762373, 8083775200, 8084856734, 8084097705, 8084833194, 8023655410, 8084826874)
+
+for (i in eliminartaxoids) {
+  pseudomonas <- pseudomonas[!(pseudomonas$taxon_oid == i),]
+}
+
+df_Microset_PseudoAll <- Microset_PseudoAll[, c(1, 54, 13, 
+                                       68, 90, 91, 
+                                       79, 80, 109, 
+                                       73, 63, 64, 
+                                       65, 66, 67)]
+
+colnames(pseudomonas)
+colnames(df_Microset_PseudoAll)
+
+colnames(df_Microset_PseudoAll) <- colnames(pseudomonas)
+
+colnames(pseudomonas)
+
+pseudomonas <- rbind(pseudomonas, df_Microset_PseudoAll)
+pseudomonas[pseudomonas == ""] <- NA
+write.csv(pseudomonas, "genomas3894.csv")
+
+rm(df_Microset_PseudoAll, eliminartaxoids, i, Microset_PseudoAll)
+```
+
+```{r}
+a_hostassociated <- subset(pseudomonas,Ecosystem == "Host-associated")
+a_engenenviro <- subset(pseudomonas,Ecosystem == "Environmental" | Ecosystem == "Engineered")
+a_vaciohostassociated <- subset(pseudomonas, is.na(Ecosystem))
+```
+
+```{r}
+library(dplyr)
+# Analizamos el set de datos que no tuvieron clasificacion con Ecosystem y que pertenecen a los hospederos
+b_Habitat_host <- subset(a_vaciohostassociated, Habitat %in% c("Clinical isolate", "Host", "Host, Soil", "Plants"))
+a_hostassociated <- rbind(a_hostassociated, b_Habitat_host)
+a_vaciohostassociated <- anti_join(a_vaciohostassociated, b_Habitat_host)
+
+c_HostName <- subset(a_vaciohostassociated, !is.na(Host.Name))
+a_hostassociated <- rbind(a_hostassociated, c_HostName)
+a_vaciohostassociated <- anti_join(a_vaciohostassociated, c_HostName)
+
+d_Isolation_host <- subset(a_vaciohostassociated, Isolation %in% c("Abscess", "Actinidia chinensis", "Associated Infection", "bleeding canker", "blood", "Blood", "citrus", "Blood culture", "combat injury wound", "cystic fibrosis airway", "Cystic fibrosis lung", "endoscope", "Endotracheal aspirate", "eye", "feces", "food/cold", "G tube", "individual with cystic fibrosis", "infected lung", "jejunal aspirate", "Mulberry blight tissue", "nasopharynx", "onion", "rectal swab", "right knee", "thigh", "tracheal aspirate", "urine", "Urine cathether", "wound", "wound swab"))
+a_hostassociated <- rbind(a_hostassociated, d_Isolation_host)
+a_vaciohostassociated <- anti_join(a_vaciohostassociated, d_Isolation_host)
+
+rm(b_Habitat_host, c_HostName, d_Isolation_host)
+```
+
+```{r}
+# Por aca se pondran los que no pertencezcan a algun hospedero o pertencen al ambiente
+b_Habitat_env <- subset(a_vaciohostassociated, !is.na(Habitat))
+a_engenenviro <- rbind(a_engenenviro, b_Habitat_env)
+a_vaciohostassociated <- anti_join(a_vaciohostassociated, b_Habitat_env)
+
+d_Isolation_env <- subset(a_vaciohostassociated, Isolation %in% c("4NP Lake Lanier Mesocosm I", "activated sludge", "alcohol foam dispenser in hospital intensive care unit", "Asite", "Biofilm in a drinking water reservoir", "Bird's nest on the bank of the Qiongtailan River", "cave sediment", "chest tube", "coldroom for food storage", "Contaminated site (chlorinated hydrocarbon)", "Cranberry bog", "environment", "environmental", "eutrophic pond", "Glacial Collins", "Ice-wedge polygon", "landfill", "meltwater pond", "mineral substrate", "Needham, MA", "petroleum-contaminated soi", "Plastic debris in land/lake environment", "plate contaminant", "Septic tank", "single colony isolate", "Sludge from paper mill effluent treatment", "soil of paddy field", "soil sample", "stone fragments", "Surface water from Lake Zurich", "washroom sink in hospital intensive care unit", "wet soil"))
+a_engenenviro <- rbind(a_engenenviro, d_Isolation_env)
+a_vaciohostassociated <- anti_join(a_vaciohostassociated, d_Isolation_env)
+
+rm(b_Habitat_env, d_Isolation_env)
+```
+
+
+```{r}
+#Con todos los genomas clasificados para la primera parte, ahora consideramos la siguiente parte para Distinguir de
+# Hosperderos
+e_hospederos <- subset(a_hostassociated, select = c("taxon_oid"))
+e_hospederos$Nicho <- rep("hospedero", nrow(e_hospederos))
+# No Hospederos
+e_ambiente <- subset(a_engenenviro, select = c("taxon_oid"))
+e_ambiente$Nicho <- rep("ambiente", nrow(e_ambiente))
+# No clasificados
+e_sinclase <- subset(a_vaciohostassociated, select = c("taxon_oid"))
+e_sinclase$Nicho <- rep("vacio", nrow(e_sinclase))
+
+Nichos <- rbind(e_hospederos, e_ambiente, e_sinclase)
+
+rm(e_hospederos, e_ambiente, e_sinclase)
+```
+
+```{r}
+# Comprobamos que los genomas esten en orden, osea los descargados coincidan con los que fueron descargados sus metadatos
+resultado <- downloadgenomecluster$GENOMETAXOID %in% Nichos$taxon_oid
+summary(resultado)
+#print(resultado)
+
+#Cambiamos nombres de las columnas
+colnames(Nichos) <- c("Genomas", "Nicho")
+#Guardamos ya que se comprobo todo esta bien.
+write.table(Nichos, "nichospseudo3894.txt", sep = "\t", row.names = FALSE, quote = FALSE)
+```
+
+### 21 de mayo del 2024 y 1 de junio del 2024
+
+# Con el siguiente set de datos, se separaran por mamiferos y plantas.
+## Plantas
+```{r}
+# Set de datos que contiene Plants en esta columna
+b_plants <- subset(pseudomonas, Ecosystem.Category == "Plants")
+#c_restantes <- subset(pseudomonas, Ecosystem.Category != "Plants")
+
+# Esto puede no se util, porque si hay datos donde no habia en Ecosystem.Category, se perderia un buen porcentaje de los que se necesitan
+
+# Tomamos el set de datos que contienen informacion distinta a Plants y vacios.
+c_restantes <- subset(pseudomonas, is.na(Ecosystem.Category) | Ecosystem.Category != "Plants")
+
+# De los restantes que se tienen, al haber eliminado la principal columna de clasificacion, tomamos la columna Relevance y que por otra parte se descarte en base a otras columnas que no sea de alguna otra, como por ejemplo de Ecosystem.Category
+# Se hace en base a la coincidencia de una palabra.
+b_a_plants_Relevance <- subset(c_restantes, grepl("Plant", Relevance, ignore.case = TRUE) & !Ecosystem.Category %in% c("Fungi", "Mammals: Human")) #Se obtienen 7 y se decartan 4 manualmente
+
+# Los extraidos anteriormente que perteneces a plantas por parte de la columna Relevanci, solo se eliminan del origen para continuar con el filtrado.
+c_restantes <- subset(c_restantes, !taxon_oid %in%  b_a_plants_Relevance$taxon_oid)
+print(nrow(b_plants) + nrow(c_restantes) + nrow(b_a_plants_Relevance))
+
+```
+
+### 2 de junio del 2024
+Clasificacion de Host Name por Planta y Mamifero, otros.
+```{r}
+
+# Clasificamos manualmente los genomas, por el tipo de individuo basado en la columna Host.Name
+HostName <- subset(c_restantes, !is.na(Host.Name))
+# Sacamos todos los datos sin repetir
+listauniq_hostname <- unique(HostName$Host.Name)
+# Creamos un dataframe con las distintas clasificaciones de Host.Name y otra clasificacion entre Plantas y Mamiferos.
+df_hostname <- data.frame(Class_HostName = listauniq_hostname)
+pizza = 1:length(listauniq_hostname)
+df_hostname["Reino"] <- pizza
+# Sustitucion.
+
+
+##############Corregir de nuevo###################
+df_hostname[c(1,24,39,46,55,67,68,73,74,75,83), "Reino"] <- "Mamifero"
+df_hostname[c(2,6,8,9,10,13,15,16,19,22,25,26,28,29,30,31,32,33,35,37,42,43,45,48,50,51,52,53,54,57,58,59,70,72,77,79,82), "Reino"] <- "Otro" # Se incluyen, hongos, nematodos, aves, peces, reptiles, gallo, especies raras, algas y moluscos.
+df_hostname[c(3,4,5,7,11,12,14,17,18,20,21,23,27,34,36,38,40,41,44,47,49,56,60,61,62,63,64,65,66,69,71,76,78,80,81), "Reino"] <- "Plantas"
+
+```
+
+```{r}
+# Contimuamos con las plantas
+plantas_hostname_list <- subset(df_hostname, Reino == "Plantas")
+df_plants_hostname_to_bpla <- subset(c_restantes, Host.Name %in% plantas_hostname_list$Class_HostName)
+
+# Juntamos los de Relevance, Host.Name con b_plants
+b_plants <- rbind(b_plants, b_a_plants_Relevance, df_plants_hostname_to_bpla)
+
+# Y los que se extrajeron de Host.Name, se eliminan del origen
+c_restantes <- subset(c_restantes, !taxon_oid %in% df_plants_hostname_to_bpla$taxon_oid)
+```
+
+## Mamiferos
+```{r}
+# Finamente toca coleccionar a todos los mamiferos, probablemente mayoria humanos, usamos un grep para la busqueda
+b_mammals <- subset(c_restantes, grepl("Mamma", Ecosystem.Category, ignore.case = TRUE))
+# Los tomados, los eliminamos de la lista c_restantes
+c_restantes <- subset(c_restantes, !grepl("Mamma", Ecosystem.Category, ignore.case = TRUE))
+
+mam_hostname_list <- subset(df_hostname, Reino == "Mamifero")
+mammals_hostname <- subset(c_restantes, Host.Name %in% mam_hostname_list$Class_HostName)
+
+# Los agregamos a la lista de b_mammals
+b_mammals <- rbind(b_mammals, mammals_hostname)
+# Los tomados, los eliminamos de la lista c_restantes
+c_restantes <- subset(c_restantes, !taxon_oid  %in% mammals_hostname$taxon_oid)
+```
+
+# Resumen de variables
+```{r}
+# A eliminar
+rm(b_a_plants_Relevance, df_hostname, mam_hostname_list, plantas_hostname_list)
+rm(mammals_hostname, df_plants_hostname_to_bpla)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
