@@ -34,4 +34,4 @@
 
 #
 # Write your commands in the next line
-python2 RandomForest.py
+python2 RandomForest_old.py
