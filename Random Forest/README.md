@@ -125,7 +125,7 @@ Y con una salida csv debido a que en el cluster no se tiene el paquete para visu
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/7636354b-e6a3-4cb0-b515-1493d7684957)
 
-Pero con el script `` Se pudo obtener el grafico de confusion
+Pero con el script `dataframeconfusionTOgraph.py` Se pudo obtener el grafico de confusion de manera local.
 
 ![Confusion_graph](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/cad56c29-ed1d-40e4-a8f5-52220c7ee104)
 
