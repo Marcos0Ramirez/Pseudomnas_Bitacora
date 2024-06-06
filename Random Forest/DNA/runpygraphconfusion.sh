@@ -15,7 +15,7 @@
 #
 # Send an email after the job has finished
 #$ -m e
-#$ -M marcosuniramirez7@outlook.com
+#$ -M correo@dominio.com
 #
 #
 # Resources of compute
