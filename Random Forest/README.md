@@ -119,3 +119,14 @@ Con el ejecutador del script `runpygraphconfusion.sh` y el script de Python que 
 # 26 de mayo del 2024
 Termino el script y con resultados exitosos del analisis, lo cuales podemos contar con el grafico de importancia
 
+![importancia_caracteristicas](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/cdb8415b-f616-4ab0-add6-e65a17365d68)
+
+Y con una salida csv debido a que en el cluster no se tiene el paquete para visualizar la matriz de confusion
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/7636354b-e6a3-4cb0-b515-1493d7684957)
+
+Pero con el script `` Se pudo obtener el grafico de confusion
+
+![Confusion_graph](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/cad56c29-ed1d-40e4-a8f5-52220c7ee104)
+
+
