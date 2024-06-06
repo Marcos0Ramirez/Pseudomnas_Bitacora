@@ -12,7 +12,7 @@ import os
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_score, recall_score, f1_score
 
-imgrutabase = "C:/Users/52477/Documents/UNAM Octavo semestre/Laboratorio Internacional de Investigación Sobre el Genoma Humano/Laboratorio de evolucion y ecologia/RandomForest/RandomForest_py/DNA"
+imgrutabase = "C:/RandomForest/RandomForest_py/DNA"
 mtzconfusion = "confusion_matrix.csv"
 imgconfusion = "Confusion_graph.png"
 
