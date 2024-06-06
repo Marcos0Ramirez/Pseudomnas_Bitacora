@@ -110,3 +110,5 @@ print("Recall:", recall)
 print("F1 Score:", f1)
 
 ```
+
+# 24 de mayo del 2024
