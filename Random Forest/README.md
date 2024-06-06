@@ -112,3 +112,4 @@ print("F1 Score:", f1)
 ```
 
 # 24 de mayo del 2024
+Se termino el script final para correr en el cluster y analizar las 3,894 secuencias de IMG, el cual esta a disposicion aqui []
