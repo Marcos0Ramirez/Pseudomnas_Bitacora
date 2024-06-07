@@ -151,7 +151,7 @@ pd.DataFrame(class_etiquetas).drop_duplicates().to_csv("np_class_etiquetas.csv",
 ```
 Se añadio modificaciones para el grafico de importancia, pero ahora tambien se agrego el grafico en version logaritmica
 
-Los primeros 100
+### Los primeros 100
 ```
 importancias = rf.feature_importances_
 feature_importances = pd.DataFrame(importancias, index=mtz_class_caracteres_list, columns=['Importancia'])
@@ -160,7 +160,7 @@ feature_importances = feature_importances.sort_values(by='Importancia', ascendin
 print(feature_importances)
 primeros100 = feature_importances.iloc[:100]
 ```
-Normal
+### Normal
 ```
 plt.figure(figsize=(20, 12))
 primeros100.plot(kind='bar')
@@ -198,3 +198,5 @@ plt.tight_layout()
 plt.savefig(rutaimportacara2, format='png', dpi=300, bbox_inches='tight')
 
 ```
+Falta poner las diferencias entre cada cateogoria
+Usar los 100 primeros cluster y de los genomas que pertenecen a cada cluster. Cuantos pertenecen a hospederos y cuantos a ambiente como este primer ejemplo
