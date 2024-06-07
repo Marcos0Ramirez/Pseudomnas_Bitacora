@@ -199,4 +199,5 @@ plt.savefig(rutaimportacara2, format='png', dpi=300, bbox_inches='tight')
 
 ```
 Falta poner las diferencias entre cada cateogoria
-Usar los 100 primeros cluster y de los genomas que pertenecen a cada cluster. Cuantos pertenecen a hospederos y cuantos a ambiente como este primer ejemplo
+Usar los 100 primeros cluster y de los genomas que pertenecen a cada cluster. Cuantos pertenecen a hospederos y cuantos a ambiente como este primer ejemplo.
+Lo hacemos desde la matriz de cdhit, nombrando con la columnas columnas necesarias y tomando solo los datos que tengan etiquetas diferentes a vacio. Realizamos el conteo.
