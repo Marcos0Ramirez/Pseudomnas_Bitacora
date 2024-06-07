@@ -149,3 +149,52 @@ class_etiquetas = np.concatenate((etiquetas, codified)).T
 print(class_etiquetas)
 pd.DataFrame(class_etiquetas).drop_duplicates().to_csv("np_class_etiquetas.csv", index=False)
 ```
+Se añadio modificaciones para el grafico de importancia, pero ahora tambien se agrego el grafico en version logaritmica
+
+Los primeros 100
+```
+importancias = rf.feature_importances_
+feature_importances = pd.DataFrame(importancias, index=mtz_class_caracteres_list, columns=['Importancia'])
+feature_importances = feature_importances.sort_values(by='Importancia', ascending=False)
+
+print(feature_importances)
+primeros100 = feature_importances.iloc[:100]
+```
+Normal
+```
+plt.figure(figsize=(20, 12))
+primeros100.plot(kind='bar')
+plt.title('Importancia de las características')
+plt.xlabel('Características')
+plt.ylabel('Importancia')
+# Ajustar la rotación de las etiquetas del eje y
+plt.xticks(rotation=90, fontsize=3, fontweight='bold') 
+# Ajustar el diseño para que no se recorten los elementos
+plt.tight_layout()
+# Guardar la gráfica como un archivo PNG
+plt.savefig(rutaimportacara, format='png', dpi=300, bbox_inches='tight')
+```
+### Logartimica
+```
+# Configurar el tamaño de la figura (ancho, alto) en pulgadas (GRAFICO LOGARITMICA)
+# Crear la figura con el tamaño especificado
+plt.figure(figsize=(20, 12))
+
+# Crear la gráfica de barras con el eje y en escala logarítmica
+primeros100.plot(kind='bar', logy=True)  # Aquí se especifica que el eje y será logarítmico
+
+# Título y etiquetas de los ejes
+plt.title('Importancia de las características')
+plt.xlabel('Características')
+plt.ylabel('Importancia')
+
+# Ajustar el tamaño de las etiquetas del eje x
+plt.xticks(rotation=90, fontsize=3, fontweight='bold')  # Ajusta el tamaño de la fuente según tus necesidades
+
+# Ajustar el diseño para que no se recorten los elementos
+plt.tight_layout()
+
+# Guardar la gráfica como un archivo PNG
+plt.savefig(rutaimportacara2, format='png', dpi=300, bbox_inches='tight')
+
+```
