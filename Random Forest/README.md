@@ -134,3 +134,5 @@ Se observo que genomas se encuntran en le cluster mas importante `Cluster 50634`
 
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/b41ae281-fb55-4e20-bc77-07b0684d433c)
 
+# 6 de junio del 2024
+Trabajando con el analisis en local, se agrego al codigo que pueda guardar la codificaicon de los nichos en numeros.
