@@ -141,10 +141,11 @@ Trabajando con el analisis en local, se agrego al codigo que pueda guardar la co
 labels = np.array(mtz_class_caracteres["Nicho"])
 la_enc = LabelEncoder()
 encoded_labels = la_enc.fit_transform(labels)
-
+######## Nuevo de aqui pa bajo ########
 etiquetas = labels.reshape(1, -1)
 codified =  encoded_labels.reshape(1, -1)
 
 class_etiquetas = np.concatenate((etiquetas, codified)).T
-pd.DataFrame(class_etiquetas).to_csv("np_class_etiquetas.csv", index=False)
+print(class_etiquetas)
+pd.DataFrame(class_etiquetas).drop_duplicates().to_csv("np_class_etiquetas.csv", index=False)
 ```
