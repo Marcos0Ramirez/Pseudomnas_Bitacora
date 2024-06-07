@@ -136,3 +136,15 @@ Se observo que genomas se encuntran en le cluster mas importante `Cluster 50634`
 
 # 6 de junio del 2024
 Trabajando con el analisis en local, se agrego al codigo que pueda guardar la codificaicon de los nichos en numeros.
+
+```
+labels = np.array(mtz_class_caracteres["Nicho"])
+la_enc = LabelEncoder()
+encoded_labels = la_enc.fit_transform(labels)
+
+etiquetas = labels.reshape(1, -1)
+codified =  encoded_labels.reshape(1, -1)
+
+class_etiquetas = np.concatenate((etiquetas, codified)).T
+pd.DataFrame(class_etiquetas).to_csv("np_class_etiquetas.csv", index=False)
+```
