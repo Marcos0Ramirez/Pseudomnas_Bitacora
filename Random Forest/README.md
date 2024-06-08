@@ -221,3 +221,26 @@ classificacion.sort_values(by='Genomas')
 mtz_class_caracteres = pd.concat([mtz_class_caracteres.drop(columns=['Specie'])], axis=1) 
 ```
 Ya con la informacion de los nichos y los genomas usados, ahora se puede saber cuales son los genomas que pertenecen a cada cluster
+```
+###################### -- Caracteristicas que son importantes -- ######################
+importancias = rf.feature_importances_
+feature_importances = pd.DataFrame(importancias, index=mtz_class_caracteres_list, columns=['Importancia'])
+feature_importances = feature_importances.sort_values(by='Importancia', ascending=False)
+
+print(feature_importances)
+primeros100 = feature_importances.iloc[:100]
+###################### -- Nichos por Clusters -- ###################### ####### Nueva linea #######
+print(primeros100)
+#Tomamos los nombres de los clusters. ####### Nueva linea #######
+cienclusters_importantes = " ".join(primeros100.index) ####### Nueva linea #######
+# Como la matriz esta en un numpy array, ahora toca extraer por el numero de las columna. ####### Nueva linea #######
+cienclusters_importantes = cienclusters_importantes.replace("Cluster", "").split(" ") ####### Nueva linea #######
+# Nombramos las columnas que necesitamos ####### Nueva linea #######
+
+# Simplificamos el for anterior ####### Nueva linea #######
+clustercien = [mtz_class_caracteres[:,int(npcol)] for npcol in cienclusters_importantes if not npcol is None] ####### Nueva linea #######
+mtz_clustercien = pd.DataFrame(np.array(clustercien).T, columns=cienclusters_importantes, index=mtz_idgen_nicho.index) ####### Nueva linea #######
+# añadimos los nichos    ####### Nueva linea #######
+mtz_clustercien['Nichos'] = mtz_idgen_nicho['Nicho'] ####### Nueva linea #######
+# Se virifico que al ordenar los datos, se colocan correctamente sin incosistencias ####### Nueva linea #######
+```
