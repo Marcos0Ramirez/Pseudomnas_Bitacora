@@ -201,3 +201,23 @@ plt.savefig(rutaimportacara2, format='png', dpi=300, bbox_inches='tight')
 Falta poner las diferencias entre cada cateogoria
 Usar los 100 primeros cluster y de los genomas que pertenecen a cada cluster. Cuantos pertenecen a hospederos y cuantos a ambiente como este primer ejemplo.
 Lo hacemos desde la matriz de cdhit, nombrando con la columnas columnas necesarias y tomando solo los datos que tengan etiquetas diferentes a vacio. Realizamos el conteo.
+
+# 8 de junio del 2024
+Se plantea añadir mas codigo para realizar ahora la matriz reducida con los 100 clusters mas importantes y con los genomas usados para hacer las predicciones.
+
+Tener los genomas con indices son muy utiles dibido que al extraer los nichos, podemos obtener un nuevo dataframe con los genomas a usar para las predicciones.
+```
+# Juntamos ambos archivos 
+mtz_class_caracteres = pd.merge(matriz.sort_values(by='Genomas'), classificacion.sort_values(by='Genomas'), on='Genomas')
+mtz_class_caracteres.set_index('Genomas', inplace=True) ####### Nueva linea #######
+mtz_class_caracteres = mtz_class_caracteres[mtz_class_caracteres['Nicho'] != 'Unclassified']
+
+mtz_idgen_nicho = pd.DataFrame(pd.Series(mtz_class_caracteres['Nicho'])) ####### Nueva linea ####### Debido a que se quitaron los genomas que no se requieren
+
+matriz.sort_values(by='Genomas')
+classificacion.sort_values(by='Genomas')
+###################### -- PREPARACION DE LOS DATOS -- ######################
+### -- One-Hot Encoding -- ###
+mtz_class_caracteres = pd.concat([mtz_class_caracteres.drop(columns=['Specie'])], axis=1) 
+```
+Ya con la informacion de los nichos y los genomas usados, ahora se puede saber cuales son los genomas que pertenecen a cada cluster
