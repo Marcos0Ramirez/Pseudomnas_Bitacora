@@ -244,3 +244,7 @@ mtz_clustercien = pd.DataFrame(np.array(clustercien).T, columns=cienclusters_imp
 mtz_clustercien['Nichos'] = mtz_idgen_nicho['Nicho'] ####### Nueva linea #######
 # Se virifico que al ordenar los datos, se colocan correctamente sin incosistencias ####### Nueva linea #######
 ```
+
+# 10 de junio del 2024
+
+![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/2b3bd46e-6204-4520-84c5-a74dad1d043d)
