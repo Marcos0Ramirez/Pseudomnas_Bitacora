@@ -1,0 +1,4467 @@
+abriendo el archivo
+empezamos con los chunks
+tomamos los chunks
+listo para concatenar todo
+      Genomas Cluster0 Cluster1  ... Cluster18998 Cluster18999 Cluster19000
+0  2505313052        0        3  ...            1            1            1
+1  2517572175        0        0  ...            0            0            0
+2  2548876750        0        1  ...            0            0            0
+3  2554235471        0        0  ...            0            0            0
+4  2630968743        0        5  ...            0            0            0
+5  2713896862        0        1  ...            0            0            0
+6  2785510749        1        0  ...            0            0            0
+7  2923166773        0        0  ...            0            0            0
+8  2972001829        0        0  ...            0            0            0
+9  8011072914        0        0  ...            0            0            0
+
+[10 rows x 19002 columns]
+('Columnas de df antes de eliminar:', Index([u'Genomas', u'Cluster0', u'Cluster1', u'Cluster2', u'Cluster3',
+       u'Cluster4', u'Cluster5', u'Cluster6', u'Cluster7', u'Cluster8',
+       ...
+       u'Cluster18991', u'Cluster18992', u'Cluster18993', u'Cluster18994',
+       u'Cluster18995', u'Cluster18996', u'Cluster18997', u'Cluster18998',
+       u'Cluster18999', u'Cluster19000'],
+      dtype='object', length=19002))
+[]
+      Genomas Cluster0 Cluster1  ... Cluster18998 Cluster18999 Cluster19000
+0  2505313052        0        3  ...            1            1            1
+1  2517572175        0        0  ...            0            0            0
+2  2548876750        0        1  ...            0            0            0
+3  2554235471        0        0  ...            0            0            0
+4  2630968743        0        5  ...            0            0            0
+5  2713896862        0        1  ...            0            0            0
+6  2785510749        1        0  ...            0            0            0
+7  2923166773        0        0  ...            0            0            0
+8  2972001829        0        0  ...            0            0            0
+9  8011072914        0        0  ...            0            0            0
+
+[10 rows x 19002 columns]
+('Columnas de df despu\xc3\xa9s de eliminar:', Index([u'Genomas', u'Cluster0', u'Cluster1', u'Cluster2', u'Cluster3',
+       u'Cluster4', u'Cluster5', u'Cluster6', u'Cluster7', u'Cluster8',
+       ...
+       u'Cluster18991', u'Cluster18992', u'Cluster18993', u'Cluster18994',
+       u'Cluster18995', u'Cluster18996', u'Cluster18997', u'Cluster18998',
+       u'Cluster18999', u'Cluster19000'],
+      dtype='object', length=19002))
+Ahora si las dimensiones de la matriz dataframe
+(10, 19002)
+      Genomas         Nicho
+0  2505313052      Patogeno
+1  2517572175     HostHuman
+2  2548876750     HostFungi
+3  2554235471     Patogeno 
+4  2630968743      Ambiente
+5  2713896862      Ambiente
+6  2785510749      Hostalga
+7  2923166773    Hostanimal
+8  2972001829  Unclassified
+9  8011072914  Unclassified
+antes de concatenar las tablas
+      Genomas Cluster0 Cluster1  ... Cluster18999 Cluster19000         Nicho
+0  2505313052        0        3  ...            1            1      Patogeno
+1  2517572175        0        0  ...            0            0     HostHuman
+2  2548876750        0        1  ...            0            0     HostFungi
+3  2554235471        0        0  ...            0            0     Patogeno 
+4  2630968743        0        5  ...            0            0      Ambiente
+5  2713896862        0        1  ...            0            0      Ambiente
+6  2785510749        1        0  ...            0            0      Hostalga
+7  2923166773        0        0  ...            0            0    Hostanimal
+8  2972001829        0        0  ...            0            0  Unclassified
+9  8011072914        0        0  ...            0            0  Unclassified
+
+[10 rows x 19003 columns]
+Una vez que ya se hizo como indice la columna Genomas
+               Genomas Cluster0  ... Cluster19000         Nicho
+Genomas                          ...                           
+2505313052  2505313052        0  ...            1      Patogeno
+2517572175  2517572175        0  ...            0     HostHuman
+2548876750  2548876750        0  ...            0     HostFungi
+2554235471  2554235471        0  ...            0     Patogeno 
+2630968743  2630968743        0  ...            0      Ambiente
+2713896862  2713896862        0  ...            0      Ambiente
+2785510749  2785510749        1  ...            0      Hostalga
+2923166773  2923166773        0  ...            0    Hostanimal
+2972001829  2972001829        0  ...            0  Unclassified
+8011072914  8011072914        0  ...            0  Unclassified
+
+[10 rows x 19003 columns]
+Index([u'2505313052', u'2517572175', u'2548876750', u'2554235471',
+       u'2630968743', u'2713896862', u'2785510749', u'2923166773',
+       u'2972001829', u'8011072914'],
+      dtype='object', name=u'Genomas')
+(8, 19003)
+               Genomas Cluster0 Cluster1  ... Cluster18999 Cluster19000      Nicho
+Genomas                                   ...                                     
+2505313052  2505313052        0        3  ...            1            1   Patogeno
+2517572175  2517572175        0        0  ...            0            0  HostHuman
+2548876750  2548876750        0        1  ...            0            0  HostFungi
+2554235471  2554235471        0        0  ...            0            0  Patogeno 
+2630968743  2630968743        0        5  ...            0            0   Ambiente
+
+[5 rows x 19003 columns]
+los nichos los hacemos array
+la matriz la hacemos arreglo
+('Training Features Shape:', (6, 19001))
+('Training Labels Shape:', (6,))
+('Testing Features Shape:', (2, 19001))
+('Testing Labels Shape:', (2,))
+              Importancia
+Cluster1723      0.034339
+Cluster7836      0.020637
+Cluster17265     0.020000
+Cluster18276     0.020000
+Cluster8078      0.020000
+Cluster15304     0.020000
+Cluster7308      0.020000
+Cluster6284      0.019755
+Cluster12050     0.019727
+Cluster2818      0.019727
+Cluster4988      0.019727
+Cluster3716      0.019600
+Cluster18593     0.019059
+Cluster7919      0.018987
+Cluster1955      0.018868
+Cluster18362     0.018868
+Cluster1235      0.018615
+Cluster11450     0.018608
+Cluster372       0.018270
+Cluster16299     0.018100
+Cluster13848     0.018000
+Cluster11344     0.018000
+Cluster4758      0.018000
+Cluster3707      0.018000
+Cluster5175      0.017857
+Cluster12171     0.017857
+Cluster11118     0.017561
+Cluster2835      0.017455
+Cluster13255     0.017241
+Cluster17708     0.017241
+...                   ...
+Cluster6345      0.000000
+Cluster6344      0.000000
+Cluster6343      0.000000
+Cluster6341      0.000000
+Cluster6350      0.000000
+Cluster6340      0.000000
+Cluster6339      0.000000
+Cluster6338      0.000000
+Cluster6337      0.000000
+Cluster6336      0.000000
+Cluster6335      0.000000
+Cluster6349      0.000000
+Cluster6351      0.000000
+Cluster6367      0.000000
+Cluster6360      0.000000
+Cluster6366      0.000000
+Cluster6365      0.000000
+Cluster6364      0.000000
+Cluster6363      0.000000
+Cluster6362      0.000000
+Cluster6361      0.000000
+Cluster6359      0.000000
+Cluster6352      0.000000
+Cluster6358      0.000000
+Cluster6357      0.000000
+Cluster6356      0.000000
+Cluster6355      0.000000
+Cluster6354      0.000000
+Cluster6353      0.000000
+Cluster19000     0.000000
+
+[19001 rows x 1 columns]
+              Importancia
+Cluster1723      0.034339
+Cluster7836      0.020637
+Cluster17265     0.020000
+Cluster18276     0.020000
+Cluster8078      0.020000
+Cluster15304     0.020000
+Cluster7308      0.020000
+Cluster6284      0.019755
+Cluster12050     0.019727
+Cluster2818      0.019727
+Cluster4988      0.019727
+Cluster3716      0.019600
+Cluster18593     0.019059
+Cluster7919      0.018987
+Cluster1955      0.018868
+Cluster18362     0.018868
+Cluster1235      0.018615
+Cluster11450     0.018608
+Cluster372       0.018270
+Cluster16299     0.018100
+Cluster13848     0.018000
+Cluster11344     0.018000
+Cluster4758      0.018000
+Cluster3707      0.018000
+Cluster5175      0.017857
+Cluster12171     0.017857
+Cluster11118     0.017561
+Cluster2835      0.017455
+Cluster13255     0.017241
+Cluster17708     0.017241
+...                   ...
+Cluster708       0.002000
+Cluster4712      0.001951
+Cluster11642     0.001939
+Cluster2211      0.001875
+Cluster3058      0.001875
+Cluster7217      0.001875
+Cluster7136      0.001730
+Cluster266       0.001629
+Cluster16625     0.001624
+Cluster5974      0.001624
+Cluster15855     0.001579
+Cluster8632      0.001561
+Cluster2946      0.001463
+Cluster3071      0.001387
+Cluster8006      0.001385
+Cluster8782      0.001333
+Cluster7339      0.001250
+Cluster3145      0.001250
+Cluster8188      0.001250
+Cluster17298     0.001154
+Cluster10580     0.001139
+Cluster13487     0.001132
+Cluster1405      0.001053
+Cluster4830      0.000941
+Cluster2288      0.000914
+Cluster18342     0.000914
+Cluster7526      0.000779
+Cluster8393      0.000759
+Cluster12084     0.000755
+Cluster7407      0.000667
+
+[100 rows x 1 columns]
+('columnas 100; extraidas: ', [array(['0', '1', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['1', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '2', '1', '1', '1', '1', '1', '2'], dtype=object), array(['0', '0', '0', '0', '2', '1', '0', '0'], dtype=object), array(['1', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '0'], dtype=object), array(['0', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['1', '1', '1', '0', '1', '1', '1', '0'], dtype=object), array(['0', '0', '0', '0', '1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '1', '1', '2', '1', '1'], dtype=object), array(['2', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '1', '1', '1'], dtype=object), array(['1', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '1', '1'], dtype=object), array(['2', '1', '1', '2', '1', '1', '1', '1'], dtype=object), array(['1', '0', '1', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '2', '2', '0', '3', '1', '2', '2'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '0'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '1', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '1', '0', '0', '1', '1', '0'], dtype=object), array(['0', '1', '0', '0', '0', '1', '0', '0'], dtype=object), array(['1', '0', '1', '0', '2', '1', '0', '0'], dtype=object), array(['1', '0', '0', '0', '0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '2', '0', '0', '0', '1'], dtype=object), array(['1', '2', '1', '1', '2', '1', '1', '1'], dtype=object), array(['1', '0', '0', '1', '0', '0', '1', '1'], dtype=object), array(['1', '0', '0', '0', '0', '1', '1', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '0', '0', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '1', '1'], dtype=object), array(['1', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '1'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '2', '1', '1', '2', '1', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['1', '0', '1', '0', '2', '1', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['2', '1', '2', '1', '3', '2', '1', '3'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '2', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '1', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '0'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '1', '0', '2', '0', '0', '1', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '2', '2', '1', '1', '1', '0', '1'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['1', '0', '1', '1', '1', '1', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '1'], dtype=object), array(['1', '0', '1', '0', '0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '0', '1', '1', '1', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '0', '1', '1', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '1', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object)])
+('matriz mtz_clustercien creada\\n',            1723 7836 17265 18276 8078  ... 7526 8393 12084 7407       Nicho
+Genomas                                ...                                 
+2505313052    0    0     0     1    0  ...    0    0     0    1    Patogeno
+2517572175    1    1     1     0    1  ...    0    0     0    0   HostHuman
+2548876750    1    0     0     0    0  ...    0    0     0    1   HostFungi
+2554235471    0    0     0     0    1  ...    1    0     1    0   Patogeno 
+2630968743    1    0     0     1    0  ...    0    0     0    1    Ambiente
+2713896862    1    0     0     1    0  ...    0    0     0    1    Ambiente
+2785510749    0    0     0     0    0  ...    0    0     0    0    Hostalga
+2923166773    0    0     0     0    0  ...    0    1     0    0  Hostanimal
+
+[8 rows x 101 columns])
+('indices de mtz_clustercien \\n', Index([u'2505313052', u'2517572175', u'2548876750', u'2554235471',
+       u'2630968743', u'2713896862', u'2785510749', u'2923166773'],
+      dtype='object', name=u'Genomas'))
+('columnas de mtz_clustercien \\n', Index([u'1723', u'7836', u'17265', u'18276', u'8078', u'15304', u'7308',
+       u'6284', u'12050', u'2818',
+       ...
+       u'13487', u'1405', u'4830', u'2288', u'18342', u'7526', u'8393',
+       u'12084', u'7407', u'Nicho'],
+      dtype='object', length=101))
+Continuamos hacia el conteo, juntando en indice y las 100 columnas
+('u', array(['Patogeno', 'HostHuman', 'HostFungi', 'Patogeno ', 'Ambiente',
+       'Hostalga', 'Hostanimal'], dtype=object), 'c', ['1723', '7836', '17265', '18276', '8078', '15304', '7308', '6284', '12050', '2818', '4988', '3716', '18593', '7919', '1955', '18362', '1235', '11450', '372', '16299', '13848', '11344', '4758', '3707', '5175', '12171', '11118', '2835', '13255', '17708', '4493', '17400', '13313', '12102', '5383', '2338', '6023', '11663', '1901', '14141', '17063', '13514', '12486', '1271', '15052', '5719', '12781', '5741', '15134', '16691', '808', '14368', '10777', '11765', '4933', '3019', '13284', '16075', '14016', '15207', '9262', '533', '7050', '15804', '6778', '3873', '16817', '14403', '1985', '10772', '708', '4712', '11642', '2211', '3058', '7217', '7136', '266', '16625', '5974', '15855', '8632', '2946', '3071', '8006', '8782', '7339', '3145', '8188', '17298', '10580', '13487', '1405', '4830', '2288', '18342', '7526', '8393', '12084', '7407', 'Nicho'])
+A eliminar la palabra Nicho de la lista c
+(['1723', '7836', '17265', '18276', '8078', '15304', '7308', '6284', '12050', '2818', '4988', '3716', '18593', '7919', '1955', '18362', '1235', '11450', '372', '16299', '13848', '11344', '4758', '3707', '5175', '12171', '11118', '2835', '13255', '17708', '4493', '17400', '13313', '12102', '5383', '2338', '6023', '11663', '1901', '14141', '17063', '13514', '12486', '1271', '15052', '5719', '12781', '5741', '15134', '16691', '808', '14368', '10777', '11765', '4933', '3019', '13284', '16075', '14016', '15207', '9262', '533', '7050', '15804', '6778', '3873', '16817', '14403', '1985', '10772', '708', '4712', '11642', '2211', '3058', '7217', '7136', '266', '16625', '5974', '15855', '8632', '2946', '3071', '8006', '8782', '7339', '3145', '8188', '17298', '10580', '13487', '1405', '4830', '2288', '18342', '7526', '8393', '12084', '7407'], False)
+matriz vacia, creandose
+matriz vacia, creada, continuamos con concatenar los 100 mejores cluster en la matriz vacia
+('Patogeno', '1723')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '7836')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '17265')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '18276')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '8078')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '15304')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '7308')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '6284')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '12050')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '2818')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '4988')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '3716')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '18593')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '7919')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '1955')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '18362')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '1235')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '11450')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '372')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Patogeno', '16299')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '13848')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '11344')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '4758')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Patogeno', '3707')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '5175')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '12171')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '11118')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '2835')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '13255')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '17708')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '4493')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '17400')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '13313')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '12102')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '5383')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '2338')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '6023')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '11663')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '1901')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '14141')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '17063')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '13514')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '12486')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '1271')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '15052')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '5719')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '12781')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '5741')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '15134')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '16691')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '808')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '14368')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '10777')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '11765')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '4933')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '3019')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '13284')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '16075')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '14016')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '15207')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '9262')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '533')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '7050')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '15804')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '6778')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '3873')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Patogeno', '16817')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '14403')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '1985')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '10772')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '708')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '4712')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '11642')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '2211')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '3058')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '7217')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '7136')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '266')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '16625')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '5974')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '15855')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '8632')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '2946')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '3071')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '8006')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '8782')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '7339')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '3145')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '8188')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '17298')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '10580')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '13487')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '1405')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '4830')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '2288')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '18342')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno', '7526')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '8393')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '12084')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno', '7407')
+['2505313052']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '1723')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '7836')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '17265')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '18276')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '8078')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '15304')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '7308')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('HostHuman', '6284')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '12050')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '2818')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '4988')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '3716')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '18593')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '7919')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '1955')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '18362')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '1235')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '11450')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '372')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '16299')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '13848')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '11344')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '4758')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '3707')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '5175')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '12171')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '11118')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('HostHuman', '2835')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '13255')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '17708')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '4493')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '17400')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '13313')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '12102')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '5383')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '2338')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '6023')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '11663')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '1901')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('HostHuman', '14141')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '17063')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '13514')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '12486')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '1271')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '15052')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '5719')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '12781')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '5741')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '15134')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '16691')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '808')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '14368')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '10777')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '11765')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '4933')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '3019')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '13284')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '16075')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '14016')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '15207')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '9262')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '533')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '7050')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '15804')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '6778')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '3873')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '16817')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '14403')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '1985')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '10772')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '708')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '4712')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '11642')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '2211')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '3058')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '7217')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '7136')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '266')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '16625')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '5974')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '15855')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '8632')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '2946')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '3071')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('HostHuman', '8006')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '8782')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '7339')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '3145')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '8188')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '17298')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '10580')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '13487')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '1405')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '4830')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostHuman', '2288')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '18342')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '7526')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '8393')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '12084')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostHuman', '7407')
+['2517572175']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '1723')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '7836')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '17265')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '18276')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '8078')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '15304')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '7308')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '6284')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '12050')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '2818')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '4988')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '3716')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '18593')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '7919')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '1955')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '18362')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '1235')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '11450')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '372')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '16299')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '13848')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '11344')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '4758')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '3707')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '5175')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '12171')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '11118')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('HostFungi', '2835')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '13255')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '17708')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '4493')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '17400')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '13313')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '12102')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '5383')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '2338')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '6023')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '11663')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '1901')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '14141')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '17063')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '13514')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '12486')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '1271')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '15052')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '5719')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '12781')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '5741')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '15134')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '16691')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '808')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '14368')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '10777')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '11765')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '4933')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '3019')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '13284')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('HostFungi', '16075')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '14016')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '15207')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '9262')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '533')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '7050')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '15804')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '6778')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '3873')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('HostFungi', '16817')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '14403')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '1985')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '10772')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '708')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '4712')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '11642')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '2211')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '3058')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '7217')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '7136')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '266')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '16625')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '5974')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '15855')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '8632')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '2946')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '3071')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('HostFungi', '8006')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '8782')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '7339')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '3145')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '8188')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '17298')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '10580')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '13487')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '1405')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '4830')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '2288')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '18342')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('HostFungi', '7526')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '8393')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '12084')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('HostFungi', '7407')
+['2548876750']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '1723')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '7836')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '17265')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '18276')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '8078')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '15304')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '7308')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '6284')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '12050')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '2818')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '4988')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '3716')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '18593')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '7919')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '1955')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '18362')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '1235')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '11450')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '372')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '16299')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '13848')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '11344')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '4758')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Patogeno ', '3707')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '5175')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '12171')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '11118')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '2835')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '13255')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '17708')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '4493')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '17400')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '13313')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '12102')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '5383')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '2338')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '6023')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '11663')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Patogeno ', '1901')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '14141')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '17063')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '13514')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '12486')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '1271')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '15052')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '5719')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '12781')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '5741')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '15134')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '16691')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '808')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '14368')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '10777')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '11765')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '4933')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '3019')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '13284')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '16075')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '14016')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '15207')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '9262')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '533')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '7050')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '15804')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '6778')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '3873')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '16817')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '14403')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '1985')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Patogeno ', '10772')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '708')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '4712')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '11642')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '2211')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '3058')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '7217')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '7136')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '266')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '16625')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '5974')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Patogeno ', '15855')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '8632')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '2946')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '3071')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '8006')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '8782')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '7339')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '3145')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '8188')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '17298')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '10580')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '13487')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '1405')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '4830')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '2288')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '18342')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '7526')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '8393')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Patogeno ', '12084')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Patogeno ', '7407')
+['2554235471']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '1723')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '7836')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '17265')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '18276')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '8078')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '15304')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '7308')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '6284')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['2', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2, 1])
+('sumas: ', 3)
+('zeroconteonichos.loc[i,j]', 3)
+('Ambiente', '12050')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '2818')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '4988')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '3716')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 0])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '18593')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 0])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '7919')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '1955')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '18362')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 0])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '1235')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '11450')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 2])
+('sumas: ', 3)
+('zeroconteonichos.loc[i,j]', 3)
+('Ambiente', '372')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 0])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '16299')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '13848')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '11344')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '4758')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '3707')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '5175')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '12171')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '11118')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['3', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [3, 1])
+('sumas: ', 4)
+('zeroconteonichos.loc[i,j]', 4)
+('Ambiente', '2835')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '13255')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '17708')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '4493')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '17400')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '13313')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '12102')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['2', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2, 1])
+('sumas: ', 3)
+('zeroconteonichos.loc[i,j]', 3)
+('Ambiente', '5383')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '2338')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '6023')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '11663')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '1901')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['2', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2, 1])
+('sumas: ', 3)
+('zeroconteonichos.loc[i,j]', 3)
+('Ambiente', '14141')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '17063')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '13514')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '12486')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '1271')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '15052')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '5719')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '12781')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '5741')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 0])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '15134')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '16691')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '808')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '14368')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '10777')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '11765')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '4933')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '3019')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '13284')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 2])
+('sumas: ', 3)
+('zeroconteonichos.loc[i,j]', 3)
+('Ambiente', '16075')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '14016')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '15207')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['2', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2, 1])
+('sumas: ', 3)
+('zeroconteonichos.loc[i,j]', 3)
+('Ambiente', '9262')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '533')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '7050')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '15804')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '6778')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '3873')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['3', '2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [3, 2])
+('sumas: ', 5)
+('zeroconteonichos.loc[i,j]', 5)
+('Ambiente', '16817')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '14403')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '1985')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '10772')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '708')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '4712')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '11642')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '2211')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '3058')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '7217')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '7136')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '266')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '16625')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '5974')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '15855')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '8632')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '2946')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '3071')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '8006')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '8782')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 0])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '7339')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '3145')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Ambiente', '8188')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '17298')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '10580')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '13487')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '1405')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '4830')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '2288')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '18342')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Ambiente', '7526')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '8393')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '12084')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['0', '0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0, 0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Ambiente', '7407')
+['2630968743', '2713896862']
+('Valores a sumar (antes de convertir):', ['1', '1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1, 1])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Hostalga', '1723')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '7836')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '17265')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '18276')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '8078')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '15304')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '7308')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '6284')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '12050')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '2818')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '4988')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '3716')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '18593')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '7919')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '1955')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '18362')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '1235')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '11450')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '372')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '16299')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '13848')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '11344')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '4758')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '3707')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '5175')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '12171')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '11118')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Hostalga', '2835')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '13255')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '17708')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '4493')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '17400')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '13313')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '12102')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '5383')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '2338')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '6023')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '11663')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '1901')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '14141')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '17063')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '13514')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '12486')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '1271')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '15052')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '5719')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '12781')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '5741')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '15134')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '16691')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '808')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '14368')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '10777')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '11765')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '4933')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '3019')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '13284')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '16075')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '14016')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '15207')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '9262')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '533')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '7050')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '15804')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '6778')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '3873')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '16817')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '14403')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '1985')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '10772')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '708')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '4712')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '11642')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '2211')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '3058')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '7217')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '7136')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '266')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '16625')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '5974')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '15855')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '8632')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '2946')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '3071')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '8006')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '8782')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '7339')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '3145')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '8188')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '17298')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '10580')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '13487')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '1405')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '4830')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '2288')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '18342')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostalga', '7526')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '8393')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '12084')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostalga', '7407')
+['2785510749']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '1723')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '7836')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '17265')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '18276')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '8078')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '15304')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '7308')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Hostanimal', '6284')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '12050')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '2818')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '4988')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '3716')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '18593')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '7919')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '1955')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '18362')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '1235')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '11450')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '372')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '16299')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '13848')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '11344')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '4758')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '3707')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '5175')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '12171')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '11118')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['2'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [2])
+('sumas: ', 2)
+('zeroconteonichos.loc[i,j]', 2)
+('Hostanimal', '2835')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '13255')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '17708')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '4493')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '17400')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '13313')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '12102')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '5383')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '2338')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '6023')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '11663')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '1901')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '14141')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '17063')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '13514')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '12486')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '1271')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '15052')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '5719')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '12781')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '5741')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '15134')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '16691')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '808')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '14368')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '10777')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '11765')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '4933')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '3019')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '13284')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '16075')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '14016')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '15207')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '9262')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '533')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '7050')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '15804')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '6778')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '3873')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['3'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [3])
+('sumas: ', 3)
+('zeroconteonichos.loc[i,j]', 3)
+('Hostanimal', '16817')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '14403')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '1985')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '10772')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '708')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '4712')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '11642')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '2211')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '3058')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '7217')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '7136')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '266')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '16625')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '5974')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '15855')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '8632')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '2946')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '3071')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '8006')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '8782')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '7339')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '3145')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '8188')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '17298')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '10580')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '13487')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '1405')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '4830')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '2288')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '18342')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '7526')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '8393')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['1'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [1])
+('sumas: ', 1)
+('zeroconteonichos.loc[i,j]', 1)
+('Hostanimal', '12084')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+('Hostanimal', '7407')
+['2923166773']
+('Valores a sumar (antes de convertir):', ['0'])
+('Valores a sumar (despu\xc3\xa9s de convertir):', [0])
+('sumas: ', 0)
+('zeroconteonichos.loc[i,j]', 0)
+Hora de hacer los graficos 
+ El primero es de barras de escala normal
+Ha ocurrido un error al usar la funcion confusion_graph(): global name 'primeros20' is not defined
