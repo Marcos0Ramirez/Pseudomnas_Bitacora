@@ -359,3 +359,6 @@ x | a | b |
 --|---|---|
 1 | ![histograma_mlabels_1](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/f6616bff-e0b7-44e6-b62c-37c82cb6cd51) | ![histograma_mlabels_2](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/21ee387e-847d-4087-992e-9c75538c83a6)  |
 2 | ![histograma_mlabels_3](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/89d52403-3fd3-4b5a-b6fb-4ec411544fc8) | ![histograma_mlabels_4](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/30c8b718-11c7-465f-842f-b51efe85f721) |
+
+# 14 de mayo del 2024
+Se haran adaptaciones para el codigo madre del cluster en el siguiente archivo [].
