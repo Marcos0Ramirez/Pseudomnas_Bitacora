@@ -397,3 +397,5 @@ Y se dejaran en la carpeta https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora
 Asi, cuando se termine de corregir el archivo se subira a esta carpeta y finalmente se aplicara con el set de datos original.
 
 Mientras tanto al parecer el problema continua con la parte de procesar los datos para hacer la matriz, se toma los datos int, pero aparece un str y no se en que parte sea del codigo
+De acuerdo con el registro `pyrandom_forgraph_output.478006.out`, no se puede hacer las sumas porque hay str values y no int values.
+
