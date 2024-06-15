@@ -361,4 +361,8 @@ x | a | b |
 2 | ![histograma_mlabels_3](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/89d52403-3fd3-4b5a-b6fb-4ec411544fc8) | ![histograma_mlabels_4](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/30c8b718-11c7-465f-842f-b51efe85f721) |
 
 # 14 de mayo del 2024
-Se haran adaptaciones para el codigo madre del cluster en el siguiente archivo https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/RandomForest_addhist_logimp.py.
+Se haran adaptaciones para el codigo madre del cluster en el siguiente archivo https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/RandomForest_addhist_logimp.py
+
+# 15 de mayo del 2024
+Estos son los registros de los problemas que fueron apareciendo
+
