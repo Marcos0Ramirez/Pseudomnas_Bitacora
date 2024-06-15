@@ -220,8 +220,112 @@ def confusion_graph():
         sys.stderr.flush()  #------------------------- // NUEVO \\ --------------------------#
 
     # Histograma, mayor a 2 nichos
-    if 
-    
+    if len(zeroconteonichos.index) > 2:
+        # MUCHOS HISTOGRAMAS
+        # Número total de clústeres
+        num_clusters = zeroconteonichos.shape[1]
+        # Dividir en grupos de 25 clústeres
+        clusters_per_image = 25
+        num_images = num_clusters // clusters_per_image
+        # Lista de colores para los histogramas
+        colors = ['skyblue', 'lightgreen', 'lightcoral', 'lightskyblue', 'lightpink']
+        for img in range(num_images):
+            histom=f"histograma_mlabels_{img+1}.png"
+            histmlabelspng = os.path.join(imgrutabase, histom)
+            start_idx = img * clusters_per_image
+            end_idx = start_idx + clusters_per_image
+            clusters_subset = zeroconteonichos.columns[start_idx:end_idx]
+            
+            # Crear subplots: número de filas y columnas
+            num_cols = 5  # Número de columnas deseadas en el grid
+            num_rows = (clusters_per_image + num_cols - 1) // num_cols  # Calcular el número de filas
+        
+            fig, axes = plt.subplots(num_rows, num_cols, figsize=(25, num_rows * 5), sharex=True, sharey=True)
+            axes = axes.flatten()
+        
+            for i, cluster in enumerate(clusters_subset):
+                axes[i].bar(zeroconteonichos.index, zeroconteonichos[cluster], color=colors[i % len(colors)])
+                axes[i].set_title(cluster, fontsize=20)
+                axes[i].tick_params(axis='x', rotation=90, labelsize=20)  # Aumentar tamaño de fuente de los números del eje x
+                axes[i].tick_params(axis='y', labelsize=25)  # Aumentar tamaño de fuente de los números del eje y
+        
+            # Remover ejes adicionales en caso de que existan
+            for i in range(len(clusters_subset), len(axes)):
+                fig.delaxes(axes[i])
+        
+            # Solo una etiqueta de eje y
+            fig.text(0.01, 0.5, 'Frecuencia', va='center', ha='center', rotation='vertical', fontsize=26)
+        
+            # Solo una etiqueta de eje x
+            fig.text(0.5, 0.001, 'Característica', va='center', ha='center', fontsize=26)
+            
+            # Ajustar las etiquetas de las características
+            plt.setp(axes, xticks=range(len(zeroconteonichos.index)), xticklabels=zeroconteonichos.index)
+        
+            # Añadir un título general
+            fig.suptitle(f'Histograma {img + 1}', fontsize=30)
+            
+            # Ajusta los márgenes de la figura
+            plt.subplots_adjust(left=0.05, right=0.9, top=0.95, bottom=0.1)
+            
+            # Guardar la gráfica como un archivo PNG
+            try:  #------------------------- // NUEVO \\ --------------------------#
+                histlabelspng
+                plt.savefig(histmlabelspng,, format='png', dpi=300, bbox_inches='tight')   #------------------------- // NUEVO \\ --------------------------#
+                plt.close(fig)
+                print("Imagen guardada exitosamente")  #------------------------- // NUEVO \\ --------------------------#
+            except Exception as e:  #------------------------- // NUEVO \\ --------------------------#
+                sys.stderr.write("Error al guardar la imagen: {}\n".format(e))  #------------------------- // NUEVO \\ --------------------------#
+                sys.stderr.flush()  #------------------------- // NUEVO \\ --------------------------#
+    else:
+        # UN HISTOGRAMA (dos filas)
+        # Apilar los datos para combinarlos en una sola serie
+        h3 = zeroconteonichos.stack().reset_index()
+        h3.columns = ['Caracteristica', 'Cluster', 'Frecuencia']
+        
+        # Crear el histograma
+        plt.figure(figsize=(30, 8))
+        clusters = h3['Cluster'].unique()
+        caracteristicas = h3['Caracteristica'].unique()
+        bar_width = 0.4  # Ajusta el ancho de las barras
+        
+        # Asignar colores
+        colors = ['blue', 'orange']  # Dos colores para las barras
+        
+        # Calcular las posiciones
+        positions = []
+        for i, caracteristica in enumerate(caracteristicas):
+            pos = [i * (bar_width * len(clusters) + 0.5) + j * bar_width for j in range(len(clusters))]
+            positions.append(pos)
+        
+        # Dibujar las barras
+        for i, cluster in enumerate(clusters):
+            cluster_data = h3[h3['Cluster'] == cluster]
+            pos = [positions[j][i] for j in range(len(caracteristicas))]
+            plt.bar(pos, cluster_data['Frecuencia'], width=bar_width, color=colors[i % 2])
+        
+        # Ajustar las posiciones del eje x y las etiquetas
+        flattened_positions = [p for sublist in positions for p in sublist]
+        x_labels = [f'{caracteristicas[i % len(caracteristicas)]}\nCluster {clusters[i // len(caracteristicas)]}' for i in range(len(flattened_positions))]
+        plt.xticks(flattened_positions, x_labels, rotation=90, fontsize=5, fontweight='bold')
+        
+        # Añadir etiquetas y leyenda
+        plt.xlabel('Característica y Clúster')
+        plt.ylabel('Frecuencia')
+        plt.title('Frecuencias por Característica y Clúster')
+        #plt.show()
+        # Ajustar el diseño para que no se recorten los elementos
+        plt.tight_layout()
+        # Guardar la gráfica como un archivo PNG
+        try:  #------------------------- // NUEVO \\ --------------------------#
+            histlabelspng
+            plt.savefig(histlabelspng,, format='png', dpi=300, bbox_inches='tight')   #------------------------- // NUEVO \\ --------------------------#
+            print("Imagen guardada exitosamente")  #------------------------- // NUEVO \\ --------------------------#
+        except Exception as e:  #------------------------- // NUEVO \\ --------------------------#
+            sys.stderr.write("Error al guardar la imagen: {}\n".format(e))  #------------------------- // NUEVO \\ --------------------------#
+            sys.stderr.flush()  #------------------------- // NUEVO \\ --------------------------#
+
+
 
     ###################### -- Hacemos predicciones con el conjunto de prueba -- ######################
     predictions = rf.predict(test_mtz_class_caracteres)
