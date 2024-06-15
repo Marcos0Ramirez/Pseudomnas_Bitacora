@@ -246,5 +246,116 @@ mtz_clustercien['Nichos'] = mtz_idgen_nicho['Nicho'] ####### Nueva linea #######
 ```
 
 # 10 de junio del 2024
+Este es el codigo para hacer la imagen, cuando se tenga solo dos nichos
+```
+# OPCION 11
+# UN HISTOGRAMA (dos filas)
 
+# Apilar los datos para combinarlos en una sola serie
+zeroconteonichos2 = pd.concat([zeroconteonichos.drop(['HostHuman', "HostFungi", "Hostalga", "Hostanimal"])], axis=0) 
+h3 = zeroconteonichos2.stack().reset_index()
+h3.columns = ['Caracteristica', 'Cluster', 'Frecuencia']
+
+# Crear el histograma
+plt.figure(figsize=(30, 8))
+clusters = h3['Cluster'].unique()
+caracteristicas = h3['Caracteristica'].unique()
+bar_width = 0.4  # Ajusta el ancho de las barras
+
+# Asignar colores
+colors = ['blue', 'orange']  # Dos colores para las barras
+
+# Calcular las posiciones
+positions = []
+for i, caracteristica in enumerate(caracteristicas):
+    pos = [i * (bar_width * len(clusters) + 0.5) + j * bar_width for j in range(len(clusters))]
+    positions.append(pos)
+
+# Dibujar las barras
+for i, cluster in enumerate(clusters):
+    cluster_data = h3[h3['Cluster'] == cluster]
+    pos = [positions[j][i] for j in range(len(caracteristicas))]
+    plt.bar(pos, cluster_data['Frecuencia'], width=bar_width, color=colors[i % 2])
+
+# Ajustar las posiciones del eje x y las etiquetas
+flattened_positions = [p for sublist in positions for p in sublist]
+x_labels = [f'{caracteristicas[i % len(caracteristicas)]}\nCluster {clusters[i // len(caracteristicas)]}' for i in range(len(flattened_positions))]
+plt.xticks(flattened_positions, x_labels, rotation=90, fontsize=5, fontweight='bold')
+
+# Añadir etiquetas y leyenda
+plt.xlabel('Característica y Clúster')
+plt.ylabel('Frecuencia')
+plt.title('Frecuencias por Característica y Clúster')
+#plt.show()
+# Ajustar el diseño para que no se recorten los elementos
+plt.tight_layout()
+# Guardar la gráfica como un archivo PNG
+plt.savefig(histlabelspng, format='png', dpi=300, bbox_inches='tight')
+```
 ![image](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/2b3bd46e-6204-4520-84c5-a74dad1d043d)
+
+Asi, para cuando son mas de 2 nichos a analizar
+```
+# OPCION 9
+# MUCHOS HISTOGRAMAS
+
+# Número total de clústeres
+num_clusters = zeroconteonichos.shape[1]
+
+# Dividir en grupos de 25 clústeres
+clusters_per_image = 25
+num_images = num_clusters // clusters_per_image
+
+# Lista de colores para los histogramas
+colors = ['skyblue', 'lightgreen', 'lightcoral', 'lightskyblue', 'lightpink']
+
+for img in range(num_images):
+    histom=f"histograma_mlabels_{img+1}.png"
+    histmlabelspng = os.path.join(imgrutabase, histom)
+    start_idx = img * clusters_per_image
+    end_idx = start_idx + clusters_per_image
+    clusters_subset = zeroconteonichos.columns[start_idx:end_idx]
+    
+    # Crear subplots: número de filas y columnas
+    num_cols = 5  # Número de columnas deseadas en el grid
+    num_rows = (clusters_per_image + num_cols - 1) // num_cols  # Calcular el número de filas
+
+    fig, axes = plt.subplots(num_rows, num_cols, figsize=(25, num_rows * 5), sharex=True, sharey=True)
+    axes = axes.flatten()
+
+    for i, cluster in enumerate(clusters_subset):
+        axes[i].bar(zeroconteonichos.index, zeroconteonichos[cluster], color=colors[i % len(colors)])
+        axes[i].set_title(cluster, fontsize=20)
+        axes[i].tick_params(axis='x', rotation=90, labelsize=20)  # Aumentar tamaño de fuente de los números del eje x
+        axes[i].tick_params(axis='y', labelsize=25)  # Aumentar tamaño de fuente de los números del eje y
+
+    # Remover ejes adicionales en caso de que existan
+    for i in range(len(clusters_subset), len(axes)):
+        fig.delaxes(axes[i])
+
+    # Solo una etiqueta de eje y
+    fig.text(0.01, 0.5, 'Frecuencia', va='center', ha='center', rotation='vertical', fontsize=26)
+
+    # Solo una etiqueta de eje x
+    fig.text(0.5, 0.001, 'Característica', va='center', ha='center', fontsize=26)
+    
+    # Ajustar las etiquetas de las características
+    plt.setp(axes, xticks=range(len(zeroconteonichos.index)), xticklabels=zeroconteonichos.index)
+
+    # Añadir un título general
+    fig.suptitle(f'Histograma {img + 1}', fontsize=30)
+    # Ajusta los márgenes de la figura
+    plt.subplots_adjust(left=0.05, right=0.9, top=0.95, bottom=0.1)
+
+    #plt.show()
+    # Ajustar el diseño para que no se recorten los elementos
+    #plt.tight_layout()
+    # Guardar la gráfica como un archivo PNG
+    plt.savefig(histmlabelspng, format='png', dpi=300, bbox_inches='tight')
+    plt.close(fig) 
+```
+
+x | a | b |
+--|---|---|
+1 | ![histograma_mlabels_1](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/f6616bff-e0b7-44e6-b62c-37c82cb6cd51) | ![histograma_mlabels_2](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/21ee387e-847d-4087-992e-9c75538c83a6)  |
+2 | ![histograma_mlabels_3](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/89d52403-3fd3-4b5a-b6fb-4ec411544fc8) | ![histograma_mlabels_4](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/30c8b718-11c7-465f-842f-b51efe85f721) |
