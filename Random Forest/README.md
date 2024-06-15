@@ -365,4 +365,31 @@ Se haran adaptaciones para el codigo madre del cluster en el siguiente archivo h
 
 # 15 de mayo del 2024
 Estos son los registros de los problemas que fueron apareciendo
-
+```
+pyrandom_forgraph_output.477979.out
+pyrandom_forgraph_output.477980.out
+pyrandom_forgraph_output.477981.out
+pyrandom_forgraph_output.477982.out
+pyrandom_forgraph_output.477983.out
+pyrandom_forgraph_output.477984.out
+pyrandom_forgraph_output.477985.out
+pyrandom_forgraph_output.477986.out
+pyrandom_forgraph_output.477988.out
+pyrandom_forgraph_output.477989.out
+pyrandom_forgraph_output.477990.out
+pyrandom_forgraph_output.477991.out
+pyrandom_forgraph_output.477992.out
+pyrandom_forgraph_output.477993.out
+pyrandom_forgraph_output.477994.out
+pyrandom_forgraph_output.477995.out
+pyrandom_forgraph_output.477996.out
+pyrandom_forgraph_output.477997.out
+pyrandom_forgraph_output.477998.out
+pyrandom_forgraph_output.477999.out
+pyrandom_forgraph_output.478000.out
+pyrandom_forgraph_output.478001.out
+pyrandom_forgraph_output.478002.out
+pyrandom_forgraph_output.478003.out
+pyrandom_forgraph_output.478004.out
+```
+Y se dejaran en la carpeta
