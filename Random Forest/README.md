@@ -430,4 +430,56 @@ Parte del codigo
 .
 .
 ```
+En base del siguiente reporte https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/ERROR_OUTPUT/pyrandom_forgraph_output.478007.out
+
+Aparecio esto
+```
+('indices de mtz_clustercien \\n', Index([u'2505313052', u'2517572175', u'2548876750', u'2554235471',
+       u'2630968743', u'2713896862', u'2785510749', u'2923166773'],
+      dtype='object', name=u'Genomas'))
+('columnas de mtz_clustercien \\n', Index([u'1723', u'7836', u'17265', u'18276', u'8078', u'15304', u'7308',
+       u'6284', u'12050', u'2818',
+       ...
+       u'13487', u'1405', u'4830', u'2288', u'18342', u'7526', u'8393',
+       u'12084', u'7407', u'Nicho'],
+      dtype='object', length=101))
+Continuamos hacia el conteo, juntando en indice y las 100 columnas
+('u', array(['Patogeno', 'HostHuman', 'HostFungi', 'Patogeno ', 'Ambiente',
+       'Hostalga', 'Hostanimal'], dtype=object), 'c', ['1723', '7836', '17265', '18276', '8078', '15304', '7308', '6284', '12050', '2818', '4988', '3716', '18593', '7919', '1955', '18362', '1235', '11450', '372', '16299', '13848', '11344', '4758', '3707', '5175', '12171', '11118', '2835', '13255', '17708', '4493', '17400', '13313', '12102', '5383', '2338', '6023', '11663', '1901', '14141', '17063', '13514', '12486', '1271', '15052', '5719', '12781', '5741', '15134', '16691', '808', '14368', '10777', '11765', '4933', '3019', '13284', '16075', '14016', '15207', '9262', '533', '7050', '15804', '6778', '3873', '16817', '14403', '1985', '10772', '708', '4712', '11642', '2211', '3058', '7217', '7136', '266', '16625', '5974', '15855', '8632', '2946', '3071', '8006', '8782', '7339', '3145', '8188', '17298', '10580', '13487', '1405', '4830', '2288', '18342', '7526', '8393', '12084', '7407', 'Nicho'])
+A eliminar la palabra Nicho de la lista c
+(['1723', '7836', '17265', '18276', '8078', '15304', '7308', '6284', '12050', '2818', '4988', '3716', '18593', '7919', '1955', '18362', '1235', '11450', '372', '16299', '13848', '11344', '4758', '3707', '5175', '12171', '11118', '2835', '13255', '17708', '4493', '17400', '13313', '12102', '5383', '2338', '6023', '11663', '1901', '14141', '17063', '13514', '12486', '1271', '15052', '5719', '12781', '5741', '15134', '16691', '808', '14368', '10777', '11765', '4933', '3019', '13284', '16075', '14016', '15207', '9262', '533', '7050', '15804', '6778', '3873', '16817', '14403', '1985', '10772', '708', '4712', '11642', '2211', '3058', '7217', '7136', '266', '16625', '5974', '15855', '8632', '2946', '3071', '8006', '8782', '7339', '3145', '8188', '17298', '10580', '13487', '1405', '4830', '2288', '18342', '7526', '8393', '12084', '7407'], False)
+matriz vacia, creandose
+matriz vacia, creada, continuamos con concatenar los 100 mejores cluster en la matriz vacia
+('Patogeno', '1723')
+Ha ocurrido un error al usar la funcion confusion_graph(): unsupported operand type(s) for +: 'int' and 'str'
+```
+Parece ser que las comparaciones las hace con str y no con int
+
+De acuerdo con chatGPT, sugiere estas modifiaciones al codigo, debido a que trabajamos con python 2
+```
+    zeroconteonichos = pd.DataFrame(0, index=u, columns=c) #------------------------- // NUEVO \\ --------------------------#
+    print("matriz vacia, creada, continuamos con concatenar los 100 mejores cluster en la matriz vacia")
+    sys.stdout.flush()
+    for i in u: #------------------------- // NUEVO \\ --------------------------#
+        for j in c: #------------------------- // NUEVO \\ --------------------------#
+            print(i, j)
+            sys.stdout.flush()
+            ev = list(mtz_clustercien.index[mtz_clustercien['Nicho'] == i])
+            print(ev)
+            sys.stdout.flush()
+            # Asegúrate de que todos los elementos sean enteros
+            values_to_sum = list(mtz_clustercien.loc[ev, j])
+            print("Valores a sumar (antes de convertir):", values_to_sum)
+            sys.stdout.flush()
+            values_to_sum = map(int, values_to_sum)
+            print("Valores a sumar (después de convertir):", values_to_sum)
+            sys.stdout.flush()
+            sumas = sum(values_to_sum)
+            print("sumas: ", sumas)
+            sys.stdout.flush()
+            zeroconteonichos.loc[i, j] = sumas
+            print("zeroconteonichos.loc[i,j]", zeroconteonichos.loc[i, j])
+            sys.stdout.flush()
+```
+Ahora el error es porque no esta la variable primeros20, esto se debe poner primeros100, asi la bitacora de errores  https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/ERROR_OUTPUT/pyrandom_forgraph_output.478009.out
 
