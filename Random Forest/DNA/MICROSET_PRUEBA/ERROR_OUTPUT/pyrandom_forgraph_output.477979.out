@@ -1,0 +1,4 @@
+  File "RandomForest_addhist_logimp.py", line 233
+    histom=f"histograma_mlabels_{img+1}.png"
+                                           ^
+SyntaxError: invalid syntax

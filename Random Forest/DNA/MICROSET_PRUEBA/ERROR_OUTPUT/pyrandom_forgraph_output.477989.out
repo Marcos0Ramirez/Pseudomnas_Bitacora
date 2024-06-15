@@ -1,0 +1,41 @@
+abriendo el archivo
+empezamos con los chunks
+tomamos los chunks
+listo para concatenar todo
+<bound method DataFrame.head of       Genomas Cluster0 Cluster1  ... Cluster18998 Cluster18999 Cluster19000
+0  2505313052        0        3  ...            1            1            1
+1  2517572175        0        0  ...            0            0            0
+2  2548876750        0        1  ...            0            0            0
+3  2554235471        0        0  ...            0            0            0
+4  2630968743        0        5  ...            0            0            0
+5  2713896862        0        1  ...            0            0            0
+6  2785510749        1        0  ...            0            0            0
+7  2923166773        0        0  ...            0            0            0
+8  2972001829        0        0  ...            0            0            0
+9  8011072914        0        0  ...            0            0            0
+
+[10 rows x 19002 columns]>
+Ahora si las dimensiones de la matriz dataframe
+(10, 19002)
+      Genomas         Nicho
+0  2505313052      Patogeno
+1  2517572175     HostHuman
+2  2548876750     HostFungi
+3  2554235471     Patogeno 
+4  2630968743      Ambiente
+5  2713896862      Ambiente
+6  2785510749      Hostalga
+7  2923166773    Hostanimal
+8  2972001829  Unclassified
+9  8011072914  Unclassified
+(8, 19002)
+           Cluster0 Cluster1 Cluster2  ... Cluster18999 Cluster19000      Nicho
+Genomas                                ...                                     
+2505313052        0        3        0  ...            1            1   Patogeno
+2517572175        0        0        0  ...            0            0  HostHuman
+2548876750        0        1        4  ...            0            0  HostFungi
+2554235471        0        0        0  ...            0            0  Patogeno 
+2630968743        0        5        2  ...            0            0   Ambiente
+
+[5 rows x 19002 columns]
+Ha ocurrido un error al usar la funcion confusion_graph(): "['Genomas'] not found in axis"

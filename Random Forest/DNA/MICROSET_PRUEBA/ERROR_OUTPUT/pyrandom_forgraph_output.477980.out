@@ -1,0 +1,4 @@
+  File "RandomForest_addhist_logimp.py", line 266
+    fig.suptitle(f'Histograma {img + 1}', fontsize=30)
+                                       ^
+SyntaxError: invalid syntax

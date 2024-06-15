@@ -1,0 +1,4 @@
+  File "RandomForest_addhist_logimp.py", line 274
+    plt.savefig(histmlabelspng,, format='png', dpi=300, bbox_inches='tight')   #------------------------- // NUEVO \\ --------------------------#
+                               ^
+SyntaxError: invalid syntax

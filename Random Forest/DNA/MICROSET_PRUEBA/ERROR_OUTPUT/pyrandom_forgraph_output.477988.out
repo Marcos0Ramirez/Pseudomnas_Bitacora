@@ -1,0 +1,18 @@
+abriendo el archivo
+empezamos con los chunks
+tomamos los chunks
+listo para concatenar todo
+Ahora si las dimensiones de la matriz dataframe
+(10, 19002)
+                     Genomas,Nicho,Specie
+0       2505313052,Patogeno,P. aeruginosa
+1      2517572175,HostHuman,P. aeruginosa
+2        2548876750,HostFungi,P. stutzeri
+3      2554235471,Patogeno,P. aeruginosa 
+4     2630968743,Ambiente,P. putrefaciens
+5       2713896862,Ambiente,P. aeruginosa
+6           2785510749,Hostalga,P. putida
+7    2923166773,Hostanimal,P. fluorescens
+8  2972001829,Unclassified,P. maltophilia
+9      8011072914,Unclassified,P. cepacia
+Ha ocurrido un error al usar la funcion confusion_graph(): 'Genomas'

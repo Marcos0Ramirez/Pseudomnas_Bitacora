@@ -1,0 +1,4 @@
+  File "RandomForest_addhist_logimp.py", line 309
+    x_labels = [f'{caracteristicas[i % len(caracteristicas)]}\nCluster {clusters[i // len(caracteristicas)]}' for i in range(len(flattened_positions))]
+                                                                                                            ^
+SyntaxError: invalid syntax
