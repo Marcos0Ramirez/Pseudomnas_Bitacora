@@ -485,3 +485,4 @@ Ahora el error es porque no esta la variable primeros20, esto se debe poner prim
 
 Ya se logro guardar los graficos de importancia, ahora solo falta los histogramas https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/ERROR_OUTPUT/pyrandom_forgraph_output.478010.out
 
+Ahora es en la parte donde se hace los graficos de histogramas https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/ERROR_OUTPUT/pyrandom_forgraph_output.478011.out 
