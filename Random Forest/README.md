@@ -483,3 +483,5 @@ De acuerdo con chatGPT, sugiere estas modifiaciones al codigo, debido a que trab
 ```
 Ahora el error es porque no esta la variable primeros20, esto se debe poner primeros100, asi la bitacora de errores  https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/ERROR_OUTPUT/pyrandom_forgraph_output.478009.out
 
+Ya se logro guardar los graficos de importancia, ahora solo falta los histogramas https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/ERROR_OUTPUT/pyrandom_forgraph_output.478010.out
+
