@@ -19,14 +19,14 @@ import matplotlib.pyplot as plt
 start_time = time.time()
 ###################### -- EXTRACCION DE LOS DATOS -- ######################
 
-rutabase= "C:/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA" # Ruta base
+rutabase= "Descargas_NCBI/CDHIT/MATRIXDATA" # Ruta base
 filemtz = "testpysh_pymatrizcdhit.csv" #Nombre del archivo con la matriz
 fileclass = "classificacion_genomas.txt" # Nombre de la tabla de clasificacion
 
 rutamtz = os.path.join(rutabase, filemtz)
 rutaclass = os.path.join(rutabase, fileclass)
 
-imgrutabase = "C:/Users/52477/Desktop/Descargas_NCBI/CDHIT/MATRIXDATA/Imagenes/"
+imgrutabase = "Descargas_NCBI/CDHIT/MATRIXDATA/Imagenes/"
 imgic = "importancia_caracteristicas.png"
 imgic2 = "importancia_caracteristicas_log.png"
 mtzconfusion = "confusion_matrix.csv"
