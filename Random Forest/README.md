@@ -485,4 +485,9 @@ Ahora el error es porque no esta la variable primeros20, esto se debe poner prim
 
 Ya se logro guardar los graficos de importancia, ahora solo falta los histogramas https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/ERROR_OUTPUT/pyrandom_forgraph_output.478010.out
 
-Ahora es en la parte donde se hace los graficos de histogramas https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/ERROR_OUTPUT/pyrandom_forgraph_output.478011.out 
+Ahora es en la parte donde se hace los graficos de histogramas https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/ERROR_OUTPUT/pyrandom_forgraph_output.478011.out
+
+# 16 de mayo del 2024
+Finalmente se logro que el script funcionara, aqui se enuentra https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/RandomForest_addhist_logimp_python275.py
+
+Comprobando que funciona tanto para el set de datos que son muchos nichos o dos nichos como maximo. El codigo, proximamente sera probado con el set de datos original, debido a que fue con datos locales de una base de datos de 10 genomas.
