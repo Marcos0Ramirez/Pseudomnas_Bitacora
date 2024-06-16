@@ -1,0 +1,261 @@
+abriendo el archivo
+empezamos con los chunks
+tomamos los chunks
+listo para concatenar todo
+      Genomas Cluster0 Cluster1  ... Cluster18998 Cluster18999 Cluster19000
+0  2505313052        0        3  ...            1            1            1
+1  2554235471        0        0  ...            0            0            0
+2  2630968743        0        5  ...            0            0            0
+3  2713896862        0        1  ...            0            0            0
+4  2972001829        0        0  ...            0            0            0
+5  8011072914        0        0  ...            0            0            0
+
+[6 rows x 19002 columns]
+('Columnas de df antes de eliminar:', Index([u'Genomas', u'Cluster0', u'Cluster1', u'Cluster2', u'Cluster3',
+       u'Cluster4', u'Cluster5', u'Cluster6', u'Cluster7', u'Cluster8',
+       ...
+       u'Cluster18991', u'Cluster18992', u'Cluster18993', u'Cluster18994',
+       u'Cluster18995', u'Cluster18996', u'Cluster18997', u'Cluster18998',
+       u'Cluster18999', u'Cluster19000'],
+      dtype='object', length=19002))
+[]
+      Genomas Cluster0 Cluster1  ... Cluster18998 Cluster18999 Cluster19000
+0  2505313052        0        3  ...            1            1            1
+1  2554235471        0        0  ...            0            0            0
+2  2630968743        0        5  ...            0            0            0
+3  2713896862        0        1  ...            0            0            0
+4  2972001829        0        0  ...            0            0            0
+5  8011072914        0        0  ...            0            0            0
+
+[6 rows x 19002 columns]
+('Columnas de df despu\xc3\xa9s de eliminar:', Index([u'Genomas', u'Cluster0', u'Cluster1', u'Cluster2', u'Cluster3',
+       u'Cluster4', u'Cluster5', u'Cluster6', u'Cluster7', u'Cluster8',
+       ...
+       u'Cluster18991', u'Cluster18992', u'Cluster18993', u'Cluster18994',
+       u'Cluster18995', u'Cluster18996', u'Cluster18997', u'Cluster18998',
+       u'Cluster18999', u'Cluster19000'],
+      dtype='object', length=19002))
+Ahora si las dimensiones de la matriz dataframe
+(6, 19002)
+      Genomas         Nicho
+0  2505313052      Patogeno
+1  2554235471      Patogeno
+2  2630968743      Ambiente
+3  2713896862      Ambiente
+4  2972001829  Unclassified
+5  8011072914  Unclassified
+antes de concatenar las tablas
+      Genomas Cluster0 Cluster1  ... Cluster18999 Cluster19000         Nicho
+0  2505313052        0        3  ...            1            1      Patogeno
+1  2554235471        0        0  ...            0            0      Patogeno
+2  2630968743        0        5  ...            0            0      Ambiente
+3  2713896862        0        1  ...            0            0      Ambiente
+4  2972001829        0        0  ...            0            0  Unclassified
+5  8011072914        0        0  ...            0            0  Unclassified
+
+[6 rows x 19003 columns]
+Una vez que ya se hizo como indice la columna Genomas
+               Genomas Cluster0  ... Cluster19000         Nicho
+Genomas                          ...                           
+2505313052  2505313052        0  ...            1      Patogeno
+2554235471  2554235471        0  ...            0      Patogeno
+2630968743  2630968743        0  ...            0      Ambiente
+2713896862  2713896862        0  ...            0      Ambiente
+2972001829  2972001829        0  ...            0  Unclassified
+8011072914  8011072914        0  ...            0  Unclassified
+
+[6 rows x 19003 columns]
+Index([u'2505313052', u'2554235471', u'2630968743', u'2713896862',
+       u'2972001829', u'8011072914'],
+      dtype='object', name=u'Genomas')
+(4, 19003)
+               Genomas Cluster0 Cluster1  ... Cluster18999 Cluster19000     Nicho
+Genomas                                   ...                                    
+2505313052  2505313052        0        3  ...            1            1  Patogeno
+2554235471  2554235471        0        0  ...            0            0  Patogeno
+2630968743  2630968743        0        5  ...            0            0  Ambiente
+2713896862  2713896862        0        1  ...            0            0  Ambiente
+
+[4 rows x 19003 columns]
+los nichos los hacemos array
+[['Patogeno' 1]
+ ['Patogeno' 1]
+ ['Ambiente' 0]
+ ['Ambiente' 0]]
+la matriz la hacemos arreglo
+('Training Features Shape:', (3, 19001))
+('Training Labels Shape:', (3,))
+('Testing Features Shape:', (1, 19001))
+('Testing Labels Shape:', (1,))
+              Importancia
+Cluster15939         0.02
+Cluster577           0.02
+Cluster3220          0.02
+Cluster14795         0.02
+Cluster5307          0.02
+Cluster18043         0.02
+Cluster16233         0.02
+Cluster15063         0.02
+Cluster2620          0.02
+Cluster3481          0.02
+Cluster4988          0.02
+Cluster9617          0.02
+Cluster2173          0.02
+Cluster9731          0.02
+Cluster8202          0.02
+Cluster12001         0.02
+Cluster5844          0.02
+Cluster16498         0.02
+Cluster6720          0.02
+Cluster9717          0.02
+Cluster10514         0.02
+Cluster10302         0.02
+Cluster12362         0.02
+Cluster11755         0.02
+Cluster9373          0.02
+Cluster6084          0.02
+Cluster13244         0.02
+Cluster3426          0.02
+Cluster12340         0.02
+Cluster3145          0.02
+...                   ...
+Cluster6329          0.00
+Cluster6328          0.00
+Cluster6327          0.00
+Cluster6326          0.00
+Cluster6325          0.00
+Cluster6324          0.00
+Cluster6323          0.00
+Cluster6322          0.00
+Cluster6321          0.00
+Cluster6320          0.00
+Cluster6319          0.00
+Cluster6334          0.00
+Cluster6335          0.00
+Cluster6336          0.00
+Cluster6345          0.00
+Cluster6351          0.00
+Cluster6350          0.00
+Cluster6349          0.00
+Cluster6348          0.00
+Cluster6347          0.00
+Cluster6346          0.00
+Cluster6344          0.00
+Cluster6337          0.00
+Cluster6343          0.00
+Cluster6342          0.00
+Cluster6341          0.00
+Cluster6340          0.00
+Cluster6339          0.00
+Cluster6338          0.00
+Cluster19000         0.00
+
+[19001 rows x 1 columns]
+              Importancia
+Cluster15939         0.02
+Cluster577           0.02
+Cluster3220          0.02
+Cluster14795         0.02
+Cluster5307          0.02
+Cluster18043         0.02
+Cluster16233         0.02
+Cluster15063         0.02
+Cluster2620          0.02
+Cluster3481          0.02
+Cluster4988          0.02
+Cluster9617          0.02
+Cluster2173          0.02
+Cluster9731          0.02
+Cluster8202          0.02
+Cluster12001         0.02
+Cluster5844          0.02
+Cluster16498         0.02
+Cluster6720          0.02
+Cluster9717          0.02
+Cluster10514         0.02
+Cluster10302         0.02
+Cluster12362         0.02
+Cluster11755         0.02
+Cluster9373          0.02
+Cluster6084          0.02
+Cluster13244         0.02
+Cluster3426          0.02
+Cluster12340         0.02
+Cluster3145          0.02
+...                   ...
+Cluster12679         0.00
+Cluster12663         0.00
+Cluster12754         0.00
+Cluster12641         0.00
+Cluster12662         0.00
+Cluster12642         0.00
+Cluster12643         0.00
+Cluster12644         0.00
+Cluster12645         0.00
+Cluster12646         0.00
+Cluster12759         0.00
+Cluster12647         0.00
+Cluster12648         0.00
+Cluster12649         0.00
+Cluster12650         0.00
+Cluster12651         0.00
+Cluster12652         0.00
+Cluster12653         0.00
+Cluster12654         0.00
+Cluster12655         0.00
+Cluster12758         0.00
+Cluster12656         0.00
+Cluster12760         0.00
+Cluster12657         0.00
+Cluster12658         0.00
+Cluster12757         0.00
+Cluster12756         0.00
+Cluster12755         0.00
+Cluster12659         0.00
+Cluster12681         0.00
+
+[100 rows x 1 columns]
+('columnas 100; extraidas: ', [array(['1', '2', '1', '1'], dtype=object), array(['3', '0', '3', '2'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['1', '0', '1', '0'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0'], dtype=object), array(['0', '2', '0', '0'], dtype=object), array(['0', '1', '0', '1'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['1', '2', '1', '1'], dtype=object), array(['0', '1', '0', '1'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['1', '0', '1', '1'], dtype=object), array(['0', '2', '1', '0'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '1'], dtype=object), array(['1', '1', '1', '2'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['1', '0', '0', '0'], dtype=object), array(['2', '0', '0', '0'], dtype=object), array(['1', '0', '1', '1'], dtype=object), array(['2', '1', '1', '1'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['0', '1', '0', '1'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['1', '0', '1', '0'], dtype=object), array(['1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0'], dtype=object), array(['3', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['1', '1', '1', '1'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '1', '1', '1'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['1', '0', '1', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['1', '0', '1', '1'], dtype=object), array(['0', '0', '1', '0'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['1', '0', '1', '1'], dtype=object), array(['1', '0', '1', '1'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['1', '0', '1', '1'], dtype=object), array(['1', '0', '1', '1'], dtype=object), array(['1', '0', '1', '0'], dtype=object), array(['0', '0', '1', '0'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['1', '1', '1', '1'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '1'], dtype=object), array(['0', '0', '0', '1'], dtype=object), array(['1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object), array(['1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0'], dtype=object)])
+('matriz mtz_clustercien creada\\n',            15939 577 3220 14795 5307  ... 12756 12755 12659 12681     Nicho
+Genomas                               ...                                  
+2505313052     1   3    0     0    1  ...     0     0     1     0  Patogeno
+2554235471     2   0    0     1    0  ...     0     0     0     0  Patogeno
+2630968743     1   3    0     0    1  ...     0     0     0     0  Ambiente
+2713896862     1   2    1     0    0  ...     0     0     0     0  Ambiente
+
+[4 rows x 101 columns])
+('indices de mtz_clustercien \\n', Index([u'2505313052', u'2554235471', u'2630968743', u'2713896862'], dtype='object', name=u'Genomas'))
+('columnas de mtz_clustercien \\n', Index([u'15939', u'577', u'3220', u'14795', u'5307', u'18043', u'16233',
+       u'15063', u'2620', u'3481',
+       ...
+       u'12656', u'12760', u'12657', u'12658', u'12757', u'12756', u'12755',
+       u'12659', u'12681', u'Nicho'],
+      dtype='object', length=101))
+Continuamos hacia el conteo, juntando en indice y las 100 columnas
+('u', array(['Patogeno', 'Ambiente'], dtype=object), 'c', ['15939', '577', '3220', '14795', '5307', '18043', '16233', '15063', '2620', '3481', '4988', '9617', '2173', '9731', '8202', '12001', '5844', '16498', '6720', '9717', '10514', '10302', '12362', '11755', '9373', '6084', '13244', '3426', '12340', '3145', '9059', '10755', '4933', '12781', '7441', '18089', '5349', '6270', '13944', '16603', '8282', '10', '12640', '12639', '12664', '12665', '12753', '12666', '12667', '12761', '12668', '12669', '12670', '12671', '12672', '12752', '12673', '12751', '12638', '12674', '12675', '12637', '12750', '12676', '12636', '12677', '12749', '12748', '12747', '12678', '12679', '12663', '12754', '12641', '12662', '12642', '12643', '12644', '12645', '12646', '12759', '12647', '12648', '12649', '12650', '12651', '12652', '12653', '12654', '12655', '12758', '12656', '12760', '12657', '12658', '12757', '12756', '12755', '12659', '12681', 'Nicho'])
+A eliminar la palabra Nicho de la lista c
+(['15939', '577', '3220', '14795', '5307', '18043', '16233', '15063', '2620', '3481', '4988', '9617', '2173', '9731', '8202', '12001', '5844', '16498', '6720', '9717', '10514', '10302', '12362', '11755', '9373', '6084', '13244', '3426', '12340', '3145', '9059', '10755', '4933', '12781', '7441', '18089', '5349', '6270', '13944', '16603', '8282', '10', '12640', '12639', '12664', '12665', '12753', '12666', '12667', '12761', '12668', '12669', '12670', '12671', '12672', '12752', '12673', '12751', '12638', '12674', '12675', '12637', '12750', '12676', '12636', '12677', '12749', '12748', '12747', '12678', '12679', '12663', '12754', '12641', '12662', '12642', '12643', '12644', '12645', '12646', '12759', '12647', '12648', '12649', '12650', '12651', '12652', '12653', '12654', '12655', '12758', '12656', '12760', '12657', '12658', '12757', '12756', '12755', '12659', '12681'], False)
+matriz vacia, creandose
+matriz vacia, creada, continuamos con concatenar los 100 mejores cluster en la matriz vacia
+(2, 100)
+Hora de hacer los graficos 
+ El primero es de barras de escala normal
+Imagen guardada exitosamente
+Hora de hacer los graficos 
+ El segundo es de barras de escala logaritmica
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1143: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn_for)
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1145: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples.
+  'recall', 'true', average, warn_for)
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1143: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn_for)
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1145: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true samples.
+  'recall', 'true', average, warn_for)
+Imagen guardada exitosamente
+Imagen guardada exitosamente
+Matriz de confusión guardada exitosamente
+('Accuracy:', 0.0)
+('Precision:', 0.0)
+('Recall:', 0.0)
+('F1 Score:', 0.0)
+Elapsed time to compute the importances: 154.224 seconds

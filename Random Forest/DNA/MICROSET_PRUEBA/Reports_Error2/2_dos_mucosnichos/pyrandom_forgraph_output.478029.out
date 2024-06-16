@@ -1,0 +1,513 @@
+abriendo el archivo
+empezamos con los chunks
+tomamos los chunks
+listo para concatenar todo
+      Genomas Cluster0 Cluster1  ... Cluster18998 Cluster18999 Cluster19000
+0  2505313052        0        3  ...            1            1            1
+1  2517572175        0        0  ...            0            0            0
+2  2548876750        0        1  ...            0            0            0
+3  2554235471        0        0  ...            0            0            0
+4  2630968743        0        5  ...            0            0            0
+5  2713896862        0        1  ...            0            0            0
+6  2785510749        1        0  ...            0            0            0
+7  2923166773        0        0  ...            0            0            0
+8  2972001829        0        0  ...            0            0            0
+9  8011072914        0        0  ...            0            0            0
+
+[10 rows x 19002 columns]
+('Columnas de df antes de eliminar:', Index([u'Genomas', u'Cluster0', u'Cluster1', u'Cluster2', u'Cluster3',
+       u'Cluster4', u'Cluster5', u'Cluster6', u'Cluster7', u'Cluster8',
+       ...
+       u'Cluster18991', u'Cluster18992', u'Cluster18993', u'Cluster18994',
+       u'Cluster18995', u'Cluster18996', u'Cluster18997', u'Cluster18998',
+       u'Cluster18999', u'Cluster19000'],
+      dtype='object', length=19002))
+[]
+      Genomas Cluster0 Cluster1  ... Cluster18998 Cluster18999 Cluster19000
+0  2505313052        0        3  ...            1            1            1
+1  2517572175        0        0  ...            0            0            0
+2  2548876750        0        1  ...            0            0            0
+3  2554235471        0        0  ...            0            0            0
+4  2630968743        0        5  ...            0            0            0
+5  2713896862        0        1  ...            0            0            0
+6  2785510749        1        0  ...            0            0            0
+7  2923166773        0        0  ...            0            0            0
+8  2972001829        0        0  ...            0            0            0
+9  8011072914        0        0  ...            0            0            0
+
+[10 rows x 19002 columns]
+('Columnas de df despu\xc3\xa9s de eliminar:', Index([u'Genomas', u'Cluster0', u'Cluster1', u'Cluster2', u'Cluster3',
+       u'Cluster4', u'Cluster5', u'Cluster6', u'Cluster7', u'Cluster8',
+       ...
+       u'Cluster18991', u'Cluster18992', u'Cluster18993', u'Cluster18994',
+       u'Cluster18995', u'Cluster18996', u'Cluster18997', u'Cluster18998',
+       u'Cluster18999', u'Cluster19000'],
+      dtype='object', length=19002))
+Ahora si las dimensiones de la matriz dataframe
+(10, 19002)
+      Genomas         Nicho
+0  2505313052      Patogeno
+1  2517572175     HostHuman
+2  2548876750     HostFungi
+3  2554235471      Patogeno
+4  2630968743      Ambiente
+5  2713896862      Ambiente
+6  2785510749      Hostalga
+7  2923166773    Hostanimal
+8  2972001829  Unclassified
+9  8011072914  Unclassified
+antes de concatenar las tablas
+      Genomas Cluster0 Cluster1  ... Cluster18999 Cluster19000         Nicho
+0  2505313052        0        3  ...            1            1      Patogeno
+1  2517572175        0        0  ...            0            0     HostHuman
+2  2548876750        0        1  ...            0            0     HostFungi
+3  2554235471        0        0  ...            0            0      Patogeno
+4  2630968743        0        5  ...            0            0      Ambiente
+5  2713896862        0        1  ...            0            0      Ambiente
+6  2785510749        1        0  ...            0            0      Hostalga
+7  2923166773        0        0  ...            0            0    Hostanimal
+8  2972001829        0        0  ...            0            0  Unclassified
+9  8011072914        0        0  ...            0            0  Unclassified
+
+[10 rows x 19003 columns]
+Una vez que ya se hizo como indice la columna Genomas
+               Genomas Cluster0  ... Cluster19000         Nicho
+Genomas                          ...                           
+2505313052  2505313052        0  ...            1      Patogeno
+2517572175  2517572175        0  ...            0     HostHuman
+2548876750  2548876750        0  ...            0     HostFungi
+2554235471  2554235471        0  ...            0      Patogeno
+2630968743  2630968743        0  ...            0      Ambiente
+2713896862  2713896862        0  ...            0      Ambiente
+2785510749  2785510749        1  ...            0      Hostalga
+2923166773  2923166773        0  ...            0    Hostanimal
+2972001829  2972001829        0  ...            0  Unclassified
+8011072914  8011072914        0  ...            0  Unclassified
+
+[10 rows x 19003 columns]
+Index([u'2505313052', u'2517572175', u'2548876750', u'2554235471',
+       u'2630968743', u'2713896862', u'2785510749', u'2923166773',
+       u'2972001829', u'8011072914'],
+      dtype='object', name=u'Genomas')
+(8, 19003)
+               Genomas Cluster0 Cluster1  ... Cluster18999 Cluster19000      Nicho
+Genomas                                   ...                                     
+2505313052  2505313052        0        3  ...            1            1   Patogeno
+2517572175  2517572175        0        0  ...            0            0  HostHuman
+2548876750  2548876750        0        1  ...            0            0  HostFungi
+2554235471  2554235471        0        0  ...            0            0   Patogeno
+2630968743  2630968743        0        5  ...            0            0   Ambiente
+
+[5 rows x 19003 columns]
+los nichos los hacemos array
+[['Patogeno' 5]
+ ['HostHuman' 2]
+ ['HostFungi' 1]
+ ['Patogeno' 5]
+ ['Ambiente' 0]
+ ['Ambiente' 0]
+ ['Hostalga' 3]
+ ['Hostanimal' 4]]
+la matriz la hacemos arreglo
+('Training Features Shape:', (6, 19001))
+('Training Labels Shape:', (6,))
+('Testing Features Shape:', (2, 19001))
+('Testing Labels Shape:', (2,))
+              Importancia
+Cluster1723      0.034742
+Cluster7836      0.022780
+Cluster7308      0.020486
+Cluster12050     0.020000
+Cluster3716      0.020000
+Cluster15304     0.020000
+Cluster18593     0.020000
+Cluster17265     0.020000
+Cluster18276     0.020000
+Cluster2818      0.020000
+Cluster8078      0.020000
+Cluster6284      0.020000
+Cluster4988      0.020000
+Cluster1955      0.019636
+Cluster7919      0.019600
+Cluster11450     0.019514
+Cluster18362     0.019514
+Cluster11344     0.019396
+Cluster5175      0.019286
+Cluster2835      0.018726
+Cluster13848     0.018286
+Cluster372       0.018270
+Cluster16299     0.018000
+Cluster1235      0.018000
+Cluster3707      0.018000
+Cluster4758      0.018000
+Cluster11118     0.017664
+Cluster13313     0.017561
+Cluster11663     0.017442
+Cluster1901      0.017442
+...                   ...
+Cluster6339      0.000000
+Cluster6338      0.000000
+Cluster6337      0.000000
+Cluster6336      0.000000
+Cluster6335      0.000000
+Cluster6334      0.000000
+Cluster6333      0.000000
+Cluster6332      0.000000
+Cluster6331      0.000000
+Cluster6330      0.000000
+Cluster6329      0.000000
+Cluster6344      0.000000
+Cluster6345      0.000000
+Cluster6346      0.000000
+Cluster6355      0.000000
+Cluster6361      0.000000
+Cluster6360      0.000000
+Cluster6359      0.000000
+Cluster6358      0.000000
+Cluster6357      0.000000
+Cluster6356      0.000000
+Cluster6354      0.000000
+Cluster6347      0.000000
+Cluster6353      0.000000
+Cluster6352      0.000000
+Cluster6351      0.000000
+Cluster6350      0.000000
+Cluster6349      0.000000
+Cluster6348      0.000000
+Cluster19000     0.000000
+
+[19001 rows x 1 columns]
+              Importancia
+Cluster1723      0.034742
+Cluster7836      0.022780
+Cluster7308      0.020486
+Cluster12050     0.020000
+Cluster3716      0.020000
+Cluster15304     0.020000
+Cluster18593     0.020000
+Cluster17265     0.020000
+Cluster18276     0.020000
+Cluster2818      0.020000
+Cluster8078      0.020000
+Cluster6284      0.020000
+Cluster4988      0.020000
+Cluster1955      0.019636
+Cluster7919      0.019600
+Cluster11450     0.019514
+Cluster18362     0.019514
+Cluster11344     0.019396
+Cluster5175      0.019286
+Cluster2835      0.018726
+Cluster13848     0.018286
+Cluster372       0.018270
+Cluster16299     0.018000
+Cluster1235      0.018000
+Cluster3707      0.018000
+Cluster4758      0.018000
+Cluster11118     0.017664
+Cluster13313     0.017561
+Cluster11663     0.017442
+Cluster1901      0.017442
+...                   ...
+Cluster9147      0.002000
+Cluster708       0.002000
+Cluster8006      0.002000
+Cluster12848     0.001951
+Cluster5490      0.001951
+Cluster3071      0.001860
+Cluster9772      0.001860
+Cluster7339      0.001860
+Cluster7136      0.001730
+Cluster8782      0.001714
+Cluster11642     0.001274
+Cluster15804     0.000792
+Cluster16817     0.000714
+Cluster5134      0.000698
+Cluster2211      0.000698
+Cluster10907     0.000698
+Cluster17298     0.000667
+Cluster1985      0.000604
+Cluster11361     0.000488
+Cluster1330      0.000488
+Cluster17331     0.000486
+Cluster2946      0.000480
+Cluster17159     0.000403
+Cluster8188      0.000403
+Cluster3145      0.000403
+Cluster8393      0.000400
+Cluster13487     0.000364
+Cluster12669     0.000000
+Cluster12737     0.000000
+Cluster12663     0.000000
+
+[100 rows x 1 columns]
+('columnas 100; extraidas: ', [array(['0', '1', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['1', '2', '1', '1', '1', '1', '1', '2'], dtype=object), array(['1', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '0', '1', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['1', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '2', '1', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '0'], dtype=object), array(['1', '1', '1', '0', '1', '1', '1', '0'], dtype=object), array(['0', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['1', '1', '1', '1', '1', '2', '1', '1'], dtype=object), array(['0', '0', '0', '0', '1', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '1', '1'], dtype=object), array(['0', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '0'], dtype=object), array(['1', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['2', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '1', '1', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '0', '1', '0', '0', '0', '0', '0'], dtype=object), array(['2', '1', '1', '2', '1', '1', '1', '1'], dtype=object), array(['1', '2', '2', '0', '3', '1', '2', '2'], dtype=object), array(['0', '1', '0', '0', '0', '1', '0', '0'], dtype=object), array(['0', '0', '0', '2', '0', '0', '0', '1'], dtype=object), array(['1', '2', '1', '1', '2', '1', '1', '1'], dtype=object), array(['1', '0', '0', '1', '0', '0', '1', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '1', '1'], dtype=object), array(['1', '1', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0', '2', '1', '0', '0'], dtype=object), array(['1', '0', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '1', '0', '0', '1', '1', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '0', '0', '0', '0', '1', '1', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '1', '1'], dtype=object), array(['1', '1', '1', '0', '0', '1', '0', '0'], dtype=object), array(['1', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '2', '1', '1', '2', '1', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '1', '1'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['1', '0', '1', '0', '2', '1', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '1'], dtype=object), array(['2', '1', '2', '1', '3', '2', '1', '3'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['1', '0', '1', '1', '1', '1', '1', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['1', '2', '2', '1', '1', '1', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['1', '0', '1', '1', '1', '1', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['1', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '1', '1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '2', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '1', '0', '0', '1', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '1', '1', '0', '1', '1', '1', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object)])
+('matriz mtz_clustercien creada\\n',            1723 7836 7308 12050 3716  ... 13487 12669 12737 12663       Nicho
+Genomas                               ...                                    
+2505313052    0    0    1     1    0  ...     1     0     0     0    Patogeno
+2517572175    1    1    2     0    0  ...     1     1     0     0   HostHuman
+2548876750    1    0    1     0    1  ...     1     0     0     0   HostFungi
+2554235471    0    0    1     1    0  ...     0     0     1     1    Patogeno
+2630968743    1    0    1     0    1  ...     1     0     0     0    Ambiente
+2713896862    1    0    1     0    0  ...     1     0     0     0    Ambiente
+2785510749    0    0    1     0    0  ...     1     0     0     0    Hostalga
+2923166773    0    0    2     0    0  ...     1     0     0     0  Hostanimal
+
+[8 rows x 101 columns])
+('indices de mtz_clustercien \\n', Index([u'2505313052', u'2517572175', u'2548876750', u'2554235471',
+       u'2630968743', u'2713896862', u'2785510749', u'2923166773'],
+      dtype='object', name=u'Genomas'))
+('columnas de mtz_clustercien \\n', Index([u'1723', u'7836', u'7308', u'12050', u'3716', u'15304', u'18593',
+       u'17265', u'18276', u'2818',
+       ...
+       u'2946', u'17159', u'8188', u'3145', u'8393', u'13487', u'12669',
+       u'12737', u'12663', u'Nicho'],
+      dtype='object', length=101))
+Continuamos hacia el conteo, juntando en indice y las 100 columnas
+('u', array(['Patogeno', 'HostHuman', 'HostFungi', 'Ambiente', 'Hostalga',
+       'Hostanimal'], dtype=object), 'c', ['1723', '7836', '7308', '12050', '3716', '15304', '18593', '17265', '18276', '2818', '8078', '6284', '4988', '1955', '7919', '11450', '18362', '11344', '5175', '2835', '13848', '372', '16299', '1235', '3707', '4758', '11118', '13313', '11663', '1901', '14141', '13255', '4493', '17708', '2338', '6023', '12102', '5383', '17400', '12171', '17063', '1271', '12486', '15052', '13514', '5719', '5741', '12781', '15134', '16691', '14368', '808', '10777', '11765', '13284', '7050', '14403', '9163', '3019', '16075', '14016', '15207', '9262', '533', '3873', '7217', '3058', '7912', '4933', '10772', '9147', '708', '8006', '12848', '5490', '3071', '9772', '7339', '7136', '8782', '11642', '15804', '16817', '5134', '2211', '10907', '17298', '1985', '11361', '1330', '17331', '2946', '17159', '8188', '3145', '8393', '13487', '12669', '12737', '12663', 'Nicho'])
+A eliminar la palabra Nicho de la lista c
+(['1723', '7836', '7308', '12050', '3716', '15304', '18593', '17265', '18276', '2818', '8078', '6284', '4988', '1955', '7919', '11450', '18362', '11344', '5175', '2835', '13848', '372', '16299', '1235', '3707', '4758', '11118', '13313', '11663', '1901', '14141', '13255', '4493', '17708', '2338', '6023', '12102', '5383', '17400', '12171', '17063', '1271', '12486', '15052', '13514', '5719', '5741', '12781', '15134', '16691', '14368', '808', '10777', '11765', '13284', '7050', '14403', '9163', '3019', '16075', '14016', '15207', '9262', '533', '3873', '7217', '3058', '7912', '4933', '10772', '9147', '708', '8006', '12848', '5490', '3071', '9772', '7339', '7136', '8782', '11642', '15804', '16817', '5134', '2211', '10907', '17298', '1985', '11361', '1330', '17331', '2946', '17159', '8188', '3145', '8393', '13487', '12669', '12737', '12663'], False)
+matriz vacia, creandose
+matriz vacia, creada, continuamos con concatenar los 100 mejores cluster en la matriz vacia
+Hora de hacer los graficos 
+ El primero es de barras de escala normal
+Imagen guardada exitosamente
+Hora de hacer los graficos 
+ El segundo es de barras de escala logaritmica
+Imagen guardada exitosamente
+HISTOGRAMA CON MUCHOS NICHOS
+Toca procesar las posiciones de las imagenes
+(0, '1723', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(1, '7836', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(2, '7308', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(3, '12050', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(4, '3716', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(5, '15304', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(6, '18593', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(7, '17265', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(8, '18276', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(9, '2818', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(10, '8078', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(11, '6284', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(12, '4988', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(13, '1955', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(14, '7919', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(15, '11450', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(16, '18362', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(17, '11344', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(18, '5175', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(19, '2835', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(20, '13848', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(21, '372', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(22, '16299', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(23, '1235', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(24, '3707', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+Vamos con los ejes
+[0, 1, 2, 3, 4, 5]
+Int64Index([5, 2, 1, 0, 3, 4], dtype='int64')
+Imagen guardada exitosamente
+Toca procesar las posiciones de las imagenes
+(0, '4758', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(1, '11118', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(2, '13313', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(3, '11663', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(4, '1901', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(5, '14141', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(6, '13255', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(7, '4493', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(8, '17708', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(9, '2338', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(10, '6023', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(11, '12102', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(12, '5383', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(13, '17400', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(14, '12171', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(15, '17063', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(16, '1271', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(17, '12486', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(18, '15052', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(19, '13514', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(20, '5719', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(21, '5741', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(22, '12781', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(23, '15134', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(24, '16691', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+Vamos con los ejes
+[0, 1, 2, 3, 4, 5]
+Int64Index([5, 2, 1, 0, 3, 4], dtype='int64')
+Imagen guardada exitosamente
+Toca procesar las posiciones de las imagenes
+(0, '14368', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(1, '808', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(2, '10777', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(3, '11765', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(4, '13284', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(5, '7050', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(6, '14403', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(7, '9163', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(8, '3019', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(9, '16075', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(10, '14016', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(11, '15207', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(12, '9262', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(13, '533', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(14, '3873', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(15, '7217', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(16, '3058', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(17, '7912', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(18, '4933', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(19, '10772', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(20, '9147', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(21, '708', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(22, '8006', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(23, '12848', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(24, '5490', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+Vamos con los ejes
+[0, 1, 2, 3, 4, 5]
+Int64Index([5, 2, 1, 0, 3, 4], dtype='int64')
+Imagen guardada exitosamente
+Toca procesar las posiciones de las imagenes
+(0, '3071', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(1, '9772', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(2, '7339', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(3, '7136', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(4, '8782', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(5, '11642', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(6, '15804', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(7, '16817', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(8, '5134', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(9, '2211', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(10, '10907', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(11, '17298', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(12, '1985', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(13, '11361', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(14, '1330', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(15, '17331', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(16, '2946', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(17, '17159', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(18, '8188', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(19, '3145', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(20, '8393', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(21, '13487', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(22, '12669', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(23, '12737', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+(24, '12663', <type 'int'>, <type 'str'>)
+[0, 1, 2, 3, 4, 5]
+Vamos con los ejes
+[0, 1, 2, 3, 4, 5]
+Int64Index([5, 2, 1, 0, 3, 4], dtype='int64')
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1143: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn_for)
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1145: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples.
+  'recall', 'true', average, warn_for)
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1143: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn_for)
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1145: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true samples.
+  'recall', 'true', average, warn_for)
+Imagen guardada exitosamente
+Matriz de confusión guardada exitosamente
+('Accuracy:', 0.5)
+('Precision:', 0.5)
+('Recall:', 0.5)
+('F1 Score:', 0.5)
+Elapsed time to compute the importances: 470.965 seconds
