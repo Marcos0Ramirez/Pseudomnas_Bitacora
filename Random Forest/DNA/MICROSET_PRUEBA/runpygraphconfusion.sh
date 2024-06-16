@@ -24,8 +24,8 @@
 #
 # output files to run
 #
-#$ -o /mnt/atgc-d3/sur/users/ENESL-MarcosR/PSEUDOMONAS_SCRIPTS/MicroSetRANDOMFOREST/OUTPUT/pyrandom_forgraph_output.$JOB_ID.out # Salida estandar
-#$ -e /mnt/atgc-d3/sur/users/ENESL-MarcosR/PSEUDOMONAS_SCRIPTS/MicroSetRANDOMFOREST/OUTPUT/pyrandom_forgraph_output.$JOB_ID.err # Archivo con los errores
+#$ -o /PSEUDOMONAS_SCRIPTS/MicroSetRANDOMFOREST/OUTPUT/pyrandom_forgraph_output.$JOB_ID.out # Salida estandar
+#$ -e /PSEUDOMONAS_SCRIPTS/MicroSetRANDOMFOREST/OUTPUT/pyrandom_forgraph_output.$JOB_ID.err # Archivo con los errores
 #
 # If modules are needed, source modules environment (Do not delete the next line):
 . /etc/profile.d/modules.sh
