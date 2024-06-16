@@ -31,7 +31,7 @@ def safe_precision_score(y_true, y_pred):
 def confusion_graph():
     start_time = time.time()
     ###################### -- DIRECCIONES, ARCHIVOS Y PARAMETROS -- ######################
-    rutabase= "/mnt/atgc-d3/sur/users/ENESL-MarcosR/PSEUDOMONAS_SCRIPTS/MicroSetRANDOMFOREST/INPUT/" # Ruta base
+    rutabase= "/PSEUDOMONAS_SCRIPTS/MicroSetRANDOMFOREST/INPUT/" # Ruta base
     filemtz = "reduced_testpysh_pymatrizcdhit.csv" #Nombre del archivo con la matriz
     fileclass = "reduced_classificacion_genomas.txt" # Nombre de la tabla de clasificacion
     empty_nicho = 'Unclassified'
@@ -43,7 +43,7 @@ def confusion_graph():
     rutamtz = os.path.join(rutabase, filemtz)
     rutaclass = os.path.join(rutabase, fileclass)
     
-    imgrutabase = "/mnt/atgc-d3/sur/users/ENESL-MarcosR/PSEUDOMONAS_SCRIPTS/MicroSetRANDOMFOREST/OUTPUT/"
+    imgrutabase = "/PSEUDOMONAS_SCRIPTS/MicroSetRANDOMFOREST/OUTPUT/"
     imgic = "importancia_caracteristicas.png"
     imgic2 = "importancia_caracteristicas_log.png" #------------------------- // NUEVO \\ --------------------------#
     mtzconfusion = "confusion_matrix.csv"
