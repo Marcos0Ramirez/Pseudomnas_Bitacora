@@ -1,0 +1,2205 @@
+abriendo el archivo
+empezamos con los chunks
+tomamos los chunks
+listo para concatenar todo
+      Genomas Cluster0 Cluster1  ... Cluster18998 Cluster18999 Cluster19000
+0  2505313052        0        3  ...            1            1            1
+1  2517572175        0        0  ...            0            0            0
+2  2548876750        0        1  ...            0            0            0
+3  2554235471        0        0  ...            0            0            0
+4  2630968743        0        5  ...            0            0            0
+5  2713896862        0        1  ...            0            0            0
+6  2785510749        1        0  ...            0            0            0
+7  2923166773        0        0  ...            0            0            0
+8  2972001829        0        0  ...            0            0            0
+9  8011072914        0        0  ...            0            0            0
+
+[10 rows x 19002 columns]
+('Columnas de df antes de eliminar:', Index([u'Genomas', u'Cluster0', u'Cluster1', u'Cluster2', u'Cluster3',
+       u'Cluster4', u'Cluster5', u'Cluster6', u'Cluster7', u'Cluster8',
+       ...
+       u'Cluster18991', u'Cluster18992', u'Cluster18993', u'Cluster18994',
+       u'Cluster18995', u'Cluster18996', u'Cluster18997', u'Cluster18998',
+       u'Cluster18999', u'Cluster19000'],
+      dtype='object', length=19002))
+[]
+      Genomas Cluster0 Cluster1  ... Cluster18998 Cluster18999 Cluster19000
+0  2505313052        0        3  ...            1            1            1
+1  2517572175        0        0  ...            0            0            0
+2  2548876750        0        1  ...            0            0            0
+3  2554235471        0        0  ...            0            0            0
+4  2630968743        0        5  ...            0            0            0
+5  2713896862        0        1  ...            0            0            0
+6  2785510749        1        0  ...            0            0            0
+7  2923166773        0        0  ...            0            0            0
+8  2972001829        0        0  ...            0            0            0
+9  8011072914        0        0  ...            0            0            0
+
+[10 rows x 19002 columns]
+('Columnas de df despu\xc3\xa9s de eliminar:', Index([u'Genomas', u'Cluster0', u'Cluster1', u'Cluster2', u'Cluster3',
+       u'Cluster4', u'Cluster5', u'Cluster6', u'Cluster7', u'Cluster8',
+       ...
+       u'Cluster18991', u'Cluster18992', u'Cluster18993', u'Cluster18994',
+       u'Cluster18995', u'Cluster18996', u'Cluster18997', u'Cluster18998',
+       u'Cluster18999', u'Cluster19000'],
+      dtype='object', length=19002))
+Ahora si las dimensiones de la matriz dataframe
+(10, 19002)
+      Genomas         Nicho
+0  2505313052      Patogeno
+1  2517572175     HostHuman
+2  2548876750     HostFungi
+3  2554235471     Patogeno 
+4  2630968743      Ambiente
+5  2713896862      Ambiente
+6  2785510749      Hostalga
+7  2923166773    Hostanimal
+8  2972001829  Unclassified
+9  8011072914  Unclassified
+antes de concatenar las tablas
+      Genomas Cluster0 Cluster1  ... Cluster18999 Cluster19000         Nicho
+0  2505313052        0        3  ...            1            1      Patogeno
+1  2517572175        0        0  ...            0            0     HostHuman
+2  2548876750        0        1  ...            0            0     HostFungi
+3  2554235471        0        0  ...            0            0     Patogeno 
+4  2630968743        0        5  ...            0            0      Ambiente
+5  2713896862        0        1  ...            0            0      Ambiente
+6  2785510749        1        0  ...            0            0      Hostalga
+7  2923166773        0        0  ...            0            0    Hostanimal
+8  2972001829        0        0  ...            0            0  Unclassified
+9  8011072914        0        0  ...            0            0  Unclassified
+
+[10 rows x 19003 columns]
+Una vez que ya se hizo como indice la columna Genomas
+               Genomas Cluster0  ... Cluster19000         Nicho
+Genomas                          ...                           
+2505313052  2505313052        0  ...            1      Patogeno
+2517572175  2517572175        0  ...            0     HostHuman
+2548876750  2548876750        0  ...            0     HostFungi
+2554235471  2554235471        0  ...            0     Patogeno 
+2630968743  2630968743        0  ...            0      Ambiente
+2713896862  2713896862        0  ...            0      Ambiente
+2785510749  2785510749        1  ...            0      Hostalga
+2923166773  2923166773        0  ...            0    Hostanimal
+2972001829  2972001829        0  ...            0  Unclassified
+8011072914  8011072914        0  ...            0  Unclassified
+
+[10 rows x 19003 columns]
+Index([u'2505313052', u'2517572175', u'2548876750', u'2554235471',
+       u'2630968743', u'2713896862', u'2785510749', u'2923166773',
+       u'2972001829', u'8011072914'],
+      dtype='object', name=u'Genomas')
+(8, 19003)
+               Genomas Cluster0 Cluster1  ... Cluster18999 Cluster19000      Nicho
+Genomas                                   ...                                     
+2505313052  2505313052        0        3  ...            1            1   Patogeno
+2517572175  2517572175        0        0  ...            0            0  HostHuman
+2548876750  2548876750        0        1  ...            0            0  HostFungi
+2554235471  2554235471        0        0  ...            0            0  Patogeno 
+2630968743  2630968743        0        5  ...            0            0   Ambiente
+
+[5 rows x 19003 columns]
+los nichos los hacemos array
+[['Patogeno' 5]
+ ['HostHuman' 2]
+ ['HostFungi' 1]
+ ['Patogeno ' 6]
+ ['Ambiente' 0]
+ ['Ambiente' 0]
+ ['Hostalga' 3]
+ ['Hostanimal' 4]]
+la matriz la hacemos arreglo
+('Training Features Shape:', (6, 19001))
+('Training Labels Shape:', (6,))
+('Testing Features Shape:', (2, 19001))
+('Testing Labels Shape:', (2,))
+              Importancia
+Cluster1723      0.034339
+Cluster7836      0.020637
+Cluster17265     0.020000
+Cluster18276     0.020000
+Cluster8078      0.020000
+Cluster15304     0.020000
+Cluster7308      0.020000
+Cluster6284      0.019755
+Cluster12050     0.019727
+Cluster2818      0.019727
+Cluster4988      0.019727
+Cluster3716      0.019600
+Cluster18593     0.019059
+Cluster7919      0.018987
+Cluster1955      0.018868
+Cluster18362     0.018868
+Cluster1235      0.018615
+Cluster11450     0.018608
+Cluster372       0.018270
+Cluster16299     0.018100
+Cluster13848     0.018000
+Cluster11344     0.018000
+Cluster4758      0.018000
+Cluster3707      0.018000
+Cluster5175      0.017857
+Cluster12171     0.017857
+Cluster11118     0.017561
+Cluster2835      0.017455
+Cluster13255     0.017241
+Cluster17708     0.017241
+...                   ...
+Cluster6345      0.000000
+Cluster6344      0.000000
+Cluster6343      0.000000
+Cluster6341      0.000000
+Cluster6350      0.000000
+Cluster6340      0.000000
+Cluster6339      0.000000
+Cluster6338      0.000000
+Cluster6337      0.000000
+Cluster6336      0.000000
+Cluster6335      0.000000
+Cluster6349      0.000000
+Cluster6351      0.000000
+Cluster6367      0.000000
+Cluster6360      0.000000
+Cluster6366      0.000000
+Cluster6365      0.000000
+Cluster6364      0.000000
+Cluster6363      0.000000
+Cluster6362      0.000000
+Cluster6361      0.000000
+Cluster6359      0.000000
+Cluster6352      0.000000
+Cluster6358      0.000000
+Cluster6357      0.000000
+Cluster6356      0.000000
+Cluster6355      0.000000
+Cluster6354      0.000000
+Cluster6353      0.000000
+Cluster19000     0.000000
+
+[19001 rows x 1 columns]
+              Importancia
+Cluster1723      0.034339
+Cluster7836      0.020637
+Cluster17265     0.020000
+Cluster18276     0.020000
+Cluster8078      0.020000
+Cluster15304     0.020000
+Cluster7308      0.020000
+Cluster6284      0.019755
+Cluster12050     0.019727
+Cluster2818      0.019727
+Cluster4988      0.019727
+Cluster3716      0.019600
+Cluster18593     0.019059
+Cluster7919      0.018987
+Cluster1955      0.018868
+Cluster18362     0.018868
+Cluster1235      0.018615
+Cluster11450     0.018608
+Cluster372       0.018270
+Cluster16299     0.018100
+Cluster13848     0.018000
+Cluster11344     0.018000
+Cluster4758      0.018000
+Cluster3707      0.018000
+Cluster5175      0.017857
+Cluster12171     0.017857
+Cluster11118     0.017561
+Cluster2835      0.017455
+Cluster13255     0.017241
+Cluster17708     0.017241
+...                   ...
+Cluster708       0.002000
+Cluster4712      0.001951
+Cluster11642     0.001939
+Cluster2211      0.001875
+Cluster3058      0.001875
+Cluster7217      0.001875
+Cluster7136      0.001730
+Cluster266       0.001629
+Cluster16625     0.001624
+Cluster5974      0.001624
+Cluster15855     0.001579
+Cluster8632      0.001561
+Cluster2946      0.001463
+Cluster3071      0.001387
+Cluster8006      0.001385
+Cluster8782      0.001333
+Cluster7339      0.001250
+Cluster3145      0.001250
+Cluster8188      0.001250
+Cluster17298     0.001154
+Cluster10580     0.001139
+Cluster13487     0.001132
+Cluster1405      0.001053
+Cluster4830      0.000941
+Cluster2288      0.000914
+Cluster18342     0.000914
+Cluster7526      0.000779
+Cluster8393      0.000759
+Cluster12084     0.000755
+Cluster7407      0.000667
+
+[100 rows x 1 columns]
+('columnas 100; extraidas: ', [array(['0', '1', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['1', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '2', '1', '1', '1', '1', '1', '2'], dtype=object), array(['0', '0', '0', '0', '2', '1', '0', '0'], dtype=object), array(['1', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '0'], dtype=object), array(['0', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['1', '1', '1', '0', '1', '1', '1', '0'], dtype=object), array(['0', '0', '0', '0', '1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '1', '1', '2', '1', '1'], dtype=object), array(['2', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '1', '1', '1'], dtype=object), array(['1', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '1', '1'], dtype=object), array(['2', '1', '1', '2', '1', '1', '1', '1'], dtype=object), array(['1', '0', '1', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '2', '2', '0', '3', '1', '2', '2'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '0'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '1', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '1', '0', '0', '1', '1', '0'], dtype=object), array(['0', '1', '0', '0', '0', '1', '0', '0'], dtype=object), array(['1', '0', '1', '0', '2', '1', '0', '0'], dtype=object), array(['1', '0', '0', '0', '0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '2', '0', '0', '0', '1'], dtype=object), array(['1', '2', '1', '1', '2', '1', '1', '1'], dtype=object), array(['1', '0', '0', '1', '0', '0', '1', '1'], dtype=object), array(['1', '0', '0', '0', '0', '1', '1', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '0', '0', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '1', '1'], dtype=object), array(['1', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '1'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '2', '1', '1', '2', '1', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '0', '0', '0', '1', '1', '0', '0'], dtype=object), array(['1', '0', '1', '0', '2', '1', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['2', '1', '2', '1', '3', '2', '1', '3'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '2', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '1', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '0'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '1', '0', '2', '0', '0', '1', '1'], dtype=object), array(['0', '1', '0', '0', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['1', '2', '2', '1', '1', '1', '0', '1'], dtype=object), array(['0', '1', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '0', '1', '0', '1', '0', '0', '0'], dtype=object), array(['1', '0', '1', '1', '1', '1', '0', '1'], dtype=object), array(['0', '0', '0', '0', '0', '1', '0', '1'], dtype=object), array(['1', '0', '1', '0', '0', '0', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '0', '1', '1', '1', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '1', '1', '0', '1', '1', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '1'], dtype=object), array(['1', '0', '1', '0', '1', '1', '1', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['0', '0', '0', '0', '0', '0', '0', '1'], dtype=object), array(['0', '0', '0', '1', '0', '0', '0', '0'], dtype=object), array(['1', '0', '1', '0', '1', '1', '0', '0'], dtype=object)])
+('matriz mtz_clustercien creada\\n',            1723 7836 17265 18276 8078  ... 7526 8393 12084 7407       Nicho
+Genomas                                ...                                 
+2505313052    0    0     0     1    0  ...    0    0     0    1    Patogeno
+2517572175    1    1     1     0    1  ...    0    0     0    0   HostHuman
+2548876750    1    0     0     0    0  ...    0    0     0    1   HostFungi
+2554235471    0    0     0     0    1  ...    1    0     1    0   Patogeno 
+2630968743    1    0     0     1    0  ...    0    0     0    1    Ambiente
+2713896862    1    0     0     1    0  ...    0    0     0    1    Ambiente
+2785510749    0    0     0     0    0  ...    0    0     0    0    Hostalga
+2923166773    0    0     0     0    0  ...    0    1     0    0  Hostanimal
+
+[8 rows x 101 columns])
+('indices de mtz_clustercien \\n', Index([u'2505313052', u'2517572175', u'2548876750', u'2554235471',
+       u'2630968743', u'2713896862', u'2785510749', u'2923166773'],
+      dtype='object', name=u'Genomas'))
+('columnas de mtz_clustercien \\n', Index([u'1723', u'7836', u'17265', u'18276', u'8078', u'15304', u'7308',
+       u'6284', u'12050', u'2818',
+       ...
+       u'13487', u'1405', u'4830', u'2288', u'18342', u'7526', u'8393',
+       u'12084', u'7407', u'Nicho'],
+      dtype='object', length=101))
+Continuamos hacia el conteo, juntando en indice y las 100 columnas
+('u', array(['Patogeno', 'HostHuman', 'HostFungi', 'Patogeno ', 'Ambiente',
+       'Hostalga', 'Hostanimal'], dtype=object), 'c', ['1723', '7836', '17265', '18276', '8078', '15304', '7308', '6284', '12050', '2818', '4988', '3716', '18593', '7919', '1955', '18362', '1235', '11450', '372', '16299', '13848', '11344', '4758', '3707', '5175', '12171', '11118', '2835', '13255', '17708', '4493', '17400', '13313', '12102', '5383', '2338', '6023', '11663', '1901', '14141', '17063', '13514', '12486', '1271', '15052', '5719', '12781', '5741', '15134', '16691', '808', '14368', '10777', '11765', '4933', '3019', '13284', '16075', '14016', '15207', '9262', '533', '7050', '15804', '6778', '3873', '16817', '14403', '1985', '10772', '708', '4712', '11642', '2211', '3058', '7217', '7136', '266', '16625', '5974', '15855', '8632', '2946', '3071', '8006', '8782', '7339', '3145', '8188', '17298', '10580', '13487', '1405', '4830', '2288', '18342', '7526', '8393', '12084', '7407', 'Nicho'])
+A eliminar la palabra Nicho de la lista c
+(['1723', '7836', '17265', '18276', '8078', '15304', '7308', '6284', '12050', '2818', '4988', '3716', '18593', '7919', '1955', '18362', '1235', '11450', '372', '16299', '13848', '11344', '4758', '3707', '5175', '12171', '11118', '2835', '13255', '17708', '4493', '17400', '13313', '12102', '5383', '2338', '6023', '11663', '1901', '14141', '17063', '13514', '12486', '1271', '15052', '5719', '12781', '5741', '15134', '16691', '808', '14368', '10777', '11765', '4933', '3019', '13284', '16075', '14016', '15207', '9262', '533', '7050', '15804', '6778', '3873', '16817', '14403', '1985', '10772', '708', '4712', '11642', '2211', '3058', '7217', '7136', '266', '16625', '5974', '15855', '8632', '2946', '3071', '8006', '8782', '7339', '3145', '8188', '17298', '10580', '13487', '1405', '4830', '2288', '18342', '7526', '8393', '12084', '7407'], False)
+matriz vacia, creandose
+matriz vacia, creada, continuamos con concatenar los 100 mejores cluster en la matriz vacia
+Hora de hacer los graficos 
+ El primero es de barras de escala normal
+Imagen guardada exitosamente
+Hora de hacer los graficos 
+ El segundo es de barras de escala logaritmica
+Imagen guardada exitosamente
+HISTOGRAMA CON MUCHOS NICHOS
+Toca procesar las posiciones de las imagenes
+(0, '1723', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 1723, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(1, '7836', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 7836, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(2, '17265', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 17265, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(3, '18276', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 18276, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(4, '8078', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 8078, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(5, '15304', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 15304, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(6, '7308', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     2
+HostFungi     1
+Patogeno      1
+Ambiente      2
+Hostalga      1
+Hostanimal    2
+Name: 7308, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(7, '6284', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      3
+Hostalga      0
+Hostanimal    0
+Name: 6284, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(8, '12050', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 12050, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(9, '2818', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 2818, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(10, '4988', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    0
+Name: 4988, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(11, '3716', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    0
+Name: 3716, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(12, '18593', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    0
+Name: 18593, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(13, '7919', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 7919, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(14, '1955', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     1
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      1
+Hostanimal    0
+Name: 1955, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(15, '18362', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    0
+Name: 18362, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(16, '1235', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 1235, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(17, '11450', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     1
+HostFungi     1
+Patogeno      1
+Ambiente      3
+Hostalga      1
+Hostanimal    1
+Name: 11450, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(18, '372', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      2
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    0
+Name: 372, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(19, '16299', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      1
+Hostalga      1
+Hostanimal    1
+Name: 16299, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(20, '13848', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 13848, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(21, '11344', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      1
+Hostanimal    1
+Name: 11344, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(22, '4758', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      2
+HostHuman     1
+HostFungi     1
+Patogeno      2
+Ambiente      2
+Hostalga      1
+Hostanimal    1
+Name: 4758, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(23, '3707', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 3707, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(24, '5175', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 5175, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+Vamos con los ejes
+Imagen guardada exitosamente
+Toca procesar las posiciones de las imagenes
+(0, '12171', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 12171, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(1, '11118', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     2
+HostFungi     2
+Patogeno      0
+Ambiente      4
+Hostalga      2
+Hostanimal    2
+Name: 11118, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(2, '2835', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    0
+Name: 2835, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(3, '13255', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 13255, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(4, '17708', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      1
+Hostanimal    1
+Name: 17708, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(5, '4493', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 4493, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(6, '17400', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     1
+Patogeno      0
+Ambiente      1
+Hostalga      1
+Hostanimal    0
+Name: 17400, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(7, '13313', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    0
+Name: 13313, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(8, '12102', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      3
+Hostalga      0
+Hostanimal    0
+Name: 12102, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(9, '5383', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 5383, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(10, '2338', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     1
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 2338, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(11, '6023', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 6023, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(12, '11663', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      2
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 11663, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(13, '1901', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     2
+HostFungi     1
+Patogeno      1
+Ambiente      3
+Hostalga      1
+Hostanimal    1
+Name: 1901, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(14, '14141', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      1
+Hostanimal    1
+Name: 14141, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(15, '17063', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      1
+Hostalga      1
+Hostanimal    1
+Name: 17063, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(16, '13514', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 13514, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(17, '12486', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     1
+HostFungi     1
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    0
+Name: 12486, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(18, '1271', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      1
+Hostanimal    1
+Name: 1271, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(19, '15052', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 15052, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(20, '5719', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 5719, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(21, '12781', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 12781, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(22, '5741', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    0
+Name: 5741, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(23, '15134', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 15134, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(24, '16691', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 16691, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+Vamos con los ejes
+Imagen guardada exitosamente
+Toca procesar las posiciones de las imagenes
+(0, '808', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 808, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(1, '14368', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 14368, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(2, '10777', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 10777, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(3, '11765', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 11765, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(4, '4933', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    1
+Name: 4933, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(5, '3019', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 3019, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(6, '13284', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     2
+Patogeno      1
+Ambiente      3
+Hostalga      1
+Hostanimal    1
+Name: 13284, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(7, '16075', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 16075, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(8, '14016', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 14016, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(9, '15207', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      3
+Hostalga      0
+Hostanimal    0
+Name: 15207, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(10, '9262', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 9262, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(11, '533', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 533, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(12, '7050', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 7050, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(13, '15804', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 15804, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(14, '6778', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 6778, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(15, '3873', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      2
+HostHuman     1
+HostFungi     2
+Patogeno      1
+Ambiente      5
+Hostalga      1
+Hostanimal    3
+Name: 3873, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(16, '16817', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 16817, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(17, '14403', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 14403, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(18, '1985', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      2
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 1985, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(19, '10772', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 10772, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(20, '708', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 708, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(21, '4712', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      1
+Hostanimal    1
+Name: 4712, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(22, '11642', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 11642, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(23, '2211', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 2211, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(24, '3058', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 3058, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+Vamos con los ejes
+Imagen guardada exitosamente
+Toca procesar las posiciones de las imagenes
+(0, '7217', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 7217, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(1, '7136', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 7136, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(2, '266', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    0
+Name: 266, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(3, '16625', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 16625, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(4, '5974', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      2
+Ambiente      0
+Hostalga      1
+Hostanimal    1
+Name: 5974, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(5, '15855', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 15855, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(6, '8632', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 8632, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(7, '2946', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 2946, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(8, '3071', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     2
+HostFungi     2
+Patogeno      1
+Ambiente      2
+Hostalga      0
+Hostanimal    1
+Name: 3071, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(9, '8006', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     1
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 8006, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(10, '8782', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    0
+Name: 8782, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(11, '7339', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      1
+Ambiente      2
+Hostalga      0
+Hostanimal    1
+Name: 7339, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(12, '3145', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      1
+Hostalga      0
+Hostanimal    1
+Name: 3145, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(13, '8188', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 8188, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(14, '17298', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 17298, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(15, '10580', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 10580, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(16, '13487', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     1
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      1
+Hostanimal    1
+Name: 13487, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(17, '1405', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 1405, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(18, '4830', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     1
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    1
+Name: 4830, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(19, '2288', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    1
+Name: 2288, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(20, '18342', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      1
+Hostanimal    1
+Name: 18342, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(21, '7526', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 7526, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(22, '8393', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      0
+Ambiente      0
+Hostalga      0
+Hostanimal    1
+Name: 8393, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(23, '12084', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      0
+HostHuman     0
+HostFungi     0
+Patogeno      1
+Ambiente      0
+Hostalga      0
+Hostanimal    0
+Name: 12084, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+(24, '7407', <type 'int'>, <type 'str'>)
+(Index([u'Patogeno', u'HostHuman', u'HostFungi', u'Patogeno ', u'Ambiente',
+       u'Hostalga', u'Hostanimal'],
+      dtype='object'), <class 'pandas.core.indexes.base.Index'>, Patogeno      1
+HostHuman     0
+HostFungi     1
+Patogeno      0
+Ambiente      2
+Hostalga      0
+Hostanimal    0
+Name: 7407, dtype: int64, <class 'pandas.core.series.Series'>)
+('zeroconteonichosindices',    int         str
+0    0    Patogeno
+1    1   HostHuman
+2    2   HostFungi
+3    3   Patogeno 
+4    4    Ambiente
+5    5    Hostalga
+6    6  Hostanimal)
+Vamos con los ejes
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1143: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn_for)
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1145: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples.
+  'recall', 'true', average, warn_for)
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1143: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no predicted samples.
+  'precision', 'predicted', average, warn_for)
+/usr/lib64/python2.7/site-packages/sklearn/metrics/classification.py:1145: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true samples.
+  'recall', 'true', average, warn_for)
+Imagen guardada exitosamente
+Matriz de confusión guardada exitosamente
+('Accuracy:', 0.5)
+('Precision:', 0.5)
+('Recall:', 0.5)
+('F1 Score:', 0.5)
+Elapsed time to compute the importances: 502.429 seconds
