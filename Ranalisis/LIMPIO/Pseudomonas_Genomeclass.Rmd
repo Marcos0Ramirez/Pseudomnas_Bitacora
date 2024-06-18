@@ -4,6 +4,12 @@ author: "Marcos Ramirez"
 date: "2024-05-19"
 output: html_document
 ---
+#library
+```{r}
+library(dplyr)
+```
+
+
 # Tabla de datos Actualizados 28 de febrero del 2024
 ```{r}
 # Con este comando se provee del documento con los datos ordenados de manera correcta y listos para ser manupulados. 
@@ -240,6 +246,26 @@ rm(b_a_plants_Relevance, df_hostname, mam_hostname_list, plantas_hostname_list)
 rm(mammals_hostname, df_plants_hostname_to_bpla)
 ```
 
+# 17 de mayo del 2024
+Hacemos que se concatenen los genomas y nichos
+```{r}
+
+m <- c(rep("mamifero", length(b_mammals$taxon_oid)))
+p <- c(rep("planta", length(b_plants$taxon_oid)))
+
+length(m)
+length(p)
+
+nichospseudo3894_mamifplant <- rbind(data.frame(Genomas=b_mammals$taxon_oid, Nicho=m), data.frame(Genomas=b_plants$taxon_oid,  Nicho=p))
+
+vacios_mammal_plant <- subset(pseudomonas, !taxon_oid %in% nichospseudo3894_mamifplant$Genomas)
+v <- c(rep("vacio", length(vacios_mammal_plant$taxon_oid)))
+length(v)
+nichospseudo3894_mamifplant <- rbind(nichospseudo3894_mamifplant, data.frame(Genomas=vacios_mammal_plant$taxon_oid, Nicho=v))
+
+## Guardamos
+write.table(nichospseudo3894_mamifplant, file = "nichospseudo3894_mamifplant.txt", sep = "\t", quote = FALSE, row.names = FALSE)
+```
 
 
 
