@@ -246,7 +246,7 @@ rm(b_a_plants_Relevance, df_hostname, mam_hostname_list, plantas_hostname_list)
 rm(mammals_hostname, df_plants_hostname_to_bpla)
 ```
 
-# 17 de mayo del 2024
+# 17 de junio del 2024
 Hacemos que se concatenen los genomas y nichos
 ```{r}
 
