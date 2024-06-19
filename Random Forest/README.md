@@ -360,10 +360,10 @@ x | a | b |
 1 | ![histograma_mlabels_1](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/f6616bff-e0b7-44e6-b62c-37c82cb6cd51) | ![histograma_mlabels_2](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/21ee387e-847d-4087-992e-9c75538c83a6)  |
 2 | ![histograma_mlabels_3](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/89d52403-3fd3-4b5a-b6fb-4ec411544fc8) | ![histograma_mlabels_4](https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/assets/88853577/30c8b718-11c7-465f-842f-b51efe85f721) |
 
-# 14 de mayo del 2024
+# 14 de junio del 2024
 Se haran adaptaciones para el codigo madre del cluster en el siguiente archivo https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/RandomForest_addhist_logimp.py
 
-# 15 de mayo del 2024
+# 15 de junio del 2024
 Estos son los registros de los problemas que fueron apareciendo
 ```
 pyrandom_forgraph_output.477979.out
@@ -487,7 +487,7 @@ Ya se logro guardar los graficos de importancia, ahora solo falta los histograma
 
 Ahora es en la parte donde se hace los graficos de histogramas https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/ERROR_OUTPUT/pyrandom_forgraph_output.478011.out
 
-# 16 de mayo del 2024
+# 16 de junio del 2024
 Finalmente se logro que el script funcionara, aqui se enuentra https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/RandomForest_addhist_logimp_python275.py
 
 Comprobando que funciona tanto para el set de datos que son muchos nichos o dos nichos como maximo. El codigo, proximamente sera probado con el set de datos original, debido a que fue con datos locales de una base de datos de 10 genomas.
