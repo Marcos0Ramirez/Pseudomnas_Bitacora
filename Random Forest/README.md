@@ -491,3 +491,6 @@ Ahora es en la parte donde se hace los graficos de histogramas https://github.co
 Finalmente se logro que el script funcionara, aqui se enuentra https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/DNA/MICROSET_PRUEBA/RandomForest_addhist_logimp_python275.py
 
 Comprobando que funciona tanto para el set de datos que son muchos nichos o dos nichos como maximo. El codigo, proximamente sera probado con el set de datos original, debido a que fue con datos locales de una base de datos de 10 genomas.
+
+# 17 de junio del 2024 al 19 de junio del 2024
+Se probo en el cluster y con el set dedatos original y funciono correctamente para ambos analisis. Tanto para la comparacion entre hospedero y ambiente, como para la comparacion de mamiferos y plantas.
