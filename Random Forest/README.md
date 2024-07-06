@@ -494,3 +494,7 @@ Comprobando que funciona tanto para el set de datos que son muchos nichos o dos 
 
 # 17 de junio del 2024 al 19 de junio del 2024
 Se probo en el cluster y con el set dedatos original y funciono correctamente para ambos analisis. Tanto para la comparacion entre hospedero y ambiente, como para la comparacion de mamiferos y plantas.
+
+# 6 de julio del 2024
+Ahora se modificara la parte del script que recibe dos clasificaciones para que haga 4 graficas con 50 datos cada imagen y de ahi poderlos mostrar. A partir de https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/Grafio_Confusion_RandomForest.py para entender y modificar el script original de DNA.
+
