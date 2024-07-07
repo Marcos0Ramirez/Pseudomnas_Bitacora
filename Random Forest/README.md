@@ -498,3 +498,32 @@ Se probo en el cluster y con el set dedatos original y funciono correctamente pa
 # 6 de julio del 2024
 Ahora se modificara la parte del script que recibe dos clasificaciones para que haga 4 graficas con 50 datos cada imagen y de ahi poderlos mostrar. A partir de https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/Grafio_Confusion_RandomForest.py para entender y modificar el script original de DNA.
 
+Se elimino esta parte del codigo, ya que daba otras medidas para poner las etiquetas
+```
+        positions2 = []
+        for i, caracteristica in enumerate(caracteristicas):
+            print(i, caracteristica)
+            pos = [i * (bar_width * len(clusters) + 0.5) + j * bar_width for j in range(len(clusters))]
+            print(pos)
+            positions2.append(pos)
+```
+Y se agrego esta parte, modificando el inicio
+```
+else:
+    # OPCION 11
+    # UN HISTOGRAMA (dos filas)
+    # Apilar los datos para combinarlos en una sola serie
+    h3_o = pd.DataFrame(np.array([[i, j, zeroconteonichos.loc[i,j]] for j in zeroconteonichos.columns if j for i in zeroconteonichos.index if i]))
+    h3_o.columns = ['Caracteristica', 'Cluster', 'Frecuencia']
+    for i in [0, 50, 100, 150]:
+        h3 = h3_o[i:i+50]
+        
+        # Crear el histograma
+        plt.figure(figsize=(10, 4))
+        clusters = h3['Cluster'].unique()
+        caracteristicas = h3['Caracteristica'].unique()
+        bar_width = 0.4  # Ajusta el ancho de las barras
+```
+Para hacer imagenes de 25 cluster por imagen, obteniendo 4 de ellas y teniendo una mejor observacion de los datos y etiquetas
+
+Ahora solo falta corregir el porque se mueve el eje y, cambiando las posiciones de las frecuencias y agregar la parte de que aparezcan imagenes por separados y que no se sustituyan.
