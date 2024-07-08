@@ -605,3 +605,54 @@ Finalmente el script se modifico, relizando 4 imagenes con 50 clusters y que con
         plt.savefig(histt50labelspang, format='png', dpi=300, bbox_inches='tight')
         plt.close()
 ```
+
+Finalmente tambien se modificaron las configuraciones de los graficos para la importancia de las caracteristicas
+```
+# =============================================================================
+
+# Crear la figura y el objeto Axes
+fig, ax = plt.subplots(figsize=(12, 4))
+
+# Crear el gráfico de barras en el objeto Axes
+primeros100.plot(kind='bar', ax=ax)
+
+# Título y etiquetas de los ejes
+ax.set_title('Importancia de las características NORMAL, \ncomparativa ({})'.format(" ".join(caracteristicas)))
+ax.set_xlabel('Random Forest: Características consideradas (clusters)')
+ax.set_ylabel('Importancia de las caracteristicas (clusters), \nnormal')
+
+# Ajustar la rotación de las etiquetas del eje x
+ax.set_xticklabels(ax.get_xticklabels(), rotation=90, fontsize=6, fontweight='bold')
+
+# Ajustar el diseño para que no se recorten los elementos
+plt.tight_layout()
+
+# Guardar la gráfica como un archivo PNG
+plt.savefig(rutaimportacara, format='png', dpi=300, bbox_inches='tight')
+
+# Mostrar la gráfica
+plt.show()
+
+# =============================================================================
+# Configurar el tamaño de la figura (ancho, alto) en pulgadas (GRAFICO LOGARITMICA)
+# Crear la figura con el tamaño especificado
+fig, ax = plt.subplots(figsize=(12, 4))
+
+# Crear la gráfica de barras con el eje y en escala logarítmica
+primeros100.plot(kind='bar', logy=True, ax=ax)  # Aquí se especifica que el eje y será logarítmico
+
+# Título y etiquetas de los ejes
+ax.set_title('Importancia de las características LOGARITMICA, \ncomparativa ({})'.format(" ".join(caracteristicas)))
+ax.set_xlabel('Random Forest: Características consideradas (clusters)')
+ax.set_ylabel('Importancia de las caracteristicas (clusters), \nlogaritmica')
+
+# Ajustar la rotación de las etiquetas del eje x
+ax.set_xticklabels(ax.get_xticklabels(), rotation=90, fontsize=6, fontweight='bold')
+
+# Ajustar el diseño para que no se recorten los elementos
+plt.tight_layout()
+
+# Guardar la gráfica como un archivo PNG
+plt.savefig(rutaimportacara2, format='png', dpi=300, bbox_inches='tight')
+```
+Finalmente toca adaptar en el cluster, correr con el pequeño subconjunto y finalmente con los datos originales.
