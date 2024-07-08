@@ -19,14 +19,14 @@ import matplotlib.pyplot as plt
 start_time = time.time()
 ###################### -- EXTRACCION DE LOS DATOS -- ######################
 
-rutabase= "C:/Users/52477/Documents/UNAM_Octavo_semestre/LIIGH/LEE/RandomForest/RandomForest_py/" # Ruta base
+rutabase= "/RandomForest/RandomForest_py/" # Ruta base
 filemtz = "reduced_testpysh_pymatrizcdhit.csv" #Nombre del archivo con la matriz
 fileclass = "reduced_classificacion_genomas.txt" # Nombre de la tabla de clasificacion
 
 rutamtz = os.path.join(rutabase, filemtz)
 rutaclass = os.path.join(rutabase, fileclass)
 
-imgrutabase = "C:/Users/52477/Documents/UNAM_Octavo_semestre/LIIGH/LEE/RandomForest/RandomForest_py/Imagenes_results_local_data/Prueba1_donichos/"
+imgrutabase = "/RandomForest/RandomForest_py/Imagenes_results_local_data/Prueba1_donichos/"
 imgic = "importancia_caracteristicas.png"
 imgic2 = "importancia_caracteristicas_log.png"
 mtzconfusion = "confusion_matrix.csv"
