@@ -527,3 +527,81 @@ else:
 Para hacer imagenes de 25 cluster por imagen, obteniendo 4 de ellas y teniendo una mejor observacion de los datos y etiquetas
 
 Ahora solo falta corregir el porque se mueve el eje y, cambiando las posiciones de las frecuencias y agregar la parte de que aparezcan imagenes por separados y que no se sustituyan.
+
+# 7 de julio del 2024 a 8 de julio del 2024
+Finalmente el script se modifico, relizando 4 imagenes con 50 clusters y que con eso se le pudiese agregar con que se esta comparando, corrigiendo el orden del eje y y finalmente agregando de que color son las etiquetas.
+```
+    # OPCION 11
+    # UN HISTOGRAMA (dos filas)
+    # Apilar los datos para combinarlos en una sola serie
+
+    h3_o = pd.DataFrame(np.array([[i, j, int(zeroconteonichos.loc[i,j])] for j in zeroconteonichos.columns if j for i in zeroconteonichos.index if i]))
+    h3_o.columns = ['Caracteristica', 'Cluster', 'Frecuencia']
+
+    for i in [0, 50, 100, 150]:
+        h3 = h3_o[i:i+50]
+        h3 = h3.reset_index(drop=True)
+        y_min, y_max = 0, int(max(h3['Frecuencia'])) + 1
+        print(h3)
+        
+        histot_50="histograma_t50labels_{}.png".format(i)
+        histt50labelspang = os.path.join(imgrutabase, histot_50)
+        
+        # Crear el histograma
+        plt.figure(figsize=(10, 4))
+        clusters = h3['Cluster'].unique()
+        caracteristicas = h3['Caracteristica'].unique()
+        bar_width = 0.1  # Ajusta el ancho de las barras
+        
+        # Asignar colores
+        colors = ['blue', 'orange']  # Dos colores para las barras
+            
+        # Calcular las posiciones
+        positions = []
+        par=[]
+        impar=[]
+        for i in range(0,len(h3)):
+            if i % 2 == 0:
+                #print('par', i)
+                par.append(i*bar_width)
+            else:
+                #print('impar', i)
+                impar.append(i*bar_width)
+        positions.append(par)
+        positions.append(impar)
+        
+        
+        # Dibujar las barras
+        for i, cluster in enumerate(clusters):
+            cluster_data = h3[h3['Cluster'] == cluster]
+            pos = [positions[j][i] for j in range(len(caracteristicas))]
+            plt.bar(pos, pd.Series(int(i) for i in cluster_data['Frecuencia'] if i), width=bar_width, color=[colors[0],colors[1]])
+    
+        # Ajustar las posiciones del eje x y las etiquetas
+        #flattened_positions = [p for sublist in positions2 for p in sublist]
+        flattened_positions = [p for sublist in positions for p in sublist]
+        x_labels = ['{}\nCluster {}'.format(caracteristicas[i], clusters[j]) for i in range(len(caracteristicas)) for j in range(len(clusters))]
+        plt.xticks(flattened_positions, x_labels, rotation=90, fontsize=5, fontweight='bold')
+        
+        # Ajustar el eje y manualmente para asegurar consistencia
+        plt.ylim(y_min, y_max)
+        plt.yticks(np.arange(y_min, y_max, 1)) 
+        
+        # Añadir etiquetas y leyenda con colores personalizados
+        legend_patches = [
+            plt.Rectangle((0, 0), 1, 1, fc='blue', alpha=0.7),
+            plt.Rectangle((0, 0), 1, 1, fc='orange', alpha=0.7)
+        ]
+        plt.legend(legend_patches, caracteristicas)
+        
+        # Añadir etiquetas y leyenda
+        plt.xlabel('Característica y Clúster')
+        plt.ylabel('Frecuencia')
+        plt.title('Frecuencias por Característica y Clúster ({} y {})'.format(caracteristicas[0], caracteristicas[1]))
+        #plt.show()
+        # Ajustar el diseño para que no se recorten los elementos
+        plt.tight_layout()
+        # Guardar la gráfica como un archivo PNG
+        plt.savefig(histt50labelspang, format='png', dpi=300, bbox_inches='tight')
+        plt.close()
+```
