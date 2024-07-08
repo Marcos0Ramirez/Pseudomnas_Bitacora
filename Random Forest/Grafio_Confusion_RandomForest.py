@@ -19,36 +19,46 @@ import matplotlib.pyplot as plt
 start_time = time.time()
 ###################### -- EXTRACCION DE LOS DATOS -- ######################
 
-rutabase= "Descargas_NCBI/CDHIT/MATRIXDATA" # Ruta base
-filemtz = "testpysh_pymatrizcdhit.csv" #Nombre del archivo con la matriz
-fileclass = "classificacion_genomas.txt" # Nombre de la tabla de clasificacion
+rutabase= "C:/Users/52477/Documents/UNAM_Octavo_semestre/LIIGH/LEE/RandomForest/RandomForest_py/" # Ruta base
+filemtz = "reduced_testpysh_pymatrizcdhit.csv" #Nombre del archivo con la matriz
+fileclass = "reduced_classificacion_genomas.txt" # Nombre de la tabla de clasificacion
 
 rutamtz = os.path.join(rutabase, filemtz)
 rutaclass = os.path.join(rutabase, fileclass)
 
-imgrutabase = "Descargas_NCBI/CDHIT/MATRIXDATA/Imagenes/"
+imgrutabase = "C:/Users/52477/Documents/UNAM_Octavo_semestre/LIIGH/LEE/RandomForest/RandomForest_py/Imagenes_results_local_data/Prueba1_donichos/"
 imgic = "importancia_caracteristicas.png"
 imgic2 = "importancia_caracteristicas_log.png"
 mtzconfusion = "confusion_matrix.csv"
 mtzconfusion2 = "confusion_matrix.png"
 histo="histograma_tlabels.png"
+histot_50="histograma_t50labels_{}.png"
 histom="histograma_mlabels.png"
 histompy2="histograma_mlabels_encoded.png"
+histom_input = "histograma_mlabels_encoded_{}.png" #Mantener el {0} para las multiples imagenes si son mas de dos nichos
+conteonichos = "zeroconteonichos.csv"
+conteonichos_encoded = "zeroconteonichos_encoded.csv"
+etiquetas_codificadas = "np_class_etiquetas.csv"
 
 rutaimportacara = os.path.join(imgrutabase, imgic)
 rutaimportacara2 = os.path.join(imgrutabase, imgic2)
 rutaconfusion = os.path.join(imgrutabase, mtzconfusion)
 rutaconfusionpng = os.path.join(imgrutabase, mtzconfusion2)
 histlabelspng = os.path.join(imgrutabase, histo)
+histt50labelspang = os.path.join(imgrutabase, histot_50)
 histmlabelspng = os.path.join(imgrutabase, histom)
 histmlabelspng_encoded = os.path.join(imgrutabase, histompy2)
+cluster100matriz = os.path.join(imgrutabase, conteonichos)
+cluster100matriz_encoded = os.path.join(imgrutabase, conteonichos_encoded)
+rutaetiquetas_codificadas = os.path.join(imgrutabase, etiquetas_codificadas)
+
 # Extraemos la data
 matriz = pd.read_csv(rutamtz)
 print(matriz)
 matriz = matriz.rename_axis("HOLA")
 # Extremos la tabla de clasificacion
 
-classificacion = pd.read_csv(rutaclass)
+classificacion = pd.read_csv(rutaclass, sep='\t')
 
 #matriz.drop([1,2,6,7]).to_csv("reduced_testpysh_pymatrizcdhit.csv", index=False)
 #classificacion.drop([1,2,6,7]).drop('Specie', axis=1).to_csv("reduced_classificacion_genomas.txt", index=False, sep="\t")
@@ -67,7 +77,7 @@ mtz_idgen_nicho = pd.DataFrame(pd.Series(mtz_class_caracteres['Nicho']))
 #classificacion.sort_values(by='Genomas')
 ###################### -- PREPARACION DE LOS DATOS -- ######################
 ### -- One-Hot Encoding -- ###
-mtz_class_caracteres = pd.concat([mtz_class_caracteres.drop(columns=['Specie'])], axis=1) 
+#mtz_class_caracteres = pd.concat([mtz_class_caracteres.drop(columns=['Specie'])], axis=1) 
 
 ### -- Caracteristicas y Objetivos, y Convertir Datos en Arreglos -- ###
 labels = np.array(mtz_class_caracteres["Nicho"])
@@ -79,7 +89,7 @@ codified =  encoded_labels.reshape(1, -1)
 
 class_etiquetas = np.concatenate((etiquetas, codified)).T
 print(class_etiquetas)
-pd.DataFrame(class_etiquetas).drop_duplicates().to_csv("np_class_etiquetas.csv", index=False)
+pd.DataFrame(class_etiquetas).drop_duplicates().to_csv(rutaetiquetas_codificadas, index=False)
 list(pd.DataFrame(class_etiquetas).drop_duplicates()[1])
 mtz_class_caracteres = mtz_class_caracteres.drop("Nicho", axis=1)
 mtz_class_caracteres_list = list(mtz_class_caracteres.columns)
@@ -170,6 +180,8 @@ for i in u:
     for j in c:
         ev = list(mtz_clustercien.index[mtz_clustercien['Nicho'] == i])
         zeroconteonichos.loc[i,j] = int(sum(list(mtz_clustercien.loc[ev,j])))
+        
+zeroconteonichos.to_csv(cluster100matriz)
       
 #############################################################################################
 mtz_idgen_nicho_encoded = pd.DataFrame(pd.Series(mtz_idgen_nicho['Nicho']))
@@ -213,277 +225,260 @@ for i in u_encoded:
         zeroconteonichos_encoded.loc[i, j] = sumas
         #print("zeroconteonichos.loc[i,j]", zeroconteonichos.loc[i, j])
         #sys.stdout.flush()
-
+zeroconteonichos_encoded.to_csv(cluster100matriz_encoded)
 
 ##### Continuamos con el histograma. ######
 
-# # =============================================================================
-# =============================================================================
-# OPCION 9
-# MUCHOS HISTOGRAMAS
 
-# Número total de clústeres
-num_clusters = zeroconteonichos.shape[1]
-
-# Dividir en grupos de 25 clústeres
-clusters_per_image = 25
-num_images = num_clusters // clusters_per_image
-
-# Lista de colores para los histogramas
-colors = ['skyblue', 'lightgreen', 'lightcoral', 'lightskyblue', 'lightpink']
-
-for img in range(num_images):
-    histom=f"histograma_mlabels_{img+1}.png"
-    histmlabelspng = os.path.join(imgrutabase, histom)
-    start_idx = img * clusters_per_image
-    end_idx = start_idx + clusters_per_image
-    clusters_subset = zeroconteonichos.columns[start_idx:end_idx]
-    
-    # Crear subplots: número de filas y columnas
-    num_cols = 5  # Número de columnas deseadas en el grid
-    num_rows = (clusters_per_image + num_cols - 1) // num_cols  # Calcular el número de filas
-
-    fig, axes = plt.subplots(num_rows, num_cols, figsize=(25, num_rows * 5), sharex=True, sharey=True)
-    axes = axes.flatten()
-
-    for i, cluster in enumerate(clusters_subset):
-        print(i, cluster)
-        axes[i].bar(zeroconteonichos.index, zeroconteonichos[cluster], color=colors[i % len(colors)])
-        axes[i].set_title(cluster, fontsize=20)
-        axes[i].tick_params(axis='x', rotation=90, labelsize=20)  # Aumentar tamaño de fuente de los números del eje x
-        axes[i].tick_params(axis='y', labelsize=25)  # Aumentar tamaño de fuente de los números del eje y
-
-    # Remover ejes adicionales en caso de que existan
-    for i in range(len(clusters_subset), len(axes)):
-        fig.delaxes(axes[i])
-
-    # Solo una etiqueta de eje y
-    fig.text(0.01, 0.5, 'Frecuencia', va='center', ha='center', rotation='vertical', fontsize=26)
-
-    # Solo una etiqueta de eje x
-    fig.text(0.5, 0.001, 'Característica', va='center', ha='center', fontsize=26)
-    
-    # Ajustar las etiquetas de las características
-    plt.setp(axes, xticks=range(len(zeroconteonichos.index)), xticklabels=zeroconteonichos.index)
-
-    # Añadir un título general
-    fig.suptitle(f'Histograma {img + 1}', fontsize=30)
-    # Ajusta los márgenes de la figura
-    plt.subplots_adjust(left=0.05, right=0.9, top=0.95, bottom=0.1)
-
-    #plt.show()
-    # Ajustar el diseño para que no se recorten los elementos
-    #plt.tight_layout()
-    # Guardar la gráfica como un archivo PNG
-    plt.savefig(histmlabelspng, format='png', dpi=300, bbox_inches='tight')
-    plt.close(fig) 
 # =============================================================================
 # =============================================================================
-# =============================================================================
-# =============================================================================
-# OPCION 9  Para python 2
-# MUCHOS HISTOGRAMAS
-
-# Número total de clústeres
-num_clusters = zeroconteonichos_encoded.shape[1]
-
-# Dividir en grupos de 25 clústeres
-clusters_per_image = 25
-num_images = num_clusters // clusters_per_image
-
-# Lista de colores para los histogramas
-colors = ['skyblue', 'lightgreen', 'lightcoral', 'lightskyblue', 'lightpink']
-
-for img in range(num_images):
-    histompy2=f"histograma_mlabels_encoded2_{img+1}.png"
-    histmlabelspng_encoded = os.path.join(imgrutabase, histompy2)
-    start_idx = img * clusters_per_image
-    end_idx = start_idx + clusters_per_image
-    clusters_subset = zeroconteonichos_encoded.columns[start_idx:end_idx]
-    
-    # Crear subplots: número de filas y columnas
-    num_cols = 5  # Número de columnas deseadas en el grid
-    num_rows = (clusters_per_image + num_cols - 1) // num_cols  # Calcular el número de filas
-
-    fig, axes = plt.subplots(num_rows, num_cols, figsize=(25, num_rows * 5), sharex=True, sharey=True)
-    axes = axes.flatten()
-    
-    for i, cluster in enumerate(clusters_subset):
-        print(i, cluster)
-        axes[i].bar(sorted(list(zeroconteonichos_encoded.index)), zeroconteonichos_encoded[cluster], color=colors[i % len(colors)])
-        axes[i].set_title(cluster, fontsize=20)
-        axes[i].tick_params(axis='x', rotation=90, labelsize=20)  # Aumentar tamaño de fuente de los números del eje x
-        axes[i].tick_params(axis='y', labelsize=25)  # Aumentar tamaño de fuente de los números del eje y
-
-    # Remover ejes adicionales en caso de que existan
-    for i in range(len(clusters_subset), len(axes)):
-        fig.delaxes(axes[i])
-
-    # Solo una etiqueta de eje y
-    fig.text(0.01, 0.5, 'Frecuencia', va='center', ha='center', rotation='vertical', fontsize=26)
-
-    # Solo una etiqueta de eje x
-    fig.text(0.5, 0.001, 'Característica', va='center', ha='center', fontsize=26)
-    
-    # Ajustar las etiquetas de las características
-    plt.setp(axes, xticks=range(len(zeroconteonichos_encoded.index)), xticklabels=zeroconteonichos_encoded.index)
-
-    # Añadir un título general
-    fig.suptitle(f'Histograma_encoded {img + 1}', fontsize=30)
-    # Ajusta los márgenes de la figura
-    plt.subplots_adjust(left=0.05, right=0.9, top=0.95, bottom=0.1)
-
-    #plt.show()
-    # Ajustar el diseño para que no se recorten los elementos
-    #plt.tight_layout()
-    # Guardar la gráfica como un archivo PNG
-    plt.savefig(histmlabelspng_encoded, format='png', dpi=300, bbox_inches='tight')
-    plt.close(fig) 
-# =============================================================================
-# =============================================================================
-# # OPCION 10
-# # MUCHOS HISTOGRAMAS (dos filas)
-# zeroconteonichos2 = pd.concat([zeroconteonichos.drop(['HostHuman', "HostFungi", "Hostalga", "Hostanimal"])], axis=0) 
+# # OPCION 9
+# # MUCHOS HISTOGRAMAS
+# 
 # # Número total de clústeres
-# num_clusters = zeroconteonichos2.shape[1]
-
+# num_clusters = zeroconteonichos.shape[1]
+# 
 # # Dividir en grupos de 25 clústeres
-# clusters_per_image = 100
+# clusters_per_image = 25
 # num_images = num_clusters // clusters_per_image
-
+# 
+# # Lista de colores para los histogramas
+# colors = ['skyblue', 'lightgreen', 'lightcoral', 'lightskyblue', 'lightpink']
+# 
 # for img in range(num_images):
+#     histom=histom_input.format(img + 1)
+#     histmlabelspng = os.path.join(imgrutabase, histom)
 #     start_idx = img * clusters_per_image
 #     end_idx = start_idx + clusters_per_image
-#     clusters_subset = zeroconteonichos2.columns[start_idx:end_idx]
-    
+#     clusters_subset = zeroconteonichos.columns[start_idx:end_idx]
+#     
 #     # Crear subplots: número de filas y columnas
-#     num_cols = 10  # Número de columnas deseadas en el grid
+#     num_cols = 5  # Número de columnas deseadas en el grid
 #     num_rows = (clusters_per_image + num_cols - 1) // num_cols  # Calcular el número de filas
-
-#     fig, axes = plt.subplots(num_rows, num_cols, figsize=(50, num_rows * 10), sharex=True, sharey=True)
+# 
+#     fig, axes = plt.subplots(num_rows, num_cols, figsize=(25, num_rows * 5), sharex=True, sharey=True)
 #     axes = axes.flatten()
-
+# 
 #     for i, cluster in enumerate(clusters_subset):
-#         axes[i].bar(zeroconteonichos2.index, zeroconteonichos2[cluster], color='skyblue')
+#         print(i, cluster)
+#         axes[i].bar(zeroconteonichos.index, zeroconteonichos[cluster], color=colors[i % len(colors)])
 #         axes[i].set_title(cluster, fontsize=20)
-#         axes[i].tick_params(axis='x', rotation=90, labelsize=16)  # Aumentar tamaño de fuente de los números del eje x
-#         axes[i].tick_params(axis='y', labelsize=16)  # Aumentar tamaño de fuente de los números del eje y
-
+#         axes[i].tick_params(axis='x', rotation=90, labelsize=20)  # Aumentar tamaño de fuente de los números del eje x
+#         axes[i].tick_params(axis='y', labelsize=25)  # Aumentar tamaño de fuente de los números del eje y
+# 
 #     # Remover ejes adicionales en caso de que existan
 #     for i in range(len(clusters_subset), len(axes)):
 #         fig.delaxes(axes[i])
-
+# 
 #     # Solo una etiqueta de eje y
-#     fig.text(0.04, 0.5, 'Frecuencia', va='center', ha='center', rotation='vertical', fontsize=18)
-
+#     fig.text(0.01, 0.5, 'Frecuencia', va='center', ha='center', rotation='vertical', fontsize=26)
+# 
 #     # Solo una etiqueta de eje x
-#     fig.text(0.5, 0.04, 'Característica', va='center', ha='center', fontsize=18)
-    
+#     fig.text(0.5, 0.001, 'Característica', va='center', ha='center', fontsize=26)
+#     
 #     # Ajustar las etiquetas de las características
-#     plt.setp(axes, xticks=range(len(zeroconteonichos2.index)), xticklabels=zeroconteonichos2.index)
+#     plt.setp(axes, xticks=range(len(zeroconteonichos.index)), xticklabels=zeroconteonichos.index)
+# 
+#     # Añadir un título general
+#     fig.suptitle(f'Histograma {img + 1}', fontsize=30)
+#     # Ajusta los márgenes de la figura
+#     plt.subplots_adjust(left=0.05, right=0.9, top=0.95, bottom=0.1)
+# 
+#     #plt.show()
+#     # Ajustar el diseño para que no se recorten los elementos
+#     #plt.tight_layout()
+#     # Guardar la gráfica como un archivo PNG
+#     plt.savefig(histmlabelspng, format='png', dpi=300, bbox_inches='tight')
+#     plt.close(fig) 
+# =============================================================================
+
+# =============================================================================
+if len(zeroconteonichos.index) > 2:
+    # OPCION 9  Para python 2
+    # MUCHOS HISTOGRAMAS
     
-#     plt.tight_layout(rect=[0.05, 0.05, 1, 0.95])
-#     plt.show()
+    # Número total de clústeres
+    num_clusters = zeroconteonichos_encoded.shape[1]
     
+    # Dividir en grupos de 25 clústeres
+    clusters_per_image = 25
+    num_images = num_clusters // clusters_per_image
+    
+    # Lista de colores para los histogramas
+    colors = ['skyblue', 'lightgreen', 'lightcoral', 'lightskyblue', 'lightpink']
+    
+    for img in range(num_images):
+        histompy2=histom_input.format(img + 1)
+        histmlabelspng_encoded = os.path.join(imgrutabase, histompy2)
+        start_idx = img * clusters_per_image
+        end_idx = start_idx + clusters_per_image
+        clusters_subset = zeroconteonichos_encoded.columns[start_idx:end_idx]
+        
+        # Crear subplots: número de filas y columnas
+        num_cols = 5  # Número de columnas deseadas en el grid
+        num_rows = (clusters_per_image + num_cols - 1) // num_cols  # Calcular el número de filas
+    
+        fig, axes = plt.subplots(num_rows, num_cols, figsize=(25, num_rows * 5), sharex=True, sharey=True)
+        axes = axes.flatten()
+        
+        for i, cluster in enumerate(clusters_subset):
+            print(i, cluster)
+            axes[i].bar(sorted(list(zeroconteonichos_encoded.index)), zeroconteonichos_encoded[cluster], color=colors[i % len(colors)])
+            axes[i].set_title(cluster, fontsize=20)
+            axes[i].tick_params(axis='x', rotation=90, labelsize=20)  # Aumentar tamaño de fuente de los números del eje x
+            axes[i].tick_params(axis='y', labelsize=25)  # Aumentar tamaño de fuente de los números del eje y
+    
+        # Remover ejes adicionales en caso de que existan
+        for i in range(len(clusters_subset), len(axes)):
+            fig.delaxes(axes[i])
+    
+        # Solo una etiqueta de eje y
+        fig.text(0.01, 0.5, 'Frecuencia', va='center', ha='center', rotation='vertical', fontsize=26)
+    
+        # Solo una etiqueta de eje x
+        fig.text(0.5, 0.001, 'Característica', va='center', ha='center', fontsize=26)
+        
+        # Ajustar las etiquetas de las características
+        plt.setp(axes, xticks=range(len(zeroconteonichos_encoded.index)), xticklabels=zeroconteonichos_encoded.index)
+    
+        # Añadir un título general
+        fig.suptitle(f'Histograma_encoded {img + 1}', fontsize=30)
+        # Ajusta los márgenes de la figura
+        plt.subplots_adjust(left=0.05, right=0.9, top=0.95, bottom=0.1)
+    
+        #plt.show()
+        # Ajustar el diseño para que no se recorten los elementos
+        #plt.tight_layout()
+        # Guardar la gráfica como un archivo PNG
+        plt.savefig(histmlabelspng_encoded, format='png', dpi=300, bbox_inches='tight')
+        plt.close(fig) 
 # =============================================================================
 # =============================================================================
-# OPCION 11
-# UN HISTOGRAMA (dos filas)
-len(zeroconteonichos.index)
-# Apilar los datos para combinarlos en una sola serie
-zeroconteonichos2 = pd.concat([zeroconteonichos.drop(['HostHuman', "HostFungi", "Hostalga", "Hostanimal"])], axis=0) 
-h3 = zeroconteonichos2.stack().reset_index()
-h3.columns = ['Caracteristica', 'Cluster', 'Frecuencia']
+else:
+    # OPCION 11
+    # UN HISTOGRAMA (dos filas)
+    # Apilar los datos para combinarlos en una sola serie
 
-# Crear el histograma
-plt.figure(figsize=(30, 8))
-clusters = h3['Cluster'].unique()
-caracteristicas = h3['Caracteristica'].unique()
-bar_width = 0.4  # Ajusta el ancho de las barras
+    h3_o = pd.DataFrame(np.array([[i, j, int(zeroconteonichos.loc[i,j])] for j in zeroconteonichos.columns if j for i in zeroconteonichos.index if i]))
+    h3_o.columns = ['Caracteristica', 'Cluster', 'Frecuencia']
 
-# Asignar colores
-colors = ['blue', 'orange']  # Dos colores para las barras
+    for i in [0, 50, 100, 150]:
+        h3 = h3_o[i:i+50]
+        h3 = h3.reset_index(drop=True)
+        y_min, y_max = 0, int(max(h3['Frecuencia'])) + 1
+        print(h3)
+        
+        histot_50="histograma_t50labels_{}.png".format(i)
+        histt50labelspang = os.path.join(imgrutabase, histot_50)
+        
+        # Crear el histograma
+        plt.figure(figsize=(12, 4))
+        clusters = h3['Cluster'].unique()
+        caracteristicas = h3['Caracteristica'].unique()
+        bar_width = 0.1  # Ajusta el ancho de las barras
+        
+        # Asignar colores
+        colors = ['blue', 'orange']  # Dos colores para las barras
+            
+        # Calcular las posiciones
+        positions = []
+        par=[]
+        impar=[]
+        for i in range(0,len(h3)):
+            if i % 2 == 0:
+                #print('par', i)
+                par.append(i*bar_width)
+            else:
+                #print('impar', i)
+                impar.append(i*bar_width)
+        positions.append(par)
+        positions.append(impar)
+        
+        
+        # Dibujar las barras
+        for i, cluster in enumerate(clusters):
+            cluster_data = h3[h3['Cluster'] == cluster]
+            pos = [positions[j][i] for j in range(len(caracteristicas))]
+            plt.bar(pos, pd.Series(int(i) for i in cluster_data['Frecuencia'] if i), width=bar_width, color=[colors[0],colors[1]])
+    
+        # Ajustar las posiciones del eje x y las etiquetas
+        #flattened_positions = [p for sublist in positions2 for p in sublist]
+        flattened_positions = [p for sublist in positions for p in sublist]
+        x_labels = ['{}\nCluster {}'.format(caracteristicas[i], clusters[j]) for i in range(len(caracteristicas)) for j in range(len(clusters))]
+        plt.xticks(flattened_positions, x_labels, rotation=90, fontsize=6, fontweight='bold')
+        
+        # Ajustar el eje y manualmente para asegurar consistencia
+        plt.ylim(y_min, y_max)
+        plt.yticks(np.arange(y_min, y_max, 1)) 
+        
+        # Añadir etiquetas y leyenda con colores personalizados
+        legend_patches = [
+            plt.Rectangle((0, 0), 1, 1, fc='blue', alpha=0.7),
+            plt.Rectangle((0, 0), 1, 1, fc='orange', alpha=0.7)
+        ]
+        plt.legend(legend_patches, caracteristicas)
+        
+        # Añadir etiquetas y leyenda
+        plt.xlabel('Característica y Clúster')
+        plt.ylabel('Frecuencia')
+        plt.title('Frecuencias por Característica y Clúster ({})'.format(" y ".join(caracteristicas)))
+        #plt.show()
+        # Ajustar el diseño para que no se recorten los elementos
+        plt.tight_layout()
+        # Guardar la gráfica como un archivo PNG
+        plt.savefig(histt50labelspang, format='png', dpi=300, bbox_inches='tight')
+        plt.close()
 
-# Calcular las posiciones
-positions = []
-for i, caracteristica in enumerate(caracteristicas):
-    pos = [i * (bar_width * len(clusters) + 0.5) + j * bar_width for j in range(len(clusters))]
-    positions.append(pos)
-
-# Dibujar las barras
-for i, cluster in enumerate(clusters):
-    cluster_data = h3[h3['Cluster'] == cluster]
-    pos = [positions[j][i] for j in range(len(caracteristicas))]
-    plt.bar(pos, cluster_data['Frecuencia'], width=bar_width, color=colors[i % 2])
-
-# Ajustar las posiciones del eje x y las etiquetas
-flattened_positions = [p for sublist in positions for p in sublist]
-x_labels = [f'{caracteristicas[i % len(caracteristicas)]}\nCluster {clusters[i // len(caracteristicas)]}' for i in range(len(flattened_positions))]
-plt.xticks(flattened_positions, x_labels, rotation=90, fontsize=5, fontweight='bold')
-
-# Añadir etiquetas y leyenda
-plt.xlabel('Característica y Clúster')
-plt.ylabel('Frecuencia')
-plt.title('Frecuencias por Característica y Clúster')
-#plt.show()
-# Ajustar el diseño para que no se recorten los elementos
-plt.tight_layout()
-# Guardar la gráfica como un archivo PNG
-plt.savefig(histlabelspng, format='png', dpi=300, bbox_inches='tight')
 # =============================================================================
 # =============================================================================
 
-## >>>>> Queda pendiente pero puede ser util <<<<< ##
-#first_zero_label = feature_importances[feature_importances['Importancia'] == 0].index[0]
-#rango_zero = feature_importances.index.get_loc(first_zero_label)
-#max_index = len(feature_importances) - 1
-#end_index = min(rango_zero + 10, max_index)
-#subrango_feature_importances = feature_importances.iloc[:end_index + 1]
-# Graficar el DataFrame con barras horizontales
-#ax = subrango_feature_importances.plot(kind='bar')
-#plt.title('Importancia de las características')
-#plt.xlabel('Importancia')
-#plt.ylabel('Características')
-# Ajustar la rotación de las etiquetas del eje y
-#plt.yticks(rotation=0)
-# Mostrar la gráfica
-#plt.show()
-## >>>>> Queda pendiente pero puede ser util <<<<< ##
-# -------------------------------------------------------------- #
-# =============================================================================
-# Configurar el tamaño de la figura (ancho, alto) en pulgadas (GRAFICO DE BARRAS)
-plt.figure(figsize=(20, 12))
-primeros100.plot(kind='bar')
-plt.title('Importancia de las características')
-plt.xlabel('Características')
-plt.ylabel('Importancia')
+# Crear la figura y el objeto Axes
+fig, ax = plt.subplots(figsize=(12, 4))
+
+# Crear el gráfico de barras en el objeto Axes
+primeros100.plot(kind='bar', ax=ax)
+
+# Título y etiquetas de los ejes
+ax.set_title('Importancia de las características NORMAL, \ncomparativa ({})'.format(" ".join(caracteristicas)))
+ax.set_xlabel('Random Forest: Características consideradas (clusters)')
+ax.set_ylabel('Importancia de las caracteristicas (clusters), \nnormal')
+
 # Ajustar la rotación de las etiquetas del eje x
-plt.xticks(rotation=90, fontsize=3, fontweight='bold') 
+ax.set_xticklabels(ax.get_xticklabels(), rotation=90, fontsize=6, fontweight='bold')
+
 # Ajustar el diseño para que no se recorten los elementos
 plt.tight_layout()
+
 # Guardar la gráfica como un archivo PNG
 plt.savefig(rutaimportacara, format='png', dpi=300, bbox_inches='tight')
+
+# Mostrar la gráfica
+plt.show()
+
 # =============================================================================
 # Configurar el tamaño de la figura (ancho, alto) en pulgadas (GRAFICO LOGARITMICA)
 # Crear la figura con el tamaño especificado
-plt.figure(figsize=(20, 12))
+fig, ax = plt.subplots(figsize=(12, 4))
 
 # Crear la gráfica de barras con el eje y en escala logarítmica
-primeros100.plot(kind='bar', logy=True)  # Aquí se especifica que el eje y será logarítmico
+primeros100.plot(kind='bar', logy=True, ax=ax)  # Aquí se especifica que el eje y será logarítmico
 
 # Título y etiquetas de los ejes
-plt.title('Importancia de las características')
-plt.xlabel('Características')
-plt.ylabel('Importancia')
+ax.set_title('Importancia de las características LOGARITMICA, \ncomparativa ({})'.format(" ".join(caracteristicas)))
+ax.set_xlabel('Random Forest: Características consideradas (clusters)')
+ax.set_ylabel('Importancia de las caracteristicas (clusters), \nlogaritmica')
 
-# Ajustar el tamaño de las etiquetas del eje x
-plt.xticks(rotation=90, fontsize=3, fontweight='bold')  # Ajusta el tamaño de la fuente según tus necesidades
+# Ajustar la rotación de las etiquetas del eje x
+ax.set_xticklabels(ax.get_xticklabels(), rotation=90, fontsize=6, fontweight='bold')
 
 # Ajustar el diseño para que no se recorten los elementos
 plt.tight_layout()
 
 # Guardar la gráfica como un archivo PNG
 plt.savefig(rutaimportacara2, format='png', dpi=300, bbox_inches='tight')
+
+
+
 
 
 ###################### -- Hacemos predicciones con el conjunto de prueba -- ######################
