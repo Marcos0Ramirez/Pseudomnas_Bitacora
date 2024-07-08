@@ -656,3 +656,5 @@ plt.tight_layout()
 plt.savefig(rutaimportacara2, format='png', dpi=300, bbox_inches='tight')
 ```
 Finalmente toca adaptar en el cluster, correr con el pequeño subconjunto y finalmente con los datos originales.
+https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/Grafio_Confusion_RandomForest.py
+
