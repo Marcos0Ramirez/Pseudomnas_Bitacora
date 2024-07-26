@@ -658,3 +658,57 @@ plt.savefig(rutaimportacara2, format='png', dpi=300, bbox_inches='tight')
 Finalmente toca adaptar en el cluster, correr con el pequeño subconjunto y finalmente con los datos originales.
 https://github.com/Marcos0Ramirez/Pseudomnas_Bitacora/blob/main/Random%20Forest/Grafio_Confusion_RandomForest.py
 
+# 25 de julio del 2024
+Hasta el dia hoy hay dos script de python que corren un modelo de random forest, el cual uno era para windows, que esta en version 3.8, despues de actualizar de la 2.7.5 y ahora se implementa codigo y modificaciones para python 3.10. Para este punto la lectura de las frecuencias para ser modificadas, no estaban siendo recopiladas correctmente, es asi que se decidio mejorar, señalado los cambios con (<----)
+```
+else:
+    # OPCION 11
+    # UN HISTOGRAMA (dos filas)
+    # Apilar los datos para combinarlos en una sola serie
+    h3_o = pd.DataFrame(np.array([[i, j, int(zeroconteonichos.loc[i,j])] for j in zeroconteonichos.columns if j for i in zeroconteonichos.index if i]))
+    h3_o.columns = ['Caracteristica', 'Cluster', 'Frecuencia']
+    
+    for i in [0, 50, 100, 150]:
+        h3 = h3_o[i:i+50]
+        h3 = h3.reset_index(drop=True)
+        h3['Frecuencia'] = h3['Frecuencia'].astype(int)
+        y_min, y_max = 0, int(max(h3['Frecuencia']))# + 200
+        print(h3)
+        histot_50=f"test_histograma_t50labels_{i}.png"
+        histt50labelspang = os.path.join(imgrutabase, histot_50)
+        # Crear el histograma
+        plt.figure(figsize=(10, 4))
+        clusters = h3['Cluster'].unique()
+        caracteristicas = h3['Caracteristica'].unique()
+        bar_width = 0.1  # Ajusta el ancho de las barras
+        # Asignar colores
+        colors = ['blue', 'orange']  # Dos colores para las barras
+        # Calcular las posiciones
+        positions = []
+        par=[]
+        impar=[]
+        for i in range(0,len(h3)):
+            if i % 2 == 0:
+                #print('par', i)
+                par.append(i*bar_width)
+            else:
+                #print('impar', i)
+                impar.append(i*bar_width)
+        positions.append(par)
+        positions.append(impar)
+        
+        # Dibujar las barras
+        for i, cluster in enumerate(clusters):
+            cluster_data = h3[h3['Cluster'] == cluster]
+            print(cluster_data)
+            pos = [positions[j][i] for j in range(len(caracteristicas))]
+            print(pos)
+            print("hola")
+            #values=pd.Series(int(m) for m in cluster_data['Frecuencia'] if m) <--------------------------------------
+            values=cluster_data['Frecuencia'].astype(int).tolist() # Esta modificacion se da, porque la anterior si funciona en python 3.8, pero ya en 3.10 ya no. <-----------------------------------------
+            print(values)
+            plt.bar(pos, values, width=bar_width, color=[colors[0],colors[1]])
+```
+Por lo que ahora se leen correctamente las frecuencias.
+
+
