@@ -1,0 +1,1220 @@
+Ya trabajando en directorio actual:  /mnt/atgc-d3/sur/users/ENESL-MarcosR/PSEUDOMONAS_SCRIPTS/OriginalSetRANDOMFOREST
+##### ABRIENDO TABLA DE CLASIFICACIONES #####
+         Genomas     Nicho
+0     2758568623  Mamifero
+1     2926430786  Mamifero
+2     2718218424  Mamifero
+3     2926037195  Mamifero
+4     2990205228  Mamifero
+...          ...       ...
+3889  2791355645     Vacio
+3890  2877800095     Vacio
+3891  8035357749     Vacio
+3892  2939020026     Vacio
+3893  2675902956     Vacio
+
+[3894 rows x 2 columns]
+##### EXTRAYENDO LOS GENOMAS #####
+abriendo el archivo
+empezamos con los chunks
+tomamos los chunks
+listo para concatenar todo
+         Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871   
+0     2228664007        0        0  ...             0             0   
+1     2501799902        0        0  ...             0             0   
+2     2501846300        0        0  ...             0             0   
+3     2502790010        0        0  ...             0             0   
+4     2503538034        0        0  ...             0             0   
+...          ...      ...      ...  ...           ...           ... ..
+3889  8087728815        0        0  ...             0             0   
+3890  8088455273        0        0  ...             0             0   
+3891  8088461797        0        0  ...             0             0   
+3892  8088468458        0        0  ...             0             0   
+3893  8088474632        0        0  ...             0             0  6
+
+[3894 rows x 405874 columns]
+Columnas de df antes de eliminar: Index(['Genomas', 'Cluster0', 'Cluster1', 'Cluster2', 'Cluster3', 'Cluster4',
+       'Cluster5', 'Cluster6', 'Cluster7', 'Cluster8',
+       ...
+       'Cluster405863', 'Cluster405864', 'Cluster405865', 'Cluster405866',
+       'Cluster405867', 'Cluster405868', 'Cluster405869', 'Cluster405870',
+       'Cluster405871', ''],
+      dtype='object', length=405874)
+['']
+         Genomas Cluster0 Cluster1  ... Cluster405869 Cluster405870 Cluster405871
+0     2228664007        0        0  ...             0             0             0
+1     2501799902        0        0  ...             0             0             0
+2     2501846300        0        0  ...             0             0             0
+3     2502790010        0        0  ...             0             0             0
+4     2503538034        0        0  ...             0             0             0
+...          ...      ...      ...  ...           ...           ...           ...
+3889  8087728815        0        0  ...             0             0             0
+3890  8088455273        0        0  ...             0             0             0
+3891  8088461797        0        0  ...             0             0             0
+3892  8088468458        0        0  ...             0             0             0
+3893  8088474632        0        0  ...             0             0             0
+
+[3894 rows x 405873 columns]
+Columnas de df después de eliminar: Index(['Genomas', 'Cluster0', 'Cluster1', 'Cluster2', 'Cluster3', 'Cluster4',
+       'Cluster5', 'Cluster6', 'Cluster7', 'Cluster8',
+       ...
+       'Cluster405862', 'Cluster405863', 'Cluster405864', 'Cluster405865',
+       'Cluster405866', 'Cluster405867', 'Cluster405868', 'Cluster405869',
+       'Cluster405870', 'Cluster405871'],
+      dtype='object', length=405873)
+Ahora si las dimensiones de la matriz dataframe
+(3894, 405873)
+antes de concatenar las tablas
+         Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871     Nicho
+0     2228664007        0        0  ...             0             0     Vacio
+1     2501799902        0        0  ...             0             0  Mamifero
+2     2501846300        0        0  ...             0             0  Mamifero
+3     2502790010        0        0  ...             0             0  Mamifero
+4     2503538034        0        0  ...             0             0     Vacio
+...          ...      ...      ...  ...           ...           ...       ...
+3889  8087728815        0        0  ...             0             0     Vacio
+3890  8088455273        0        0  ...             0             0     Vacio
+3891  8088461797        0        0  ...             0             0     Vacio
+3892  8088468458        0        0  ...             0             0     Vacio
+3893  8088474632        0        0  ...             0             0     Vacio
+
+[3894 rows x 405874 columns]
+Una vez que ya se hizo como indice la columna Genomas
+               Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871     Nicho
+Genomas                                   ...                                      
+2228664007  2228664007        0        0  ...             0             0     Vacio
+2501799902  2501799902        0        0  ...             0             0  Mamifero
+2501846300  2501846300        0        0  ...             0             0  Mamifero
+2502790010  2502790010        0        0  ...             0             0  Mamifero
+2503538034  2503538034        0        0  ...             0             0     Vacio
+...                ...      ...      ...  ...           ...           ...       ...
+8087728815  8087728815        0        0  ...             0             0     Vacio
+8088455273  8088455273        0        0  ...             0             0     Vacio
+8088461797  8088461797        0        0  ...             0             0     Vacio
+8088468458  8088468458        0        0  ...             0             0     Vacio
+8088474632  8088474632        0        0  ...             0             0     Vacio
+
+[3894 rows x 405874 columns]
+Index(['2228664007', '2501799902', '2501846300', '2502790010', '2503538034',
+       '2504643024', '2505313002', '2505313005', '2505313027', '2505313040',
+       ...
+       '8087295818', '8087536365', '8087590616', '8087597119', '8087603415',
+       '8087728815', '8088455273', '8088461797', '8088468458', '8088474632'],
+      dtype='object', name='Genomas', length=3894)
+(1457, 405874)
+               Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871     Nicho
+Genomas                                   ...                                      
+2501799902  2501799902        0        0  ...             0             0  Mamifero
+2501846300  2501846300        0        0  ...             0             0  Mamifero
+2502790010  2502790010        0        0  ...             0             0  Mamifero
+2505313002  2505313002        0        0  ...             0             0  Mamifero
+2505313005  2505313005        0        0  ...             0             0  Mamifero
+
+[5 rows x 405874 columns]
+##### PREPARAMOS LOS DATOS #####
+los nichos los hacemos array
+[['Mamifero' 0]
+ ['Mamifero' 0]
+ ['Mamifero' 0]
+ ...
+ ['Planta' 1]
+ ['Planta' 1]
+ ['Planta' 1]]
+la matriz la hacemos arreglo
+Training Features Shape: (1165, 405872)
+Training Labels Shape: (1165,)
+Testing Features Shape: (292, 405872)
+Testing Labels Shape: (292,)
+##### ENTRENANDO EL MODELO #####
+##### CLUSTERS DE IMPORTANCIA #####
+               Importancia
+Cluster213635     0.161188
+Cluster165846     0.128650
+Cluster153509     0.109520
+Cluster130070     0.079836
+Cluster241888     0.064623
+...                    ...
+Cluster135478     0.000000
+Cluster135477     0.000000
+Cluster135476     0.000000
+Cluster135475     0.000000
+Cluster405871     0.000000
+
+[405872 rows x 1 columns]
+               Importancia
+Cluster213635     0.161188
+Cluster165846     0.128650
+Cluster153509     0.109520
+Cluster130070     0.079836
+Cluster241888     0.064623
+...                    ...
+Cluster10677      0.000458
+Cluster330030     0.000451
+Cluster354557     0.000439
+Cluster306613     0.000437
+Cluster238314     0.000436
+
+[100 rows x 1 columns]
+##### PRIMEROS 100 CLUSTERS MAS IMPORTANTES #####
+columnas 100; extraidas:  [array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '0', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '2', '2', ..., '0', '0', '0'], dtype=object), array(['0', '2', '2', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '1', '1'], dtype=object), array(['2', '2', '2', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '1', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '1', '1'], dtype=object), array(['0', '0', '1', ..., '0', '2', '2'], dtype=object), array(['0', '0', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['2', '1', '2', ..., '2', '2', '2'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '4', '3', '3'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object)]
+matriz mtz_clustercien creada\n            213635 165846 153509 130070  ... 354557 306613 238314     Nicho
+Genomas                                 ...                               
+2501799902      1      1      1      1  ...      0      0      0  Mamifero
+2501846300      1      1      0      1  ...      0      0      0  Mamifero
+2502790010      1      1      1      1  ...      0      0      0  Mamifero
+2505313002      1      1      1      1  ...      0      0      0  Mamifero
+2505313005      1      1      1      1  ...      0      0      0  Mamifero
+...           ...    ...    ...    ...  ...    ...    ...    ...       ...
+8086947143      0      0      0      0  ...      0      0      0    Planta
+8087536365      1      0      0      0  ...      0      0      0    Planta
+8087590616      0      0      0      0  ...      0      0      0    Planta
+8087597119      0      0      0      0  ...      0      0      0    Planta
+8087603415      0      0      0      0  ...      0      0      0    Planta
+
+[1457 rows x 101 columns]
+indices de mtz_clustercien \n Index(['2501799902', '2501846300', '2502790010', '2505313002', '2505313005',
+       '2505313027', '2505313040', '2505313041', '2505313042', '2505313043',
+       ...
+       '8079031769', '8079054357', '8079069389', '8079075367', '8079462635',
+       '8086947143', '8087536365', '8087590616', '8087597119', '8087603415'],
+      dtype='object', name='Genomas', length=1457)
+columnas de mtz_clustercien \n Index(['213635', '165846', '153509', '130070', '241888', '102714', '67881',
+       '30345', '57698', '67709',
+       ...
+       '60690', '53443', '82723', '197316', '10677', '330030', '354557',
+       '306613', '238314', 'Nicho'],
+      dtype='object', length=101)
+Continuamos hacia el conteo, juntando en indice y las 100 columnas
+u ['Mamifero' 'Planta'] c ['213635', '165846', '153509', '130070', '241888', '102714', '67881', '30345', '57698', '67709', '301080', '14789', '162651', '221315', '29541', '63426', '97108', '162718', '19013', '285028', '126085', '46912', '234438', '335417', '67223', '232620', '222296', '260416', '12033', '187224', '58509', '88829', '172481', '82550', '182790', '45174', '24995', '84910', '243805', '244040', '101', '165978', '101451', '83390', '250057', '254778', '72025', '60532', '121515', '106805', '46758', '67716', '222717', '403857', '132660', '68267', '211770', '12758', '102056', '144516', '48126', '148779', '14635', '128098', '98887', '14475', '35165', '126059', '18262', '54156', '123452', '217887', '78522', '268178', '47164', '23569', '277946', '105939', '106542', '144529', '29574', '195729', '85261', '103668', '47670', '238249', '241016', '279375', '250088', '124157', '133782', '60690', '53443', '82723', '197316', '10677', '330030', '354557', '306613', '238314', 'Nicho']
+A eliminar la palabra Nicho de la lista c
+['213635', '165846', '153509', '130070', '241888', '102714', '67881', '30345', '57698', '67709', '301080', '14789', '162651', '221315', '29541', '63426', '97108', '162718', '19013', '285028', '126085', '46912', '234438', '335417', '67223', '232620', '222296', '260416', '12033', '187224', '58509', '88829', '172481', '82550', '182790', '45174', '24995', '84910', '243805', '244040', '101', '165978', '101451', '83390', '250057', '254778', '72025', '60532', '121515', '106805', '46758', '67716', '222717', '403857', '132660', '68267', '211770', '12758', '102056', '144516', '48126', '148779', '14635', '128098', '98887', '14475', '35165', '126059', '18262', '54156', '123452', '217887', '78522', '268178', '47164', '23569', '277946', '105939', '106542', '144529', '29574', '195729', '85261', '103668', '47670', '238249', '241016', '279375', '250088', '124157', '133782', '60690', '53443', '82723', '197316', '10677', '330030', '354557', '306613', '238314'] False
+matriz vacia, creandose
+matriz vacia, creada, continuamos con concatenar los 100 mejores cluster en la matriz vacia
+##### GUARDANDING 100 MAS IMPORTANTES #####
+(2, 100)
+v1_MP_original_histograma50labels_parte_0.png
+./OUTPUT_MP_V1/v1_MP_original_histograma50labels_parte_0.png
+   Caracteristica Cluster  Frecuencia
+0        Mamifero  213635         490
+1          Planta  213635          28
+2        Mamifero  165846         469
+3          Planta  165846          14
+4        Mamifero  153509         473
+5          Planta  153509          19
+6        Mamifero  130070         497
+7          Planta  130070          41
+8        Mamifero  241888         472
+9          Planta  241888          15
+10       Mamifero  102714         468
+11         Planta  102714          12
+12       Mamifero   67881         487
+13         Planta   67881          32
+14       Mamifero   30345         472
+15         Planta   30345          17
+16       Mamifero   57698         237
+17         Planta   57698           2
+18       Mamifero   67709         468
+19         Planta   67709          19
+20       Mamifero  301080         468
+21         Planta  301080          13
+22       Mamifero   14789         505
+23         Planta   14789          56
+24       Mamifero  162651         470
+25         Planta  162651          16
+26       Mamifero  221315         466
+27         Planta  221315          15
+28       Mamifero   29541         941
+29         Planta   29541          44
+30       Mamifero   63426         887
+31         Planta   63426          64
+32       Mamifero   97108         463
+33         Planta   97108          15
+34       Mamifero  162718          56
+35         Planta  162718         899
+36       Mamifero   19013         935
+37         Planta   19013          26
+38       Mamifero  285028          16
+39         Planta  285028           3
+40       Mamifero  126085         195
+41         Planta  126085           3
+42       Mamifero   46912          71
+43         Planta   46912          15
+44       Mamifero  234438          24
+45         Planta  234438           5
+46       Mamifero  335417          71
+47         Planta  335417          10
+48       Mamifero   67223         343
+49         Planta   67223           2
+25
+25
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+0       Mamifero  213635         490
+1         Planta  213635          28
+Posiciones:  [0.0, 0.1]
+Frecuencias:  [490, 28]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+2       Mamifero  165846         469
+3         Planta  165846          14
+Posiciones:  [0.2, 0.30000000000000004]
+Frecuencias:  [469, 14]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+4       Mamifero  153509         473
+5         Planta  153509          19
+Posiciones:  [0.4, 0.5]
+Frecuencias:  [473, 19]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+6       Mamifero  130070         497
+7         Planta  130070          41
+Posiciones:  [0.6000000000000001, 0.7000000000000001]
+Frecuencias:  [497, 41]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+8       Mamifero  241888         472
+9         Planta  241888          15
+Posiciones:  [0.8, 0.9]
+Frecuencias:  [472, 15]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+10       Mamifero  102714         468
+11         Planta  102714          12
+Posiciones:  [1.0, 1.1]
+Frecuencias:  [468, 12]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+12       Mamifero   67881         487
+13         Planta   67881          32
+Posiciones:  [1.2000000000000002, 1.3]
+Frecuencias:  [487, 32]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+14       Mamifero   30345         472
+15         Planta   30345          17
+Posiciones:  [1.4000000000000001, 1.5]
+Frecuencias:  [472, 17]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+16       Mamifero   57698         237
+17         Planta   57698           2
+Posiciones:  [1.6, 1.7000000000000002]
+Frecuencias:  [237, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+18       Mamifero   67709         468
+19         Planta   67709          19
+Posiciones:  [1.8, 1.9000000000000001]
+Frecuencias:  [468, 19]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+20       Mamifero  301080         468
+21         Planta  301080          13
+Posiciones:  [2.0, 2.1]
+Frecuencias:  [468, 13]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+22       Mamifero   14789         505
+23         Planta   14789          56
+Posiciones:  [2.2, 2.3000000000000003]
+Frecuencias:  [505, 56]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+24       Mamifero  162651         470
+25         Planta  162651          16
+Posiciones:  [2.4000000000000004, 2.5]
+Frecuencias:  [470, 16]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+26       Mamifero  221315         466
+27         Planta  221315          15
+Posiciones:  [2.6, 2.7]
+Frecuencias:  [466, 15]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+28       Mamifero   29541         941
+29         Planta   29541          44
+Posiciones:  [2.8000000000000003, 2.9000000000000004]
+Frecuencias:  [941, 44]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+30       Mamifero   63426         887
+31         Planta   63426          64
+Posiciones:  [3.0, 3.1]
+Frecuencias:  [887, 64]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+32       Mamifero   97108         463
+33         Planta   97108          15
+Posiciones:  [3.2, 3.3000000000000003]
+Frecuencias:  [463, 15]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+34       Mamifero  162718          56
+35         Planta  162718         899
+Posiciones:  [3.4000000000000004, 3.5]
+Frecuencias:  [56, 899]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+36       Mamifero   19013         935
+37         Planta   19013          26
+Posiciones:  [3.6, 3.7]
+Frecuencias:  [935, 26]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+38       Mamifero  285028          16
+39         Planta  285028           3
+Posiciones:  [3.8000000000000003, 3.9000000000000004]
+Frecuencias:  [16, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+40       Mamifero  126085         195
+41         Planta  126085           3
+Posiciones:  [4.0, 4.1000000000000005]
+Frecuencias:  [195, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+42       Mamifero   46912          71
+43         Planta   46912          15
+Posiciones:  [4.2, 4.3]
+Frecuencias:  [71, 15]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+44       Mamifero  234438          24
+45         Planta  234438           5
+Posiciones:  [4.4, 4.5]
+Frecuencias:  [24, 5]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+46       Mamifero  335417          71
+47         Planta  335417          10
+Posiciones:  [4.6000000000000005, 4.7]
+Frecuencias:  [71, 10]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+48       Mamifero   67223         343
+49         Planta   67223           2
+Posiciones:  [4.800000000000001, 4.9]
+Frecuencias:  [343, 2]
+Longitud de las frecuencias:  2
+v1_MP_original_histograma50labels_parte_50.png
+./OUTPUT_MP_V1/v1_MP_original_histograma50labels_parte_50.png
+   Caracteristica Cluster  Frecuencia
+0        Mamifero  232620           8
+1          Planta  232620           0
+2        Mamifero  222296           1
+3          Planta  222296           2
+4        Mamifero  260416         175
+5          Planta  260416           5
+6        Mamifero   12033           2
+7          Planta   12033           0
+8        Mamifero  187224           2
+9          Planta  187224           2
+10       Mamifero   58509          60
+11         Planta   58509          15
+12       Mamifero   88829          29
+13         Planta   88829          15
+14       Mamifero  172481          29
+15         Planta  172481          12
+16       Mamifero   82550         504
+17         Planta   82550         772
+18       Mamifero  182790         188
+19         Planta  182790           5
+20       Mamifero   45174         221
+21         Planta   45174          43
+22       Mamifero   24995         476
+23         Planta   24995          37
+24       Mamifero   84910          28
+25         Planta   84910           7
+26       Mamifero  243805          17
+27         Planta  243805          21
+28       Mamifero  244040          10
+29         Planta  244040           0
+30       Mamifero     101          13
+31         Planta     101          40
+32       Mamifero  165978           7
+33         Planta  165978           2
+34       Mamifero  101451           2
+35         Planta  101451          32
+36       Mamifero   83390          14
+37         Planta   83390           4
+38       Mamifero  250057          21
+39         Planta  250057           6
+40       Mamifero  254778           2
+41         Planta  254778           1
+42       Mamifero   72025         508
+43         Planta   72025         218
+44       Mamifero   60532          34
+45         Planta   60532          23
+46       Mamifero  121515          29
+47         Planta  121515          12
+48       Mamifero  106805          27
+49         Planta  106805           1
+25
+25
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+0       Mamifero  232620           8
+1         Planta  232620           0
+Posiciones:  [0.0, 0.1]
+Frecuencias:  [8, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+2       Mamifero  222296           1
+3         Planta  222296           2
+Posiciones:  [0.2, 0.30000000000000004]
+Frecuencias:  [1, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+4       Mamifero  260416         175
+5         Planta  260416           5
+Posiciones:  [0.4, 0.5]
+Frecuencias:  [175, 5]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+6       Mamifero   12033           2
+7         Planta   12033           0
+Posiciones:  [0.6000000000000001, 0.7000000000000001]
+Frecuencias:  [2, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+8       Mamifero  187224           2
+9         Planta  187224           2
+Posiciones:  [0.8, 0.9]
+Frecuencias:  [2, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+10       Mamifero   58509          60
+11         Planta   58509          15
+Posiciones:  [1.0, 1.1]
+Frecuencias:  [60, 15]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+12       Mamifero   88829          29
+13         Planta   88829          15
+Posiciones:  [1.2000000000000002, 1.3]
+Frecuencias:  [29, 15]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+14       Mamifero  172481          29
+15         Planta  172481          12
+Posiciones:  [1.4000000000000001, 1.5]
+Frecuencias:  [29, 12]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+16       Mamifero   82550         504
+17         Planta   82550         772
+Posiciones:  [1.6, 1.7000000000000002]
+Frecuencias:  [504, 772]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+18       Mamifero  182790         188
+19         Planta  182790           5
+Posiciones:  [1.8, 1.9000000000000001]
+Frecuencias:  [188, 5]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+20       Mamifero   45174         221
+21         Planta   45174          43
+Posiciones:  [2.0, 2.1]
+Frecuencias:  [221, 43]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+22       Mamifero   24995         476
+23         Planta   24995          37
+Posiciones:  [2.2, 2.3000000000000003]
+Frecuencias:  [476, 37]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+24       Mamifero   84910          28
+25         Planta   84910           7
+Posiciones:  [2.4000000000000004, 2.5]
+Frecuencias:  [28, 7]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+26       Mamifero  243805          17
+27         Planta  243805          21
+Posiciones:  [2.6, 2.7]
+Frecuencias:  [17, 21]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+28       Mamifero  244040          10
+29         Planta  244040           0
+Posiciones:  [2.8000000000000003, 2.9000000000000004]
+Frecuencias:  [10, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+30       Mamifero     101          13
+31         Planta     101          40
+Posiciones:  [3.0, 3.1]
+Frecuencias:  [13, 40]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+32       Mamifero  165978           7
+33         Planta  165978           2
+Posiciones:  [3.2, 3.3000000000000003]
+Frecuencias:  [7, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+34       Mamifero  101451           2
+35         Planta  101451          32
+Posiciones:  [3.4000000000000004, 3.5]
+Frecuencias:  [2, 32]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+36       Mamifero   83390          14
+37         Planta   83390           4
+Posiciones:  [3.6, 3.7]
+Frecuencias:  [14, 4]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+38       Mamifero  250057          21
+39         Planta  250057           6
+Posiciones:  [3.8000000000000003, 3.9000000000000004]
+Frecuencias:  [21, 6]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+40       Mamifero  254778           2
+41         Planta  254778           1
+Posiciones:  [4.0, 4.1000000000000005]
+Frecuencias:  [2, 1]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+42       Mamifero   72025         508
+43         Planta   72025         218
+Posiciones:  [4.2, 4.3]
+Frecuencias:  [508, 218]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+44       Mamifero   60532          34
+45         Planta   60532          23
+Posiciones:  [4.4, 4.5]
+Frecuencias:  [34, 23]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+46       Mamifero  121515          29
+47         Planta  121515          12
+Posiciones:  [4.6000000000000005, 4.7]
+Frecuencias:  [29, 12]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+48       Mamifero  106805          27
+49         Planta  106805           1
+Posiciones:  [4.800000000000001, 4.9]
+Frecuencias:  [27, 1]
+Longitud de las frecuencias:  2
+v1_MP_original_histograma50labels_parte_100.png
+./OUTPUT_MP_V1/v1_MP_original_histograma50labels_parte_100.png
+   Caracteristica Cluster  Frecuencia
+0        Mamifero   46758         510
+1          Planta   46758         186
+2        Mamifero   67716          57
+3          Planta   67716          18
+4        Mamifero  222717           2
+5          Planta  222717          20
+6        Mamifero  403857           5
+7          Planta  403857           1
+8        Mamifero  132660          32
+9          Planta  132660          18
+10       Mamifero   68267          15
+11         Planta   68267           1
+12       Mamifero  211770         458
+13         Planta  211770          12
+14       Mamifero   12758           3
+15         Planta   12758           3
+16       Mamifero  102056          84
+17         Planta  102056          68
+18       Mamifero  144516           6
+19         Planta  144516         187
+20       Mamifero   48126           2
+21         Planta   48126           3
+22       Mamifero  148779           7
+23         Planta  148779         114
+24       Mamifero   14635           7
+25         Planta   14635         153
+26       Mamifero  128098           5
+27         Planta  128098           4
+28       Mamifero   98887          12
+29         Planta   98887         150
+30       Mamifero   14475          29
+31         Planta   14475           0
+32       Mamifero   35165        1042
+33         Planta   35165         782
+34       Mamifero  126059           4
+35         Planta  126059           2
+36       Mamifero   18262          24
+37         Planta   18262         660
+38       Mamifero   54156           2
+39         Planta   54156          21
+40       Mamifero  123452         522
+41         Planta  123452         928
+42       Mamifero  217887           2
+43         Planta  217887          22
+44       Mamifero   78522          17
+45         Planta   78522          16
+46       Mamifero  268178           2
+47         Planta  268178          26
+48       Mamifero   47164           4
+49         Planta   47164          28
+25
+25
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+0       Mamifero   46758         510
+1         Planta   46758         186
+Posiciones:  [0.0, 0.1]
+Frecuencias:  [510, 186]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+2       Mamifero   67716          57
+3         Planta   67716          18
+Posiciones:  [0.2, 0.30000000000000004]
+Frecuencias:  [57, 18]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+4       Mamifero  222717           2
+5         Planta  222717          20
+Posiciones:  [0.4, 0.5]
+Frecuencias:  [2, 20]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+6       Mamifero  403857           5
+7         Planta  403857           1
+Posiciones:  [0.6000000000000001, 0.7000000000000001]
+Frecuencias:  [5, 1]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+8       Mamifero  132660          32
+9         Planta  132660          18
+Posiciones:  [0.8, 0.9]
+Frecuencias:  [32, 18]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+10       Mamifero   68267          15
+11         Planta   68267           1
+Posiciones:  [1.0, 1.1]
+Frecuencias:  [15, 1]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+12       Mamifero  211770         458
+13         Planta  211770          12
+Posiciones:  [1.2000000000000002, 1.3]
+Frecuencias:  [458, 12]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+14       Mamifero   12758           3
+15         Planta   12758           3
+Posiciones:  [1.4000000000000001, 1.5]
+Frecuencias:  [3, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+16       Mamifero  102056          84
+17         Planta  102056          68
+Posiciones:  [1.6, 1.7000000000000002]
+Frecuencias:  [84, 68]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+18       Mamifero  144516           6
+19         Planta  144516         187
+Posiciones:  [1.8, 1.9000000000000001]
+Frecuencias:  [6, 187]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+20       Mamifero   48126           2
+21         Planta   48126           3
+Posiciones:  [2.0, 2.1]
+Frecuencias:  [2, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+22       Mamifero  148779           7
+23         Planta  148779         114
+Posiciones:  [2.2, 2.3000000000000003]
+Frecuencias:  [7, 114]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+24       Mamifero   14635           7
+25         Planta   14635         153
+Posiciones:  [2.4000000000000004, 2.5]
+Frecuencias:  [7, 153]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+26       Mamifero  128098           5
+27         Planta  128098           4
+Posiciones:  [2.6, 2.7]
+Frecuencias:  [5, 4]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+28       Mamifero   98887          12
+29         Planta   98887         150
+Posiciones:  [2.8000000000000003, 2.9000000000000004]
+Frecuencias:  [12, 150]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+30       Mamifero   14475          29
+31         Planta   14475           0
+Posiciones:  [3.0, 3.1]
+Frecuencias:  [29, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+32       Mamifero   35165        1042
+33         Planta   35165         782
+Posiciones:  [3.2, 3.3000000000000003]
+Frecuencias:  [1042, 782]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+34       Mamifero  126059           4
+35         Planta  126059           2
+Posiciones:  [3.4000000000000004, 3.5]
+Frecuencias:  [4, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+36       Mamifero   18262          24
+37         Planta   18262         660
+Posiciones:  [3.6, 3.7]
+Frecuencias:  [24, 660]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+38       Mamifero   54156           2
+39         Planta   54156          21
+Posiciones:  [3.8000000000000003, 3.9000000000000004]
+Frecuencias:  [2, 21]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+40       Mamifero  123452         522
+41         Planta  123452         928
+Posiciones:  [4.0, 4.1000000000000005]
+Frecuencias:  [522, 928]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+42       Mamifero  217887           2
+43         Planta  217887          22
+Posiciones:  [4.2, 4.3]
+Frecuencias:  [2, 22]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+44       Mamifero   78522          17
+45         Planta   78522          16
+Posiciones:  [4.4, 4.5]
+Frecuencias:  [17, 16]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+46       Mamifero  268178           2
+47         Planta  268178          26
+Posiciones:  [4.6000000000000005, 4.7]
+Frecuencias:  [2, 26]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+48       Mamifero   47164           4
+49         Planta   47164          28
+Posiciones:  [4.800000000000001, 4.9]
+Frecuencias:  [4, 28]
+Longitud de las frecuencias:  2
+v1_MP_original_histograma50labels_parte_150.png
+./OUTPUT_MP_V1/v1_MP_original_histograma50labels_parte_150.png
+   Caracteristica Cluster  Frecuencia
+0        Mamifero   23569           8
+1          Planta   23569           1
+2        Mamifero  277946           9
+3          Planta  277946          21
+4        Mamifero  105939          13
+5          Planta  105939          10
+6        Mamifero  106542           6
+7          Planta  106542          18
+8        Mamifero  144529          18
+9          Planta  144529           8
+10       Mamifero   29574         575
+11         Planta   29574         533
+12       Mamifero  195729           2
+13         Planta  195729           8
+14       Mamifero   85261           1
+15         Planta   85261           2
+16       Mamifero  103668           2
+17         Planta  103668           2
+18       Mamifero   47670         116
+19         Planta   47670         133
+20       Mamifero  238249          13
+21         Planta  238249          86
+22       Mamifero  241016         248
+23         Planta  241016          28
+24       Mamifero  279375         451
+25         Planta  279375          12
+26       Mamifero  250088           3
+27         Planta  250088           3
+28       Mamifero  124157           3
+29         Planta  124157           9
+30       Mamifero  133782         492
+31         Planta  133782         214
+32       Mamifero   60690           3
+33         Planta   60690           0
+34       Mamifero   53443         499
+35         Planta   53443         761
+36       Mamifero   82723          13
+37         Planta   82723          82
+38       Mamifero  197316          23
+39         Planta  197316         462
+40       Mamifero   10677          65
+41         Planta   10677          27
+42       Mamifero  330030          14
+43         Planta  330030          24
+44       Mamifero  354557           1
+45         Planta  354557           0
+46       Mamifero  306613           8
+47         Planta  306613           1
+48       Mamifero  238314           2
+49         Planta  238314           4
+25
+25
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+0       Mamifero   23569           8
+1         Planta   23569           1
+Posiciones:  [0.0, 0.1]
+Frecuencias:  [8, 1]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+2       Mamifero  277946           9
+3         Planta  277946          21
+Posiciones:  [0.2, 0.30000000000000004]
+Frecuencias:  [9, 21]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+4       Mamifero  105939          13
+5         Planta  105939          10
+Posiciones:  [0.4, 0.5]
+Frecuencias:  [13, 10]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+6       Mamifero  106542           6
+7         Planta  106542          18
+Posiciones:  [0.6000000000000001, 0.7000000000000001]
+Frecuencias:  [6, 18]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+8       Mamifero  144529          18
+9         Planta  144529           8
+Posiciones:  [0.8, 0.9]
+Frecuencias:  [18, 8]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+10       Mamifero   29574         575
+11         Planta   29574         533
+Posiciones:  [1.0, 1.1]
+Frecuencias:  [575, 533]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+12       Mamifero  195729           2
+13         Planta  195729           8
+Posiciones:  [1.2000000000000002, 1.3]
+Frecuencias:  [2, 8]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+14       Mamifero   85261           1
+15         Planta   85261           2
+Posiciones:  [1.4000000000000001, 1.5]
+Frecuencias:  [1, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+16       Mamifero  103668           2
+17         Planta  103668           2
+Posiciones:  [1.6, 1.7000000000000002]
+Frecuencias:  [2, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+18       Mamifero   47670         116
+19         Planta   47670         133
+Posiciones:  [1.8, 1.9000000000000001]
+Frecuencias:  [116, 133]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+20       Mamifero  238249          13
+21         Planta  238249          86
+Posiciones:  [2.0, 2.1]
+Frecuencias:  [13, 86]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+22       Mamifero  241016         248
+23         Planta  241016          28
+Posiciones:  [2.2, 2.3000000000000003]
+Frecuencias:  [248, 28]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+24       Mamifero  279375         451
+25         Planta  279375          12
+Posiciones:  [2.4000000000000004, 2.5]
+Frecuencias:  [451, 12]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+26       Mamifero  250088           3
+27         Planta  250088           3
+Posiciones:  [2.6, 2.7]
+Frecuencias:  [3, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+28       Mamifero  124157           3
+29         Planta  124157           9
+Posiciones:  [2.8000000000000003, 2.9000000000000004]
+Frecuencias:  [3, 9]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+30       Mamifero  133782         492
+31         Planta  133782         214
+Posiciones:  [3.0, 3.1]
+Frecuencias:  [492, 214]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+32       Mamifero   60690           3
+33         Planta   60690           0
+Posiciones:  [3.2, 3.3000000000000003]
+Frecuencias:  [3, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+34       Mamifero   53443         499
+35         Planta   53443         761
+Posiciones:  [3.4000000000000004, 3.5]
+Frecuencias:  [499, 761]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+36       Mamifero   82723          13
+37         Planta   82723          82
+Posiciones:  [3.6, 3.7]
+Frecuencias:  [13, 82]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+38       Mamifero  197316          23
+39         Planta  197316         462
+Posiciones:  [3.8000000000000003, 3.9000000000000004]
+Frecuencias:  [23, 462]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+40       Mamifero   10677          65
+41         Planta   10677          27
+Posiciones:  [4.0, 4.1000000000000005]
+Frecuencias:  [65, 27]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+42       Mamifero  330030          14
+43         Planta  330030          24
+Posiciones:  [4.2, 4.3]
+Frecuencias:  [14, 24]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+44       Mamifero  354557           1
+45         Planta  354557           0
+Posiciones:  [4.4, 4.5]
+Frecuencias:  [1, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+46       Mamifero  306613           8
+47         Planta  306613           1
+Posiciones:  [4.6000000000000005, 4.7]
+Frecuencias:  [8, 1]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+48       Mamifero  238314           2
+49         Planta  238314           4
+Posiciones:  [4.800000000000001, 4.9]
+Frecuencias:  [2, 4]
+Longitud de las frecuencias:  2
+Matriz de confusión guardada exitosamente
+Accuracy: 0.9726027397260274
+Precision: 0.972726389514498
+Recall: 0.9726027397260274
+F1 Score: 0.9724571335383467
+Elapsed time to compute the importances: 8897.689 seconds

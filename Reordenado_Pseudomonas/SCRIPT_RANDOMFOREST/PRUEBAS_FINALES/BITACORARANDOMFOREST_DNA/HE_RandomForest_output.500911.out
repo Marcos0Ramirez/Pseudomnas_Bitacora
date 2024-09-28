@@ -1,0 +1,59 @@
+Traceback (most recent call last):
+  File "RandomForest_python3.10.14.py", line 165, in <module>
+    with codecs.open(rutaclass, 'r', encoding='utf-8') as csvclass:
+  File "/mnt/atgc-d3/sur/modules/pkgs/mamba/main/envs/MarcosELeon/lib/python3.8/codecs.py", line 905, in open
+    file = builtins.open(filename, mode, buffering)
+FileNotFoundError: [Errno 2] No such file or directory: './INPUT/HE_nicho_pseudomonas_original.txt'
+Error: [Errno 2] No such file or directory: './INPUT/HE_nicho_pseudomonas_original.txt'
+Ya trabajando en directorio actual:  /mnt/atgc-d3/sur/users/ENESL-MarcosR/PSEUDOMONAS_SCRIPTS/OriginalSetRANDOMFOREST
+##### EXTRAYENDO LOS GENOMAS #####
+abriendo el archivo
+empezamos con los chunks
+tomamos los chunks
+listo para concatenar todo
+         Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871   
+0     2228664007        0        0  ...             0             0   
+1     2501799902        0        0  ...             0             0   
+2     2501846300        0        0  ...             0             0   
+3     2502790010        0        0  ...             0             0   
+4     2503538034        0        0  ...             0             0   
+...          ...      ...      ...  ...           ...           ... ..
+3889  8087728815        0        0  ...             0             0   
+3890  8088455273        0        0  ...             0             0   
+3891  8088461797        0        0  ...             0             0   
+3892  8088468458        0        0  ...             0             0   
+3893  8088474632        0        0  ...             0             0  6
+
+[3894 rows x 405874 columns]
+Columnas de df antes de eliminar: Index(['Genomas', 'Cluster0', 'Cluster1', 'Cluster2', 'Cluster3', 'Cluster4',
+       'Cluster5', 'Cluster6', 'Cluster7', 'Cluster8',
+       ...
+       'Cluster405863', 'Cluster405864', 'Cluster405865', 'Cluster405866',
+       'Cluster405867', 'Cluster405868', 'Cluster405869', 'Cluster405870',
+       'Cluster405871', ''],
+      dtype='object', length=405874)
+['']
+         Genomas Cluster0 Cluster1  ... Cluster405869 Cluster405870 Cluster405871
+0     2228664007        0        0  ...             0             0             0
+1     2501799902        0        0  ...             0             0             0
+2     2501846300        0        0  ...             0             0             0
+3     2502790010        0        0  ...             0             0             0
+4     2503538034        0        0  ...             0             0             0
+...          ...      ...      ...  ...           ...           ...           ...
+3889  8087728815        0        0  ...             0             0             0
+3890  8088455273        0        0  ...             0             0             0
+3891  8088461797        0        0  ...             0             0             0
+3892  8088468458        0        0  ...             0             0             0
+3893  8088474632        0        0  ...             0             0             0
+
+[3894 rows x 405873 columns]
+Columnas de df después de eliminar: Index(['Genomas', 'Cluster0', 'Cluster1', 'Cluster2', 'Cluster3', 'Cluster4',
+       'Cluster5', 'Cluster6', 'Cluster7', 'Cluster8',
+       ...
+       'Cluster405862', 'Cluster405863', 'Cluster405864', 'Cluster405865',
+       'Cluster405866', 'Cluster405867', 'Cluster405868', 'Cluster405869',
+       'Cluster405870', 'Cluster405871'],
+      dtype='object', length=405873)
+Ahora si las dimensiones de la matriz dataframe
+(3894, 405873)
+Ha ocurrido un error al usar la función confusion_graph():

@@ -1,0 +1,397 @@
+Ya trabajando en directorio actual:  /mnt/atgc-d3/sur/users/ENESL-MarcosR/PSEUDOMONAS_SCRIPTS/OriginalSetRANDOMFOREST
+abriendo el archivo
+empezamos con los chunks
+tomamos los chunks
+listo para concatenar todo
+         Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871   
+0     2228664007        0        0  ...             0             0   
+1     2501799902        0        0  ...             0             0   
+2     2501846300        0        0  ...             0             0   
+3     2502790010        0        0  ...             0             0   
+4     2503538034        0        0  ...             0             0   
+...          ...      ...      ...  ...           ...           ... ..
+3889  8087728815        0        0  ...             0             0   
+3890  8088455273        0        0  ...             0             0   
+3891  8088461797        0        0  ...             0             0   
+3892  8088468458        0        0  ...             0             0   
+3893  8088474632        0        0  ...             0             0  6
+
+[3894 rows x 405874 columns]
+Columnas de df antes de eliminar: Index(['Genomas', 'Cluster0', 'Cluster1', 'Cluster2', 'Cluster3', 'Cluster4',
+       'Cluster5', 'Cluster6', 'Cluster7', 'Cluster8',
+       ...
+       'Cluster405863', 'Cluster405864', 'Cluster405865', 'Cluster405866',
+       'Cluster405867', 'Cluster405868', 'Cluster405869', 'Cluster405870',
+       'Cluster405871', ''],
+      dtype='object', length=405874)
+['']
+         Genomas Cluster0 Cluster1  ... Cluster405869 Cluster405870 Cluster405871
+0     2228664007        0        0  ...             0             0             0
+1     2501799902        0        0  ...             0             0             0
+2     2501846300        0        0  ...             0             0             0
+3     2502790010        0        0  ...             0             0             0
+4     2503538034        0        0  ...             0             0             0
+...          ...      ...      ...  ...           ...           ...           ...
+3889  8087728815        0        0  ...             0             0             0
+3890  8088455273        0        0  ...             0             0             0
+3891  8088461797        0        0  ...             0             0             0
+3892  8088468458        0        0  ...             0             0             0
+3893  8088474632        0        0  ...             0             0             0
+
+[3894 rows x 405873 columns]
+Columnas de df después de eliminar: Index(['Genomas', 'Cluster0', 'Cluster1', 'Cluster2', 'Cluster3', 'Cluster4',
+       'Cluster5', 'Cluster6', 'Cluster7', 'Cluster8',
+       ...
+       'Cluster405862', 'Cluster405863', 'Cluster405864', 'Cluster405865',
+       'Cluster405866', 'Cluster405867', 'Cluster405868', 'Cluster405869',
+       'Cluster405870', 'Cluster405871'],
+      dtype='object', length=405873)
+Ahora si las dimensiones de la matriz dataframe
+(3894, 405873)
+         Genomas      Nicho
+0     2740892069  hospedero
+1     8011325151  hospedero
+2     2886129330  hospedero
+3     2524614586  hospedero
+4     2740892099  hospedero
+...          ...        ...
+3889  2630968566      vacio
+3890  2582580909      vacio
+3891  2713897254      vacio
+3892  2939020026      vacio
+3893  2675902956      vacio
+
+[3894 rows x 2 columns]
+antes de concatenar las tablas
+         Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871      Nicho
+0     2228664007        0        0  ...             0             0      vacio
+1     2501799902        0        0  ...             0             0  hospedero
+2     2501846300        0        0  ...             0             0  hospedero
+3     2502790010        0        0  ...             0             0  hospedero
+4     2503538034        0        0  ...             0             0   ambiente
+...          ...      ...      ...  ...           ...           ...        ...
+3889  8087728815        0        0  ...             0             0      vacio
+3890  8088455273        0        0  ...             0             0      vacio
+3891  8088461797        0        0  ...             0             0      vacio
+3892  8088468458        0        0  ...             0             0      vacio
+3893  8088474632        0        0  ...             0             0      vacio
+
+[3894 rows x 405874 columns]
+Una vez que ya se hizo como indice la columna Genomas
+               Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871      Nicho
+Genomas                                   ...                                       
+2228664007  2228664007        0        0  ...             0             0      vacio
+2501799902  2501799902        0        0  ...             0             0  hospedero
+2501846300  2501846300        0        0  ...             0             0  hospedero
+2502790010  2502790010        0        0  ...             0             0  hospedero
+2503538034  2503538034        0        0  ...             0             0   ambiente
+...                ...      ...      ...  ...           ...           ...        ...
+8087728815  8087728815        0        0  ...             0             0      vacio
+8088455273  8088455273        0        0  ...             0             0      vacio
+8088461797  8088461797        0        0  ...             0             0      vacio
+8088468458  8088468458        0        0  ...             0             0      vacio
+8088474632  8088474632        0        0  ...             0             0      vacio
+
+[3894 rows x 405874 columns]
+Index(['2228664007', '2501799902', '2501846300', '2502790010', '2503538034',
+       '2504643024', '2505313002', '2505313005', '2505313027', '2505313040',
+       ...
+       '8087295818', '8087536365', '8087590616', '8087597119', '8087603415',
+       '8087728815', '8088455273', '8088461797', '8088468458', '8088474632'],
+      dtype='object', name='Genomas', length=3894)
+(2452, 405874)
+               Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871      Nicho
+Genomas                                   ...                                       
+2501799902  2501799902        0        0  ...             0             0  hospedero
+2501846300  2501846300        0        0  ...             0             0  hospedero
+2502790010  2502790010        0        0  ...             0             0  hospedero
+2503538034  2503538034        0        0  ...             0             0   ambiente
+2504643024  2504643024        0        0  ...             0             0   ambiente
+
+[5 rows x 405874 columns]
+los nichos los hacemos array
+[['hospedero' 1]
+ ['hospedero' 1]
+ ['hospedero' 1]
+ ...
+ ['hospedero' 1]
+ ['hospedero' 1]
+ ['hospedero' 1]]
+la matriz la hacemos arreglo
+Training Features Shape: (1961, 405872)
+Training Labels Shape: (1961,)
+Testing Features Shape: (491, 405872)
+Testing Labels Shape: (491,)
+               Importancia
+Cluster50634      0.162537
+Cluster220763     0.012390
+Cluster193891     0.011113
+Cluster106790     0.008163
+Cluster65822      0.007891
+...                    ...
+Cluster136694     0.000000
+Cluster136693     0.000000
+Cluster136692     0.000000
+Cluster136691     0.000000
+Cluster405871     0.000000
+
+[405872 rows x 1 columns]
+               Importancia
+Cluster50634      0.162537
+Cluster220763     0.012390
+Cluster193891     0.011113
+Cluster106790     0.008163
+Cluster65822      0.007891
+...                    ...
+Cluster26786      0.000834
+Cluster278765     0.000832
+Cluster4032       0.000828
+Cluster57364      0.000826
+Cluster9159       0.000823
+
+[100 rows x 1 columns]
+columnas 100; extraidas:  [array(['2', '2', '2', ..., '0', '2', '2'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['2', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '2', '2', '2'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '2', '1', '2'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '1', '2'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '1', '2'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '2', '2'], dtype=object), array(['0', '0', '0', ..., '0', '1', '1'], dtype=object), array(['0', '0', '0', ..., '2', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '1', '1', '1'], dtype=object), array(['1', '2', '2', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '2', '1'], dtype=object), array(['0', '0', '0', ..., '1', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '2', '2', ..., '1', '0', '0'], dtype=object), array(['1', '2', '2', ..., '3', '2', '2'], dtype=object), array(['0', '0', '0', ..., '1', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '1', '1'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '2', '2', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '1', '1'], dtype=object), array(['0', '0', '0', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '1', '0', ..., '0', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '1', '1'], dtype=object)]
+matriz mtz_clustercien creada\n            50634 220763 193891 106790 65822  ... 278765 4032 57364 9159      Nicho
+Genomas                                      ...                                  
+2501799902     2      0      0      0     1  ...      0    0     0    0  hospedero
+2501846300     2      1      0      0     1  ...      0    0     0    0  hospedero
+2502790010     2      1      0      0     1  ...      0    0     0    0  hospedero
+2503538034     0      0      0      0     0  ...      0    0     1    1   ambiente
+2504643024     0      0      0      1     1  ...      1    0     0    1   ambiente
+...          ...    ...    ...    ...   ...  ...    ...  ...   ...  ...        ...
+8087295818     0      0      0      0     0  ...      0    0     0    0   ambiente
+8087536365     0      0      0      0     0  ...      1    0     0    1  hospedero
+8087590616     0      0      0      0     0  ...      0    0     0    1  hospedero
+8087597119     2      0      0      0     0  ...      0    0     0    1  hospedero
+8087603415     2      0      0      0     0  ...      0    0     0    1  hospedero
+
+[2452 rows x 101 columns]
+indices de mtz_clustercien \n Index(['2501799902', '2501846300', '2502790010', '2503538034', '2504643024',
+       '2505313002', '2505313005', '2505313027', '2505313040', '2505313041',
+       ...
+       '8080272579', '8080279160', '8081094103', '8082710732', '8086947143',
+       '8087295818', '8087536365', '8087590616', '8087597119', '8087603415'],
+      dtype='object', name='Genomas', length=2452)
+columnas de mtz_clustercien \n Index(['50634', '220763', '193891', '106790', '65822', '28849', '48528',
+       '165322', '18506', '16848',
+       ...
+       '127760', '173585', '276232', '97110', '26786', '278765', '4032',
+       '57364', '9159', 'Nicho'],
+      dtype='object', length=101)
+Continuamos hacia el conteo, juntando en indice y las 100 columnas
+u ['hospedero' 'ambiente'] c ['50634', '220763', '193891', '106790', '65822', '28849', '48528', '165322', '18506', '16848', '37368', '21795', '159375', '44108', '68365', '114622', '139822', '169568', '59304', '133305', '28207', '199505', '99093', '104022', '19057', '239319', '42035', '91852', '119520', '326634', '362420', '50362', '242353', '99107', '234230', '59197', '18646', '221486', '46649', '20872', '157251', '248050', '48635', '194083', '167562', '18978', '22005', '32350', '155079', '303523', '87269', '45827', '237358', '316311', '149404', '64471', '158975', '81688', '20909', '267926', '65603', '136681', '161430', '95086', '114325', '38269', '316157', '41099', '184660', '34051', '76520', '36750', '265839', '17956', '166260', '15741', '189862', '68217', '64609', '13282', '17083', '120949', '129128', '59483', '52957', '72500', '302695', '298590', '43162', '181533', '50199', '127760', '173585', '276232', '97110', '26786', '278765', '4032', '57364', '9159', 'Nicho']
+A eliminar la palabra Nicho de la lista c
+['50634', '220763', '193891', '106790', '65822', '28849', '48528', '165322', '18506', '16848', '37368', '21795', '159375', '44108', '68365', '114622', '139822', '169568', '59304', '133305', '28207', '199505', '99093', '104022', '19057', '239319', '42035', '91852', '119520', '326634', '362420', '50362', '242353', '99107', '234230', '59197', '18646', '221486', '46649', '20872', '157251', '248050', '48635', '194083', '167562', '18978', '22005', '32350', '155079', '303523', '87269', '45827', '237358', '316311', '149404', '64471', '158975', '81688', '20909', '267926', '65603', '136681', '161430', '95086', '114325', '38269', '316157', '41099', '184660', '34051', '76520', '36750', '265839', '17956', '166260', '15741', '189862', '68217', '64609', '13282', '17083', '120949', '129128', '59483', '52957', '72500', '302695', '298590', '43162', '181533', '50199', '127760', '173585', '276232', '97110', '26786', '278765', '4032', '57364', '9159'] False
+matriz vacia, creandose
+matriz vacia, creada, continuamos con concatenar los 100 mejores cluster en la matriz vacia
+(2, 100)
+   Caracteristica Cluster Frecuencia
+0       hospedero   50634       1877
+1        ambiente   50634        289
+2       hospedero  220763        666
+3        ambiente  220763        157
+4       hospedero  193891          2
+5        ambiente  193891         19
+6       hospedero  106790         66
+7        ambiente  106790        204
+8       hospedero   65822       1085
+9        ambiente   65822        261
+10      hospedero   28849        886
+11       ambiente   28849        125
+12      hospedero   48528       2146
+13       ambiente   48528       1319
+14      hospedero  165322          5
+15       ambiente  165322         26
+16      hospedero   18506       1085
+17       ambiente   18506        629
+18      hospedero   16848       1090
+19       ambiente   16848        267
+20      hospedero   37368        385
+21       ambiente   37368        242
+22      hospedero   21795         23
+23       ambiente   21795        102
+24      hospedero  159375          0
+25       ambiente  159375          3
+26      hospedero   44108       1232
+27       ambiente   44108        347
+28      hospedero   68365        106
+29       ambiente   68365         30
+30      hospedero  114622        569
+31       ambiente  114622        477
+32      hospedero  139822        321
+33       ambiente  139822         62
+34      hospedero  169568        573
+35       ambiente  169568        147
+36      hospedero   59304        317
+37       ambiente   59304        194
+38      hospedero  133305          1
+39       ambiente  133305          3
+40      hospedero   28207         31
+41       ambiente   28207        117
+42      hospedero  199505          2
+43       ambiente  199505          5
+44      hospedero   99093        834
+45       ambiente   99093        200
+46      hospedero  104022        401
+47       ambiente  104022        463
+48      hospedero   19057        868
+49       ambiente   19057        380
+   Caracteristica Cluster Frecuencia
+0       hospedero  239319        366
+1        ambiente  239319         89
+2       hospedero   42035        112
+3        ambiente   42035        246
+4       hospedero   91852          3
+5        ambiente   91852         16
+6       hospedero  119520        392
+7        ambiente  119520        459
+8       hospedero  326634         61
+9        ambiente  326634        188
+10      hospedero  362420          3
+11       ambiente  362420          6
+12      hospedero   50362        192
+13       ambiente   50362        266
+14      hospedero  242353         64
+15       ambiente  242353         18
+16      hospedero   99107       1073
+17       ambiente   99107        658
+18      hospedero  234230          4
+19       ambiente  234230          8
+20      hospedero   59197         60
+21       ambiente   59197        105
+22      hospedero   18646        250
+23       ambiente   18646        182
+24      hospedero  221486        575
+25       ambiente  221486        147
+26      hospedero   46649          6
+27       ambiente   46649          7
+28      hospedero   20872        455
+29       ambiente   20872        441
+30      hospedero  157251          4
+31       ambiente  157251          6
+32      hospedero  248050        635
+33       ambiente  248050        170
+34      hospedero   48635       1599
+35       ambiente   48635        479
+36      hospedero  194083         83
+37       ambiente  194083        197
+38      hospedero  167562          3
+39       ambiente  167562         15
+40      hospedero   18978        235
+41       ambiente   18978         76
+42      hospedero   22005        163
+43       ambiente   22005        268
+44      hospedero   32350        243
+45       ambiente   32350        215
+46      hospedero  155079         11
+47       ambiente  155079         10
+48      hospedero  303523        186
+49       ambiente  303523         96
+   Caracteristica Cluster Frecuencia
+0       hospedero   87269        182
+1        ambiente   87269         68
+2       hospedero   45827        464
+3        ambiente   45827         66
+4       hospedero  237358        120
+5        ambiente  237358        144
+6       hospedero  316311         48
+7        ambiente  316311         87
+8       hospedero  149404          5
+9        ambiente  149404         20
+10      hospedero   64471        105
+11       ambiente   64471        152
+12      hospedero  158975        113
+13       ambiente  158975         61
+14      hospedero   81688        296
+15       ambiente   81688        352
+16      hospedero   20909         99
+17       ambiente   20909         41
+18      hospedero  267926         16
+19       ambiente  267926         17
+20      hospedero   65603       1703
+21       ambiente   65603        538
+22      hospedero  136681       3009
+23       ambiente  136681       1714
+24      hospedero  161430         92
+25       ambiente  161430         73
+26      hospedero   95086        147
+27       ambiente   95086         53
+28      hospedero  114325        277
+29       ambiente  114325         46
+30      hospedero   38269        148
+31       ambiente   38269        228
+32      hospedero  316157        372
+33       ambiente  316157        478
+34      hospedero   41099          2
+35       ambiente   41099          3
+36      hospedero  184660          3
+37       ambiente  184660          6
+38      hospedero   34051        844
+39       ambiente   34051        364
+40      hospedero   76520          5
+41       ambiente   76520          7
+42      hospedero   36750        942
+43       ambiente   36750        502
+44      hospedero  265839          3
+45       ambiente  265839         12
+46      hospedero   17956        187
+47       ambiente   17956         75
+48      hospedero  166260        116
+49       ambiente  166260        117
+   Caracteristica Cluster Frecuencia
+0       hospedero   15741        630
+1        ambiente   15741        135
+2       hospedero  189862          0
+3        ambiente  189862          4
+4       hospedero   68217          4
+5        ambiente   68217          3
+6       hospedero   64609         78
+7        ambiente   64609        118
+8       hospedero   13282       1074
+9        ambiente   13282        241
+10      hospedero   17083          5
+11       ambiente   17083         18
+12      hospedero  120949         25
+13       ambiente  120949         21
+14      hospedero  129128         22
+15       ambiente  129128          6
+16      hospedero   59483        802
+17       ambiente   59483        227
+18      hospedero   52957        258
+19       ambiente   52957        364
+20      hospedero   72500          8
+21       ambiente   72500          9
+22      hospedero  302695         93
+23       ambiente  302695         91
+24      hospedero  298590          8
+25       ambiente  298590          7
+26      hospedero   43162        543
+27       ambiente   43162         95
+28      hospedero  181533          0
+29       ambiente  181533          6
+30      hospedero   50199        192
+31       ambiente   50199        266
+32      hospedero  127760        294
+33       ambiente  127760        322
+34      hospedero  173585        528
+35       ambiente  173585        357
+36      hospedero  276232        132
+37       ambiente  276232         39
+38      hospedero   97110         10
+39       ambiente   97110         16
+40      hospedero   26786        628
+41       ambiente   26786        187
+42      hospedero  278765        160
+43       ambiente  278765        287
+44      hospedero    4032         77
+45       ambiente    4032          9
+46      hospedero   57364        371
+47       ambiente   57364        216
+48      hospedero    9159       1415
+49       ambiente    9159        627
+Matriz de confusión guardada exitosamente
+Accuracy: 0.814663951120163
+Precision: 0.8120403828044587
+Recall: 0.814663951120163
+F1 Score: 0.8129054518951158
+Elapsed time to compute the importances: 2552.117 seconds

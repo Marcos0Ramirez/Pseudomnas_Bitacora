@@ -1,0 +1,1220 @@
+Ya trabajando en directorio actual:  /mnt/atgc-d3/sur/users/ENESL-MarcosR/PSEUDOMONAS_SCRIPTS/OriginalSetRANDOMFOREST
+##### ABRIENDO TABLA DE CLASIFICACIONES #####
+         Genomas   Nicho
+0     2740892069  Humano
+1     2886129330  Humano
+2     2740892099  Humano
+3     8010912407  Humano
+4     2888734210  Humano
+...          ...     ...
+2863  2740892097   Vacio
+2864  2684623235   Vacio
+2865  8069893365   Vacio
+2866  8069853593   Vacio
+2867  8069931265   Vacio
+
+[2868 rows x 2 columns]
+##### EXTRAYENDO LOS GENOMAS #####
+abriendo el archivo
+empezamos con los chunks
+tomamos los chunks
+listo para concatenar todo
+         Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871   
+0     2228664007        0        0  ...             0             0   
+1     2501799902        0        0  ...             0             0   
+2     2501846300        0        0  ...             0             0   
+3     2502790010        0        0  ...             0             0   
+4     2503538034        0        0  ...             0             0   
+...          ...      ...      ...  ...           ...           ... ..
+3889  8087728815        0        0  ...             0             0   
+3890  8088455273        0        0  ...             0             0   
+3891  8088461797        0        0  ...             0             0   
+3892  8088468458        0        0  ...             0             0   
+3893  8088474632        0        0  ...             0             0  6
+
+[3894 rows x 405874 columns]
+Columnas de df antes de eliminar: Index(['Genomas', 'Cluster0', 'Cluster1', 'Cluster2', 'Cluster3', 'Cluster4',
+       'Cluster5', 'Cluster6', 'Cluster7', 'Cluster8',
+       ...
+       'Cluster405863', 'Cluster405864', 'Cluster405865', 'Cluster405866',
+       'Cluster405867', 'Cluster405868', 'Cluster405869', 'Cluster405870',
+       'Cluster405871', ''],
+      dtype='object', length=405874)
+['']
+         Genomas Cluster0 Cluster1  ... Cluster405869 Cluster405870 Cluster405871
+0     2228664007        0        0  ...             0             0             0
+1     2501799902        0        0  ...             0             0             0
+2     2501846300        0        0  ...             0             0             0
+3     2502790010        0        0  ...             0             0             0
+4     2503538034        0        0  ...             0             0             0
+...          ...      ...      ...  ...           ...           ...           ...
+3889  8087728815        0        0  ...             0             0             0
+3890  8088455273        0        0  ...             0             0             0
+3891  8088461797        0        0  ...             0             0             0
+3892  8088468458        0        0  ...             0             0             0
+3893  8088474632        0        0  ...             0             0             0
+
+[3894 rows x 405873 columns]
+Columnas de df después de eliminar: Index(['Genomas', 'Cluster0', 'Cluster1', 'Cluster2', 'Cluster3', 'Cluster4',
+       'Cluster5', 'Cluster6', 'Cluster7', 'Cluster8',
+       ...
+       'Cluster405862', 'Cluster405863', 'Cluster405864', 'Cluster405865',
+       'Cluster405866', 'Cluster405867', 'Cluster405868', 'Cluster405869',
+       'Cluster405870', 'Cluster405871'],
+      dtype='object', length=405873)
+Ahora si las dimensiones de la matriz dataframe
+(3894, 405873)
+antes de concatenar las tablas
+         Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871   Nicho
+0     2501799902        0        0  ...             0             0  Humano
+1     2501799902        0        0  ...             0             0   Vacio
+2     2501846300        0        0  ...             0             0  Humano
+3     2501846300        0        0  ...             0             0   Vacio
+4     2502790010        0        0  ...             0             0   Vacio
+...          ...      ...      ...  ...           ...           ...     ...
+2863  8087590616        0        0  ...             0             0  Planta
+2864  8087597119        0        0  ...             0             0   Vacio
+2865  8087597119        0        0  ...             0             0  Planta
+2866  8087603415        0        0  ...             0             0  Planta
+2867  8087603415        0        0  ...             0             0   Vacio
+
+[2868 rows x 405874 columns]
+Una vez que ya se hizo como indice la columna Genomas
+               Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871   Nicho
+Genomas                                   ...                                    
+2501799902  2501799902        0        0  ...             0             0  Humano
+2501799902  2501799902        0        0  ...             0             0   Vacio
+2501846300  2501846300        0        0  ...             0             0  Humano
+2501846300  2501846300        0        0  ...             0             0   Vacio
+2502790010  2502790010        0        0  ...             0             0   Vacio
+...                ...      ...      ...  ...           ...           ...     ...
+8087590616  8087590616        0        0  ...             0             0  Planta
+8087597119  8087597119        0        0  ...             0             0   Vacio
+8087597119  8087597119        0        0  ...             0             0  Planta
+8087603415  8087603415        0        0  ...             0             0  Planta
+8087603415  8087603415        0        0  ...             0             0   Vacio
+
+[2868 rows x 405874 columns]
+Index(['2501799902', '2501799902', '2501846300', '2501846300', '2502790010',
+       '2502790010', '2505313002', '2505313002', '2505313005', '2505313005',
+       ...
+       '8086947143', '8086947143', '8087536365', '8087536365', '8087590616',
+       '8087590616', '8087597119', '8087597119', '8087603415', '8087603415'],
+      dtype='object', name='Genomas', length=2868)
+(1434, 405874)
+               Genomas Cluster0 Cluster1  ... Cluster405870 Cluster405871   Nicho
+Genomas                                   ...                                    
+2501799902  2501799902        0        0  ...             0             0  Humano
+2501846300  2501846300        0        0  ...             0             0  Humano
+2502790010  2502790010        0        0  ...             0             0  Humano
+2505313002  2505313002        0        0  ...             0             0  Humano
+2505313005  2505313005        0        0  ...             0             0  Humano
+
+[5 rows x 405874 columns]
+##### PREPARAMOS LOS DATOS #####
+los nichos los hacemos array
+[['Humano' 0]
+ ['Humano' 0]
+ ['Humano' 0]
+ ...
+ ['Planta' 1]
+ ['Planta' 1]
+ ['Planta' 1]]
+la matriz la hacemos arreglo
+Training Features Shape: (1147, 405872)
+Training Labels Shape: (1147,)
+Testing Features Shape: (287, 405872)
+Testing Labels Shape: (287,)
+##### ENTRENANDO EL MODELO #####
+##### CLUSTERS DE IMPORTANCIA #####
+               Importancia
+Cluster203765     0.116921
+Cluster97108      0.100534
+Cluster52428      0.100063
+Cluster151711     0.083102
+Cluster149401     0.034016
+...                    ...
+Cluster135459     0.000000
+Cluster135458     0.000000
+Cluster135457     0.000000
+Cluster135456     0.000000
+Cluster405871     0.000000
+
+[405872 rows x 1 columns]
+               Importancia
+Cluster203765     0.116921
+Cluster97108      0.100534
+Cluster52428      0.100063
+Cluster151711     0.083102
+Cluster149401     0.034016
+...                    ...
+Cluster32337      0.000425
+Cluster259403     0.000383
+Cluster42559      0.000379
+Cluster31525      0.000377
+Cluster294801     0.000377
+
+[100 rows x 1 columns]
+##### PRIMEROS 100 CLUSTERS MAS IMPORTANTES #####
+columnas 100; extraidas:  [array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['3', '2', '2', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '1', '1'], dtype=object), array(['0', '2', '2', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['2', '2', '2', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '3', '0', '0'], dtype=object), array(['1', '1', '1', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '1', '1'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '1', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '1', '1', ..., '1', '1', '1'], dtype=object), array(['1', '0', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '1', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '2', '2', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '1', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '2', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['1', '0', '0', ..., '1', '1', '1'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object), array(['0', '0', '0', ..., '0', '0', '0'], dtype=object)]
+matriz mtz_clustercien creada\n            203765 97108 52428 151711 149401  ... 259403 42559 31525 294801   Nicho
+Genomas                                      ...                                  
+2501799902      1     0     1      1      1  ...      0     1     0      0  Humano
+2501846300      1     1     1      1      1  ...      0     0     0      0  Humano
+2502790010      1     1     1      1      1  ...      0     0     0      0  Humano
+2505313002      1     1     1      1      1  ...      0     1     0      0  Humano
+2505313005      1     1     1      1      1  ...      0     0     0      0  Humano
+...           ...   ...   ...    ...    ...  ...    ...   ...   ...    ...     ...
+8086947143      0     0     0      0      0  ...      0     1     0      0  Planta
+8087536365      0     0     1      0      0  ...      0     0     0      0  Planta
+8087590616      0     0     0      0      0  ...      0     1     0      0  Planta
+8087597119      0     0     0      0      0  ...      0     1     0      0  Planta
+8087603415      0     0     0      0      0  ...      0     1     0      0  Planta
+
+[1434 rows x 101 columns]
+indices de mtz_clustercien \n Index(['2501799902', '2501846300', '2502790010', '2505313002', '2505313005',
+       '2505313027', '2505313040', '2505313041', '2505313042', '2505313043',
+       ...
+       '8079031769', '8079054357', '8079069389', '8079075367', '8079462635',
+       '8086947143', '8087536365', '8087590616', '8087597119', '8087603415'],
+      dtype='object', name='Genomas', length=1434)
+columnas de mtz_clustercien \n Index(['203765', '97108', '52428', '151711', '149401', '110718', '67881',
+       '130070', '213635', '4898',
+       ...
+       '101514', '306613', '130376', '3591', '32337', '259403', '42559',
+       '31525', '294801', 'Nicho'],
+      dtype='object', length=101)
+Continuamos hacia el conteo, juntando en indice y las 100 columnas
+u ['Humano' 'Planta'] c ['203765', '97108', '52428', '151711', '149401', '110718', '67881', '130070', '213635', '4898', '76914', '118214', '142687', '220891', '28322', '159943', '230785', '165846', '14789', '52734', '157687', '16882', '12808', '120522', '13426', '67223', '285028', '57698', '46912', '172481', '12033', '232620', '132660', '182790', '101', '244040', '106419', '126085', '45174', '288782', '49456', '68384', '12402', '97365', '169528', '200767', '98608', '48734', '27800', '91580', '231392', '12758', '335417', '270050', '382914', '184270', '121515', '227574', '222296', '87236', '110291', '38142', '103668', '270697', '77939', '279483', '241016', '135310', '21366', '44364', '97576', '10318', '260416', '286266', '34033', '187224', '237565', '36833', '123452', '141384', '33707', '169568', '15533', '286698', '345206', '28381', '34134', '314861', '51586', '93782', '215837', '101514', '306613', '130376', '3591', '32337', '259403', '42559', '31525', '294801', 'Nicho']
+A eliminar la palabra Nicho de la lista c
+['203765', '97108', '52428', '151711', '149401', '110718', '67881', '130070', '213635', '4898', '76914', '118214', '142687', '220891', '28322', '159943', '230785', '165846', '14789', '52734', '157687', '16882', '12808', '120522', '13426', '67223', '285028', '57698', '46912', '172481', '12033', '232620', '132660', '182790', '101', '244040', '106419', '126085', '45174', '288782', '49456', '68384', '12402', '97365', '169528', '200767', '98608', '48734', '27800', '91580', '231392', '12758', '335417', '270050', '382914', '184270', '121515', '227574', '222296', '87236', '110291', '38142', '103668', '270697', '77939', '279483', '241016', '135310', '21366', '44364', '97576', '10318', '260416', '286266', '34033', '187224', '237565', '36833', '123452', '141384', '33707', '169568', '15533', '286698', '345206', '28381', '34134', '314861', '51586', '93782', '215837', '101514', '306613', '130376', '3591', '32337', '259403', '42559', '31525', '294801'] False
+matriz vacia, creandose
+matriz vacia, creada, continuamos con concatenar los 100 mejores cluster en la matriz vacia
+##### GUARDANDING 100 MAS IMPORTANTES #####
+(2, 100)
+v1_HP_original_histograma50labels_parte_0.png
+./OUTPUT_HP_V1/v1_HP_original_histograma50labels_parte_0.png
+   Caracteristica Cluster  Frecuencia
+0          Humano  203765         457
+1          Planta  203765          13
+2          Humano   97108         456
+3          Planta   97108          15
+4          Humano   52428         465
+5          Planta   52428          18
+6          Humano  151711         453
+7          Planta  151711          11
+8          Humano  149401         456
+9          Planta  149401          14
+10         Humano  110718         454
+11         Planta  110718          14
+12         Humano   67881         469
+13         Planta   67881          32
+14         Humano  130070         482
+15         Planta  130070          41
+16         Humano  213635         471
+17         Planta  213635          28
+18         Humano    4898         926
+19         Planta    4898          24
+20         Humano   76914         455
+21         Planta   76914          19
+22         Humano  118214         457
+23         Planta  118214          11
+24         Humano  142687         452
+25         Planta  142687          13
+26         Humano  220891         460
+27         Planta  220891          19
+28         Humano   28322         460
+29         Planta   28322          13
+30         Humano  159943         450
+31         Planta  159943          10
+32         Humano  230785         449
+33         Planta  230785          10
+34         Humano  165846         454
+35         Planta  165846          14
+36         Humano   14789         486
+37         Planta   14789          56
+38         Humano   52734         461
+39         Planta   52734          21
+40         Humano  157687          53
+41         Planta  157687         908
+42         Humano   16882         902
+43         Planta   16882          24
+44         Humano   12808         466
+45         Planta   12808          19
+46         Humano  120522         903
+47         Planta  120522          24
+48         Humano   13426         461
+49         Planta   13426          13
+25
+25
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+0         Humano  203765         457
+1         Planta  203765          13
+Posiciones:  [0.0, 0.1]
+Frecuencias:  [457, 13]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+2         Humano   97108         456
+3         Planta   97108          15
+Posiciones:  [0.2, 0.30000000000000004]
+Frecuencias:  [456, 15]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+4         Humano   52428         465
+5         Planta   52428          18
+Posiciones:  [0.4, 0.5]
+Frecuencias:  [465, 18]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+6         Humano  151711         453
+7         Planta  151711          11
+Posiciones:  [0.6000000000000001, 0.7000000000000001]
+Frecuencias:  [453, 11]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+8         Humano  149401         456
+9         Planta  149401          14
+Posiciones:  [0.8, 0.9]
+Frecuencias:  [456, 14]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+10         Humano  110718         454
+11         Planta  110718          14
+Posiciones:  [1.0, 1.1]
+Frecuencias:  [454, 14]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+12         Humano   67881         469
+13         Planta   67881          32
+Posiciones:  [1.2000000000000002, 1.3]
+Frecuencias:  [469, 32]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+14         Humano  130070         482
+15         Planta  130070          41
+Posiciones:  [1.4000000000000001, 1.5]
+Frecuencias:  [482, 41]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+16         Humano  213635         471
+17         Planta  213635          28
+Posiciones:  [1.6, 1.7000000000000002]
+Frecuencias:  [471, 28]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+18         Humano    4898         926
+19         Planta    4898          24
+Posiciones:  [1.8, 1.9000000000000001]
+Frecuencias:  [926, 24]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+20         Humano   76914         455
+21         Planta   76914          19
+Posiciones:  [2.0, 2.1]
+Frecuencias:  [455, 19]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+22         Humano  118214         457
+23         Planta  118214          11
+Posiciones:  [2.2, 2.3000000000000003]
+Frecuencias:  [457, 11]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+24         Humano  142687         452
+25         Planta  142687          13
+Posiciones:  [2.4000000000000004, 2.5]
+Frecuencias:  [452, 13]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+26         Humano  220891         460
+27         Planta  220891          19
+Posiciones:  [2.6, 2.7]
+Frecuencias:  [460, 19]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+28         Humano   28322         460
+29         Planta   28322          13
+Posiciones:  [2.8000000000000003, 2.9000000000000004]
+Frecuencias:  [460, 13]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+30         Humano  159943         450
+31         Planta  159943          10
+Posiciones:  [3.0, 3.1]
+Frecuencias:  [450, 10]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+32         Humano  230785         449
+33         Planta  230785          10
+Posiciones:  [3.2, 3.3000000000000003]
+Frecuencias:  [449, 10]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+34         Humano  165846         454
+35         Planta  165846          14
+Posiciones:  [3.4000000000000004, 3.5]
+Frecuencias:  [454, 14]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+36         Humano   14789         486
+37         Planta   14789          56
+Posiciones:  [3.6, 3.7]
+Frecuencias:  [486, 56]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+38         Humano   52734         461
+39         Planta   52734          21
+Posiciones:  [3.8000000000000003, 3.9000000000000004]
+Frecuencias:  [461, 21]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+40         Humano  157687          53
+41         Planta  157687         908
+Posiciones:  [4.0, 4.1000000000000005]
+Frecuencias:  [53, 908]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+42         Humano   16882         902
+43         Planta   16882          24
+Posiciones:  [4.2, 4.3]
+Frecuencias:  [902, 24]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+44         Humano   12808         466
+45         Planta   12808          19
+Posiciones:  [4.4, 4.5]
+Frecuencias:  [466, 19]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+46         Humano  120522         903
+47         Planta  120522          24
+Posiciones:  [4.6000000000000005, 4.7]
+Frecuencias:  [903, 24]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+48         Humano   13426         461
+49         Planta   13426          13
+Posiciones:  [4.800000000000001, 4.9]
+Frecuencias:  [461, 13]
+Longitud de las frecuencias:  2
+v1_HP_original_histograma50labels_parte_50.png
+./OUTPUT_HP_V1/v1_HP_original_histograma50labels_parte_50.png
+   Caracteristica Cluster  Frecuencia
+0          Humano   67223         342
+1          Planta   67223           2
+2          Humano  285028          16
+3          Planta  285028           3
+4          Humano   57698         236
+5          Planta   57698           2
+6          Humano   46912          69
+7          Planta   46912          15
+8          Humano  172481          29
+9          Planta  172481          12
+10         Humano   12033           2
+11         Planta   12033           0
+12         Humano  232620           8
+13         Planta  232620           0
+14         Humano  132660          32
+15         Planta  132660          18
+16         Humano  182790         186
+17         Planta  182790           5
+18         Humano     101          12
+19         Planta     101          40
+20         Humano  244040          10
+21         Planta  244040           0
+22         Humano  106419          15
+23         Planta  106419           3
+24         Humano  126085         194
+25         Planta  126085           3
+26         Humano   45174         217
+27         Planta   45174          43
+28         Humano  288782           2
+29         Planta  288782           1
+30         Humano   49456          18
+31         Planta   49456         493
+32         Humano   68384         466
+33         Planta   68384         864
+34         Humano   12402          12
+35         Planta   12402           4
+36         Humano   97365          18
+37         Planta   97365           3
+38         Humano  169528          23
+39         Planta  169528           6
+40         Humano  200767          25
+41         Planta  200767          11
+42         Humano   98608          85
+43         Planta   98608           4
+44         Humano   48734          37
+45         Planta   48734          31
+46         Humano   27800          22
+47         Planta   27800           8
+48         Humano   91580          12
+49         Planta   91580           1
+25
+25
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+0         Humano   67223         342
+1         Planta   67223           2
+Posiciones:  [0.0, 0.1]
+Frecuencias:  [342, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+2         Humano  285028          16
+3         Planta  285028           3
+Posiciones:  [0.2, 0.30000000000000004]
+Frecuencias:  [16, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+4         Humano   57698         236
+5         Planta   57698           2
+Posiciones:  [0.4, 0.5]
+Frecuencias:  [236, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+6         Humano   46912          69
+7         Planta   46912          15
+Posiciones:  [0.6000000000000001, 0.7000000000000001]
+Frecuencias:  [69, 15]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+8         Humano  172481          29
+9         Planta  172481          12
+Posiciones:  [0.8, 0.9]
+Frecuencias:  [29, 12]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+10         Humano   12033           2
+11         Planta   12033           0
+Posiciones:  [1.0, 1.1]
+Frecuencias:  [2, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+12         Humano  232620           8
+13         Planta  232620           0
+Posiciones:  [1.2000000000000002, 1.3]
+Frecuencias:  [8, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+14         Humano  132660          32
+15         Planta  132660          18
+Posiciones:  [1.4000000000000001, 1.5]
+Frecuencias:  [32, 18]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+16         Humano  182790         186
+17         Planta  182790           5
+Posiciones:  [1.6, 1.7000000000000002]
+Frecuencias:  [186, 5]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+18         Humano     101          12
+19         Planta     101          40
+Posiciones:  [1.8, 1.9000000000000001]
+Frecuencias:  [12, 40]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+20         Humano  244040          10
+21         Planta  244040           0
+Posiciones:  [2.0, 2.1]
+Frecuencias:  [10, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+22         Humano  106419          15
+23         Planta  106419           3
+Posiciones:  [2.2, 2.3000000000000003]
+Frecuencias:  [15, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+24         Humano  126085         194
+25         Planta  126085           3
+Posiciones:  [2.4000000000000004, 2.5]
+Frecuencias:  [194, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+26         Humano   45174         217
+27         Planta   45174          43
+Posiciones:  [2.6, 2.7]
+Frecuencias:  [217, 43]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+28         Humano  288782           2
+29         Planta  288782           1
+Posiciones:  [2.8000000000000003, 2.9000000000000004]
+Frecuencias:  [2, 1]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+30         Humano   49456          18
+31         Planta   49456         493
+Posiciones:  [3.0, 3.1]
+Frecuencias:  [18, 493]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+32         Humano   68384         466
+33         Planta   68384         864
+Posiciones:  [3.2, 3.3000000000000003]
+Frecuencias:  [466, 864]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+34         Humano   12402          12
+35         Planta   12402           4
+Posiciones:  [3.4000000000000004, 3.5]
+Frecuencias:  [12, 4]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+36         Humano   97365          18
+37         Planta   97365           3
+Posiciones:  [3.6, 3.7]
+Frecuencias:  [18, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+38         Humano  169528          23
+39         Planta  169528           6
+Posiciones:  [3.8000000000000003, 3.9000000000000004]
+Frecuencias:  [23, 6]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+40         Humano  200767          25
+41         Planta  200767          11
+Posiciones:  [4.0, 4.1000000000000005]
+Frecuencias:  [25, 11]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+42         Humano   98608          85
+43         Planta   98608           4
+Posiciones:  [4.2, 4.3]
+Frecuencias:  [85, 4]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+44         Humano   48734          37
+45         Planta   48734          31
+Posiciones:  [4.4, 4.5]
+Frecuencias:  [37, 31]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+46         Humano   27800          22
+47         Planta   27800           8
+Posiciones:  [4.6000000000000005, 4.7]
+Frecuencias:  [22, 8]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+48         Humano   91580          12
+49         Planta   91580           1
+Posiciones:  [4.800000000000001, 4.9]
+Frecuencias:  [12, 1]
+Longitud de las frecuencias:  2
+v1_HP_original_histograma50labels_parte_100.png
+./OUTPUT_HP_V1/v1_HP_original_histograma50labels_parte_100.png
+   Caracteristica Cluster  Frecuencia
+0          Humano  231392           8
+1          Planta  231392           4
+2          Humano   12758           3
+3          Planta   12758           3
+4          Humano  335417          69
+5          Planta  335417          10
+6          Humano  270050          25
+7          Planta  270050          15
+8          Humano  382914          19
+9          Planta  382914           0
+10         Humano  184270           5
+11         Planta  184270          36
+12         Humano  121515          28
+13         Planta  121515          12
+14         Humano  227574          15
+15         Planta  227574           8
+16         Humano  222296           1
+17         Planta  222296           2
+18         Humano   87236           8
+19         Planta   87236           2
+20         Humano  110291          15
+21         Planta  110291         796
+22         Humano   38142         492
+23         Planta   38142         108
+24         Humano  103668           2
+25         Planta  103668           2
+26         Humano  270697           7
+27         Planta  270697           3
+28         Humano   77939           6
+29         Planta   77939         541
+30         Humano  279483          10
+31         Planta  279483           7
+32         Humano  241016         245
+33         Planta  241016          28
+34         Humano  135310           5
+35         Planta  135310           2
+36         Humano   21366           2
+37         Planta   21366          20
+38         Humano   44364          31
+39         Planta   44364          27
+40         Humano   97576           2
+41         Planta   97576           1
+42         Humano   10318           1
+43         Planta   10318           4
+44         Humano  260416         173
+45         Planta  260416           5
+46         Humano  286266         184
+47         Planta  286266           4
+48         Humano   34033           1
+49         Planta   34033           5
+25
+25
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+0         Humano  231392           8
+1         Planta  231392           4
+Posiciones:  [0.0, 0.1]
+Frecuencias:  [8, 4]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+2         Humano   12758           3
+3         Planta   12758           3
+Posiciones:  [0.2, 0.30000000000000004]
+Frecuencias:  [3, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+4         Humano  335417          69
+5         Planta  335417          10
+Posiciones:  [0.4, 0.5]
+Frecuencias:  [69, 10]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+6         Humano  270050          25
+7         Planta  270050          15
+Posiciones:  [0.6000000000000001, 0.7000000000000001]
+Frecuencias:  [25, 15]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+8         Humano  382914          19
+9         Planta  382914           0
+Posiciones:  [0.8, 0.9]
+Frecuencias:  [19, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+10         Humano  184270           5
+11         Planta  184270          36
+Posiciones:  [1.0, 1.1]
+Frecuencias:  [5, 36]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+12         Humano  121515          28
+13         Planta  121515          12
+Posiciones:  [1.2000000000000002, 1.3]
+Frecuencias:  [28, 12]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+14         Humano  227574          15
+15         Planta  227574           8
+Posiciones:  [1.4000000000000001, 1.5]
+Frecuencias:  [15, 8]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+16         Humano  222296           1
+17         Planta  222296           2
+Posiciones:  [1.6, 1.7000000000000002]
+Frecuencias:  [1, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+18         Humano   87236           8
+19         Planta   87236           2
+Posiciones:  [1.8, 1.9000000000000001]
+Frecuencias:  [8, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+20         Humano  110291          15
+21         Planta  110291         796
+Posiciones:  [2.0, 2.1]
+Frecuencias:  [15, 796]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+22         Humano   38142         492
+23         Planta   38142         108
+Posiciones:  [2.2, 2.3000000000000003]
+Frecuencias:  [492, 108]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+24         Humano  103668           2
+25         Planta  103668           2
+Posiciones:  [2.4000000000000004, 2.5]
+Frecuencias:  [2, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+26         Humano  270697           7
+27         Planta  270697           3
+Posiciones:  [2.6, 2.7]
+Frecuencias:  [7, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+28         Humano   77939           6
+29         Planta   77939         541
+Posiciones:  [2.8000000000000003, 2.9000000000000004]
+Frecuencias:  [6, 541]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+30         Humano  279483          10
+31         Planta  279483           7
+Posiciones:  [3.0, 3.1]
+Frecuencias:  [10, 7]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+32         Humano  241016         245
+33         Planta  241016          28
+Posiciones:  [3.2, 3.3000000000000003]
+Frecuencias:  [245, 28]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+34         Humano  135310           5
+35         Planta  135310           2
+Posiciones:  [3.4000000000000004, 3.5]
+Frecuencias:  [5, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+36         Humano   21366           2
+37         Planta   21366          20
+Posiciones:  [3.6, 3.7]
+Frecuencias:  [2, 20]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+38         Humano   44364          31
+39         Planta   44364          27
+Posiciones:  [3.8000000000000003, 3.9000000000000004]
+Frecuencias:  [31, 27]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+40         Humano   97576           2
+41         Planta   97576           1
+Posiciones:  [4.0, 4.1000000000000005]
+Frecuencias:  [2, 1]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+42         Humano   10318           1
+43         Planta   10318           4
+Posiciones:  [4.2, 4.3]
+Frecuencias:  [1, 4]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+44         Humano  260416         173
+45         Planta  260416           5
+Posiciones:  [4.4, 4.5]
+Frecuencias:  [173, 5]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+46         Humano  286266         184
+47         Planta  286266           4
+Posiciones:  [4.6000000000000005, 4.7]
+Frecuencias:  [184, 4]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+48         Humano   34033           1
+49         Planta   34033           5
+Posiciones:  [4.800000000000001, 4.9]
+Frecuencias:  [1, 5]
+Longitud de las frecuencias:  2
+v1_HP_original_histograma50labels_parte_150.png
+./OUTPUT_HP_V1/v1_HP_original_histograma50labels_parte_150.png
+   Caracteristica Cluster  Frecuencia
+0          Humano  187224           2
+1          Planta  187224           2
+2          Humano  237565           5
+3          Planta  237565           1
+4          Humano   36833          14
+5          Planta   36833           0
+6          Humano  123452         499
+7          Planta  123452         928
+8          Humano  141384         164
+9          Planta  141384           2
+10         Humano   33707           3
+11         Planta   33707           1
+12         Humano  169568         441
+13         Planta  169568          95
+14         Humano   15533          43
+15         Planta   15533         244
+16         Humano  286698           3
+17         Planta  286698           3
+18         Humano  345206           7
+19         Planta  345206           4
+20         Humano   28381         910
+21         Planta   28381          40
+22         Humano   34134           2
+23         Planta   34134           0
+24         Humano  314861           5
+25         Planta  314861          13
+26         Humano   51586           0
+27         Planta   51586          32
+28         Humano   93782           7
+29         Planta   93782           0
+30         Humano  215837           5
+31         Planta  215837          21
+32         Humano  101514           6
+33         Planta  101514           0
+34         Humano  306613           8
+35         Planta  306613           1
+36         Humano  130376         250
+37         Planta  130376          21
+38         Humano    3591          10
+39         Planta    3591           4
+40         Humano   32337          17
+41         Planta   32337         563
+42         Humano  259403           8
+43         Planta  259403           2
+44         Humano   42559          30
+45         Planta   42559         297
+46         Humano   31525          13
+47         Planta   31525           2
+48         Humano  294801           2
+49         Planta  294801          10
+25
+25
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+0         Humano  187224           2
+1         Planta  187224           2
+Posiciones:  [0.0, 0.1]
+Frecuencias:  [2, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+2         Humano  237565           5
+3         Planta  237565           1
+Posiciones:  [0.2, 0.30000000000000004]
+Frecuencias:  [5, 1]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+4         Humano   36833          14
+5         Planta   36833           0
+Posiciones:  [0.4, 0.5]
+Frecuencias:  [14, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+6         Humano  123452         499
+7         Planta  123452         928
+Posiciones:  [0.6000000000000001, 0.7000000000000001]
+Frecuencias:  [499, 928]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+   Caracteristica Cluster  Frecuencia
+8         Humano  141384         164
+9         Planta  141384           2
+Posiciones:  [0.8, 0.9]
+Frecuencias:  [164, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+10         Humano   33707           3
+11         Planta   33707           1
+Posiciones:  [1.0, 1.1]
+Frecuencias:  [3, 1]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+12         Humano  169568         441
+13         Planta  169568          95
+Posiciones:  [1.2000000000000002, 1.3]
+Frecuencias:  [441, 95]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+14         Humano   15533          43
+15         Planta   15533         244
+Posiciones:  [1.4000000000000001, 1.5]
+Frecuencias:  [43, 244]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+16         Humano  286698           3
+17         Planta  286698           3
+Posiciones:  [1.6, 1.7000000000000002]
+Frecuencias:  [3, 3]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+18         Humano  345206           7
+19         Planta  345206           4
+Posiciones:  [1.8, 1.9000000000000001]
+Frecuencias:  [7, 4]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+20         Humano   28381         910
+21         Planta   28381          40
+Posiciones:  [2.0, 2.1]
+Frecuencias:  [910, 40]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+22         Humano   34134           2
+23         Planta   34134           0
+Posiciones:  [2.2, 2.3000000000000003]
+Frecuencias:  [2, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+24         Humano  314861           5
+25         Planta  314861          13
+Posiciones:  [2.4000000000000004, 2.5]
+Frecuencias:  [5, 13]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+26         Humano   51586           0
+27         Planta   51586          32
+Posiciones:  [2.6, 2.7]
+Frecuencias:  [0, 32]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+28         Humano   93782           7
+29         Planta   93782           0
+Posiciones:  [2.8000000000000003, 2.9000000000000004]
+Frecuencias:  [7, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+30         Humano  215837           5
+31         Planta  215837          21
+Posiciones:  [3.0, 3.1]
+Frecuencias:  [5, 21]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+32         Humano  101514           6
+33         Planta  101514           0
+Posiciones:  [3.2, 3.3000000000000003]
+Frecuencias:  [6, 0]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+34         Humano  306613           8
+35         Planta  306613           1
+Posiciones:  [3.4000000000000004, 3.5]
+Frecuencias:  [8, 1]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+36         Humano  130376         250
+37         Planta  130376          21
+Posiciones:  [3.6, 3.7]
+Frecuencias:  [250, 21]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+38         Humano    3591          10
+39         Planta    3591           4
+Posiciones:  [3.8000000000000003, 3.9000000000000004]
+Frecuencias:  [10, 4]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+40         Humano   32337          17
+41         Planta   32337         563
+Posiciones:  [4.0, 4.1000000000000005]
+Frecuencias:  [17, 563]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+42         Humano  259403           8
+43         Planta  259403           2
+Posiciones:  [4.2, 4.3]
+Frecuencias:  [8, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+44         Humano   42559          30
+45         Planta   42559         297
+Posiciones:  [4.4, 4.5]
+Frecuencias:  [30, 297]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+46         Humano   31525          13
+47         Planta   31525           2
+Posiciones:  [4.6000000000000005, 4.7]
+Frecuencias:  [13, 2]
+Longitud de las frecuencias:  2
+###########################
+Cluster data 
+    Caracteristica Cluster  Frecuencia
+48         Humano  294801           2
+49         Planta  294801          10
+Posiciones:  [4.800000000000001, 4.9]
+Frecuencias:  [2, 10]
+Longitud de las frecuencias:  2
+Matriz de confusión guardada exitosamente
+Accuracy: 0.9686411149825784
+Precision: 0.9685967866203279
+Recall: 0.9686411149825784
+F1 Score: 0.9686061389978021
+Elapsed time to compute the importances: 8712.838 seconds

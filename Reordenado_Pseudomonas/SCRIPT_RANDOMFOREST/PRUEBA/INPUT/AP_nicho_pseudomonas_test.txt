@@ -1,0 +1,7 @@
+Genomas	Nicho
+2505313052	Patogeno
+2554235471	Patogeno
+2630968743	Ambiente
+2713896862	Ambiente
+2972001829	Patogeno
+8011072914	Ambiente
