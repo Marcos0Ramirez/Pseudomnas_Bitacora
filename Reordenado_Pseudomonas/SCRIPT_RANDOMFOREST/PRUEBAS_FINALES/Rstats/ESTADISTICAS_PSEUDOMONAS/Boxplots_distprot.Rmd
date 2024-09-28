@@ -1,0 +1,136 @@
+---
+title: "Boxplots_distprot"
+author: "Marcos Ramirez"
+date: "2024-09-27"
+output: html_document
+---
+
+### Script para desarrollar boxplots, por cuanto es mayor un nicho sobre otro
+
+```{r}
+# Librerias
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(ggrepel)
+```
+
+
+```{r}
+# Abrimos los csv con la distribucion de proteinas por nicho
+HE_freqs <- read.csv("../../OUTPUT_HE_V1/v1_HE_original_contnichos.csv", header = FALSE) %>%
+  t() %>% # TRANSPONEMOS
+  as.data.frame() # DATAFRAME
+
+colnames(HE_freqs) <- c("Clusters", "Hospedero", "Ambiente") # NUEVOS NOMBRES DE COLUMNAS
+
+HE_freqs <- HE_freqs %>%
+  subset(!Clusters %in% "") %>% #ELIMINAMOS PRIMERA FILA
+  tibble() # TIBBLE
+  
+#Realizamos operacion por fila
+HE_freqs <- HE_freqs %>%
+  mutate(
+    Hospedero = as.numeric(Hospedero),
+    Ambiente = as.numeric(Ambiente),
+    predominancia = ifelse(Hospedero > Ambiente, "HE_hospedero",
+                   ifelse(Hospedero < Ambiente, "HE_ambiente", NA)),
+    dif = abs(Hospedero - Ambiente)
+         )
+
+```
+
+```{r}
+MP_freqs <- read.csv("../../OUTPUT_MP_V1/v1_MP_original_contnichos.csv", header = FALSE) %>%
+  t() %>% # TRANSPONEMOS
+  as.data.frame() # DATAFRAME
+
+colnames(MP_freqs) <- c("Clusters", "Mamifero", "Planta") # NUEVOS NOMBRES DE COLUMNAS
+
+MP_freqs <- MP_freqs %>%
+  subset(!Clusters %in% "") %>% #ELIMINAMOS PRIMERA FILA
+  tibble() # TIBBLE
+  
+#Realizamos operacion por fila
+MP_freqs <- MP_freqs %>%
+  mutate(
+    Mamifero = as.numeric(Mamifero),
+    Planta = as.numeric(Planta),
+    predominancia = ifelse(Mamifero > Planta, "MP_mamifero",
+                   ifelse(Mamifero < Planta, "MP_planta", NA)),
+    dif = abs(Mamifero - Planta)
+         )
+```
+
+```{r}
+HP_freqs <- read.csv("../../OUTPUT_HP_V2/v2_HP_original_contnichos.csv", header = FALSE) %>%
+  t() %>% # TRANSPONEMOS
+  as.data.frame() # DATAFRAME
+
+colnames(HP_freqs) <- c("Clusters", "Humano", "Planta") # NUEVOS NOMBRES DE COLUMNAS
+
+HP_freqs <- HP_freqs %>%
+  subset(!Clusters %in% "") %>% #ELIMINAMOS PRIMERA FILA
+  tibble() # TIBBLE
+  
+#Realizamos operacion por fila
+HP_freqs <- HP_freqs %>%
+  mutate(
+    Humano = as.numeric(Humano),
+    Planta = as.numeric(Planta),
+    predominancia = ifelse(Humano > Planta, "HP_humano",
+                   ifelse(Humano < Planta, "HP_planta", NA)),
+    dif = abs(Humano - Planta)
+         )
+```
+
+
+```{r}
+# Renombramos las columnas
+colnames(HE_freqs) <- c("Clusters", "Positivo", "Negativo", "PREDOMINANCIA", "DIFERENCIA")
+colnames(MP_freqs) <- c("Clusters", "Positivo", "Negativo", "PREDOMINANCIA", "DIFERENCIA")
+colnames(HP_freqs) <- c("Clusters", "Positivo", "Negativo", "PREDOMINANCIA", "DIFERENCIA")
+# Concatenamos las tablas
+df_comparativas <- rbind(HE_freqs, MP_freqs, HP_freqs)
+# Retiramos las que no tengan etiqueta de predominancia
+df_comparativas <- subset(df_comparativas, !is.na(PREDOMINANCIA))
+```
+
+
+```{r}
+
+n = 5
+puntos_interes <- data.frame(
+  PREDOMINANCIA = c(rep("HE_hospedero", n), rep("MP_mamifero", n), rep("HP_humano", n)),
+  DIFERENCIA = c(HE_freqs$DIFERENCIA[1:n], MP_freqs$DIFERENCIA[1:n], HP_freqs$DIFERENCIA[1:n]),
+  cluster = c(HE_freqs$Clusters[1:n], MP_freqs$Clusters[1:n], HP_freqs$Clusters[1:n]),
+  color = factor(c(rep(c("darkgreen", "blue", "red", "gold4", "magenta4"), 3)), levels = c("darkgreen", "blue", "red", "gold4", "magenta4"))
+)
+
+p <- ggplot(df_comparativas, aes(x = PREDOMINANCIA, y = DIFERENCIA)) +
+  geom_boxplot() +
+  geom_jitter(data = puntos_interes, aes(x = PREDOMINANCIA, y = DIFERENCIA, color = color), 
+               size = 1.5, width = 0.15) +  # Cambiar a jitter
+  geom_text_repel(data = puntos_interes, aes(x = PREDOMINANCIA, y = DIFERENCIA, label = paste("cluster:", cluster, sep = " "), color = color), size = 1.5) +
+  geom_hline(aes(yintercept = 25, color = "diferencia de 25"), linetype = "dashed", size = 1) +
+  labs(y = "Diferencia", x = "Predominancia") +  
+  scale_color_manual(values = c("darkgreen" = "darkgreen", 
+                                 "blue" = "blue", 
+                                 "red" = "red",
+                                 "gold4" = "gold4",
+                                 "magenta4" = "magenta4",
+                                 "diferencia de 25" = "skyblue"),
+                     labels = c("1er Cluster", "2do Cluster", "3er Cluster", "4to Cluster", "5to Cluster", "diferencia de 25"),
+                     name = "Clusters") +
+  theme(legend.title = element_blank())
+
+# Mostrar el gráfico
+print(p)
+
+ggsave("clusters_dif.png", plot = p, width = 8, height = 6, dpi = 300)
+
+p
+```
+
+
+
