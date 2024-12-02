@@ -711,4 +711,51 @@ else:
 ```
 Por lo que ahora se leen correctamente las frecuencias.
 
+# 26 de julio del 2024 - 27 de julio del 2024
+Se añadio, en el script de prueba con el microset de datos en DNA, (MicroSetRANDOMFOREST/RandomForest_python3.8_tmp.py), la parte de la permutacion de los datos, inmediatamente salieron los graficos y tablas esperadas para la permutacion. Se intento correr 3 veces, una se cancelo manualmente "pyrandomforestpy3.8_output.488633.out", la otra se interrumpio por un error "pyrandomforestpy3.8_output.488634.out" y finalmente la ultima termino exitosamente "pyrandomforestpy3.8_output.488663.out" con un total de ~7 horas para un set de 6 genomas.
+
+```
+from sklearn.inspection import permutation_importance
+.
+.
+.
+permutacion= "test_permutation_importance.png"
+permutacion_csv="test_top_100_importances.csv"
+.
+.
+.
+importance_permutation = os.path.join(imgrutabase, permutacion)
+importance_permutation_csv = os.path.join(imgrutabase, permutacion_csv)
+.
+.
+.
+print("Extrayendo la importancia por permutacion")
+# Calcular la importancia por permutación
+r = permutation_importance(rf, test_mtz_class_caracteres, test_labels, n_repeats=20, random_state=99, n_jobs=30)
+# Convertir las importancias a un DataFrame
+importances_df = pd.DataFrame({
+    'feature': test_mtz_class_caracteres.columns,
+    'importance_mean': r.importances_mean,
+    'importance_std': r.importances_std
+})
+# Ordenar las importancias de mayor a menor
+importances_df = importances_df.sort_values(by='importance_mean', ascending=False)
+# Seleccionar las 100 características más importantes
+top_100_importances = importances_df.head(100)
+# Guardar los datos en un archivo CSV
+top_100_importances.to_csv(importance_permutation_csv, index=False)
+
+# Graficar las importancias
+plt.figure(figsize=(14, 10))
+plt.barh(top_100_importances['feature'], top_100_importances['importance_mean'], xerr=top_100_importances['importance_std'])
+plt.xlabel('Importancia')
+plt.ylabel('Características')
+plt.title('Top 100 características más importantes')
+plt.gca().invert_yaxis()  # Invertir el eje y para que las características más importantes estén en la parte superior
+# Rotar las etiquetas del eje y para una mejor legibilidad
+plt.yticks(rotation=0, fontsize=7)
+plt.tight_layout()
+# Guardar la gráfica como un archivo PNG
+plt.savefig(importance_permutation, format='png', dpi=300, bbox_inches='tight')
+```
 
