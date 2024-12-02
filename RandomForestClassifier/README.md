@@ -297,3 +297,21 @@ Lo mismo que el bloque anterior, ademas de que se movieron ciertos bloques para 
 print("-----------------------------------------------------------------------------------------------")
 print("")
 ```
+
+
+## FECHA 2 DE DICIEMBRE DEL 2024
+Encontre que hay un grafico para implemetar, se llama `decision surfaces`, encontrado en la siguiente liga https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_iris.html y se explica por medio de este blog: https://hackernoon.com/lang/es/como-trazar-un-limite-de-decision-para-algoritmos-de-aprendizaje-maquina-en-python-3o1n3w07 la funcion de este grafico. El cual cito:
+
+> Los algoritmos de clasificación aprenden a asignar etiquetas de clase a ejemplos (observaciones o puntos de datos), aunque sus decisiones pueden parecer opacas.
+> Este tutorial está escrito por KVS Setty
+> Puedes encontrar el código fuente completo en mi repositorio git
+> Un diagnóstico popular para comprender las decisiones tomadas por un algoritmo de clasificación es la superficie de decisión . Esta es una gráfica que muestra cómo un algoritmo de aprendizaje automático entrenado predice una cuadrícula gruesa en el espacio de características de entrada.
+> ***Un gráfico de superficie de decisión es una herramienta poderosa para comprender cómo un modelo determinado "ve" la tarea de predicción y cómo ha decidido dividir el espacio de características de entrada por etiqueta de clase.***
+
+Que en mis palabras
+
+La premisa, es que los **algoritmos de aprendiza automatico**, aprenden a asignar etiquetas en base a su entrenamiento con las observaciones.
+Este grafico, puede ser implementado en el modelo RandomForesClassifier, el cual indica como es que el modelo, considera a que clase se asocia de acuerdo a una combinacion especifica de caracteristicas.
+En caso de que la clasificacion por Random Fores hace muchos arboles, cada uno puede generar una superficie de decision diferente. Pero en si RandomForestClassifier combina el resultado de todos los arboles generados, lo cual al usar todos la hace mas robusta y menos propensa a sobreajustes. Asi al entrenar y predecir, asigna una clase con un promedio de las predicciones de los arboles y la superficie de decision resultante muestra como esas clases se distribuyen a traves de las combinaciones de las caracteristicas. Nota, las caracteristicas se toman de manera aleatoria para generar la malla.
+
+Pagina que hace la comparacion con diferentes clasificadores https://qu4nt.github.io/sklearn-doc-es/auto_examples/ensemble/plot_forest_iris.html
