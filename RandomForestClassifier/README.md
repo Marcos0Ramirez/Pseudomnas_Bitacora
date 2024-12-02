@@ -314,4 +314,6 @@ La premisa, es que los **algoritmos de aprendiza automatico**, aprenden a asigna
 Este grafico, puede ser implementado en el modelo RandomForesClassifier, el cual indica como es que el modelo, considera a que clase se asocia de acuerdo a una combinacion especifica de caracteristicas.
 En caso de que la clasificacion por Random Fores hace muchos arboles, cada uno puede generar una superficie de decision diferente. Pero en si RandomForestClassifier combina el resultado de todos los arboles generados, lo cual al usar todos la hace mas robusta y menos propensa a sobreajustes. Asi al entrenar y predecir, asigna una clase con un promedio de las predicciones de los arboles y la superficie de decision resultante muestra como esas clases se distribuyen a traves de las combinaciones de las caracteristicas. Nota, las caracteristicas se toman de manera aleatoria para generar la malla.
 
-Pagina que hace la comparacion con diferentes clasificadores https://qu4nt.github.io/sklearn-doc-es/auto_examples/ensemble/plot_forest_iris.html
+Pagina que hace la comparacion con diferentes clasificadores entre ellos RandomForestClassifier https://qu4nt.github.io/sklearn-doc-es/auto_examples/ensemble/plot_forest_iris.html
+Ejmplo con DecisionTreeClassifier https://qu4nt.github.io/sklearn-doc-es/auto_examples/tree/plot_iris_dtc.html#sphx-glr-auto-examples-tree-plot-iris-dtc-py
+
