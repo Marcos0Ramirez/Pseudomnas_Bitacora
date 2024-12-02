@@ -300,20 +300,30 @@ print("")
 
 
 ## FECHA 2 DE DICIEMBRE DEL 2024
+
+### Grafico de Arboles
+Adaptacion de codigo para graficar arboles de decision generados por Random Forest:
+https://stackoverflow.com/questions/40155128/plot-trees-for-a-random-forest-in-python-with-scikit-learn
+
+
+
+## Grafico de Superficie de decisiones
 Encontre que hay un grafico para implemetar, se llama `decision surfaces`, encontrado en la siguiente liga https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_iris.html y se explica por medio de este blog: https://hackernoon.com/lang/es/como-trazar-un-limite-de-decision-para-algoritmos-de-aprendizaje-maquina-en-python-3o1n3w07 la funcion de este grafico. El cual cito:
 
 > Los algoritmos de clasificación aprenden a asignar etiquetas de clase a ejemplos (observaciones o puntos de datos), aunque sus decisiones pueden parecer opacas.
-> Este tutorial está escrito por KVS Setty
-> Puedes encontrar el código fuente completo en mi repositorio git
-> Un diagnóstico popular para comprender las decisiones tomadas por un algoritmo de clasificación es la superficie de decisión . Esta es una gráfica que muestra cómo un algoritmo de aprendizaje automático entrenado predice una cuadrícula gruesa en el espacio de características de entrada.
+> Un diagnóstico popular para comprender las decisiones tomadas por un algoritmo de clasificación es la superficie de decisión. Esta es una gráfica que muestra cómo un algoritmo de aprendizaje automático entrenado predice una cuadrícula gruesa en el espacio de características de entrada.
 > ***Un gráfico de superficie de decisión es una herramienta poderosa para comprender cómo un modelo determinado "ve" la tarea de predicción y cómo ha decidido dividir el espacio de características de entrada por etiqueta de clase.***
 
 Que en mis palabras
 
 La premisa, es que los **algoritmos de aprendiza automatico**, aprenden a asignar etiquetas en base a su entrenamiento con las observaciones.
-Este grafico, puede ser implementado en el modelo RandomForesClassifier, el cual indica como es que el modelo, considera a que clase se asocia de acuerdo a una combinacion especifica de caracteristicas.
+Este grafico, puede ser implementado en el modelo RandomForesClassifier https://qu4nt.github.io/sklearn-doc-es/auto_examples/ensemble/plot_forest_iris.html
+Ejmplo con DecisionTreeClassifier https://qu4nt.github.io/sklearn-doc-es/auto_examples/tree/plot_iris_dtc.html#sphx-glr-auto-examples-tree-plot-iris-dtc-py, el cual indica como es que el modelo, considera a que clase se asocia de acuerdo a una combinacion especifica de caracteristicas.
+
 En caso de que la clasificacion por Random Fores hace muchos arboles, cada uno puede generar una superficie de decision diferente. Pero en si RandomForestClassifier combina el resultado de todos los arboles generados, lo cual al usar todos la hace mas robusta y menos propensa a sobreajustes. Asi al entrenar y predecir, asigna una clase con un promedio de las predicciones de los arboles y la superficie de decision resultante muestra como esas clases se distribuyen a traves de las combinaciones de las caracteristicas. Nota, las caracteristicas se toman de manera aleatoria para generar la malla.
 
-Pagina que hace la comparacion con diferentes clasificadores entre ellos RandomForestClassifier https://qu4nt.github.io/sklearn-doc-es/auto_examples/ensemble/plot_forest_iris.html
-Ejmplo con DecisionTreeClassifier https://qu4nt.github.io/sklearn-doc-es/auto_examples/tree/plot_iris_dtc.html#sphx-glr-auto-examples-tree-plot-iris-dtc-py
+En el articulo de Sun et al., 2021, propone el termino de "***support-vector network***" como una nueva tecnica de aprendizaje de maquinas para problemas de clasificacion de dos grupos. 
 
+Cabe destacar que el termino Superficie de decisiones (***"Decision Surface"***),
+
+1. Sun, J., Deng, J., Peng, W., & Zhang, D. (2021). Strip crown prediction in hot rolling process using random forest. International Journal of Precision Engineering and Manufacturing, 22, 301-311.
