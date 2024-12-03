@@ -307,7 +307,7 @@ https://stackoverflow.com/questions/40155128/plot-trees-for-a-random-forest-in-p
 
 
 
-## Grafico de Superficie de decisiones
+## Grafico de Superficie de Decisiones
 Encontre que hay un grafico para implemetar, se llama `decision surfaces`, encontrado en la siguiente liga https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_iris.html y se explica por medio de este blog: https://hackernoon.com/lang/es/como-trazar-un-limite-de-decision-para-algoritmos-de-aprendizaje-maquina-en-python-3o1n3w07 la funcion de este grafico. El cual cito:
 
 > Los algoritmos de clasificación aprenden a asignar etiquetas de clase a ejemplos (observaciones o puntos de datos), aunque sus decisiones pueden parecer opacas.
@@ -322,8 +322,14 @@ Ejmplo con DecisionTreeClassifier https://qu4nt.github.io/sklearn-doc-es/auto_ex
 
 En caso de que la clasificacion por Random Fores hace muchos arboles, cada uno puede generar una superficie de decision diferente. Pero en si RandomForestClassifier combina el resultado de todos los arboles generados, lo cual al usar todos la hace mas robusta y menos propensa a sobreajustes. Asi al entrenar y predecir, asigna una clase con un promedio de las predicciones de los arboles y la superficie de decision resultante muestra como esas clases se distribuyen a traves de las combinaciones de las caracteristicas. Nota, las caracteristicas se toman de manera aleatoria para generar la malla.
 
-En el articulo de Sun et al., 2021, propone el termino de "***support-vector network***" como una nueva tecnica de aprendizaje de maquinas para problemas de clasificacion de dos grupos. 
+### Support-Vector Network
+En el articulo de Vapnik y Cortes en 2021, proponen el termino de "***support-vector network***" como una nueva tecnica de aprendizaje de maquinas para problemas de clasificacion de dos grupos. Enfoque del articulo:
+
+> The support-vector network implements the following idea: it maps the input vectors into some high dimensional feature space Z through some non-linear mapping chosen a priori. In this space a linear decision surface is constructed with special properties that ensure high generalization ability of the network.
+
+En una vision general, hay dos problemas que abarca conceptual y tecnico respectivamente: ¿Como encontrar un hiperplano de separacion que generalice bien? Y computacionalmente, ¿como tratar con un espacios de muchas dimensiones?
+La conceptual, ya fue hecha para clases separables. Donde definien a un hiperplano como una funcion de decision linear con el margen maximo de dos clases. Y el caso de hiperplanos optimos, son que toma entre una pequeña cantidad de datos de entrenamiento son los vectores de soporte, los cuales determinan el margen.
 
 Cabe destacar que el termino Superficie de decisiones (***"Decision Surface"***),
 
-1. Sun, J., Deng, J., Peng, W., & Zhang, D. (2021). Strip crown prediction in hot rolling process using random forest. International Journal of Precision Engineering and Manufacturing, 22, 301-311.
+Vapnik, V., & Cortes, C. (1995). Support Vector Networks, machine learning 20, 273-297.
