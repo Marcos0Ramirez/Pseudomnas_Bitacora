@@ -307,7 +307,7 @@ https://stackoverflow.com/questions/40155128/plot-trees-for-a-random-forest-in-p
 
 
 
-## Grafico de Superficie de Decisiones
+### Grafico de Superficie de Decisiones
 Encontre que hay un grafico para implemetar, se llama `decision surfaces`, encontrado en la siguiente liga https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_iris.html y se explica por medio de este blog: https://hackernoon.com/lang/es/como-trazar-un-limite-de-decision-para-algoritmos-de-aprendizaje-maquina-en-python-3o1n3w07 la funcion de este grafico. El cual cito:
 
 > Los algoritmos de clasificación aprenden a asignar etiquetas de clase a ejemplos (observaciones o puntos de datos), aunque sus decisiones pueden parecer opacas.
@@ -333,3 +333,146 @@ La conceptual, ya fue hecha para clases separables. Donde definien a un hiperpla
 Cabe destacar que el termino Superficie de decisiones (***"Decision Surface"***),
 
 Vapnik, V., & Cortes, C. (1995). Support Vector Networks, machine learning 20, 273-297.
+---
+
+### Codigo eliminado
+Una vez confirmado que se puede usar, se paso el codigo restante para las matrices de confusion y graficos de distribucion de nichos y eliminacion de codigo del script anterior, eliminando esto de codigo:
+```
+# Bloque 1
+        #############################################################################################
+        mtz_idgen_nicho_encoded = pd.DataFrame(pd.Series(mtz_idgen_nicho['Nicho']))
+        mtz_idgen_nicho_encoded["Nicho"] = encoded_labels
+        #############################################################################################
+        mtz_clustercien_encod = pd.DataFrame(np.array(clustercien).T, columns=cienclusters_importantes, index=mtz_idgen_nicho_encoded.index)
+        # añadimos los nichos   
+        mtz_clustercien_encod['Nicho'] = mtz_idgen_nicho_encoded['Nicho']
+        u_encoded = mtz_idgen_nicho_encoded["Nicho"].unique()
+        c =list(mtz_clustercien_encod.columns)
+        del c[c.index('Nicho')]
+        #Creamos una matriz
+        zeroconteonichos_encoded = pd.DataFrame(0, index=u_encoded, columns=c)
+    
+        for i in u_encoded:
+            for j in c:
+                #print(i, j)
+                #
+                ev = list(mtz_clustercien_encod.index[mtz_clustercien_encod['Nicho'] == i])
+                #print(ev)
+                # Asegúrate de que todos los elementos sean enteros
+                values_to_sum = list(mtz_clustercien_encod.loc[ev, j])
+                #print("Valores a sumar (antes de convertir):", values_to_sum)
+                values_to_sum = map(int, values_to_sum)
+                #print("Valores a sumar (después de convertir):", values_to_sum)
+                sumas = sum(values_to_sum)
+                #print("sumas: ", sumas)
+                zeroconteonichos_encoded.loc[i, j] = sumas
+                #print("zeroconteonichos.loc[i,j]", zeroconteonichos.loc[i, j])
+        print(zeroconteonichos_encoded.shape, flush=True)
+        # print("##### GUARDANDING 100 MAS IMPORTANTES CODIFICADOS #####")
+        # zeroconteonichos_encoded.to_csv(cluster100matriz_encoded)
+        
+        ###################### -- GRAFICOS -- ######################
+        # =============================================================================
+        
+        # Histograma, mayor a 2 nichos
+        if len(zeroconteonichos.index) > 2:
+            # Codificacion en numeros, los indices
+            # MUCHOS HISTOGRAMAS
+            # Número total de clústeres
+            print("HISTOGRAMA CON MUCHOS NICHOS", flush=True)
+            num_clusters = zeroconteonichos_encoded.shape[1]
+            # Dividir en grupos de 25 clústeres
+            clusters_per_image = 25
+            num_images = num_clusters // clusters_per_image
+            # Lista de colores para los histogramas
+            colors = ['skyblue', 'lightgreen', 'lightcoral', 'lightskyblue', 'lightpink']
+            for img in range(num_images):
+                histom = histom_input.format(img + 1)
+                histmlabelspng = os.path.join(directo, histom)
+                start_idx = img * clusters_per_image
+                end_idx = start_idx + clusters_per_image
+                clusters_subset = zeroconteonichos_encoded.columns[start_idx:end_idx]
+                # Crear subplots: número de filas y columnas
+                num_cols = 5  # Número de columnas deseadas en el grid
+                num_rows = (clusters_per_image + num_cols - 1) // num_cols  # Calcular el número de filas
+                fig, axes = plt.subplots(num_rows, num_cols, figsize=(25, num_rows * 5), sharex=True, sharey=True)
+                axes = axes.flatten()
+                print("Toca procesar las posiciones de las imagenes", flush=True)
+                for i, cluster in enumerate(clusters_subset):
+                    print(i, cluster, type(i), type(cluster), flush=True)
+                    #cluster=int(cluster)
+                    #print(i, cluster, type(i), type(cluster))
+                    #print(zeroconteonichos.index, type(zeroconteonichos.index), zeroconteonichos[cluster], type(zeroconteonichos[cluster]))
+                    print("Ordenando la lista: ", sorted(list(zeroconteonichos_encoded.index)), flush=True)
+                    axes[i].bar(sorted(list(zeroconteonichos_encoded.index)), zeroconteonichos_encoded[cluster], color=colors[i % len(colors)])
+                    axes[i].set_title(cluster, fontsize=20)
+                    #plt.setp(axes[i].get_xticklabels(), rotation=90, fontsize=20)
+                    axes[i].tick_params(axis='x', labelsize=20)  # Aumentar tamaño de fuente de los números del eje x rotation=90,
+                    axes[i].tick_params(axis='y', labelsize=25)  # Aumentar tamaño de fuente de los números del eje y
+        
+                print("Vamos con los ejes", flush=True)
+                # Remover ejes adicionales en caso de que existan
+                for i in range(len(clusters_subset), len(axes)):
+                    fig.delaxes(axes[i])
+                # Solo una etiqueta de eje y
+                fig.text(0.01, 0.5, 'Frecuencia', va='center', ha='center', rotation='vertical', fontsize=26)
+                # Solo una etiqueta de eje x
+                fig.text(0.5, 0.001, 'Característica', va='center', ha='center', fontsize=26)
+                # Ajustar las etiquetas de las características
+                print(range(len(zeroconteonichos_encoded.index)), flush=True)
+                print(zeroconteonichos_encoded.index, flush=True)
+                plt.setp(axes, xticks=range(len(zeroconteonichos_encoded.index)), xticklabels=zeroconteonichos_encoded.index)
+                # Añadir un título general
+                fig.suptitle('Histograma {0}'.format(img + 1), fontsize=30)
+                # Ajusta los márgenes de la figura
+                plt.subplots_adjust(left=0.05, right=0.9, top=0.95, bottom=0.1)
+                # Guardar la gráfica como un archivo PNG
+                try:  
+                    plt.savefig(histmlabelspng, format='png', dpi=300, bbox_inches='tight')   
+                    plt.close(fig)
+                    print("Imagen guardada exitosamente", flush=True)  
+                except Exception as e:  
+                    sys.stderr.write("Error al guardar la imagen: {}\n".format(e))  
+                    sys.stderr.flush()
+
+#################################################################################################################################
+# Bloque 2
+            # =============================================================================
+            # Crear la figura y el objeto Axes
+            fig, ax = plt.subplots(figsize=(12, 4))
+            # Crear el gráfico de barras en el objeto Axes
+            primeros100.plot(kind='bar', ax=ax)
+            # Título y etiquetas de los ejes
+            ax.set_title(f'Importancia de las características NORMAL, \ncomparativa ({" ".join(caracteristicas)})')
+            ax.set_xlabel('Random Forest: Características consideradas (clusters)')
+            ax.set_ylabel('Importancia de las caracteristicas (clusters), \nnormal')
+            # Ajustar la rotación de las etiquetas del eje x
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=90, fontsize=6, fontweight='bold')
+            # Ajustar el diseño para que no se recorten los elementos
+            plt.tight_layout()
+            # Guardar la gráfica como un archivo PNG
+            plt.savefig(rutaimportacara, format='png', dpi=300, bbox_inches='tight')
+            # Mostrar la gráfica
+            plt.show()
+
+#################################################################################################################################
+Bloque 3
+            try:
+                accuracy = accuracy_score(test_labels, prediction_discrete)
+                precision = safe_precision_score(test_labels, prediction_discrete)
+                recall = recall_score(test_labels, prediction_discrete, average='weighted')
+                f1 = f1_score(test_labels, prediction_discrete, average='weighted')
+                print("Accuracy:", accuracy, flush=True)
+                print("Precision:", precision, flush=True)
+                print("Recall:", recall, flush=True)
+                print("F1 Score:", f1, flush=True)
+                
+            except Exception as e:
+                sys.stderr.write(f"Error al calcular las métricas: {e}\n")
+                sys.stderr.flush()
+
+```
+Lo restante, se dejo y adapto al codigo nuevo
+
+## FECHA 3 DE DICIEMBRE DEL 2024
+El dia de hoy se eliminaron algunas variables que no tenian uso en la nueva adaptacion, mismo que se cambiaron los nombres de algunas variables a los nombres de variables que usa en los ejemplos del paquete `scikit-learn`:
