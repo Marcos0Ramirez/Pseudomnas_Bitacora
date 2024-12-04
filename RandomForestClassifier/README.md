@@ -9,6 +9,13 @@ Por default se instalo python 3.12.7 y solo queda instalar los paquetes scikit-s
 ```
 conda install -c conda-forge scikit-learn numpy pandas matplotlib seaborn
 ```
+
+Si tienes mas versiones de python y no quieres alterarlas con instalar nuevos paquetes añade la version del python que quieres despues de los paquetes.
+ 
+Ejemplo
+```
+conda install -c conda-forge scikit-learn numpy pandas matplotlib seaborn python=3.12.7
+```
 En el camino se hicieron estos reajustes, dentro del ambiente `base`, debido a que siempre habia una advertencia, sobre que no se reconocia un archivo de `numpy`, entonces se volvio a reinstalar los paquetes de `pandas` y `numpy`, para despues hacer una configuracion y actualizar los paquetes. Por otra parte aparecio que no se reconocia correctamente el paquete `pyexpat` y por tanto se volvio a forzar su instalacion y funciono.
 ```
 conda remove pandas
