@@ -476,3 +476,506 @@ Lo restante, se dejo y adapto al codigo nuevo
 
 ## FECHA 3 DE DICIEMBRE DEL 2024
 El dia de hoy se eliminaron algunas variables que no tenian uso en la nueva adaptacion, mismo que se cambiaron los nombres de algunas variables a los nombres de variables que usa en los ejemplos del paquete `scikit-learn`:
+
+```
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Importamos las librerias necesarias
+import time
+import datetime
+import pandas as pd
+import numpy as np
+import os
+import csv
+import sys
+import traceback
+import io
+import re
+import codecs
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, ConfusionMatrixDisplay, classification_report
+from sklearn import tree
+from sklearn.inspection import permutation_importance
+import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
+
+# direccion donde se encuentra el script
+actual_script = os.path.abspath(__file__)
+# Ahora extraemos la ruta del directorio
+actual_directorio = os.path.dirname(actual_script)
+
+print("")
+print("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡")
+# Nos cambiamos de ruta
+os.chdir(actual_directorio)
+print("Ya trabajando en directorio actual: ", os.getcwd())
+hora_actual = datetime.datetime.now()
+print("Fecha y hora de ejecución: ", hora_actual)
+print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+print("")
+
+if __name__ == "__main__":
+	try:
+		start_time = time.time()
+		###################### -- DIRECCIONES, ARCHIVOS Y PARAMETROS -- ######################
+		siglas_exp =       "AP"
+		test_or_original = "test"
+		version =          "v3" 
+		################ -- INPUT -- ################
+		rutabase=                "./MicroSet/INPUT/" # Ruta base
+		filemtz =                f"cluster_pseudomonas_{test_or_original}.csv" #Nombre del archivo con la matriz
+		fileclass =              f"{siglas_exp}_nicho_pseudomonas_{test_or_original}.txt" # Nombre de la tabla de clasificacion
+		empty_nicho =            'Vacio'
+		n_estima =                50
+		test_size =               0.50
+		random_state_split =      99
+		random_state_classifier = 7
+
+		rutamtz = os.path.join(rutabase, filemtz)
+		rutaclass = os.path.join(rutabase, fileclass)
+
+		################ -- OUTPUT FOLDERS -- ################ 
+		imgrutabase =   "./MicroSet/OUTPUT"
+		directo =       f"./{imgrutabase}_{siglas_exp}_{version}_{test_or_original}".upper()
+		if not os.path.exists(directo):
+			os.makedirs(directo)
+
+		tree_ds =       f"tree_decision_surfaces_{siglas_exp}_{version}_{test_or_original}".upper()
+		rutatree_ds =   os.path.join(directo, tree_ds)
+		if not os.path.exists(rutatree_ds):
+			os.makedirs(rutatree_ds)
+
+
+
+
+		lcodcsv =               f"{version}_{siglas_exp}_{test_or_original}_codificacionichos.csv"
+		ilogpng =               f"{version}_{siglas_exp}_{test_or_original}_clusters_importancia_log.png"
+		ilogcsv =               f"{version}_{siglas_exp}_{test_or_original}_clusters_importancia_log.csv"
+		confcsv =               f"{version}_{siglas_exp}_{test_or_original}_confmatrix.csv"
+		confpng =               f"{version}_{siglas_exp}_{test_or_original}_confmatrix.png" # Nombre del histograma si solo son dos nichos que se estan comparando 
+		distnichocsv =          f"{version}_{siglas_exp}_{test_or_original}_distribucionichos.csv"
+		histot_50=              f"{version}_{siglas_exp}_{test_or_original}_distribucionichos_parte"
+		ypred =                 f"{version}_{siglas_exp}_{test_or_original}_ypredicciones.csv"
+		report =                f"{version}_{siglas_exp}_{test_or_original}_ypredreport.csv"
+		arbol =                 f"{version}_{siglas_exp}_{test_or_original}_tree"
+		dsurface =              f"{version}_{siglas_exp}_{test_or_original}_decision_surface_tree"
+
+
+		rutalcodcsv =           os.path.join(directo, lcodcsv)
+		rutaimplogpng =         os.path.join(directo, ilogpng)
+		rutaimplogcsv =         os.path.join(directo, ilogcsv)
+		rutaconfcsv =           os.path.join(directo, confcsv)
+		rutaconfpng =           os.path.join(directo, confpng)
+		rutadistnichocsv =      os.path.join(directo, distnichocsv)
+		rutaypred =             os.path.join(directo, ypred)
+		rutareport =            os.path.join(directo, report)
+		rutaarbol =             os.path.join(rutatree_ds, arbol)
+		rutadsurface =          os.path.join(rutatree_ds, dsurface)
+
+
+
+		###################### -- EXTRACCION DE LOS DATOS -- ######################
+		print("##### ABRIENDO TABLA DE CLASIFICACIONES #####", flush=True)
+		# Tabla de clasificacion por nichos
+		with codecs.open(rutaclass, 'r', encoding='utf-8') as csvclass:
+		        csvclase = csv.reader(csvclass, delimiter="\t")
+		        data = list(csvclase)
+		encabezado = data[0]
+		rows = data[1:]
+		df_clase = pd.DataFrame(rows, columns=encabezado)
+		print(df_clase, flush=True)
+		print(df_clase.shape, flush=True)
+
+		print("##### EXTRAYENDO LOS GENOMAS #####", flush=True)
+		# Extraemos la data
+		# Matriz de frecuencias genomas-clusters
+		chunks = []
+		chunk_size = 100000  # Número de filas por chunk
+		row_count = 0
+		print("abriendo el archivo", flush=True)
+		with codecs.open(rutamtz, 'r', encoding='utf-8') as csvfile:
+		    csvreader = csv.reader(csvfile)
+		    header = next(csvreader)
+		    print("empezamos con los chunks", flush=True)
+		    chunk = []
+		    for row in csvreader:
+		        chunk.append(row)
+		        row_count += 1
+		        if row_count % chunk_size == 0:
+		            df_chunk = pd.DataFrame(chunk, columns=header)
+		            chunks.append(df_chunk)
+		            chunk = []
+		    print("tomamos los chunks", flush=True)
+		    if chunk:
+		        df_chunk = pd.DataFrame(chunk, columns=header)
+		        chunks.append(df_chunk)
+		print("listo para concatenar todo", flush=True)
+		df = pd.concat(chunks, ignore_index=True)
+		print(df, flush=True)
+
+		# Verificar la presencia de la columna 'Genomas' antes de eliminar columnas
+		#print("Columnas de df antes de eliminar:", df.columns, flush=True)
+		if 'Genomas' not in df.columns:
+		    print("Error: 'Genomas' no se encuentra en df antes de eliminar columnas", flush=True)
+		coldrop = [col for col in df.columns if col == '' or col is None]
+		# print(coldrop, flush=True)
+		if len(coldrop) > 0:
+			df.drop(columns=coldrop, inplace=True)
+
+
+		# Verificar la presencia de la columna 'Genomas' después de eliminar columnas
+		# print("Columnas de df después de eliminar:", df.columns, flush=True)
+		if 'Genomas' not in df.columns:
+		    print("Error: 'Genomas' no se encuentra en df después de eliminar columnas", flush=True)
+		print("Ahora si las dimensiones de la matriz dataframe", flush=True)
+		print(df.shape, flush=True)
+
+
+
+
+		###################### -- PREPARACION DE LOS DATOS -- ######################
+		print("##### PREPARAMOS LOS DATOS #####", flush=True)
+		print("Configurando tablas...", flush=True)
+		df = pd.merge(df.sort_values(by='Genomas'), df_clase.sort_values(by='Genomas'), on='Genomas')
+		#print(df, flush=True)
+		df.set_index('Genomas', inplace=True, drop=False) 
+		#df.index.name = 'Genomas'
+
+		print("Columna Genomas, convertida como indice", flush=True)
+		#print(df, flush=True)
+		#print(df.index, flush=True)
+		df = df[df['Nicho'] != empty_nicho]
+		Y = pd.DataFrame(pd.Series(df['Nicho'])) 
+
+		print("Eliminamos columna Genomas", flush=True)
+		df = pd.concat([df.drop(columns=['Genomas'])], axis=1)
+		print("Forma final: ", flush=True)
+		print(df.shape, flush=True)
+		print(df.head(), flush=True)
+
+		print("Los nichos los codificamos en numeros", flush=True)
+		Y_observados = np.array(df["Nicho"])
+		la_enc = LabelEncoder()
+		Y_encoded = la_enc.fit_transform(Y_observados)
+		Y_observados_resh = Y_observados.reshape(1, -1) 
+		Y_encoded_resh =  Y_encoded.reshape(1, -1) 
+		Y_observados_encoded = np.concatenate((Y_observados_resh, Y_encoded_resh)).T
+		np_clases_eitquetas=pd.DataFrame(Y_observados_encoded).drop_duplicates()
+		np_clases_eitquetas.columns = ["Nicho", "Codificacion"]
+		print("Aqui las respectivas codificaciones", flush=True)
+		print(np_clases_eitquetas, flush=True)
+		print("Guardamos en un csv...", flush=True)
+		np_clases_eitquetas.to_csv(rutalcodcsv, index=False)
+		print("De la matriz eliminamos la columna nicho", flush=True)
+		X = df.drop("Nicho", axis=1)
+		#print(X)
+		X_clusters = list(X.columns)
+		#print(X_clusters)
+		print("DataFrame a Numpy array", flush=True)
+		Xnp = np.array(X).astype(int)
+		print(Xnp, flush=True)
+		print(Y_encoded, flush=True)
+
+
+
+
+
+
+		###################### -- ENTRENAMIENTO DEL MODELO -- ######################
+		print("##### ENTRENANDO EL MODELO #####", flush=True)
+		print("Dividimos los datos en entrenamiento (train) y prueba (test), tanto features como labels", flush=True)
+		X_train, X_test, Y_train, Y_test = train_test_split(
+															Xnp, 
+															Y_encoded, 
+															test_size=test_size,  
+															random_state=random_state_split
+															)
+
+		rf = RandomForestClassifier(n_estimators=n_estima, random_state=random_state_classifier) 
+		rf.fit(X_train, Y_train)
+
+
+
+
+
+
+		###################### -- CLUSTERS IMPORTANTES -- ######################
+		print("##### CLUSTERS DE IMPORTANCIA #####", flush=True)
+		print("En base a la importancia de Gini, sacamos la importancia de los clusters", flush=True)
+		importancias = rf.feature_importances_
+		feature_importances = pd.DataFrame(importancias, index=X_clusters, columns=['Importancia'])
+		feature_importances = feature_importances.sort_values(by='Importancia', ascending=False)
+
+		print("Se extraen los primeros 100...", flush=True)
+		df_primeros100 = feature_importances.iloc[:100]
+		print("Los clusters de indices a columna: ", flush=True)
+		df_primeros100 = df_primeros100.reset_index()
+		df_primeros100.columns = ["Clusters", "Importancia"]
+
+		print("Remplaamos la palabra cluster, por solo el numero que lo constituye", flush=True)
+		clusternum = ", ".join(df_primeros100['Clusters'])
+		num = re.findall("[0-9]+", clusternum)
+		df_primeros100["Clusters"] = num # Solo la version normal
+		print(df_primeros100, flush=True)
+		# Aplicar log10 a la columna de interés (asegurando que no haya valores <= 0)
+		df_primeros100['Importancia_Log10'] = np.log10(df_primeros100['Importancia'].replace(0, np.nan)) # Añadimos version logaritmica
+		df_primeros100['Importancia_Log10'] = df_primeros100['Importancia_Log10'].replace(np.nan, 0)
+		print(df_primeros100, flush=True)
+		print("Guardamos las importancias en la version logaritmica como CSV y PNG... ", flush=True)
+		print("Importancias en CSV...", flush=True)
+		df_primeros100.to_csv(rutaimplogcsv, index=False)
+
+		#
+		#
+		# Especificar las columnas
+		x_col = 'Clusters'  # Columna para el eje X
+		y_col = 'Importancia_Log10'  # Columna para el eje Y (puede ser 'Importancia' o 'Importancia_Log10')
+		# Crear la figura
+		fig, ax = plt.subplots(figsize=(12, 4))
+		# Graficar las barras usando las columnas específicas
+		ax.bar(df_primeros100[x_col], df_primeros100[y_col], color='skyblue')  # Usar las columnas especificadas
+		# Título y etiquetas
+		ax.set_title(f'Importancia de las características escala Logaritmica')
+		ax.set_xlabel('Clusters')
+		ax.set_ylabel('Importancia logarítmica')
+		# Ajustar las etiquetas del eje X
+		ax.set_xticks(range(len(df_primeros100[x_col])))
+		ax.set_xticklabels(df_primeros100[x_col], rotation=90, fontsize=6, fontweight='bold')
+		# Ajustar el diseño para evitar recortes
+		plt.tight_layout()
+		# Guardar el gráfico como archivo PNG
+		plt.savefig(rutaimplogpng, format='png', dpi=300, bbox_inches='tight')
+
+
+
+
+
+
+
+		###################### -- DISTRIBUCION DE NICHOS -- ######################
+		print("##### Distribucion de nichos 100 Clusters #####", flush=True)
+		#Tomamos los nombres de los clusters.
+		# Como la matriz esta en un numpy array, ahora toca extraer por el numero de las columna. 
+		# Nombramos las columnas que necesitamos 
+		list100 = [Xnp[:,int(npcol)] for npcol in df_primeros100.iloc[:, 0] if not npcol is None] 
+		print("columnas 100; extraidas: ", list100, flush=True)
+		#list100 = [Xnp[npcol] for npcol in cienclusters_importantes if npcol in Xnp.columns]
+		df_cluster100 = pd.DataFrame(np.array(list100).T, columns=df_primeros100.iloc[:, 0], index=Y.index) 
+		# añadimos los nichos 
+		df_cluster100['Nicho'] = Y['Nicho'] 
+		#print(r"matriz df_cluster100 creada\n", df_cluster100, flush=True)
+		#print(r"indices de df_cluster100 \n", df_cluster100.index, flush=True)
+		#print(r"columnas de df_cluster100 \n", df_cluster100.columns, flush=True)	
+
+		###################### -- Nichos por Clusters: Hacemos el conteo -- ######################
+		print("Continuamos hacia el conteo, juntando en indice y las 100 columnas", flush=True)
+		u = Y["Nicho"].unique() 
+		c =list(df_cluster100.columns) 
+		print("u", u, "c", c, flush=True)
+		print("A eliminar la palabra Nicho de la lista c", flush=True)
+		del c[c.index('Nicho')] 
+		print(c, 'Nicho' in c, flush=True)
+		#Creamos una matriz 
+		print("matriz vacia, creandose", flush=True)
+		zeroconteonichos = pd.DataFrame(0, index=u, columns=c) 
+
+		for i in u: 
+			for j in c:
+				ev = list(df_cluster100.index[df_cluster100['Nicho'] == i])
+				# Asegúrate de que todos los elementos sean enteros
+				values_to_sum = list(df_cluster100.loc[ev, j])
+				values_to_sum = map(int, values_to_sum)
+				sumas = sum(values_to_sum)
+				zeroconteonichos.loc[i, j] = sumas
+		print("##### Guardando distribucion de nichos... #####", flush=True)
+		zeroconteonichos.to_csv(rutadistnichocsv)
+
+		# OPCION 11
+		# UN HISTOGRAMA (dos filas)
+		# Apilar los datos para combinarlos en una sola serie
+		h3_o = pd.DataFrame(np.array([[i, j, int(zeroconteonichos.loc[i,j])] for j in zeroconteonichos.columns if j for i in zeroconteonichos.index if i]))
+		h3_o.columns = ['Caracteristica', 'Cluster', 'Frecuencia']
+        
+		for i in [0, 50, 100, 150]:
+			h3 = h3_o[i:i+50]
+			h3 = h3.reset_index(drop=True)
+			h3['Frecuencia'] = h3['Frecuencia'].astype(int)
+			y_min, y_max = 0, int(max(h3['Frecuencia'])) + 2
+			histot_50_2=f"_{i}.png"
+			pegadin= histot_50 + histot_50_2
+			print(pegadin, flush=True)
+			histt50labelspang = os.path.join(directo, pegadin)
+			print(histt50labelspang, flush=True)
+			print(h3, flush=True)
+			# Crear el histograma
+			plt.figure(figsize=(10, 4))
+			clusters = h3['Cluster'].unique()
+			caracteristicas = h3['Caracteristica'].unique()
+			bar_width = 0.1  # Ajusta el ancho de las barras
+			# Asignar colores
+			colors = ['blue', 'orange']  # Dos colores para las barras
+			# Calcular las posiciones
+			positions = []
+			par=[]
+			impar=[]
+			for i in range(0,len(h3)):
+				if i % 2 == 0:
+					#print('par', i)
+					par.append(i*bar_width)
+				else:
+					#print('impar', i)
+					impar.append(i*bar_width)
+			positions.append(par)
+			positions.append(impar)
+			#print(len(par), flush=True)
+			#print(len(impar), flush=True)
+            
+            # Dibujar las barras
+			for i, cluster in enumerate(clusters):
+				#print("###########################", flush=True)
+				cluster_data = h3[h3['Cluster'] == cluster]
+
+				pos = [positions[j][i] for j in range(len(caracteristicas))]
+				freqs =[]
+				for i in list(cluster_data['Frecuencia']):
+					freqs.append(i)
+					
+				freqs = pd.Series(freqs)
+				#print("Cluster data \n", cluster_data, flush=True)
+				#print("Posiciones: ", pos, flush=True)
+				#print("Frecuencias: ", list(cluster_data['Frecuencia']), flush=True)
+				#print("Longitud de las frecuencias: ", len(freqs), flush=True)
+				if len(freqs) == len(pos):
+					plt.bar(pos, freqs, width=bar_width, color=[colors[0],colors[1]])
+				else:
+					print("Se diferencian por longitudes las frecuencias con longitud ", len(freqs), "y la longitud de las posisciones con longitud ", len(pos), flush=True)
+					exit()
+            
+				# Ajustar las posiciones del eje x y las etiquetas
+				#flattened_positions = [p for sublist in positions2 for p in sublist]
+				flattened_positions = [p for sublist in positions for p in sublist]
+				x_labels = [f'{caracteristicas[i]}\nCluster {clusters[j]}' for i in range(len(caracteristicas)) for j in range(len(clusters))]
+				plt.xticks(flattened_positions, x_labels, rotation=90, fontsize=5, fontweight='bold')
+				# Ajustar el eje y manualmente para asegurar consistencia
+				plt.ylim(y_min, y_max)
+				#plt.yticks(np.arange(y_min, y_max, 300))
+				plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True, prune='both'))
+				# Añadir etiquetas y leyenda con colores personalizados
+				legend_patches = [
+					plt.Rectangle((0, 0), 1, 1, fc='blue', alpha=0.7),
+					plt.Rectangle((0, 0), 1, 1, fc='orange', alpha=0.7)
+				]
+				plt.legend(legend_patches, caracteristicas)
+				# Añadir etiquetas y leyenda
+				plt.xlabel('Característica y Clúster')
+				plt.ylabel('Frecuencia')
+				plt.title(f'Frecuencias por Característica y Clúster ({caracteristicas[0]} y {caracteristicas[1]})')
+				#plt.show()
+				# Ajustar el diseño para que no se recorten los elementos
+				plt.tight_layout()
+				# Guardar la gráfica como un archivo PNG
+				plt.savefig(histt50labelspang, format='png', dpi=300, bbox_inches='tight')
+				#plt.close()
+
+
+
+
+
+
+		###################### -- PREDICCIONES -- ######################
+		Y_pred = rf.predict(X_test)
+
+
+
+
+
+
+		##################### -- MATRIZ DE CONFUSION -- ######################
+		Ynp_pred = np.round(Y_pred).astype(int)
+		dict_predictions = {"Observados": Y_test,
+		                       "Predichos": Ynp_pred}
+
+		df_predictions = pd.DataFrame(dict_predictions)
+		df_predictions.to_csv(rutaypred)
+		mc = confusion_matrix(Y_test, Ynp_pred)
+		#tn, fp, fn, tp = confusion_matrix(Y_test, Ynp_pred).ravel()
+		#print(tn, fp, fn, tp)
+		cero=np_clases_eitquetas[np_clases_eitquetas["Codificacion"] == 0]["Nicho"].to_string(index=False)
+		uno=np_clases_eitquetas[np_clases_eitquetas["Codificacion"] == 1]["Nicho"].to_string(index=False)
+		df_matrixconf = pd.DataFrame(mc)
+		df_matrixconf = df_matrixconf.rename(columns={
+			'0': f'{cero}',
+			'1': f'{uno}'
+		})
+		df_matrixconf.index = [f'{cero}', f'{uno}']
+		conf_matrix = df_matrixconf.values
+		##################### -- Visualizacion de la Matriz de Confusion -- ######################
+		# Crear la visualización de la matriz de confusión
+		disp = ConfusionMatrixDisplay(confusion_matrix=conf_matrix, display_labels=[f'{cero}', f'{uno}'])
+		disp.plot()
+
+		# Ajustar el diseño para que no se recorten los elementos
+		plt.tight_layout()
+
+		# Guardar la gráfica como un archivo PNG con el tamaño y resolución especificados
+		plt.savefig(rutaconfpng, format='png', dpi=300, bbox_inches='tight')
+
+		try:
+			df_matrixconf.to_csv(rutaconfcsv)
+			print("Matriz de confusión guardada exitosamente", flush=True)
+		except Exception as e:
+			sys.stderr.write(f"Error al guardar la matriz de confusión: {e}\n")
+			sys.stderr.flush()
+
+
+		df_report = pd.DataFrame(classification_report(Y_test, Y_pred, output_dict=True))
+		print(df_report)
+		df_report.to_csv(rutareport)
+
+
+
+
+
+
+		###################### -- GRAFICOS DE ARBOLES -- ######################
+		#fig, axes = plt.subplots(nrows = 1,ncols = 5, figsize=(20,20))
+		for i in range(1, 5):
+			rutaarbolf = rutaarbol + f"_{i}.png"
+			plt.figure(figsize=(6, 5))
+			tree.plot_tree(rf.estimators_[i], filled=True)
+		#plt.subplots_adjust(wspace=0.5, hspace=0.5)
+		# Guardar el gráfico como archivo PNG
+			plt.savefig(rutaarbolf, format='png', dpi=300, bbox_inches='tight')
+		#plt.close()
+
+
+
+
+
+
+
+
+
+
+		elapsed_time = time.time() - start_time
+		print("Elapsed time to compute the importances: {:.3f} seconds".format(elapsed_time), flush=True)
+
+	except Exception as e:
+		# Obtener la información del traceback
+		exc_type, exc_value, exc_traceback = sys.exc_info()
+		# Imprimir el traceback completo
+		print("Ha ocurrido un error al usar la función confusion_graph():", e, flush=True)
+		traceback.print_exception(exc_type, exc_value, exc_traceback)
+		# Escribir solo el mensaje de error en stderr
+		sys.stderr.write(f"Error: {e}\n")
+		sys.stderr.flush()
+
+
+print("-----------------------------------------------------------------------------------------------")
+print("")
+
+# Ya solo falta las metricas y modificar lo de los arboles y añadir lo de la superficie de decision. Y reportar en Github
+```
