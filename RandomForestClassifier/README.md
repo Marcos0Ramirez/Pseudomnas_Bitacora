@@ -986,3 +986,189 @@ print("")
 
 # Ya solo falta las metricas y modificar lo de los arboles y añadir lo de la superficie de decision. Y reportar en Github
 ```
+---
+
+Se estructuro un codigo con dos caracteristicas especificas, con el fin de construir graficos sobre arboles y decision surfaces.
+El exporta en imagenes independientes, cada uno de lo arboles y decision surfaces. Reduce el tiempo de lectura, abriendo solo dos columnas de la tabla de frecuencias, mas la columna Genomas, personalizando cuales columnas usar y realizar los analisis posteriores de manera auomatica.
+```
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Importamos las librerias necesarias
+import time
+import datetime
+import pandas as pd
+import numpy as np
+import os
+import csv
+import sys
+import traceback
+import io
+import re
+import codecs
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, ConfusionMatrixDisplay, classification_report
+from sklearn import tree
+from sklearn.inspection import permutation_importance
+import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
+
+# direccion donde se encuentra el script
+actual_script = os.path.abspath(__file__)
+# Ahora extraemos la ruta del directorio
+actual_directorio = os.path.dirname(actual_script)
+
+print("")
+print("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡")
+# Nos cambiamos de ruta
+os.chdir(actual_directorio)
+print("Script para construir graficos de Arboles y Superficies de Decision")
+print("Ya trabajando en directorio actual: ", os.getcwd())
+hora_actual = datetime.datetime.now()
+print("Fecha y hora de ejecución: ", hora_actual)
+print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+print("")
+
+if __name__ == "__main__":
+	try:
+		start_time = time.time()
+		###################### -- DIRECCIONES, ARCHIVOS Y PARAMETROS -- ######################
+		siglas_exp =       "AP"
+		test_or_original = "test"
+		version =          "v3" 
+		################ -- INPUT -- ################
+		rutabase=                "./MicroSet/INPUT/" # Ruta base
+		filemtz =                f"cluster_pseudomonas_{test_or_original}.csv" #Nombre del archivo con la matriz
+		fileclass =              f"{siglas_exp}_nicho_pseudomonas_{test_or_original}.txt" # Nombre de la tabla de clasificacion
+		empty_nicho =            'Vacio'
+		n_estima =                50
+		test_size =               0.50
+		random_state_split =      99
+		random_state_classifier = 7
+
+		rutamtz = os.path.join(rutabase, filemtz)
+		rutaclass = os.path.join(rutabase, fileclass)
+
+		################ -- OUTPUT FOLDERS -- ################ 
+		imgrutabase =   "./MicroSet/OUTPUT"
+		directo =       f"./{imgrutabase}_{siglas_exp}_{version}_{test_or_original}".upper()
+		if not os.path.exists(directo):
+			os.makedirs(directo)
+
+		tree_ds =       f"tree_decision_surfaces_{siglas_exp}_{version}_{test_or_original}".upper()
+		rutatree_ds =   os.path.join(directo, tree_ds)
+		if not os.path.exists(rutatree_ds):
+			os.makedirs(rutatree_ds)
+
+
+
+		arbol =                 f"{version}_{siglas_exp}_{test_or_original}_tree"
+		dsurface =              f"{version}_{siglas_exp}_{test_or_original}_decision_surface_tree"
+
+		rutaarbol =             os.path.join(rutatree_ds, arbol)
+		rutadsurface =          os.path.join(rutatree_ds, dsurface)
+
+
+		###################### -- ABRIMOS LOS ARCHIVOS Y PREPARAMOS LOS DATOS -- ###########################
+		# CSV con la Tabla de Frecuencias
+		df_tf = pd.read_csv(rutamtz, usecols=['Genomas', 'Cluster13000', 'Cluster12345'])
+
+		# TXT con las etiquetas
+		df_e = pd.read_csv(rutaclass, delimiter='\t')
+
+		# Unimos acorde a los genomas.
+		df = pd.merge(df_tf.sort_values(by='Genomas'), df_e.sort_values(by='Genomas'), on='Genomas')
+
+		# Eliminamos los genomas sin etiquetas
+		df = df[df['Nicho'] != empty_nicho]
+
+		# De este DataFrame separamos los nichos y transformamos en numeros como etiquetas
+		la_enc = LabelEncoder()
+		y_normal = np.array(df['Nicho'])
+		y_encoded = la_enc.fit_transform(y_normal)
+		y_encoded = y_encoded.astype(int)
+
+		# Extraemos los clusters
+		X = np.array(df.iloc[:,[1, 2]])
+
+
+		print("Presentacion: ", flush=True)
+		print(" 'X' que son los clusters en arreglo")
+		print(X, flush=True)
+		print(" 'y' normal, que son los nichos")
+		print(y_normal, flush=True)
+		print(" 'y' codificada, que son los nichos")
+		print(y_encoded, flush=True)
+		print("Dataframe con Genomas, dos clusters y nichos", flush=True)
+		print(df, flush=True)
+
+		###################### -- SEPARAMOS DATOS Y CONSTRUIMOS MODELO -- ##################################
+		# Dividir los datos
+		X_train, X_test, Y_train, Y_test = train_test_split(
+			X, y_encoded, test_size=test_size, random_state=random_state_split
+		)
+
+		# Entrenar el modelo Random Forest
+		rf = RandomForestClassifier(n_estimators=n_estima, random_state=random_state_classifier)
+		rf.fit(X_train, Y_train)
+
+
+		###################### -- GRAFICOS DE ARBOLES -- ######################
+		#fig, axes = plt.subplots(nrows = 1,ncols = 5, figsize=(20,20))
+		for i in range(1, 5):
+			rutaarbolf = rutaarbol + f"_{i}.png"
+			plt.figure(figsize=(6, 5))
+			tree.plot_tree(rf.estimators_[i], filled=True)
+		#plt.subplots_adjust(wspace=0.5, hspace=0.5)
+		# Guardar el gráfico como archivo PNG
+			plt.savefig(rutaarbolf, format='png', dpi=300, bbox_inches='tight')
+		#plt.close()
+
+
+
+
+
+		###################### -- SUPERFICIE DE DECISIONES -- ######################
+		# Generar la superficie de decisión para cada árbol
+		for i, tree in enumerate(rf.estimators_[1:5]):
+			numero = f"_{i}.png"
+			rutadsurfacef = rutadsurface + numero
+			plt.figure(figsize=(6, 5))
+			# Crear una malla de puntos
+			x_min, x_max = X_train[:, 0].min() - 1, X_train[:, 0].max() + 1
+			y_min, y_max = X_train[:, 1].min() - 1, X_train[:, 1].max() + 1
+			xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01),
+								np.arange(y_min, y_max, 0.01))
+
+			# Predecir sobre la malla
+			Z = tree.predict(np.c_[xx.ravel(), yy.ravel()])
+			Z = Z.reshape(xx.shape)
+
+			# Dibujar la superficie de decisión
+			plt.contourf(xx, yy, Z, alpha=0.8, cmap=plt.cm.Paired)
+			plt.scatter(X_train[:, 0], X_train[:, 1], c=Y_train, edgecolor='k', cmap=plt.cm.Paired)
+			plt.title(f"Superficie de Decisión del Árbol {i}")
+			plt.xlabel("Feature 1")
+			plt.ylabel("Feature 2")
+			plt.tight_layout()
+			plt.savefig(rutadsurfacef, dpi=300)
+
+		elapsed_time = time.time() - start_time
+		print("Elapsed time to compute the importances: {:.3f} seconds".format(elapsed_time), flush=True)
+
+	except Exception as e:
+		# Obtener la información del traceback
+		exc_type, exc_value, exc_traceback = sys.exc_info()
+		# Imprimir el traceback completo
+		print("Ha ocurrido un error al usar la función confusion_graph():", e, flush=True)
+		traceback.print_exception(exc_type, exc_value, exc_traceback)
+		# Escribir solo el mensaje de error en stderr
+		sys.stderr.write(f"Error: {e}\n")
+		sys.stderr.flush()
+
+
+print("-----------------------------------------------------------------------------------------------")
+print("")
+```
