@@ -7,7 +7,7 @@ Se instalo miniconda para la maquina virtual de Ubunut en Windows, de la siguien
 
 Por default se instalo python 3.12.7 y solo queda instalar los paquetes scikit-sklearn, numpy, pandas y matplotlib.pyplot
 ```
-conda install -c conda-forge scikit-learn numpy pandas matplotlib
+conda install -c conda-forge scikit-learn numpy pandas matplotlib seaborn
 ```
 En el camino se hicieron estos reajustes, dentro del ambiente `base`, debido a que siempre habia una advertencia, sobre que no se reconocia un archivo de `numpy`, entonces se volvio a reinstalar los paquetes de `pandas` y `numpy`, para despues hacer una configuracion y actualizar los paquetes. Por otra parte aparecio que no se reconocia correctamente el paquete `pyexpat` y por tanto se volvio a forzar su instalacion y funciono.
 ```
