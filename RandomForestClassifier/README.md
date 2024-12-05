@@ -1281,4 +1281,5 @@ for i, tree in enumerate(rf.estimators_):
     plt.tight_layout()
     plt.savefig(f"decision_surface_tree_{i+1}.png", dpi=300, transparent=True)
 ```
-
+Como leer los recuadros de los arboles:
+https://www.w3schools.com/python/python_ml_decision_tree.asp
