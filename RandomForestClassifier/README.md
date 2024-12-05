@@ -1172,3 +1172,7 @@ if __name__ == "__main__":
 print("-----------------------------------------------------------------------------------------------")
 print("")
 ```
+---
+
+# 4 DE DICIEMBRE DEL 2024
+Otra pagina sobre como grafican y usan las `decision surface` https://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/auto_examples/ensemble/plot_forest_iris.html 
