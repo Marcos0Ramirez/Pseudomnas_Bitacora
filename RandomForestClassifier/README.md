@@ -1175,4 +1175,8 @@ print("")
 ---
 
 # 4 DE DICIEMBRE DEL 2024
-Otra pagina sobre como grafican y usan las `decision surface` https://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/auto_examples/ensemble/plot_forest_iris.html 
+Otra pagina sobre como grafican y usan las `decision surface` https://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/auto_examples/ensemble/plot_forest_iris.html
+
+De esta otra pagina, se pudo cambiar a un color personalizado los puntos y fondo de las `decision surface`: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html
+
+Y de esta pagina, se encontro un codigo que se adapto y ajusto con Chat GPT para cambiar a un color personalizado a los nodos de los arboles: https://stackoverflow.com/questions/70437840/how-to-change-colors-for-decision-tree-plot-using-sklearn-plot-tree
