@@ -1180,3 +1180,105 @@ Otra pagina sobre como grafican y usan las `decision surface` https://ogrisel.gi
 De esta otra pagina, se pudo cambiar a un color personalizado los puntos y fondo de las `decision surface`: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html
 
 Y de esta pagina, se encontro un codigo que se adapto y ajusto con Chat GPT para cambiar a un color personalizado a los nodos de los arboles: https://stackoverflow.com/questions/70437840/how-to-change-colors-for-decision-tree-plot-using-sklearn-plot-tree
+
+Este fue el codigo al finalizar el dia, para cambiar el color y graficar los `arboles` y `decision tree`
+```
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import make_classification
+
+# Crear un conjunto de datos de ejemplo
+X, y = make_classification(n_features=2, n_redundant=0, n_informative=2,
+                           n_clusters_per_class=1, n_samples=5, random_state=42)
+
+print("X data")
+print(X)
+print("y data")
+print(y)
+
+# Entrenar un RandomForestClassifier
+rf = RandomForestClassifier(n_estimators=5, random_state=42)
+rf.fit(X, y)
+from matplotlib.colors import ListedColormap, to_rgb
+from sklearn import tree
+
+print("""
+Los colores que usa por default scikit-learn, pero representan para hacer los cambios en una variable, y los cuales respectan:
+cmap_points = ListedColormap(["tab:cyan", "tab:orange"])
+custom_colors = ['tab:orange', 'tab:cyan']
+
+Y podemo definir las variables como
+color1 = "tab:orange"
+color2 = "tab:cyan"
+
+Si es a convertir en dos variables, consideramos
+cmap_points = ListedColormap([color2, color1])
+custom_colors = [color1, color2]
+    """)
+
+color1 = "saddlebrown"
+color2 = "darkgreen"
+cmap_points = ListedColormap([color2, color1])
+custom_colors = [color1, color2]
+
+###################### -- GRAFICOS DE ARBOLES -- ######################
+#fig, axes = plt.subplots(nrows = 1,ncols = 5, figsize=(20,20))
+for i in range(0, 5):
+    rutaarbolf = "plot_tree" + f"_{i}.png"
+    plt.figure(figsize=(6, 5))
+    # 1ra version
+    #tree.plot_tree(rf.estimators_[i], filled=True)
+
+    # 2da version
+    arbolito = tree.plot_tree(
+                                rf.estimators_[i],
+                                feature_names=["Feature 1", "Feature 2"], 
+                                class_names=["Clase 0", "Clase 1"],
+                                filled=True
+                            ) # feature_names=["X", "y"], class_names=colors,
+    for a, impurity, value in zip(arbolito, rf.estimators_[i].tree_.impurity, rf.estimators_[i].tree_.value):
+        if a is not None:  # Verificar que el nodo no sea None
+            try:
+                # let the max value decide the color; whiten the color depending on impurity (gini)
+                r, g, b = to_rgb(custom_colors[np.argmax(value)])
+                f = impurity * 4 # for N colors: f = impurity * N/(N-1) if N>1 else 0
+                a.get_bbox_patch().set_facecolor((f + (1-f)*r, f + (1-f)*g, f + (1-f)*b))
+                a.get_bbox_patch().set_edgecolor('black')
+            except (AttributeError, ValueError):
+                pass  # Si no se puede cambiar, continuar con el siguiente nodo
+
+#plt.subplots_adjust(wspace=0.5, hspace=0.5)
+# Guardar el gráfico como archivo PNG
+    plt.savefig(rutaarbolf, format='png', dpi=300, bbox_inches='tight', transparent=True)
+    plt.close()
+
+
+###################### -- GRAFICOS DE DECISION SURFACE -- ######################
+# Generar la superficie de decisión para cada árbol
+for i, tree in enumerate(rf.estimators_):
+    plt.figure(figsize=(6, 5))
+    # Crear una malla de puntos
+    x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+    y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01),
+                         np.arange(y_min, y_max, 0.01))
+
+    # Predecir sobre la malla
+    Z = tree.predict(np.c_[xx.ravel(), yy.ravel()])
+    Z = Z.reshape(xx.shape)
+
+    # Dibujar la superficie de decisión
+    #plt.contourf(xx, yy, Z, alpha=0.8, cmap=plt.cm.Paired) 
+    plt.contourf(xx, yy, Z, alpha=0.8, cmap=cmap_points) # cmap=plt.cm.Paired
+    #plt.scatter(X[:, 0], X[:, 1], c=y, edgecolor='k', cmap=plt.cm.Paired, s=350) 
+    plt.scatter(X[:, 0], X[:, 1], c=y, edgecolor='k', cmap=cmap_points, s=400) # cmap=plt.cm.Paired
+    plt.tick_params(axis='both', which='major', labelsize=35) # Cambiar tamaño de los números de los ejes
+    plt.title(f"Superficie de Decisión del Árbol {i+1}")
+    plt.xlabel("Feature 1")
+    plt.ylabel("Feature 2")
+    plt.tight_layout()
+    plt.savefig(f"decision_surface_tree_{i+1}.png", dpi=300, transparent=True)
+```
+
