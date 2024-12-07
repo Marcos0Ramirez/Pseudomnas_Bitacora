@@ -307,7 +307,6 @@ print("")
 
 
 ## FECHA 2 DE DICIEMBRE DEL 2024
-
 ### Grafico de Arboles
 Adaptacion de codigo para graficar arboles de decision generados por Random Forest:
 https://stackoverflow.com/questions/40155128/plot-trees-for-a-random-forest-in-python-with-scikit-learn
@@ -327,7 +326,7 @@ La premisa, es que los **algoritmos de aprendiza automatico**, aprenden a asigna
 Este grafico, puede ser implementado en el modelo RandomForesClassifier https://qu4nt.github.io/sklearn-doc-es/auto_examples/ensemble/plot_forest_iris.html
 Ejmplo con DecisionTreeClassifier https://qu4nt.github.io/sklearn-doc-es/auto_examples/tree/plot_iris_dtc.html#sphx-glr-auto-examples-tree-plot-iris-dtc-py, el cual indica como es que el modelo, considera a que clase se asocia de acuerdo a una combinacion especifica de caracteristicas.
 
-En caso de que la clasificacion por Random Fores hace muchos arboles, cada uno puede generar una superficie de decision diferente. Pero en si RandomForestClassifier combina el resultado de todos los arboles generados, lo cual al usar todos la hace mas robusta y menos propensa a sobreajustes. Asi al entrenar y predecir, asigna una clase con un promedio de las predicciones de los arboles y la superficie de decision resultante muestra como esas clases se distribuyen a traves de las combinaciones de las caracteristicas. Nota, las caracteristicas se toman de manera aleatoria para generar la malla.
+En caso de que la clasificacion por `Random Forest` hace muchos arboles, cada uno puede generar una superficie de decision diferente. Pero en si `RandomForestClassifier` combina el resultado de todos los arboles generados, lo cual al usar todos la hace mas robusta y menos propensa a sobreajustes. Asi al entrenar y predecir, asigna una clase con un promedio de las predicciones de los arboles y la superficie de decision resultante muestra como esas clases se distribuyen a traves de las combinaciones de las caracteristicas. Nota, las caracteristicas se toman de manera aleatoria para generar la malla.
 
 ### Support-Vector Network
 En el articulo de Vapnik y Cortes en 2021, proponen el termino de "***support-vector network***" como una nueva tecnica de aprendizaje de maquinas para problemas de clasificacion de dos grupos. Enfoque del articulo:
@@ -342,7 +341,7 @@ Cabe destacar que el termino Superficie de decisiones (***"Decision Surface"***)
 Vapnik, V., & Cortes, C. (1995). Support Vector Networks, machine learning 20, 273-297.
 ---
 
-### Codigo eliminado
+### Codigo eliminado da los analisis `Random Forest`
 Una vez confirmado que se puede usar, se paso el codigo restante para las matrices de confusion y graficos de distribucion de nichos y eliminacion de codigo del script anterior, eliminando esto de codigo:
 ```
 # Bloque 1
@@ -482,6 +481,7 @@ Bloque 3
 Lo restante, se dejo y adapto al codigo nuevo
 
 ## FECHA 3 DE DICIEMBRE DEL 2024
+### Codigo modificado y adaptado del analisis de `Random Forest`
 El dia de hoy se eliminaron algunas variables que no tenian uso en la nueva adaptacion, mismo que se cambiaron los nombres de algunas variables a los nombres de variables que usa en los ejemplos del paquete `scikit-learn`:
 
 ```
@@ -987,9 +987,9 @@ print("")
 # Ya solo falta las metricas y modificar lo de los arboles y añadir lo de la superficie de decision. Y reportar en Github
 ```
 ---
-
+### `Surface Decision` y `Tree` Plots
 Se estructuro un codigo con dos caracteristicas especificas, con el fin de construir graficos sobre arboles y decision surfaces.
-El exporta en imagenes independientes, cada uno de lo arboles y decision surfaces. Reduce el tiempo de lectura, abriendo solo dos columnas de la tabla de frecuencias, mas la columna Genomas, personalizando cuales columnas usar y realizar los analisis posteriores de manera auomatica.
+El exporta en imagenes independientes, cada uno de lo arboles y decision surfaces. Reduce el tiempo de lectura, abriendo solo dos columnas de la tabla de frecuencias, mas la columna `Genomas`, personalizando cuales columnas usar y realizar los analisis posteriores de manera automatica.
 ```
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -1175,6 +1175,7 @@ print("")
 ---
 
 # 4 DE DICIEMBRE DEL 2024
+### `Surface Decision` y `Tree` Plots
 Otra pagina sobre como grafican y usan las `decision surface` https://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/auto_examples/ensemble/plot_forest_iris.html
 
 De esta otra pagina, se pudo cambiar a un color personalizado los puntos y fondo de las `decision surface`: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html
@@ -1283,3 +1284,243 @@ for i, tree in enumerate(rf.estimators_):
 ```
 Como leer los recuadros de los arboles:
 https://www.w3schools.com/python/python_ml_decision_tree.asp
+
+# 5 de diciembre del 2024
+### Colores: `Surface Decision` y `Tree` Plots
+Durante el dia se busco adaptar codigo para generar los colore selectos, mediente RGB. Lo cual no funciono y se decidio colorear con `Photoshop`.
+
+### Codigo finalizado: `Surface Decision` y `Tree` Plots
+El cual se implemento, la automatizacion de multiples analisis para los graficos de `Surface Decision` y `Tree`, adaptado todo en un `while` y se extrae de un dataframe.
+```
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Importamos las librerias necesarias
+import time
+import datetime
+import pandas as pd
+import numpy as np
+import os
+import csv
+import sys
+import traceback
+import io
+import re
+import codecs
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, ConfusionMatrixDisplay, classification_report
+from sklearn import tree
+from sklearn.inspection import permutation_importance
+import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
+
+# direccion donde se encuentra el script
+actual_script = os.path.abspath(__file__)
+# Ahora extraemos la ruta del directorio
+actual_directorio = os.path.dirname(actual_script)
+
+print("", flush=True)
+print("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡", flush=True)
+# Nos cambiamos de ruta
+os.chdir(actual_directorio)
+print("Script para construir graficos de Arboles y Superficies de Decision", flush=True)
+print("Ya trabajando en directorio actual: ", os.getcwd(), flush=True)
+hora_actual = datetime.datetime.now()
+print("Fecha y hora de ejecución: ", hora_actual, flush=True)
+print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", flush=True)
+print("", flush=True)
+
+###################### -- DIRECCIONES, ARCHIVOS Y PARAMETROS -- ######################
+dict = {
+#	No.col : [Comparation, cluster1, cluster2]
+	0 : ['HE', 'Cluster82153', 'Cluster57759'],
+	1 : ['MP', 'Cluster273947', 'Cluster215937'],
+	2 : ['HP', 'Cluster250627', 'Cluster198130']
+} # HE: 'Cluster82153', 'Cluster57759' MP: 'Cluster273947', 'Cluster215937' HP: 'Cluster250627', 'Cluster198130'
+
+d = pd.DataFrame(dict)
+
+
+empty_nicho =            'Vacio'
+n_estima =                50
+test_size =               0.20
+random_state_split =      99
+random_state_classifier = 7
+arbolmin =                0
+arbolmax =                10
+
+colgenomas       = ['Genomas']
+rutabase         = "./INPUT" # Ruta base
+imgrutabase      = "./TREEDS"
+test_or_original = "original"
+version          = "v4"
+
+col = 0
+
+def entrenar_y_graficar(tree, X_train, X_test, Y_train, Y_test, arbolmin, arbolmax, rutaarbol, rutadsurface):
+	# Entrenar el modelo Random Forest
+	print("Entrenamos el modelo...", flush=True)
+	rf = RandomForestClassifier(n_estimators=n_estima, random_state=random_state_classifier)
+	rf.fit(X_train, Y_train)
+
+
+	###################### -- GRAFICOS DE ARBOLES -- ######################
+	#fig, axes = plt.subplots(nrows = 1,ncols = 5, figsize=(20,20))
+	print("Graficamos los arboles...", flush=True)
+	for i in range(arbolmin, arbolmax):
+		rutaarbolf = rutaarbol + f"_{i}.png"
+		print(rf.estimators_[i])
+		plt.figure(figsize=(6, 5))
+		tree.plot_tree(
+			rf.estimators_[i], 
+			filled=True, 
+			feature_names = ["Feature 1", "Feature 2"], 
+			class_names = ["Class 1", "Class 2"]
+			)
+	#plt.subplots_adjust(wspace=0.5, hspace=0.5)
+	# Guardar el gráfico como archivo PNG
+		plt.savefig(rutaarbolf, format='png', dpi=300, bbox_inches='tight', transparent=True)
+		plt.close()
+
+	###################### -- SUPERFICIE DE DECISIONES -- ######################
+	print("Graficamos las superficies de decision...", flush=True)
+	# Generar la superficie de decisión para cada árbol
+	for i, tree in enumerate(rf.estimators_[arbolmin:arbolmax]):
+		numero = f"_{i}.png"
+		rutadsurfacef = rutadsurface + numero
+		plt.figure(figsize=(6, 5))
+		# Crear una malla de puntos
+		x_min, x_max = X_train[:, 0].min() - 1, X_train[:, 0].max() + 1
+		y_min, y_max = X_train[:, 1].min() - 1, X_train[:, 1].max() + 1
+		xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.01),
+							np.arange(y_min, y_max, 0.01))
+
+		# Predecir sobre la malla
+		Z = tree.predict(np.c_[xx.ravel(), yy.ravel()])
+		Z = Z.reshape(xx.shape)
+
+		# Dibujar la superficie de decisión
+		plt.contourf(xx, yy, Z, alpha=0.8, cmap=plt.cm.Paired)
+		plt.scatter(X_train[:, 0], X_train[:, 1], c=Y_train, edgecolor='k', cmap=plt.cm.Paired, s=400)
+		plt.tick_params(axis='both', which='major', labelsize=35) # Cambiar tamaño de los números de los ejes
+		#plt.title(f"Superficie de Decisión del Árbol {i}")
+		plt.xlabel("Feature 1")
+		plt.ylabel("Feature 2")
+		plt.tight_layout()
+		plt.savefig(rutadsurfacef, dpi=300, transparent=True)
+		plt.close()
+	return rf  # Devuelve el modelo por si se necesita
+
+
+if __name__ == "__main__":
+	try:
+		start_time = time.time()
+		while col < len(d.columns):
+			print(f"""
+				posicion columna: {col}
+				     comparacion: {d.iloc[0, col]}
+				       cluster 1: {d.iloc[1, col]}
+				       cluster 2: {d.iloc[2, col]}
+				""", flush=True)
+			clustersinput = [d.iloc[1, col], d.iloc[2, col]]
+			columnas      = colgenomas + clustersinput
+			siglas_exp    = d.iloc[0, col]
+			cluster1      = "".join(re.findall('[0-9]+', d.iloc[1, col]))
+			cluster2      = "".join(re.findall('[0-9]+', d.iloc[2, col]))
+
+			filemtz   =     f"cluster_pseudomonas_{test_or_original}.csv" #Nombre del archivo con la matriz
+			fileclass =     f"{siglas_exp}_nicho_pseudomonas_{test_or_original}.txt" # Nombre de la tabla de clasificacion
+			directo   =     f"{imgrutabase}_{version}_{test_or_original}".upper()
+			tree_ds   =     f"tree_decision_surfaces_{siglas_exp}_{version}_{test_or_original}_{cluster1}_{cluster2}".upper()
+
+
+			rutamtz = os.path.join(rutabase, filemtz)
+			rutaclass = os.path.join(rutabase, fileclass)
+			rutatree_ds =   os.path.join(directo, tree_ds)
+			
+			arbol =                 f"{version}_{siglas_exp}_{test_or_original}_{cluster1}_{cluster2}_tree"
+			dsurface =              f"{version}_{siglas_exp}_{test_or_original}_{cluster1}_{cluster2}_decision_surface_tree"
+			rutaarbol =             os.path.join(rutatree_ds, arbol)
+			rutadsurface =          os.path.join(rutatree_ds, dsurface)
+
+			if not os.path.exists(directo):
+				os.makedirs(directo)
+			if not os.path.exists(rutatree_ds):
+				os.makedirs(rutatree_ds)
+
+			print(f"""
+				Tabla de Frecuencias: {filemtz}
+				              Nichos: {fileclass}
+				Directorio de Salida: {rutatree_ds}
+				""", flush=True)
+
+
+			###################### -- ABRIMOS LOS ARCHIVOS Y PREPARAMOS LOS DATOS -- ###########################
+			# TXT con las etiquetas
+			print("Abriendo Nichos... ", flush=True)
+			df_e = pd.read_csv(rutaclass, delimiter='\t')
+
+			# CSV con la Tabla de Frecuencias
+			print("Abriendo tabla de frecuencias... ", flush=True)
+			df_tf = pd.read_csv(rutamtz, usecols=columnas)
+
+			# Unimos acorde a los genomas.
+			print("Uniendo... ", flush=True)
+			df = pd.merge(df_tf.sort_values(by='Genomas'), df_e.sort_values(by='Genomas'), on='Genomas')
+
+			# Eliminamos los genomas sin etiquetas
+			print(f"Eliminando aquellos con nicho: {empty_nicho}...", flush=True)
+			df = df[df['Nicho'] != empty_nicho]
+
+			# De este DataFrame separamos los nichos y transformamos en numeros como etiquetas
+			la_enc = LabelEncoder()
+			y_normal = np.array(df['Nicho'])
+			y_encoded = la_enc.fit_transform(y_normal)
+			y_encoded = y_encoded.astype(int)
+
+			# Extraemos los clusters
+			X = np.array(df.iloc[:,[1, 2]]).astype(int)
+
+
+			print("Presentacion: ", flush=True)
+			print(" 'X' que son los clusters en arreglo", flush=True)
+			print(X, flush=True)
+			print(" 'y' normal, que son los nichos", flush=True)
+			print(y_normal, flush=True)
+			print(" 'y' codificada, que son los nichos", flush=True)
+			print(y_encoded, flush=True)
+			print("Dataframe con Genomas, dos clusters y nichos", flush=True)
+			print(df, flush=True)
+			print(df.shape, flush=True)
+
+			###################### -- SEPARAMOS DATOS Y CONSTRUIMOS MODELO -- ##################################
+			# Dividir los datos
+			print("Separamos datos...", flush=True)
+			X_train, X_test, Y_train, Y_test = train_test_split(
+				X, y_encoded, test_size=test_size, random_state=random_state_split
+			)
+
+			rf = entrenar_y_graficar(tree, X_train, X_test, Y_train, Y_test, arbolmin, arbolmax, rutaarbol, rutadsurface)
+			col += 1
+
+		elapsed_time = time.time() - start_time
+		print("Elapsed time to compute the importances: {:.3f} seconds".format(elapsed_time), flush=True)
+
+	except Exception as e:
+		# Obtener la información del traceback
+		exc_type, exc_value, exc_traceback = sys.exc_info()
+		# Imprimir el traceback completo
+		print("Ha ocurrido un error al usar la función confusion_graph():", e, flush=True)
+		traceback.print_exception(exc_type, exc_value, exc_traceback)
+		# Escribir solo el mensaje de error en stderr
+		sys.stderr.write(f"Error: {e}\n")
+		sys.stderr.flush()
+
+
+print("-----------------------------------------------------------------------------------------------", flush=True)
+print("", flush=True)
+```
+# 6 de diciembre del 2024
+
