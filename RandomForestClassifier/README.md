@@ -1522,5 +1522,18 @@ if __name__ == "__main__":
 print("-----------------------------------------------------------------------------------------------", flush=True)
 print("", flush=True)
 ```
-# 6 de diciembre del 2024
+# 6 de diciembre del 2024 a 7 de diciembre del 2024
+***Colores RGB***
+verde oscuro = rgb(0, 115, 65)
+cafe oscuro =  rgb(139, 69, 18)
 
+***Graficos realizados y coloreados en R***
+1. Importancia de clusters
+2. Matrices de Confusion
+3. Distribucion de Nichos
+
+***Graficos coloreados con Photoshop***
+1. Trees
+2. Decision Surface
+
+# 8 de diciembre del 2024
